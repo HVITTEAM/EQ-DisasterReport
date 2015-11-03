@@ -1,0 +1,85 @@
+//
+//  EQ_DisasterReport.pch
+//  EQ_DisasterReport
+//
+//  Created by shi on 15/11/2.
+//  Copyright © 2015年 董徐维. All rights reserved.
+//
+
+#ifndef EQ_DisasterReport_pch
+#define EQ_DisasterReport_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* EQ_DisasterReport_pch */
+
+#import "MJExtension.h"
+#import "MJRefresh.h"
+#import "UIView+Extension.h"
+#import "UIBarButtonItem+Extension.h"
+#import "UIImage+Extension.h"
+#import "MBProgressHUD.h"
+
+#import "FMDatabase.h"
+#import "FMDatabaseQueue.h"
+
+#import "SpotTableHelper.h"
+#import "PictureTableHelper.h"
+#import "VoiceTableHelper.h"
+
+//数据库名字
+#define DBNAME @"EQDisasterReport.sqlite"
+
+// 屏幕尺寸
+#define MTNavgationHeadH 44
+
+#define MTViewW self.view.width
+
+#define MTViewH self.view.height
+
+#define MTScreenW [UIScreen mainScreen].bounds.size.width
+
+#define MTScreenH [UIScreen mainScreen].bounds.size.height
+
+// 颜色
+#define HMColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
+
+// 全局背景色
+#define HMGlobalBg HMColor(235, 235, 235)
+
+// 表格选中背景色
+#define HMSelectBg HMColor(220, 220, 220)
+
+
+/**
+ *  用户信息归档key
+ */
+#define User_Archiver_Key @"userInfor"
+/**
+ *  用户信息归档路径
+ */
+#define User_Archiver_Path @"userInforPath"
+
+/**
+ *  系统信息归档key
+ */
+#define MapVo_Archiver_Key @"mapvo"
+/**
+ *  系统信息归档路径
+ */
+#define MapVo_Archiver_Path @"mapvopath"
+
+
+/**
+ *   导航历史归档key
+ */
+#define MapNav_Archiver_Key @"mapnav"
+/**
+ *  导航历史归档路径
+ */
+#define MapNav_Archiver_Path @"mapnavpath"
+
+
+
+#define IOS_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]

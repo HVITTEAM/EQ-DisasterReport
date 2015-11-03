@@ -7,7 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "SWYMapViewController.h"
+#import <MAMapKit/MAMapKit.h>
 
+#define MAPKEY @"4bc6c5298b30d483ce75d69247d5b2df"
 @interface AppDelegate ()
 
 @end
@@ -17,6 +20,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    //创建窗口
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    //配置地图key
+    [self configureAPIKey];
+    
+    SWYMapViewController *mapVC = [[SWYMapViewController alloc] init];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:mapVC];
+    
+    //显示窗口
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
@@ -40,6 +55,20 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)configureAPIKey
+{
+    if ([MAPKEY length] == 0)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"apiKey为空，请检查key是否正确设置" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            
+            [alert show];
+        });
+    }
+    
+    [MAMapServices sharedServices].apiKey = MAPKEY;
 }
 
 @end
