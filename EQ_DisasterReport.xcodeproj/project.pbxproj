@@ -16,6 +16,24 @@
 		01EBA1761BE6F4CA00F2701D /* EQ_DisasterReportUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EBA1751BE6F4CA00F2701D /* EQ_DisasterReportUITests.m */; };
 		D2ADF95C1BE845D6007ECA5F /* SWYButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D2ADF95B1BE845D6007ECA5F /* SWYButton.m */; };
 		D2ADF95F1BE85B5E007ECA5F /* SWYMapTypeSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2ADF95E1BE85B5E007ECA5F /* SWYMapTypeSelectView.m */; };
+		D2BFE57B1BE9DACF00B65E91 /* SWYPhotoSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2BFE5781BE9DACF00B65E91 /* SWYPhotoSetViewController.m */; };
+		D2BFE57F1BE9DB5F00B65E91 /* PhotoSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2BFE57D1BE9DB5F00B65E91 /* PhotoSetCell.m */; };
+		D2BFE5801BE9DB5F00B65E91 /* PhotoSetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2BFE57E1BE9DB5F00B65E91 /* PhotoSetCell.xib */; };
+		D2BFE58C1BE9E0D800B65E91 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D2BFE5821BE9E0D800B65E91 /* 1.jpg */; };
+		D2BFE58D1BE9E0D800B65E91 /* 10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D2BFE5831BE9E0D800B65E91 /* 10.jpg */; };
+		D2BFE58E1BE9E0D800B65E91 /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D2BFE5841BE9E0D800B65E91 /* 2.jpg */; };
+		D2BFE58F1BE9E0D800B65E91 /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D2BFE5851BE9E0D800B65E91 /* 3.jpg */; };
+		D2BFE5901BE9E0D800B65E91 /* 4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D2BFE5861BE9E0D800B65E91 /* 4.jpg */; };
+		D2BFE5911BE9E0D800B65E91 /* 5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D2BFE5871BE9E0D800B65E91 /* 5.jpg */; };
+		D2BFE5921BE9E0D800B65E91 /* 6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D2BFE5881BE9E0D800B65E91 /* 6.jpg */; };
+		D2BFE5931BE9E0D800B65E91 /* 7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D2BFE5891BE9E0D800B65E91 /* 7.jpg */; };
+		D2BFE5941BE9E0D800B65E91 /* 8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D2BFE58A1BE9E0D800B65E91 /* 8.jpg */; };
+		D2BFE5951BE9E0D800B65E91 /* 9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D2BFE58B1BE9E0D800B65E91 /* 9.jpg */; };
+		D2BFE5991BE9FA3400B65E91 /* SWYCollectDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2BFE5971BE9FA3400B65E91 /* SWYCollectDetailViewController.m */; };
+		D2BFE59A1BE9FA3400B65E91 /* SWYCollectDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2BFE5981BE9FA3400B65E91 /* SWYCollectDetailViewController.xib */; };
+		D2BFE59E1BE9FD8800B65E91 /* UserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2BFE59C1BE9FD8800B65E91 /* UserInfoCell.m */; };
+		D2BFE59F1BE9FD8800B65E91 /* UserInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2BFE59D1BE9FD8800B65E91 /* UserInfoCell.xib */; };
+		D2BFE5A21BE9FFFF00B65E91 /* TableHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2BFE5A11BE9FFFF00B65E91 /* TableHeadView.m */; };
 		D2EC97DB1BE70E4A00ED8661 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC97C91BE70E4A00ED8661 /* AFHTTPRequestOperation.m */; };
 		D2EC97DC1BE70E4A00ED8661 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC97CB1BE70E4A00ED8661 /* AFHTTPRequestOperationManager.m */; };
 		D2EC97DD1BE70E4A00ED8661 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC97CD1BE70E4A00ED8661 /* AFHTTPSessionManager.m */; };
@@ -140,6 +158,29 @@
 		D2ADF95B1BE845D6007ECA5F /* SWYButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWYButton.m; sourceTree = "<group>"; };
 		D2ADF95D1BE85B5E007ECA5F /* SWYMapTypeSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWYMapTypeSelectView.h; sourceTree = "<group>"; };
 		D2ADF95E1BE85B5E007ECA5F /* SWYMapTypeSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWYMapTypeSelectView.m; sourceTree = "<group>"; };
+		D2BFE5771BE9DACF00B65E91 /* SWYPhotoSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWYPhotoSetViewController.h; sourceTree = "<group>"; };
+		D2BFE5781BE9DACF00B65E91 /* SWYPhotoSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWYPhotoSetViewController.m; sourceTree = "<group>"; };
+		D2BFE57C1BE9DB5F00B65E91 /* PhotoSetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoSetCell.h; sourceTree = "<group>"; };
+		D2BFE57D1BE9DB5F00B65E91 /* PhotoSetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoSetCell.m; sourceTree = "<group>"; };
+		D2BFE57E1BE9DB5F00B65E91 /* PhotoSetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoSetCell.xib; sourceTree = "<group>"; };
+		D2BFE5821BE9E0D800B65E91 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
+		D2BFE5831BE9E0D800B65E91 /* 10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 10.jpg; sourceTree = "<group>"; };
+		D2BFE5841BE9E0D800B65E91 /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
+		D2BFE5851BE9E0D800B65E91 /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
+		D2BFE5861BE9E0D800B65E91 /* 4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.jpg; sourceTree = "<group>"; };
+		D2BFE5871BE9E0D800B65E91 /* 5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 5.jpg; sourceTree = "<group>"; };
+		D2BFE5881BE9E0D800B65E91 /* 6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 6.jpg; sourceTree = "<group>"; };
+		D2BFE5891BE9E0D800B65E91 /* 7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 7.jpg; sourceTree = "<group>"; };
+		D2BFE58A1BE9E0D800B65E91 /* 8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 8.jpg; sourceTree = "<group>"; };
+		D2BFE58B1BE9E0D800B65E91 /* 9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 9.jpg; sourceTree = "<group>"; };
+		D2BFE5961BE9FA3400B65E91 /* SWYCollectDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWYCollectDetailViewController.h; sourceTree = "<group>"; };
+		D2BFE5971BE9FA3400B65E91 /* SWYCollectDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWYCollectDetailViewController.m; sourceTree = "<group>"; };
+		D2BFE5981BE9FA3400B65E91 /* SWYCollectDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SWYCollectDetailViewController.xib; sourceTree = "<group>"; };
+		D2BFE59B1BE9FD8800B65E91 /* UserInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoCell.h; sourceTree = "<group>"; };
+		D2BFE59C1BE9FD8800B65E91 /* UserInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoCell.m; sourceTree = "<group>"; };
+		D2BFE59D1BE9FD8800B65E91 /* UserInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfoCell.xib; sourceTree = "<group>"; };
+		D2BFE5A01BE9FFFF00B65E91 /* TableHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableHeadView.h; sourceTree = "<group>"; };
+		D2BFE5A11BE9FFFF00B65E91 /* TableHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableHeadView.m; sourceTree = "<group>"; };
 		D2EC97C21BE7076800ED8661 /* EQ_DisasterReport.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EQ_DisasterReport.pch; sourceTree = "<group>"; };
 		D2EC97C81BE70E4A00ED8661 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		D2EC97C91BE70E4A00ED8661 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
@@ -405,6 +446,67 @@
 			path = EQ_DisasterReportUITests;
 			sourceTree = "<group>";
 		};
+		D2BFE5721BE9D8A500B65E91 /* photoSet */ = {
+			isa = PBXGroup;
+			children = (
+				D2BFE5761BE9DACF00B65E91 /* Controller */,
+				D2BFE5791BE9DACF00B65E91 /* Model */,
+				D2BFE57A1BE9DACF00B65E91 /* View */,
+			);
+			path = photoSet;
+			sourceTree = "<group>";
+		};
+		D2BFE5761BE9DACF00B65E91 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D2BFE5771BE9DACF00B65E91 /* SWYPhotoSetViewController.h */,
+				D2BFE5781BE9DACF00B65E91 /* SWYPhotoSetViewController.m */,
+				D2BFE5961BE9FA3400B65E91 /* SWYCollectDetailViewController.h */,
+				D2BFE5971BE9FA3400B65E91 /* SWYCollectDetailViewController.m */,
+				D2BFE5981BE9FA3400B65E91 /* SWYCollectDetailViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D2BFE5791BE9DACF00B65E91 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D2BFE57A1BE9DACF00B65E91 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D2BFE57C1BE9DB5F00B65E91 /* PhotoSetCell.h */,
+				D2BFE57D1BE9DB5F00B65E91 /* PhotoSetCell.m */,
+				D2BFE57E1BE9DB5F00B65E91 /* PhotoSetCell.xib */,
+				D2BFE5A01BE9FFFF00B65E91 /* TableHeadView.h */,
+				D2BFE5A11BE9FFFF00B65E91 /* TableHeadView.m */,
+				D2BFE59B1BE9FD8800B65E91 /* UserInfoCell.h */,
+				D2BFE59C1BE9FD8800B65E91 /* UserInfoCell.m */,
+				D2BFE59D1BE9FD8800B65E91 /* UserInfoCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D2BFE5811BE9E0D800B65E91 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				D2BFE5821BE9E0D800B65E91 /* 1.jpg */,
+				D2BFE5831BE9E0D800B65E91 /* 10.jpg */,
+				D2BFE5841BE9E0D800B65E91 /* 2.jpg */,
+				D2BFE5851BE9E0D800B65E91 /* 3.jpg */,
+				D2BFE5861BE9E0D800B65E91 /* 4.jpg */,
+				D2BFE5871BE9E0D800B65E91 /* 5.jpg */,
+				D2BFE5881BE9E0D800B65E91 /* 6.jpg */,
+				D2BFE5891BE9E0D800B65E91 /* 7.jpg */,
+				D2BFE58A1BE9E0D800B65E91 /* 8.jpg */,
+				D2BFE58B1BE9E0D800B65E91 /* 9.jpg */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
 		D2EC97C01BE7061E00ED8661 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -470,6 +572,7 @@
 		D2EC97C51BE70C7300ED8661 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				D2BFE5721BE9D8A500B65E91 /* photoSet */,
 				D2EC98C91BE73DED00ED8661 /* Map */,
 			);
 			path = Main;
@@ -716,6 +819,7 @@
 		D2EC98AF1BE738A800ED8661 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D2BFE5811BE9E0D800B65E91 /* images */,
 				D2EC98B01BE738A800ED8661 /* AMap.bundle */,
 			);
 			path = Resources;
@@ -862,11 +966,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2BFE5941BE9E0D800B65E91 /* 8.jpg in Resources */,
+				D2BFE5901BE9E0D800B65E91 /* 4.jpg in Resources */,
 				D2EC98B11BE738A800ED8661 /* AMap.bundle in Resources */,
+				D2BFE5921BE9E0D800B65E91 /* 6.jpg in Resources */,
+				D2BFE5931BE9E0D800B65E91 /* 7.jpg in Resources */,
 				01EBA1601BE6F4CA00F2701D /* LaunchScreen.storyboard in Resources */,
 				01EBA15D1BE6F4CA00F2701D /* Assets.xcassets in Resources */,
+				D2BFE58E1BE9E0D800B65E91 /* 2.jpg in Resources */,
 				D2EC988B1BE7112700ED8661 /* MJRefresh.bundle in Resources */,
+				D2BFE58F1BE9E0D800B65E91 /* 3.jpg in Resources */,
 				01EBA15B1BE6F4CA00F2701D /* Main.storyboard in Resources */,
+				D2BFE5801BE9DB5F00B65E91 /* PhotoSetCell.xib in Resources */,
+				D2BFE5911BE9E0D800B65E91 /* 5.jpg in Resources */,
+				D2BFE59A1BE9FA3400B65E91 /* SWYCollectDetailViewController.xib in Resources */,
+				D2BFE59F1BE9FD8800B65E91 /* UserInfoCell.xib in Resources */,
+				D2BFE5951BE9E0D800B65E91 /* 9.jpg in Resources */,
+				D2BFE58D1BE9E0D800B65E91 /* 10.jpg in Resources */,
+				D2BFE58C1BE9E0D800B65E91 /* 1.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -896,6 +1013,7 @@
 				D2EC98481BE7109A00ED8661 /* MJProperty.m in Sources */,
 				D2EC98101BE70E6B00ED8661 /* UIImage+GIF.m in Sources */,
 				D2EC97E11BE70E4A00ED8661 /* AFURLRequestSerialization.m in Sources */,
+				D2BFE5A21BE9FFFF00B65E91 /* TableHeadView.m in Sources */,
 				D2EC98281BE70EFD00ED8661 /* FMDatabase.m in Sources */,
 				D2EC980E1BE70E6B00ED8661 /* SDWebImagePrefetcher.m in Sources */,
 				D2EC98291BE70EFD00ED8661 /* FMDatabaseAdditions.m in Sources */,
@@ -907,6 +1025,7 @@
 				D2EC97DF1BE70E4A00ED8661 /* AFSecurityPolicy.m in Sources */,
 				D2EC98851BE7112700ED8661 /* MJRefreshBackGifFooter.m in Sources */,
 				D2EC982B1BE70EFD00ED8661 /* FMDatabaseQueue.m in Sources */,
+				D2BFE5991BE9FA3400B65E91 /* SWYCollectDetailViewController.m in Sources */,
 				D2EC98071BE70E6B00ED8661 /* NSData+ImageContentType.m in Sources */,
 				D2EC97DB1BE70E4A00ED8661 /* AFHTTPRequestOperation.m in Sources */,
 				D2EC98A21BE7157500ED8661 /* PictureTableHelper.m in Sources */,
@@ -919,6 +1038,7 @@
 				D2EC984C1BE7109A00ED8661 /* NSObject+MJCoding.m in Sources */,
 				D2EC980F1BE70E6B00ED8661 /* UIButton+WebCache.m in Sources */,
 				D2EC987D1BE7112700ED8661 /* MJRefreshAutoFooter.m in Sources */,
+				D2BFE57B1BE9DACF00B65E91 /* SWYPhotoSetViewController.m in Sources */,
 				D2EC989B1BE7117800ED8661 /* UIView+Extension.m in Sources */,
 				D2EC980C1BE70E6B00ED8661 /* SDWebImageDownloaderOperation.m in Sources */,
 				D2EC982A1BE70EFD00ED8661 /* FMDatabasePool.m in Sources */,
@@ -939,6 +1059,7 @@
 				D2EC97DD1BE70E4A00ED8661 /* AFHTTPSessionManager.m in Sources */,
 				D2EC984A1BE7109A00ED8661 /* MJPropertyType.m in Sources */,
 				D2EC98841BE7112700ED8661 /* MJRefreshAutoStateFooter.m in Sources */,
+				D2BFE59E1BE9FD8800B65E91 /* UserInfoCell.m in Sources */,
 				D2EC98451BE7109A00ED8661 /* MJDictionaryCache.m in Sources */,
 				D2EC97DC1BE70E4A00ED8661 /* AFHTTPRequestOperationManager.m in Sources */,
 				D2EC989F1BE7154100ED8661 /* SpotTableHelper.m in Sources */,
@@ -959,6 +1080,7 @@
 				D2EC98811BE7112700ED8661 /* MJRefreshHeader.m in Sources */,
 				D2EC988A1BE7112700ED8661 /* MJRefreshStateHeader.m in Sources */,
 				D2EC98991BE7117800ED8661 /* UIImage+Extension.m in Sources */,
+				D2BFE57F1BE9DB5F00B65E91 /* PhotoSetCell.m in Sources */,
 				D2ADF95C1BE845D6007ECA5F /* SWYButton.m in Sources */,
 				D2EC98081BE70E6B00ED8661 /* SDImageCache.m in Sources */,
 				D2EC98491BE7109A00ED8661 /* MJPropertyKey.m in Sources */,

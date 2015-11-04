@@ -11,7 +11,7 @@
 
 @implementation SWYMapTypeSelectView
 {
-    CGFloat imgwidth;
+    CGFloat imgwidth;   //图片宽
 }
 
 - (instancetype)init
@@ -19,102 +19,119 @@
     if (self = [super init]) {
         [self initMapTypeView];
     }
-    
     return self;
 }
 
+/**
+ *  初始化视图
+ */
 - (void)initMapTypeView
 {
+    //创建半透明的背景按钮，点击退出
     self.bkView = [UIButton buttonWithType:UIButtonTypeCustom];
     self.bkView.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent:0.3];
     [self.bkView addTarget:self action:@selector(removeMapTypeView) forControlEvents:UIControlEventTouchUpInside];
     
+    //循环创建内部视图
     for (int i = 0; i<3; i++) {
-        UIImageView *imgv = [[UIImageView alloc] init];
-        imgv.layer.cornerRadius = 7;
-        imgv.layer.masksToBounds = YES;
-        imgv.userInteractionEnabled = YES;
-        imgv.tag = 30+i;
-        UITapGestureRecognizer *gestureRe = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectType:)];
-        gestureRe.numberOfTapsRequired = 1;
-        gestureRe.numberOfTouchesRequired = 1;
-        [imgv addGestureRecognizer:gestureRe];
-        
-        UILabel *lb = [[UILabel alloc] init];
-        lb.textAlignment = NSTextAlignmentCenter;
-        lb.font = [UIFont systemFontOfSize:13];
-        lb.tag = 40+i;
+        UIButton *imgBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        imgBtn.userInteractionEnabled = YES;
+        imgBtn.tag = 30+i;
         
         if (i==0) {
-            imgv.image = [UIImage imageNamed:@"standardimage"];
-            lb.text = @"标准2D图";
+            [imgBtn setBackgroundImage: [self resizableImageWithImageName:@"mapType_standardimage_normal"] forState:UIControlStateNormal];
+            [imgBtn setBackgroundImage: [self resizableImageWithImageName:@"mapType_standardimage_selected"] forState:UIControlStateSelected];
+            imgBtn.selected = YES;
         }else if (i==1){
-            imgv.image = [UIImage imageNamed:@"satelliteImage"];
-            lb.text = @"卫星图";
+            [imgBtn setBackgroundImage:[self resizableImageWithImageName:@"mapType_satelliteImage_normal"] forState:UIControlStateNormal];
+            [imgBtn setBackgroundImage:[self resizableImageWithImageName:@"mapType_satelliteImage_selected"] forState:UIControlStateSelected];
         }else{
-            imgv.image = [UIImage imageNamed:@"standard_night_image"];
-            lb.text = @"夜景图";
+            [imgBtn setBackgroundImage:[self resizableImageWithImageName:@"mapType_3DImage_normal"] forState:UIControlStateNormal];
+            [imgBtn setBackgroundImage:[self resizableImageWithImageName:@"mapType_3DImage_selected"] forState:UIControlStateSelected];
         }
         
-        [self addSubview:imgv];
-        [self addSubview:lb];
+        [imgBtn addTarget:self action:@selector(selectType:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self addSubview:imgBtn];
     }
     
+    //设置 view 属性
     self.backgroundColor = [UIColor whiteColor];
+    self.layer.cornerRadius = 8;
+    self.layer.masksToBounds = YES;
 }
 
-
+/**
+ *  对视图布局
+ */
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    //计算图片宽
     imgwidth = (self.width - 4*kMargin)/3;
+    
     for (int i = 0; i<3; i++) {
-        UIImageView *imgv = (UIImageView *)[self viewWithTag:30+i];
-        UILabel *lb = (UILabel *)[self viewWithTag:40+i];
-        
-        imgv.frame = CGRectMake(kMargin+i*(imgwidth+kMargin), kMargin, imgwidth, imgwidth*0.75);
-        lb.frame = CGRectMake(kMargin+i*(imgwidth+kMargin), CGRectGetMaxY(imgv.frame), imgwidth, 30);
+        UIImageView *imgBtn = (UIImageView *)[self viewWithTag:30+i];
+        imgBtn.frame = CGRectMake(kMargin+i*(imgwidth+kMargin), kMargin, imgwidth, imgwidth*0.75);  //设置图片高为宽的0.75倍
     }
 }
 
-- (void)didMoveToSuperview
-{
-    [super didMoveToSuperview];
-
-}
-
+/**
+ *  显示这个view到指定的父视图上
+ *
+ *  @param superView 父视图
+ *  @param loc  位置
+ */
 - (void)showMapTypeViewToView:(UIView *)superView position:(CGPoint)loc
 {
+    //计算view的宽高
     CGFloat width = superView.bounds.size.width-20;
-    CGFloat height = (width-4*kMargin)/3 *0.75+2*kMargin+20;
+    CGFloat height = (width-4*kMargin)/3 *0.75+2*kMargin;
     
+    //添加背景按钮
     self.bkView.frame = superView.bounds;
     [superView addSubview:self.bkView];
     
     self.frame = CGRectMake(10, loc.y, width, height);
     [superView addSubview:self];
-//        self.layer.anchorPoint = CGPointMake(1, 0);
+    
+    //设置出现动画
     CGAffineTransform transform = CGAffineTransformMakeScale(0, 0);
     transform = CGAffineTransformTranslate(transform,-(width-10), 0);
     self.transform = transform;
-
     [UIView animateWithDuration:0.5 animations:^{
         self.transform = CGAffineTransformIdentity;
     }];
 }
 
+/**
+ *  从父视图上删除view
+ */
 -(void)removeMapTypeView
 {
     [self.bkView removeFromSuperview];
     [self removeFromSuperview];
 }
 
-
--(void)selectType:(UITapGestureRecognizer *)gestureRecongnizer
+/**
+ *  点击按钮后将选择的地图类型回调
+ */
+-(void)selectType:(UIButton *)sender
 {
-    UIView *tappedView = [gestureRecongnizer view];
-    if ([self.delegate respondsToSelector:@selector(mapTypeSelectView:selectedType:)]) {
-        [self.delegate mapTypeSelectView:self selectedType:tappedView.tag-30];
+    for (int i=0; i<3; i++) {
+        UIButton *btn = [self viewWithTag:30+i];
+        btn.selected = NO;
     }
+    sender.selected = YES;
+    
+    if ([self.delegate respondsToSelector:@selector(mapTypeSelectView:selectedType:)]) {
+        [self.delegate mapTypeSelectView:self selectedType:sender.tag-30];
+    }
+}
+
+- (UIImage *)resizableImageWithImageName:(NSString *)name
+{
+    UIImage *image = [UIImage imageWithName:name];
+    return [image resizableImageWithCapInsets:UIEdgeInsetsMake(20, 20, 20, 20) resizingMode:UIImageResizingModeStretch];
 }
 @end
