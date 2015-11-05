@@ -12,6 +12,9 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    self.headIconImgV.layer.cornerRadius = self.headIconImgV.width/2;
+    self.headIconImgV.layer.masksToBounds = YES;
+    self.headIconImgV.backgroundColor = [UIColor brownColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SWYCollectDetailViewController : UIViewController
-
+@property(nonatomic,strong)NSString *headImageName;
 @end

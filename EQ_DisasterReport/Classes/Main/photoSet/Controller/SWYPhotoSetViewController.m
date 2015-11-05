@@ -8,6 +8,7 @@
 
 #import "SWYPhotoSetViewController.h"
 #import "PhotoSetCell.h"
+#import "SWYCollectDetailViewController.h"
 
 @interface SWYPhotoSetViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 @property(nonatomic,strong)UICollectionView *photoCollectionView;
@@ -21,6 +22,12 @@
     // Do any additional setup after loading the view.
     [self initPhotoCollectionView];
     [self initNavigationBar];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
 }
 
 #pragma mark 初始化方法、setter和getter方法
@@ -41,10 +48,10 @@
 -(void)initPhotoCollectionView
 {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.itemSize = CGSizeMake((MTScreenW-40)/3, (MTScreenW-40)/3);
-    flowLayout.minimumLineSpacing = 10;
-    flowLayout.minimumInteritemSpacing = 10;
-    flowLayout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 9);
+    flowLayout.itemSize = CGSizeMake((MTScreenW-12)/3, (MTScreenW-12)/3);
+    flowLayout.minimumLineSpacing = 3;
+    flowLayout.minimumInteritemSpacing = 3;
+    flowLayout.sectionInset = UIEdgeInsetsMake(0, 3, 0, 2);
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
 
     self.photoCollectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
@@ -92,6 +99,13 @@
     UIImage *img = [UIImage imageNamed:self.dataProvider[indexPath.row]];
     cell.photoImageV.image = [img scaleImageToSize:CGSizeMake(imgvWidth, imgvWidth)];
     return cell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SWYCollectDetailViewController *detailVC = [[SWYCollectDetailViewController alloc] init];
+    detailVC.headImageName = self.dataProvider[indexPath.row];
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 #pragma mark 事件方法

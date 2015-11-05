@@ -140,7 +140,7 @@
     if(updatingLocation)
     {
         //取出当前位置的坐标
-        NSLog(@"latitude : %f,longitude: %f",userLocation.coordinate.latitude,userLocation.coordinate.longitude);
+        //NSLog(@"latitude : %f,longitude: %f",userLocation.coordinate.latitude,userLocation.coordinate.longitude);
         self.currentLocation = userLocation;
     }
 }
