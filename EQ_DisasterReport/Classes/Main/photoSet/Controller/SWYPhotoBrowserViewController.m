@@ -73,7 +73,7 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     self.leftScrollView = [[UIScrollView alloc] init];
     self.leftScrollView.delegate = self;
     self.leftScrollView.minimumZoomScale=1;
-    self.leftScrollView.maximumZoomScale=4;
+    self.leftScrollView.maximumZoomScale=2;
     self.leftImageView = [[UIImageView alloc] init];
     self.leftImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.leftScrollView addSubview:self.leftImageView];
@@ -82,7 +82,7 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     self.currentScrollView = [[UIScrollView alloc] init];
     self.currentScrollView.delegate = self;
     self.currentScrollView.minimumZoomScale=1;
-    self.currentScrollView.maximumZoomScale=4;
+    self.currentScrollView.maximumZoomScale=2;
     self.currentImageView = [[UIImageView alloc] init];
     self.currentImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.currentScrollView addSubview:self.currentImageView];
@@ -91,7 +91,7 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     self.rightScrollView = [[UIScrollView alloc] init];
     self.rightScrollView.delegate = self;
     self.rightScrollView.minimumZoomScale=1;
-    self.rightScrollView.maximumZoomScale=4;
+    self.rightScrollView.maximumZoomScale=2;
     self.rightImageView = [[UIImageView alloc] init];
     self.rightImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.rightScrollView addSubview:self.rightImageView];
@@ -190,7 +190,7 @@ typedef NS_ENUM(NSInteger, movingDirection) {
  */
 -(void)scaleImage:(UITapGestureRecognizer *)gestureRecognizer
 {
-    CGFloat newscale = 3.9;
+    CGFloat newscale = 1.9;
 
     CGRect zoomRect = [self zoomRectForScale:newscale withCenter:[gestureRecognizer locationInView:gestureRecognizer.view] andScrollView:self.currentScrollView];
     
@@ -228,5 +228,10 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+-(void)dealloc
+{
+    NSLog(@"SWYPhotoBrowserViewController 释放");
+}
 
 @end

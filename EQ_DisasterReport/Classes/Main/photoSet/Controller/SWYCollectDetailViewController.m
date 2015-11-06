@@ -25,6 +25,7 @@
     [self initTableView];
     [self initNaviBar];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
 }
 
@@ -40,11 +41,13 @@
  */
 -(void)initTableView
 {
-    self.detailTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.detailTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH) style:UITableViewStylePlain];
     self.detailTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.detailTableView.delegate = self;
     self.detailTableView.dataSource = self;
+    self.detailTableView.backgroundColor = HMGlobalBg;
     [self.view addSubview:self.detailTableView];
+    self.detailTableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"table_bk_image"]];
     
     //设置tableView头部视图
     TableHeadView *headView = [[[NSBundle mainBundle] loadNibNamed:@"TableHeadViw" owner:nil options:nil] lastObject];
@@ -55,11 +58,12 @@
 }
 
 /**
- *  初始化tableView
+ *  初始化自定义导航栏
  */
 -(void)initNaviBar
 {
     self.naviBar = [[SWYNavigationBar alloc]initCustomNavigatinBar];
+    self.naviBar.titleStr = @"标题";
     self.naviBar.delegate = self;
     [self.view addSubview:self.naviBar];
 }
@@ -118,16 +122,22 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView.contentOffset.y<0) {
-        CGFloat alph = scrollView.contentOffset.y/20;
-        NSLog(@"%f",alph);
+    CGFloat alph;
+    if (scrollView.contentOffset.y>0) {
+        alph = scrollView.contentOffset.y/100;
         if (alph>=1.0) {
             alph = 1.0;
-        }else if (alph<=0){
-            alph = 0;
         }
-        self.naviBar.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:alph];
+    }else{
+        alph = 0.0;
     }
+    self.naviBar.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:alph];
+
+}
+
+-(void)dealloc
+{
+    NSLog(@"SWYCollectDetailViewController 释放");
 }
 
 @end

@@ -12,6 +12,7 @@
 #import "SWYButton.h"
 #import "SWYMapTypeSelectView.h"
 #import "SWYPhotoSetViewController.h"
+#import "CollectInfoViewController.h"
 
 @interface SWYMapViewController ()<MAMapViewDelegate,AMapSearchDelegate,MapTypeSelectViewDelegate>
 
@@ -205,7 +206,10 @@
         UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:photoSetVC];
         [self presentViewController:navVC animated:YES completion:nil];
     }else if ([title isEqualToString:@"数据采集"]){
-    
+        CollectInfoViewController *collectionInfo = [[CollectInfoViewController alloc] init];
+        UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:collectionInfo];
+        [self presentViewController:navVC animated:YES completion:nil];
+
     } else{
     
     }
