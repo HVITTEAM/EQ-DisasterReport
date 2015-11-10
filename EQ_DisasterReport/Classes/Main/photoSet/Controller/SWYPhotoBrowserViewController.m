@@ -172,7 +172,7 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     NSInteger leftIndex = (self.currentIndex -1+imgCount)%imgCount;
     NSInteger rigthIndex = (self.currentIndex+1)%imgCount;
     
-    NSLog(@"l:%d  c:%d  r:%d",leftIndex,self.currentIndex,rigthIndex);
+    //NSLog(@"l:%d  c:%d  r:%d",leftIndex,self.currentIndex,rigthIndex);
     
     //设置图片
     self.leftImageView.image = [UIImage imageNamed:self.imageNames[leftIndex]];

@@ -20,7 +20,7 @@
                 </label>
             </subviews>
             <animations/>
-            <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="woO-Lq-jQN" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="15" id="KVA-II-ikT"/>
                 <constraint firstItem="woO-Lq-jQN" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="cey-IU-Hzu"/>

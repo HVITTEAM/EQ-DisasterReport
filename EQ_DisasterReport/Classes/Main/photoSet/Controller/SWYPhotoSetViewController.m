@@ -195,7 +195,7 @@
 #pragma mark LoopImagesViewDelegate
 -(void)loopImagesView:(LoopImagesView *)loopImageView didImageClickedIndex:(NSInteger)index
 {
-    NSLog(@"%d",index);
+    //NSLog(@"%d",index);
 }
 
 #pragma mark 事件方法

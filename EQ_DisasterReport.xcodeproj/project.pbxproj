@@ -18,6 +18,29 @@
 		D2550BC61BEB2C9400904D35 /* SWYNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D2550BC51BEB2C9400904D35 /* SWYNavigationBar.m */; };
 		D2656EAA1BEBA2B400BA127F /* PhotoSetReusableHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2656EA81BEBA2B400BA127F /* PhotoSetReusableHeadView.m */; };
 		D2656EAB1BEBA2B400BA127F /* PhotoSetReusableHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2656EA91BEBA2B400BA127F /* PhotoSetReusableHeadView.xib */; };
+		D296472B1BF17363004B8877 /* SpotInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D296472A1BF17363004B8877 /* SpotInfoViewController.m */; };
+		D29647321BF1739C004B8877 /* SpotLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D296472D1BF1739C004B8877 /* SpotLabelCell.m */; };
+		D29647331BF1739C004B8877 /* SpotLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D296472E1BF1739C004B8877 /* SpotLabelCell.xib */; };
+		D29647341BF1739C004B8877 /* SpotTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D29647301BF1739C004B8877 /* SpotTextCell.m */; };
+		D29647351BF1739C004B8877 /* SpotTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D29647311BF1739C004B8877 /* SpotTextCell.xib */; };
+		D29647381BF173CE004B8877 /* SpotInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D29647371BF173CE004B8877 /* SpotInfoModel.m */; };
+		D296473F1BF196B2004B8877 /* ImagePickCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D296473D1BF196B2004B8877 /* ImagePickCell.m */; };
+		D29647401BF196B2004B8877 /* ImagePickCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D296473E1BF196B2004B8877 /* ImagePickCell.xib */; };
+		D29647441BF19977004B8877 /* FillContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D29647421BF19977004B8877 /* FillContentViewController.m */; };
+		D29647451BF19977004B8877 /* FillContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D29647431BF19977004B8877 /* FillContentViewController.xib */; };
+		D296474B1BF1B56C004B8877 /* ImageCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D29647491BF1B56C004B8877 /* ImageCollectionView.m */; };
+		D296474C1BF1B56C004B8877 /* ImageCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D296474A1BF1B56C004B8877 /* ImageCollectionView.xib */; };
+		D296475E1BF1B814004B8877 /* UzysAssetPickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D296474F1BF1B814004B8877 /* UzysAssetPickerController.bundle */; };
+		D296475F1BF1B814004B8877 /* UzysAssetsPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = D29647511BF1B814004B8877 /* UzysAssetsPickerController.m */; };
+		D29647601BF1B814004B8877 /* UzysAssetsPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D29647521BF1B814004B8877 /* UzysAssetsPickerController.xib */; };
+		D29647611BF1B814004B8877 /* UzysAssetsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D29647551BF1B814004B8877 /* UzysAssetsViewCell.m */; };
+		D29647621BF1B814004B8877 /* UzysGroupPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D29647571BF1B814004B8877 /* UzysGroupPickerView.m */; };
+		D29647631BF1B814004B8877 /* UzysGroupPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D29647591BF1B814004B8877 /* UzysGroupPickerViewController.m */; };
+		D29647641BF1B814004B8877 /* UzysGroupViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D296475B1BF1B814004B8877 /* UzysGroupViewCell.m */; };
+		D29647651BF1B814004B8877 /* UzysWrapperPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = D296475D1BF1B814004B8877 /* UzysWrapperPickerController.m */; };
+		D29647671BF1BDF6004B8877 /* SQCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D29647661BF1BDF6004B8877 /* SQCollectionCell.xib */; };
+		D296476A1BF1C74A004B8877 /* ImgeCollectinViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D29647691BF1C74A004B8877 /* ImgeCollectinViewFlowLayout.m */; };
+		D296476D1BF1DB1C004B8877 /* PictureVO.m in Sources */ = {isa = PBXBuildFile; fileRef = D296476C1BF1DB1C004B8877 /* PictureVO.m */; };
 		D2ADF95C1BE845D6007ECA5F /* SWYButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D2ADF95B1BE845D6007ECA5F /* SWYButton.m */; };
 		D2ADF95F1BE85B5E007ECA5F /* SWYMapTypeSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2ADF95E1BE85B5E007ECA5F /* SWYMapTypeSelectView.m */; };
 		D2BFE57B1BE9DACF00B65E91 /* SWYPhotoSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2BFE5781BE9DACF00B65E91 /* SWYPhotoSetViewController.m */; };
@@ -171,6 +194,45 @@
 		D2656EA71BEBA2B400BA127F /* PhotoSetReusableHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoSetReusableHeadView.h; sourceTree = "<group>"; };
 		D2656EA81BEBA2B400BA127F /* PhotoSetReusableHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoSetReusableHeadView.m; sourceTree = "<group>"; };
 		D2656EA91BEBA2B400BA127F /* PhotoSetReusableHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoSetReusableHeadView.xib; sourceTree = "<group>"; };
+		D29647291BF17363004B8877 /* SpotInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotInfoViewController.h; sourceTree = "<group>"; };
+		D296472A1BF17363004B8877 /* SpotInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotInfoViewController.m; sourceTree = "<group>"; };
+		D296472C1BF1739C004B8877 /* SpotLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotLabelCell.h; sourceTree = "<group>"; };
+		D296472D1BF1739C004B8877 /* SpotLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotLabelCell.m; sourceTree = "<group>"; };
+		D296472E1BF1739C004B8877 /* SpotLabelCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpotLabelCell.xib; sourceTree = "<group>"; };
+		D296472F1BF1739C004B8877 /* SpotTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotTextCell.h; sourceTree = "<group>"; };
+		D29647301BF1739C004B8877 /* SpotTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotTextCell.m; sourceTree = "<group>"; };
+		D29647311BF1739C004B8877 /* SpotTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpotTextCell.xib; sourceTree = "<group>"; };
+		D29647361BF173CE004B8877 /* SpotInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotInfoModel.h; sourceTree = "<group>"; };
+		D29647371BF173CE004B8877 /* SpotInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotInfoModel.m; sourceTree = "<group>"; };
+		D296473C1BF196B2004B8877 /* ImagePickCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickCell.h; sourceTree = "<group>"; };
+		D296473D1BF196B2004B8877 /* ImagePickCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickCell.m; sourceTree = "<group>"; };
+		D296473E1BF196B2004B8877 /* ImagePickCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagePickCell.xib; sourceTree = "<group>"; };
+		D29647411BF19977004B8877 /* FillContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FillContentViewController.h; sourceTree = "<group>"; };
+		D29647421BF19977004B8877 /* FillContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FillContentViewController.m; sourceTree = "<group>"; };
+		D29647431BF19977004B8877 /* FillContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FillContentViewController.xib; sourceTree = "<group>"; };
+		D29647481BF1B56C004B8877 /* ImageCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCollectionView.h; sourceTree = "<group>"; };
+		D29647491BF1B56C004B8877 /* ImageCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCollectionView.m; sourceTree = "<group>"; };
+		D296474A1BF1B56C004B8877 /* ImageCollectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCollectionView.xib; sourceTree = "<group>"; };
+		D296474F1BF1B814004B8877 /* UzysAssetPickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UzysAssetPickerController.bundle; sourceTree = "<group>"; };
+		D29647501BF1B814004B8877 /* UzysAssetsPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysAssetsPickerController.h; sourceTree = "<group>"; };
+		D29647511BF1B814004B8877 /* UzysAssetsPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UzysAssetsPickerController.m; sourceTree = "<group>"; };
+		D29647521BF1B814004B8877 /* UzysAssetsPickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UzysAssetsPickerController.xib; sourceTree = "<group>"; };
+		D29647531BF1B814004B8877 /* UzysAssetsPickerController_Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysAssetsPickerController_Configuration.h; sourceTree = "<group>"; };
+		D29647541BF1B814004B8877 /* UzysAssetsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysAssetsViewCell.h; sourceTree = "<group>"; };
+		D29647551BF1B814004B8877 /* UzysAssetsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UzysAssetsViewCell.m; sourceTree = "<group>"; };
+		D29647561BF1B814004B8877 /* UzysGroupPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysGroupPickerView.h; sourceTree = "<group>"; };
+		D29647571BF1B814004B8877 /* UzysGroupPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UzysGroupPickerView.m; sourceTree = "<group>"; };
+		D29647581BF1B814004B8877 /* UzysGroupPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysGroupPickerViewController.h; sourceTree = "<group>"; };
+		D29647591BF1B814004B8877 /* UzysGroupPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UzysGroupPickerViewController.m; sourceTree = "<group>"; };
+		D296475A1BF1B814004B8877 /* UzysGroupViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysGroupViewCell.h; sourceTree = "<group>"; };
+		D296475B1BF1B814004B8877 /* UzysGroupViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UzysGroupViewCell.m; sourceTree = "<group>"; };
+		D296475C1BF1B814004B8877 /* UzysWrapperPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysWrapperPickerController.h; sourceTree = "<group>"; };
+		D296475D1BF1B814004B8877 /* UzysWrapperPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UzysWrapperPickerController.m; sourceTree = "<group>"; };
+		D29647661BF1BDF6004B8877 /* SQCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SQCollectionCell.xib; sourceTree = "<group>"; };
+		D29647681BF1C74A004B8877 /* ImgeCollectinViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImgeCollectinViewFlowLayout.h; sourceTree = "<group>"; };
+		D29647691BF1C74A004B8877 /* ImgeCollectinViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImgeCollectinViewFlowLayout.m; sourceTree = "<group>"; };
+		D296476B1BF1DB1C004B8877 /* PictureVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureVO.h; sourceTree = "<group>"; };
+		D296476C1BF1DB1C004B8877 /* PictureVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureVO.m; sourceTree = "<group>"; };
 		D2ADF95A1BE845D6007ECA5F /* SWYButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWYButton.h; sourceTree = "<group>"; };
 		D2ADF95B1BE845D6007ECA5F /* SWYButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWYButton.m; sourceTree = "<group>"; };
 		D2ADF95D1BE85B5E007ECA5F /* SWYMapTypeSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWYMapTypeSelectView.h; sourceTree = "<group>"; };
@@ -472,6 +534,41 @@
 			path = EQ_DisasterReportUITests;
 			sourceTree = "<group>";
 		};
+		D29647471BF1B56C004B8877 /* imageCollection */ = {
+			isa = PBXGroup;
+			children = (
+				D29647661BF1BDF6004B8877 /* SQCollectionCell.xib */,
+				D29647481BF1B56C004B8877 /* ImageCollectionView.h */,
+				D29647491BF1B56C004B8877 /* ImageCollectionView.m */,
+				D296474A1BF1B56C004B8877 /* ImageCollectionView.xib */,
+				D29647681BF1C74A004B8877 /* ImgeCollectinViewFlowLayout.h */,
+				D29647691BF1C74A004B8877 /* ImgeCollectinViewFlowLayout.m */,
+			);
+			path = imageCollection;
+			sourceTree = "<group>";
+		};
+		D296474E1BF1B814004B8877 /* MutilSelector */ = {
+			isa = PBXGroup;
+			children = (
+				D296474F1BF1B814004B8877 /* UzysAssetPickerController.bundle */,
+				D29647501BF1B814004B8877 /* UzysAssetsPickerController.h */,
+				D29647511BF1B814004B8877 /* UzysAssetsPickerController.m */,
+				D29647521BF1B814004B8877 /* UzysAssetsPickerController.xib */,
+				D29647531BF1B814004B8877 /* UzysAssetsPickerController_Configuration.h */,
+				D29647541BF1B814004B8877 /* UzysAssetsViewCell.h */,
+				D29647551BF1B814004B8877 /* UzysAssetsViewCell.m */,
+				D29647561BF1B814004B8877 /* UzysGroupPickerView.h */,
+				D29647571BF1B814004B8877 /* UzysGroupPickerView.m */,
+				D29647581BF1B814004B8877 /* UzysGroupPickerViewController.h */,
+				D29647591BF1B814004B8877 /* UzysGroupPickerViewController.m */,
+				D296475A1BF1B814004B8877 /* UzysGroupViewCell.h */,
+				D296475B1BF1B814004B8877 /* UzysGroupViewCell.m */,
+				D296475C1BF1B814004B8877 /* UzysWrapperPickerController.h */,
+				D296475D1BF1B814004B8877 /* UzysWrapperPickerController.m */,
+			);
+			path = MutilSelector;
+			sourceTree = "<group>";
+		};
 		D2BFE5721BE9D8A500B65E91 /* photoSet */ = {
 			isa = PBXGroup;
 			children = (
@@ -593,6 +690,7 @@
 		D2EC97C41BE70C7300ED8661 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				D296474E1BF1B814004B8877 /* MutilSelector */,
 				D2EC98AD1BE7372C00ED8661 /* AMapSearchKit.framework */,
 				D2EC98AB1BE7371B00ED8661 /* MAMapKit.framework */,
 				D2EC98501BE7112700ED8661 /* MJRefresh */,
@@ -915,6 +1013,11 @@
 				D2EDC4B91BEC959A00AEDFB4 /* CollectInfoViewController.h */,
 				D2EDC4BA1BEC959A00AEDFB4 /* CollectInfoViewController.m */,
 				D2EDC4BB1BEC959A00AEDFB4 /* CollectInfoViewController.xib */,
+				D29647291BF17363004B8877 /* SpotInfoViewController.h */,
+				D296472A1BF17363004B8877 /* SpotInfoViewController.m */,
+				D29647411BF19977004B8877 /* FillContentViewController.h */,
+				D29647421BF19977004B8877 /* FillContentViewController.m */,
+				D29647431BF19977004B8877 /* FillContentViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -922,6 +1025,10 @@
 		D2EDC4B21BEC938800AEDFB4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D29647361BF173CE004B8877 /* SpotInfoModel.h */,
+				D29647371BF173CE004B8877 /* SpotInfoModel.m */,
+				D296476B1BF1DB1C004B8877 /* PictureVO.h */,
+				D296476C1BF1DB1C004B8877 /* PictureVO.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -929,9 +1036,19 @@
 		D2EDC4B31BEC938800AEDFB4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D29647471BF1B56C004B8877 /* imageCollection */,
 				D2EDC4BE1BEC966600AEDFB4 /* SpotInfoCell.h */,
 				D2EDC4BF1BEC966600AEDFB4 /* SpotInfoCell.m */,
 				D2EDC4C01BEC966600AEDFB4 /* SpotInfoCell.xib */,
+				D296472C1BF1739C004B8877 /* SpotLabelCell.h */,
+				D296472D1BF1739C004B8877 /* SpotLabelCell.m */,
+				D296472E1BF1739C004B8877 /* SpotLabelCell.xib */,
+				D296472F1BF1739C004B8877 /* SpotTextCell.h */,
+				D29647301BF1739C004B8877 /* SpotTextCell.m */,
+				D29647311BF1739C004B8877 /* SpotTextCell.xib */,
+				D296473C1BF196B2004B8877 /* ImagePickCell.h */,
+				D296473D1BF196B2004B8877 /* ImagePickCell.m */,
+				D296473E1BF196B2004B8877 /* ImagePickCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1040,10 +1157,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D29647401BF196B2004B8877 /* ImagePickCell.xib in Resources */,
 				D2BFE5941BE9E0D800B65E91 /* 8.jpg in Resources */,
+				D29647331BF1739C004B8877 /* SpotLabelCell.xib in Resources */,
 				D2BFE5901BE9E0D800B65E91 /* 4.jpg in Resources */,
 				D2BFE5A41BEA063400B65E91 /* TableHeadViw.xib in Resources */,
+				D29647671BF1BDF6004B8877 /* SQCollectionCell.xib in Resources */,
 				D2EDC4C21BEC966600AEDFB4 /* SpotInfoCell.xib in Resources */,
+				D29647601BF1B814004B8877 /* UzysAssetsPickerController.xib in Resources */,
+				D296475E1BF1B814004B8877 /* UzysAssetPickerController.bundle in Resources */,
 				D2EC98B11BE738A800ED8661 /* AMap.bundle in Resources */,
 				D2BFE5921BE9E0D800B65E91 /* 6.jpg in Resources */,
 				D2BFE5931BE9E0D800B65E91 /* 7.jpg in Resources */,
@@ -1051,13 +1173,16 @@
 				01EBA15D1BE6F4CA00F2701D /* Assets.xcassets in Resources */,
 				D2BFE58E1BE9E0D800B65E91 /* 2.jpg in Resources */,
 				D2EC988B1BE7112700ED8661 /* MJRefresh.bundle in Resources */,
+				D29647351BF1739C004B8877 /* SpotTextCell.xib in Resources */,
 				D2BFE58F1BE9E0D800B65E91 /* 3.jpg in Resources */,
 				01EBA15B1BE6F4CA00F2701D /* Main.storyboard in Resources */,
 				D2BFE5801BE9DB5F00B65E91 /* PhotoSetCell.xib in Resources */,
 				D2BFE5911BE9E0D800B65E91 /* 5.jpg in Resources */,
 				D2BFE59A1BE9FA3400B65E91 /* SWYCollectDetailViewController.xib in Resources */,
+				D296474C1BF1B56C004B8877 /* ImageCollectionView.xib in Resources */,
 				D2BFE59F1BE9FD8800B65E91 /* UserInfoCell.xib in Resources */,
 				D2BFE5951BE9E0D800B65E91 /* 9.jpg in Resources */,
+				D29647451BF19977004B8877 /* FillContentViewController.xib in Resources */,
 				D2BFE58D1BE9E0D800B65E91 /* 10.jpg in Resources */,
 				D2EDC4BD1BEC959A00AEDFB4 /* CollectInfoViewController.xib in Resources */,
 				D2BFE58C1BE9E0D800B65E91 /* 1.jpg in Resources */,
@@ -1100,9 +1225,14 @@
 				D2EC987F1BE7112700ED8661 /* MJRefreshComponent.m in Sources */,
 				D2EC984F1BE7109A00ED8661 /* NSString+MJExtension.m in Sources */,
 				D2EC987E1BE7112700ED8661 /* MJRefreshBackFooter.m in Sources */,
+				D296472B1BF17363004B8877 /* SpotInfoViewController.m in Sources */,
 				D2EC97DF1BE70E4A00ED8661 /* AFSecurityPolicy.m in Sources */,
+				D296474B1BF1B56C004B8877 /* ImageCollectionView.m in Sources */,
+				D29647641BF1B814004B8877 /* UzysGroupViewCell.m in Sources */,
 				D2EC98851BE7112700ED8661 /* MJRefreshBackGifFooter.m in Sources */,
 				D2EC982B1BE70EFD00ED8661 /* FMDatabaseQueue.m in Sources */,
+				D29647321BF1739C004B8877 /* SpotLabelCell.m in Sources */,
+				D29647441BF19977004B8877 /* FillContentViewController.m in Sources */,
 				D2BFE5991BE9FA3400B65E91 /* SWYCollectDetailViewController.m in Sources */,
 				D2EC98071BE70E6B00ED8661 /* NSData+ImageContentType.m in Sources */,
 				D2EC97DB1BE70E4A00ED8661 /* AFHTTPRequestOperation.m in Sources */,
@@ -1125,9 +1255,11 @@
 				D2EC98061BE70E6B00ED8661 /* MKAnnotationView+WebCache.m in Sources */,
 				D2EC98091BE70E6B00ED8661 /* SDWebImageCompat.m in Sources */,
 				D2EC97E21BE70E4A00ED8661 /* AFURLResponseSerialization.m in Sources */,
+				D29647381BF173CE004B8877 /* SpotInfoModel.m in Sources */,
 				D2EC98FC1BE75BD500ED8661 /* SWYMapViewController.m in Sources */,
 				D2EC988F1BE7112700ED8661 /* UIView+MJExtension.m in Sources */,
 				D2EC98881BE7112700ED8661 /* MJRefreshGifHeader.m in Sources */,
+				D29647341BF1739C004B8877 /* SpotTextCell.m in Sources */,
 				D2EC98111BE70E6B00ED8661 /* UIImage+MultiFormat.m in Sources */,
 				D2550B581BEAE93C00904D35 /* SWYPhotoBrowserViewController.m in Sources */,
 				D2EDC4AE1BEC347E00AEDFB4 /* LoopImagesView.m in Sources */,
@@ -1135,19 +1267,25 @@
 				D2EC98141BE70E6B00ED8661 /* UIImageView+WebCache.m in Sources */,
 				D2EC988E1BE7112700ED8661 /* UIScrollView+MJRefresh.m in Sources */,
 				01EBA1551BE6F4CA00F2701D /* AppDelegate.m in Sources */,
+				D296475F1BF1B814004B8877 /* UzysAssetsPickerController.m in Sources */,
 				D2EC98151BE70E6B00ED8661 /* UIView+WebCacheOperation.m in Sources */,
 				D2EC97DD1BE70E4A00ED8661 /* AFHTTPSessionManager.m in Sources */,
 				D2EC984A1BE7109A00ED8661 /* MJPropertyType.m in Sources */,
 				D2EC98841BE7112700ED8661 /* MJRefreshAutoStateFooter.m in Sources */,
 				D2BFE59E1BE9FD8800B65E91 /* UserInfoCell.m in Sources */,
+				D296476D1BF1DB1C004B8877 /* PictureVO.m in Sources */,
 				D2EC98451BE7109A00ED8661 /* MJDictionaryCache.m in Sources */,
 				D2EDC4C11BEC966600AEDFB4 /* SpotInfoCell.m in Sources */,
+				D29647621BF1B814004B8877 /* UzysGroupPickerView.m in Sources */,
 				D2EDC4BC1BEC959A00AEDFB4 /* CollectInfoViewController.m in Sources */,
 				D2EC97DC1BE70E4A00ED8661 /* AFHTTPRequestOperationManager.m in Sources */,
 				D2EC989F1BE7154100ED8661 /* SpotTableHelper.m in Sources */,
+				D296476A1BF1C74A004B8877 /* ImgeCollectinViewFlowLayout.m in Sources */,
 				D2EC980B1BE70E6B00ED8661 /* SDWebImageDownloader.m in Sources */,
 				D2EC98131BE70E6B00ED8661 /* UIImageView+HighlightedWebCache.m in Sources */,
+				D296473F1BF196B2004B8877 /* ImagePickCell.m in Sources */,
 				D2EC980A1BE70E6B00ED8661 /* SDWebImageDecoder.m in Sources */,
+				D29647611BF1B814004B8877 /* UzysAssetsViewCell.m in Sources */,
 				D2EC988C1BE7112700ED8661 /* MJRefreshConst.m in Sources */,
 				D2EC984B1BE7109A00ED8661 /* NSObject+MJClass.m in Sources */,
 				D2EC98461BE7109A00ED8661 /* MJExtensionConst.m in Sources */,
@@ -1161,8 +1299,10 @@
 				D2550BC61BEB2C9400904D35 /* SWYNavigationBar.m in Sources */,
 				01EBA1521BE6F4CA00F2701D /* main.m in Sources */,
 				D2EC98811BE7112700ED8661 /* MJRefreshHeader.m in Sources */,
+				D29647651BF1B814004B8877 /* UzysWrapperPickerController.m in Sources */,
 				D2EC988A1BE7112700ED8661 /* MJRefreshStateHeader.m in Sources */,
 				D2EC98991BE7117800ED8661 /* UIImage+Extension.m in Sources */,
+				D29647631BF1B814004B8877 /* UzysGroupPickerViewController.m in Sources */,
 				D2BFE57F1BE9DB5F00B65E91 /* PhotoSetCell.m in Sources */,
 				D2ADF95C1BE845D6007ECA5F /* SWYButton.m in Sources */,
 				D2EC98081BE70E6B00ED8661 /* SDImageCache.m in Sources */,

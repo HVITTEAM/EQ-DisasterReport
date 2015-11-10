@@ -8,6 +8,8 @@
 
 #import "CollectInfoViewController.h"
 #import "SpotInfoCell.h"
+#import "SpotInfoViewController.h"
+#import "ImageCollectionView.h"
 
 @interface CollectInfoViewController ()
 
@@ -49,9 +51,20 @@
     return 90;
 }
 
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SpotInfoViewController *spotInfoVC = [[SpotInfoViewController alloc] init];
+    [self.navigationController pushViewController:spotInfoVC animated:YES];
+}
+
+
 -(void)addNewSpotInfo
 {
-
+    ImageCollectionView *collectionView = [[ImageCollectionView alloc] initWithNibName:@"ImageCollectionView" bundle:nil];
+    [self.navigationController pushViewController:collectionView animated:YES];
+//    SpotInfoViewController *spotInfoVC = [[SpotInfoViewController alloc] init];
+//    [self.navigationController pushViewController:spotInfoVC animated:YES];
 }
 
 -(void)back
