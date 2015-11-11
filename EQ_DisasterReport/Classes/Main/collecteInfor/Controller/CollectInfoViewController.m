@@ -61,10 +61,10 @@
 
 -(void)addNewSpotInfo
 {
-    ImageCollectionView *collectionView = [[ImageCollectionView alloc] initWithNibName:@"ImageCollectionView" bundle:nil];
-    [self.navigationController pushViewController:collectionView animated:YES];
 //    SpotInfoViewController *spotInfoVC = [[SpotInfoViewController alloc] init];
 //    [self.navigationController pushViewController:spotInfoVC animated:YES];
+
+    
 }
 
 -(void)back

@@ -17,7 +17,12 @@
 - (void)awakeFromNib {
     // Initialization code
     self.imagePickVC = [[ImageCollectionView alloc] initWithNibName:@"ImageCollectionView" bundle:nil];
-    
+    __weak typeof(self) weakSelf = self;
+    self.imagePickVC.changeHeightBlock = ^(CGFloat viewHeight,NSMutableArray *images){
+        if ([weakSelf.delegate respondsToSelector:@selector(imagePickCell:pickedImages:imagePickViewheight:)]) {
+            [weakSelf.delegate imagePickCell:weakSelf pickedImages:images imagePickViewheight:viewHeight];
+        }
+    };
     UICollectionView *collectionView = (UICollectionView *)self.imagePickVC.view;
     collectionView.frame = CGRectMake(0, 0, MTScreenW, 240);
     [self addSubview:collectionView];
@@ -35,5 +40,7 @@
 {
     self.imagePickVC.parentVC = parentVC;;
 }
+
+
 
 @end

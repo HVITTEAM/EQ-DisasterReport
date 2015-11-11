@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ImagePickCellDelegate;
+
 @interface ImagePickCell : UITableViewCell
 @property (nonatomic, strong) UIViewController *parentVC;
+@property (nonatomic, weak)id<ImagePickCellDelegate>delegate;
+@end
+
+@protocol ImagePickCellDelegate <NSObject>
+
+-(void)imagePickCell:(ImagePickCell *)cell pickedImages:(NSArray *)images imagePickViewheight:(CGFloat)height;
+
 @end

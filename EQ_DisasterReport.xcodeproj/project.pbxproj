@@ -41,6 +41,20 @@
 		D29647671BF1BDF6004B8877 /* SQCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D29647661BF1BDF6004B8877 /* SQCollectionCell.xib */; };
 		D296476A1BF1C74A004B8877 /* ImgeCollectinViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D29647691BF1C74A004B8877 /* ImgeCollectinViewFlowLayout.m */; };
 		D296476D1BF1DB1C004B8877 /* PictureVO.m in Sources */ = {isa = PBXBuildFile; fileRef = D296476C1BF1DB1C004B8877 /* PictureVO.m */; };
+		D2AD16A71BF2DC7A000D2182 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AD16A61BF2DC79000D2182 /* AVFoundation.framework */; };
+		D2AD16CF1BF2FDF8000D2182 /* D3RecordButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AD16C01BF2FDF8000D2182 /* D3RecordButton.m */; };
+		D2AD16D01BF2FDF8000D2182 /* mic_0.png in Resources */ = {isa = PBXBuildFile; fileRef = D2AD16C21BF2FDF8000D2182 /* mic_0.png */; };
+		D2AD16D11BF2FDF8000D2182 /* mic_1.png in Resources */ = {isa = PBXBuildFile; fileRef = D2AD16C31BF2FDF8000D2182 /* mic_1.png */; };
+		D2AD16D21BF2FDF8000D2182 /* mic_2.png in Resources */ = {isa = PBXBuildFile; fileRef = D2AD16C41BF2FDF8000D2182 /* mic_2.png */; };
+		D2AD16D31BF2FDF8000D2182 /* mic_3.png in Resources */ = {isa = PBXBuildFile; fileRef = D2AD16C51BF2FDF8000D2182 /* mic_3.png */; };
+		D2AD16D41BF2FDF8000D2182 /* mic_4.png in Resources */ = {isa = PBXBuildFile; fileRef = D2AD16C61BF2FDF8000D2182 /* mic_4.png */; };
+		D2AD16D51BF2FDF8000D2182 /* mic_5.png in Resources */ = {isa = PBXBuildFile; fileRef = D2AD16C71BF2FDF8000D2182 /* mic_5.png */; };
+		D2AD16D61BF2FDF8000D2182 /* mic_cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = D2AD16C81BF2FDF8000D2182 /* mic_cancel.png */; };
+		D2AD16D71BF2FDF8000D2182 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AD16CA1BF2FDF8000D2182 /* libmp3lame.a */; };
+		D2AD16D81BF2FDF8000D2182 /* Mp3Recorder.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AD16CC1BF2FDF8000D2182 /* Mp3Recorder.m */; };
+		D2AD16D91BF2FDF8000D2182 /* RecordHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AD16CE1BF2FDF8000D2182 /* RecordHUD.m */; };
+		D2AD16DD1BF31B6C000D2182 /* AudioCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AD16DB1BF31B6C000D2182 /* AudioCell.m */; };
+		D2AD16DE1BF31B6C000D2182 /* AudioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2AD16DC1BF31B6C000D2182 /* AudioCell.xib */; };
 		D2ADF95C1BE845D6007ECA5F /* SWYButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D2ADF95B1BE845D6007ECA5F /* SWYButton.m */; };
 		D2ADF95F1BE85B5E007ECA5F /* SWYMapTypeSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2ADF95E1BE85B5E007ECA5F /* SWYMapTypeSelectView.m */; };
 		D2BFE57B1BE9DACF00B65E91 /* SWYPhotoSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2BFE5781BE9DACF00B65E91 /* SWYPhotoSetViewController.m */; };
@@ -233,6 +247,25 @@
 		D29647691BF1C74A004B8877 /* ImgeCollectinViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImgeCollectinViewFlowLayout.m; sourceTree = "<group>"; };
 		D296476B1BF1DB1C004B8877 /* PictureVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureVO.h; sourceTree = "<group>"; };
 		D296476C1BF1DB1C004B8877 /* PictureVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureVO.m; sourceTree = "<group>"; };
+		D2AD16A61BF2DC79000D2182 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D2AD16BF1BF2FDF8000D2182 /* D3RecordButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = D3RecordButton.h; sourceTree = "<group>"; };
+		D2AD16C01BF2FDF8000D2182 /* D3RecordButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = D3RecordButton.m; sourceTree = "<group>"; };
+		D2AD16C21BF2FDF8000D2182 /* mic_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mic_0.png; sourceTree = "<group>"; };
+		D2AD16C31BF2FDF8000D2182 /* mic_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mic_1.png; sourceTree = "<group>"; };
+		D2AD16C41BF2FDF8000D2182 /* mic_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mic_2.png; sourceTree = "<group>"; };
+		D2AD16C51BF2FDF8000D2182 /* mic_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mic_3.png; sourceTree = "<group>"; };
+		D2AD16C61BF2FDF8000D2182 /* mic_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mic_4.png; sourceTree = "<group>"; };
+		D2AD16C71BF2FDF8000D2182 /* mic_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mic_5.png; sourceTree = "<group>"; };
+		D2AD16C81BF2FDF8000D2182 /* mic_cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mic_cancel.png; sourceTree = "<group>"; };
+		D2AD16C91BF2FDF8000D2182 /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
+		D2AD16CA1BF2FDF8000D2182 /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
+		D2AD16CB1BF2FDF8000D2182 /* Mp3Recorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mp3Recorder.h; sourceTree = "<group>"; };
+		D2AD16CC1BF2FDF8000D2182 /* Mp3Recorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mp3Recorder.m; sourceTree = "<group>"; };
+		D2AD16CD1BF2FDF8000D2182 /* RecordHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordHUD.h; sourceTree = "<group>"; };
+		D2AD16CE1BF2FDF8000D2182 /* RecordHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordHUD.m; sourceTree = "<group>"; };
+		D2AD16DA1BF31B6C000D2182 /* AudioCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioCell.h; sourceTree = "<group>"; };
+		D2AD16DB1BF31B6C000D2182 /* AudioCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioCell.m; sourceTree = "<group>"; };
+		D2AD16DC1BF31B6C000D2182 /* AudioCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioCell.xib; sourceTree = "<group>"; };
 		D2ADF95A1BE845D6007ECA5F /* SWYButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWYButton.h; sourceTree = "<group>"; };
 		D2ADF95B1BE845D6007ECA5F /* SWYButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWYButton.m; sourceTree = "<group>"; };
 		D2ADF95D1BE85B5E007ECA5F /* SWYMapTypeSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWYMapTypeSelectView.h; sourceTree = "<group>"; };
@@ -436,6 +469,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2AD16D71BF2FDF8000D2182 /* libmp3lame.a in Frameworks */,
+				D2AD16A71BF2DC7A000D2182 /* AVFoundation.framework in Frameworks */,
 				D2EC98D31BE7458200ED8661 /* Security.framework in Frameworks */,
 				D2EC98D11BE7448900ED8661 /* libc++.tbd in Frameworks */,
 				D2EC98CF1BE7445D00ED8661 /* OpenGLES.framework in Frameworks */,
@@ -569,6 +604,36 @@
 			path = MutilSelector;
 			sourceTree = "<group>";
 		};
+		D2AD16BE1BF2FDF8000D2182 /* D3RecordBtutton */ = {
+			isa = PBXGroup;
+			children = (
+				D2AD16BF1BF2FDF8000D2182 /* D3RecordButton.h */,
+				D2AD16C01BF2FDF8000D2182 /* D3RecordButton.m */,
+				D2AD16C11BF2FDF8000D2182 /* imgs */,
+				D2AD16C91BF2FDF8000D2182 /* lame.h */,
+				D2AD16CA1BF2FDF8000D2182 /* libmp3lame.a */,
+				D2AD16CB1BF2FDF8000D2182 /* Mp3Recorder.h */,
+				D2AD16CC1BF2FDF8000D2182 /* Mp3Recorder.m */,
+				D2AD16CD1BF2FDF8000D2182 /* RecordHUD.h */,
+				D2AD16CE1BF2FDF8000D2182 /* RecordHUD.m */,
+			);
+			path = D3RecordBtutton;
+			sourceTree = "<group>";
+		};
+		D2AD16C11BF2FDF8000D2182 /* imgs */ = {
+			isa = PBXGroup;
+			children = (
+				D2AD16C21BF2FDF8000D2182 /* mic_0.png */,
+				D2AD16C31BF2FDF8000D2182 /* mic_1.png */,
+				D2AD16C41BF2FDF8000D2182 /* mic_2.png */,
+				D2AD16C51BF2FDF8000D2182 /* mic_3.png */,
+				D2AD16C61BF2FDF8000D2182 /* mic_4.png */,
+				D2AD16C71BF2FDF8000D2182 /* mic_5.png */,
+				D2AD16C81BF2FDF8000D2182 /* mic_cancel.png */,
+			);
+			path = imgs;
+			sourceTree = "<group>";
+		};
 		D2BFE5721BE9D8A500B65E91 /* photoSet */ = {
 			isa = PBXGroup;
 			children = (
@@ -658,6 +723,7 @@
 				D2EC98C61BE73AF100ED8661 /* libstdc++.6.0.9.tbd */,
 				D2EC98C41BE73AC900ED8661 /* libz.tbd */,
 				D2EC98D01BE7448900ED8661 /* libc++.tbd */,
+				D2AD16A61BF2DC79000D2182 /* AVFoundation.framework */,
 				D2EC98D21BE7458200ED8661 /* Security.framework */,
 				D2EC98CE1BE7445D00ED8661 /* OpenGLES.framework */,
 				D2EC98C01BE739D700ED8661 /* SystemConfiguration.framework */,
@@ -690,6 +756,7 @@
 		D2EC97C41BE70C7300ED8661 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				D2AD16BE1BF2FDF8000D2182 /* D3RecordBtutton */,
 				D296474E1BF1B814004B8877 /* MutilSelector */,
 				D2EC98AD1BE7372C00ED8661 /* AMapSearchKit.framework */,
 				D2EC98AB1BE7371B00ED8661 /* MAMapKit.framework */,
@@ -1049,6 +1116,9 @@
 				D296473C1BF196B2004B8877 /* ImagePickCell.h */,
 				D296473D1BF196B2004B8877 /* ImagePickCell.m */,
 				D296473E1BF196B2004B8877 /* ImagePickCell.xib */,
+				D2AD16DA1BF31B6C000D2182 /* AudioCell.h */,
+				D2AD16DB1BF31B6C000D2182 /* AudioCell.m */,
+				D2AD16DC1BF31B6C000D2182 /* AudioCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1159,12 +1229,15 @@
 			files = (
 				D29647401BF196B2004B8877 /* ImagePickCell.xib in Resources */,
 				D2BFE5941BE9E0D800B65E91 /* 8.jpg in Resources */,
+				D2AD16D21BF2FDF8000D2182 /* mic_2.png in Resources */,
 				D29647331BF1739C004B8877 /* SpotLabelCell.xib in Resources */,
 				D2BFE5901BE9E0D800B65E91 /* 4.jpg in Resources */,
+				D2AD16D01BF2FDF8000D2182 /* mic_0.png in Resources */,
 				D2BFE5A41BEA063400B65E91 /* TableHeadViw.xib in Resources */,
 				D29647671BF1BDF6004B8877 /* SQCollectionCell.xib in Resources */,
 				D2EDC4C21BEC966600AEDFB4 /* SpotInfoCell.xib in Resources */,
 				D29647601BF1B814004B8877 /* UzysAssetsPickerController.xib in Resources */,
+				D2AD16DE1BF31B6C000D2182 /* AudioCell.xib in Resources */,
 				D296475E1BF1B814004B8877 /* UzysAssetPickerController.bundle in Resources */,
 				D2EC98B11BE738A800ED8661 /* AMap.bundle in Resources */,
 				D2BFE5921BE9E0D800B65E91 /* 6.jpg in Resources */,
@@ -1175,13 +1248,18 @@
 				D2EC988B1BE7112700ED8661 /* MJRefresh.bundle in Resources */,
 				D29647351BF1739C004B8877 /* SpotTextCell.xib in Resources */,
 				D2BFE58F1BE9E0D800B65E91 /* 3.jpg in Resources */,
+				D2AD16D41BF2FDF8000D2182 /* mic_4.png in Resources */,
 				01EBA15B1BE6F4CA00F2701D /* Main.storyboard in Resources */,
+				D2AD16D31BF2FDF8000D2182 /* mic_3.png in Resources */,
 				D2BFE5801BE9DB5F00B65E91 /* PhotoSetCell.xib in Resources */,
 				D2BFE5911BE9E0D800B65E91 /* 5.jpg in Resources */,
+				D2AD16D61BF2FDF8000D2182 /* mic_cancel.png in Resources */,
 				D2BFE59A1BE9FA3400B65E91 /* SWYCollectDetailViewController.xib in Resources */,
+				D2AD16D11BF2FDF8000D2182 /* mic_1.png in Resources */,
 				D296474C1BF1B56C004B8877 /* ImageCollectionView.xib in Resources */,
 				D2BFE59F1BE9FD8800B65E91 /* UserInfoCell.xib in Resources */,
 				D2BFE5951BE9E0D800B65E91 /* 9.jpg in Resources */,
+				D2AD16D51BF2FDF8000D2182 /* mic_5.png in Resources */,
 				D29647451BF19977004B8877 /* FillContentViewController.xib in Resources */,
 				D2BFE58D1BE9E0D800B65E91 /* 10.jpg in Resources */,
 				D2EDC4BD1BEC959A00AEDFB4 /* CollectInfoViewController.xib in Resources */,
@@ -1227,12 +1305,15 @@
 				D2EC987E1BE7112700ED8661 /* MJRefreshBackFooter.m in Sources */,
 				D296472B1BF17363004B8877 /* SpotInfoViewController.m in Sources */,
 				D2EC97DF1BE70E4A00ED8661 /* AFSecurityPolicy.m in Sources */,
+				D2AD16CF1BF2FDF8000D2182 /* D3RecordButton.m in Sources */,
 				D296474B1BF1B56C004B8877 /* ImageCollectionView.m in Sources */,
 				D29647641BF1B814004B8877 /* UzysGroupViewCell.m in Sources */,
 				D2EC98851BE7112700ED8661 /* MJRefreshBackGifFooter.m in Sources */,
 				D2EC982B1BE70EFD00ED8661 /* FMDatabaseQueue.m in Sources */,
+				D2AD16D91BF2FDF8000D2182 /* RecordHUD.m in Sources */,
 				D29647321BF1739C004B8877 /* SpotLabelCell.m in Sources */,
 				D29647441BF19977004B8877 /* FillContentViewController.m in Sources */,
+				D2AD16DD1BF31B6C000D2182 /* AudioCell.m in Sources */,
 				D2BFE5991BE9FA3400B65E91 /* SWYCollectDetailViewController.m in Sources */,
 				D2EC98071BE70E6B00ED8661 /* NSData+ImageContentType.m in Sources */,
 				D2EC97DB1BE70E4A00ED8661 /* AFHTTPRequestOperation.m in Sources */,
@@ -1261,6 +1342,7 @@
 				D2EC98881BE7112700ED8661 /* MJRefreshGifHeader.m in Sources */,
 				D29647341BF1739C004B8877 /* SpotTextCell.m in Sources */,
 				D2EC98111BE70E6B00ED8661 /* UIImage+MultiFormat.m in Sources */,
+				D2AD16D81BF2FDF8000D2182 /* Mp3Recorder.m in Sources */,
 				D2550B581BEAE93C00904D35 /* SWYPhotoBrowserViewController.m in Sources */,
 				D2EDC4AE1BEC347E00AEDFB4 /* LoopImagesView.m in Sources */,
 				D2ADF95F1BE85B5E007ECA5F /* SWYMapTypeSelectView.m in Sources */,
@@ -1451,6 +1533,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/EQ_DisasterReport/Classes/Libs/MAMap",
@@ -1459,6 +1542,10 @@
 				INFOPLIST_FILE = EQ_DisasterReport/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EQ_DisasterReport/Classes/Libs/D3RecordBtutton",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hvit.EQ-DisasterReport";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1470,6 +1557,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/EQ_DisasterReport/Classes/Libs/MAMap",
@@ -1478,6 +1566,10 @@
 				INFOPLIST_FILE = EQ_DisasterReport/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EQ_DisasterReport/Classes/Libs/D3RecordBtutton",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hvit.EQ-DisasterReport";
 				PRODUCT_NAME = "$(TARGET_NAME)";

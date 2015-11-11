@@ -121,7 +121,7 @@
         [self.dataProvider removeObjectAtIndex:index];
         [self setAddBtn];
         [self.collectionView reloadData];
-//        [self changeViewHeight];
+        [self changeViewHeight];
      }
 }
 
@@ -206,9 +206,8 @@
         }
         [self setAddBtn];
         [self.collectionView reloadData];
-//        //调整view高度
-//        [self changeViewHeight];
-        
+        //调整view高度
+        [self changeViewHeight];
     }
 }
 
@@ -247,13 +246,36 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self setAddBtn];
                     [self.collectionView reloadData];
-//                    //调整view高度
-//                    [self changeViewHeight];
+                    //调整view高度
+                    [self changeViewHeight];
                 });
                 
             }];
         }
     });
+}
+
+
+/**
+ *  根据当前图片数调整view高度
+ */
+-(void)changeViewHeight
+{
+    //一行3张，高度为80,两行时高度为160,三行为240(把间隔已包含在内)
+    CGFloat h = 90;
+    
+    if (self.changeHeightBlock) {
+//        NSInteger cellNum = self.isShowAddBtn?self.dataProvider.count+1:self.dataProvider.count;
+        NSInteger cellNum = self.dataProvider.count+1;
+        if (cellNum<=3) {
+            h = 90;
+        }else if (cellNum<=6){
+            h = 170;
+        }else{
+            h = 250;
+        }
+        self.changeHeightBlock(h,self.dataProvider);
+    }
 }
 
 -(void)dealloc{

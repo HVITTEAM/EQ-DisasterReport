@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="audioCell" rowHeight="57" id="KGk-i7-Jjw" customClass="AudioCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="56.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X2d-Fi-hXF" customClass="D3RecordButton">
+                        <rect key="frame" x="0.0" y="0.0" width="90" height="56.5"/>
+                        <animations/>
+                        <color key="backgroundColor" red="0.98823529409999999" green="0.40000000000000002" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="90" id="QgP-PB-UpY"/>
+                        </constraints>
+                        <state key="normal" title="点击录音">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60&quot;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wz8-Y6-g82">
+                        <rect key="frame" x="262" y="16" width="40" height="24.5"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Re-9m-J7e">
+                        <rect key="frame" x="100" y="8" width="150" height="40.5"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="150" id="oP4-kg-aJC"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="fs_chat_bubble"/>
+                        <connections>
+                            <action selector="playAudio:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="BXj-wA-WjO"/>
+                        </connections>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fs_icon_wave_0" translatesAutoresizingMaskIntoConstraints="NO" id="l1o-Jz-vNz">
+                        <rect key="frame" x="120" y="10" width="35" height="36.5"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="35" id="y42-DV-JUg"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <animations/>
+                <constraints>
+                    <constraint firstItem="4Re-9m-J7e" firstAttribute="leading" secondItem="X2d-Fi-hXF" secondAttribute="trailing" constant="10" id="2jd-ZR-DQj"/>
+                    <constraint firstAttribute="bottom" secondItem="4Re-9m-J7e" secondAttribute="bottom" constant="8" id="3aK-ia-1pP"/>
+                    <constraint firstItem="X2d-Fi-hXF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="4k6-Vq-TZh"/>
+                    <constraint firstAttribute="bottom" secondItem="l1o-Jz-vNz" secondAttribute="bottom" constant="10" id="CEq-Uh-fDN"/>
+                    <constraint firstItem="l1o-Jz-vNz" firstAttribute="leading" secondItem="X2d-Fi-hXF" secondAttribute="trailing" constant="30" id="CUn-yV-Ogb"/>
+                    <constraint firstAttribute="bottom" secondItem="Wz8-Y6-g82" secondAttribute="bottom" constant="16" id="JlQ-Su-pbV"/>
+                    <constraint firstItem="Wz8-Y6-g82" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="KoW-mY-wcZ"/>
+                    <constraint firstAttribute="bottom" secondItem="X2d-Fi-hXF" secondAttribute="bottom" id="NPi-0N-XwY"/>
+                    <constraint firstItem="X2d-Fi-hXF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Td1-Dh-0HP"/>
+                    <constraint firstItem="4Re-9m-J7e" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="VRR-SQ-8t5"/>
+                    <constraint firstItem="Wz8-Y6-g82" firstAttribute="leading" secondItem="4Re-9m-J7e" secondAttribute="trailing" constant="12" id="eUo-q3-15c"/>
+                    <constraint firstItem="l1o-Jz-vNz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="oCz-QN-KuO"/>
+                    <constraint firstAttribute="trailing" secondItem="Wz8-Y6-g82" secondAttribute="trailing" constant="18" id="p2P-Gi-y4m"/>
+                </constraints>
+            </tableViewCellContentView>
+            <animations/>
+            <connections>
+                <outlet property="audioDuration" destination="Wz8-Y6-g82" id="SMx-eZ-ghd"/>
+                <outlet property="recordBtn" destination="X2d-Fi-hXF" id="PfL-NV-5Lt"/>
+                <outlet property="signalImage" destination="l1o-Jz-vNz" id="fv1-ye-Num"/>
+            </connections>
+            <point key="canvasLocation" x="327" y="366.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="fs_chat_bubble" width="190" height="53"/>
+        <image name="fs_icon_wave_0" width="20" height="20"/>
+    </resources>
+</document>
