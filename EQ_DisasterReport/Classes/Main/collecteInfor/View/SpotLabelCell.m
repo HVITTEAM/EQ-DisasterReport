@@ -7,6 +7,7 @@
 //
 
 #import "SpotLabelCell.h"
+#import "SpotCellModel.h"
 
 @interface SpotLabelCell ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLb;
@@ -26,7 +27,7 @@
     // Configure the view for the selected state
 }
 
-+(instancetype)cellWithTableView:(UITableView *)tableView model:(SpotInfoModel *)model
++(instancetype)cellWithTableView:(UITableView *)tableView model:(SpotCellModel *)model
 {
     static NSString *cellID = @"SpotLabelCell";
     SpotLabelCell *cell = (SpotLabelCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
@@ -45,14 +46,14 @@
     return cell;
 }
 
--(void)setCellModel:(SpotInfoModel *)cellModel
+-(void)setCellModel:(SpotCellModel *)cellModel
 {
     _cellModel = cellModel;
     self.titleLb.text =cellModel.titleStr;
     self.contentLb.text = cellModel.contentStr;
 }
 
--(CGFloat)calulateCellHeightWithModel:(SpotInfoModel *)model
+-(CGFloat)calulateCellHeightWithModel:(SpotCellModel *)model
 {
     self.cellModel = model;
     
@@ -62,7 +63,7 @@
 //    [self.contentView layoutIfNeeded];
 
     CGSize size = [self.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-     NSLog(@"cell-------%f",size.height+1);
+    // NSLog(@"cell-------%f",size.height+1);
     return size.height+1.0f;
 }
 
@@ -89,6 +90,11 @@
     }
 }
 
+
+-(NSString *)getContent
+{
+    return self.contentLb.text;
+}
 
 
 @end

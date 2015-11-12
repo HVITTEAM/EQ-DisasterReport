@@ -35,7 +35,9 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     // Do any additional setup after loading the view.
     [self initScrollView];
     [self initGestureRecognizer];
+    /*
     [self changeImageWithMovingDirection:movingDirectionNone];
+     */
     
 }
 
@@ -47,7 +49,7 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     
     CGFloat bkWidth = self.bkScrollView.width;
     CGFloat bkHeight = self.bkScrollView.height;
-    
+    /*
     self.leftScrollView.frame = CGRectMake(0, 0, bkWidth, bkHeight);
     self.currentScrollView.frame = CGRectMake(bkWidth, 0, bkWidth, bkHeight);
     self.rightScrollView.frame = CGRectMake(2*bkWidth, 0, bkWidth, bkHeight);
@@ -55,6 +57,10 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     self.leftImageView.frame = self.leftScrollView.bounds;
     self.currentImageView.frame = self.currentScrollView.bounds;
     self.rightImageView.frame = self.rightScrollView.bounds;
+     */
+    //暂时
+    self.leftScrollView.frame = CGRectMake(0, 0, bkWidth, bkHeight);
+    self.leftImageView.frame = self.leftScrollView.bounds;
 }
 
 #pragma mark 初始化方法、setter和getter方法
@@ -64,11 +70,13 @@ typedef NS_ENUM(NSInteger, movingDirection) {
 -(void)initScrollView
 {
     self.bkScrollView = [[UIScrollView alloc] init];
-    self.bkScrollView.contentSize = CGSizeMake(3*MTScreenW, MTScreenH);
+    //self.bkScrollView.contentSize = CGSizeMake(3*MTScreenW, MTScreenH);
+    self.bkScrollView.contentSize = CGSizeMake(MTScreenW, MTScreenH);
     self.bkScrollView.pagingEnabled = YES;
     self.bkScrollView.delegate = self;
     self.bkScrollView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:self.bkScrollView];
+    
     
     self.leftScrollView = [[UIScrollView alloc] init];
     self.leftScrollView.delegate = self;
@@ -79,6 +87,11 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     [self.leftScrollView addSubview:self.leftImageView];
     [self.bkScrollView addSubview:self.leftScrollView];
     
+    
+    //暂时
+    self.leftImageView.image = [UIImage imageNamed:self.imageNames[0]];
+
+    /*
     self.currentScrollView = [[UIScrollView alloc] init];
     self.currentScrollView.delegate = self;
     self.currentScrollView.minimumZoomScale=1;
@@ -87,7 +100,8 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     self.currentImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.currentScrollView addSubview:self.currentImageView];
     [self.bkScrollView addSubview:self.currentScrollView];
-    
+     */
+    /*
     self.rightScrollView = [[UIScrollView alloc] init];
     self.rightScrollView.delegate = self;
     self.rightScrollView.minimumZoomScale=1;
@@ -96,7 +110,7 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     self.rightImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.rightScrollView addSubview:self.rightImageView];
     [self.bkScrollView addSubview:self.rightScrollView];
-    
+    */
 }
 
 /**
@@ -124,6 +138,7 @@ typedef NS_ENUM(NSInteger, movingDirection) {
 
 #pragma mark 协议方法
 #pragma mark  UIScrollViewDelegate
+/*
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (scrollView == self.bkScrollView) {
@@ -136,13 +151,17 @@ typedef NS_ENUM(NSInteger, movingDirection) {
         }
     }
 }
+ */
 
 /**
  *  确定要放大的view
  */
 -(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
+    /*
     return self.currentImageView;
+     */
+    return self.leftImageView;
 }
 
 /**
@@ -190,6 +209,7 @@ typedef NS_ENUM(NSInteger, movingDirection) {
  */
 -(void)scaleImage:(UITapGestureRecognizer *)gestureRecognizer
 {
+    /*
     CGFloat newscale = 1.9;
 
     CGRect zoomRect = [self zoomRectForScale:newscale withCenter:[gestureRecognizer locationInView:gestureRecognizer.view] andScrollView:self.currentScrollView];
@@ -203,7 +223,21 @@ typedef NS_ENUM(NSInteger, movingDirection) {
         [self.currentScrollView zoomToRect:self.currentScrollView.frame animated:YES];
     }
     self.isDoubleTapBigger = !self.isDoubleTapBigger;
+     */
 
+     CGFloat newscale = 1.9;
+     
+     CGRect zoomRect = [self zoomRectForScale:newscale withCenter:[gestureRecognizer locationInView:gestureRecognizer.view] andScrollView:self.leftScrollView];
+     
+     if (self.isDoubleTapBigger == YES)  {
+     
+     [self.leftScrollView zoomToRect:zoomRect animated:YES];
+     
+     }else {
+     
+     [self.leftScrollView zoomToRect:self.leftScrollView.frame animated:YES];
+     }
+     self.isDoubleTapBigger = !self.isDoubleTapBigger;
 }
 
 /**

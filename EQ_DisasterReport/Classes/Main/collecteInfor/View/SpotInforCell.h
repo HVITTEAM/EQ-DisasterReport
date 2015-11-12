@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+@class SpotInforModel;
 
-@interface SpotInfoCell : UITableViewCell
+@interface SpotInforCell : UITableViewCell
+@property(nonatomic,strong)SpotInforModel *cellModel;
 
 @end

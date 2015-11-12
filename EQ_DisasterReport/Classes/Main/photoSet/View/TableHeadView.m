@@ -23,6 +23,7 @@
  */
 -(void)setBigimageName:(NSString *)bigimageName
 {
+    _bigimageName = bigimageName;
     UIImage *bigImage = [UIImage imageNamed:bigimageName];
     self.bigImagV.image = bigImage;
 }

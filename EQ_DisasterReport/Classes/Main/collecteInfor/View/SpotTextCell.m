@@ -7,8 +7,9 @@
 //
 
 #import "SpotTextCell.h"
+#import "SpotCellModel.h"
 
-@interface SpotTextCell ()
+@interface SpotTextCell ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *titleLb;
 @property (weak, nonatomic) IBOutlet UITextField *contentTextField;
 
@@ -17,6 +18,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    self.contentTextField.delegate = self;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -25,7 +27,7 @@
     // Configure the view for the selected state
 }
 
--(void)setCellModel:(SpotInfoModel *)cellModel
+-(void)setCellModel:(SpotCellModel *)cellModel
 {
     _cellModel = cellModel;
     self.titleLb.text =cellModel.titleStr;
@@ -33,7 +35,7 @@
     self.contentTextField.text = cellModel.contentStr;
 }
 
-+(instancetype)cellWithTableView:(UITableView *)tableView model:(SpotInfoModel *)model
++(instancetype)cellWithTableView:(UITableView *)tableView model:(SpotCellModel *)model
 {
     static NSString *cellID = @"spotTextCell";
     SpotTextCell *cell = (SpotTextCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
@@ -74,6 +76,17 @@
         bgView.image = [UIImage resizedImage:@"common_card_middle_background"];
         selectedBgView.image = [UIImage resizedImage:@"common_card_middle_background_highlighted"];
     }
+}
+
+-(NSString *)getContent
+{
+    return self.contentTextField.text;
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 @end

@@ -13,7 +13,7 @@
 #import "PhotoSetReusableHeadView.h"
 #import "LoopImagesView.h"
 
-@interface SWYPhotoSetViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate,NavigationBarDelegate,LoopImagesViewDelegate>
+@interface SWYPhotoSetViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate,NavigationBarDelegate,LoopImagesViewDelegate,UITextFieldDelegate>
 @property(nonatomic,strong)UICollectionView *photoCollectionView;
 @property(nonatomic,strong)SWYNavigationBar *naviBar;
 @property(nonatomic,strong)LoopImagesView *loopView;
@@ -52,6 +52,8 @@
 //    UISearchBar *searbar = [[UISearchBar alloc]init];
 //    [searbar setSearchBarStyle:UISearchBarStyleMinimal];
     UITextField *searchTextField = [[UITextField alloc] init];
+    searchTextField.delegate = self;
+    searchTextField.returnKeyType = UIReturnKeyDone;
     searchTextField.borderStyle = UITextBorderStyleRoundedRect;
     searchTextField.textColor = [UIColor whiteColor];
     searchTextField.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
@@ -181,6 +183,12 @@
     if (alph <= 0.2) {
         self.naviBar.titleView.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent:0.1];
     }
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 #pragma mark NavigationBarDelegate

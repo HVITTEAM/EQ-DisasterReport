@@ -28,7 +28,7 @@
                         <rect key="frame" x="100" y="0.0" width="210" height="43.5"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits"/>
+                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                     </textField>
                 </subviews>
                 <animations/>

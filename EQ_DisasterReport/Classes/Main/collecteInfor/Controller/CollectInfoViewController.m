@@ -7,11 +7,15 @@
 //
 
 #import "CollectInfoViewController.h"
-#import "SpotInfoCell.h"
+#import "SpotInforCell.h"
+#import "SpotInforModel.h"
+#import "SpotTableHelper.h"
 #import "SpotInfoViewController.h"
-#import "ImageCollectionView.h"
+//#import "ImageCollectionView.h"
 
 @interface CollectInfoViewController ()
+
+@property(nonatomic,strong)__block NSMutableArray *dataProvider;   // tableview数据源
 
 @end
 
@@ -19,13 +23,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UINib *cellNib = [UINib nibWithNibName:@"SpotInfoCell" bundle:nil];
-    [self.tableView registerNib:cellNib forCellReuseIdentifier:@"spotInfoCell"];
+    
     [self initNaviBar];
+    self.tableView.tableFooterView = [[UIView alloc] init];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    //获取数据
+    [self fetchData];
+}
+
+#pragma mark 初始化方法、setter和getter方法
+/**
+ *  初始化导航栏
+ */
 -(void)initNaviBar
 {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     self.navigationItem.leftBarButtonItem = leftItem;
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"新增" style:UIBarButtonItemStylePlain target:self action:@selector(addNewSpotInfo)];
@@ -34,39 +51,79 @@
     self.navigationItem.title = @"采集信息列表";
 }
 
-#pragma mark - Table view data source
+/**
+ *  dataProvider的 getter 方法
+ */
+-(NSMutableArray *)dataProvider
+{
+    if (!_dataProvider) {
+        _dataProvider = [[NSMutableArray alloc] init];
+    }
+    return _dataProvider;
+}
+
+#pragma mark 协议方法
+#pragma mark - TableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.dataProvider.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *spotInfoCellID = @"spotInfoCell";
-    SpotInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:spotInfoCellID];
+    static NSString *spotInfoCellID = @"spotInforCell";
+    SpotInforCell *cell = [tableView dequeueReusableCellWithIdentifier:spotInfoCellID];
+    if (!cell) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"SpotInforCell" owner:self options:nil] lastObject];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    SpotInforModel *cellModel = self.dataProvider[indexPath.row];
+    cell.cellModel = cellModel;
+    
     return cell;
 }
 
+#pragma mark - UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 90;
 }
 
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //进入详情界面
     SpotInfoViewController *spotInfoVC = [[SpotInfoViewController alloc] init];
+    spotInfoVC.spotInfoModel = self.dataProvider[indexPath.row];
+    spotInfoVC.actionType = kActionTypeShow; //设置页面类型为显示和更新
     [self.navigationController pushViewController:spotInfoVC animated:YES];
 }
 
-
--(void)addNewSpotInfo
+#pragma mark 事件方法
+/**
+ *  获取所有采集点的数据
+ */
+-(void)fetchData
 {
-//    SpotInfoViewController *spotInfoVC = [[SpotInfoViewController alloc] init];
-//    [self.navigationController pushViewController:spotInfoVC animated:YES];
-
-    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        self.dataProvider = [[SpotTableHelper sharedInstance] fetchAllData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    });
 }
 
+/**
+ *  新增采集点
+ */
+-(void)addNewSpotInfo
+{
+    SpotInfoViewController *spotInfoVC = [[SpotInfoViewController alloc] init];
+    spotInfoVC.actionType = kActionTypeAdd;  //设置页面类型为新增
+    [self.navigationController pushViewController:spotInfoVC animated:YES];
+}
+
+/**
+ *  返回上一级页面
+ */
 -(void)back
 {
     [self dismissViewControllerAnimated:YES completion:nil];

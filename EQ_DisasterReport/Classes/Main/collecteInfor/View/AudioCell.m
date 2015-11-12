@@ -59,7 +59,7 @@
 
 -(void)addTimer{
     if (!self.fashImageTimer) {
-        self.fashImageTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(flashImage) userInfo:nil repeats:YES];
+        self.fashImageTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(flashImage) userInfo:nil repeats:YES];
         //[[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
     }
 }
@@ -89,7 +89,6 @@
         // 停止播放音频
         [self.audioPlayer stop];
         [self removeTimer];
-        
     }
 }
 

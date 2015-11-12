@@ -106,7 +106,7 @@
     //进图片浏览器查看大图
     SWYPhotoBrowserViewController *browserVC = [[SWYPhotoBrowserViewController alloc] init];
     browserVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    browserVC.imageNames = @[@"1.jpg",@"2.jpg",@"3.jpg",@"4.jpg",@"5.jpg",@"6.jpg",@"7.jpg",@"8.jpg",@"9.jpg",@"10.jpg"];
+    browserVC.imageNames = @[imageName];
 
     [self presentViewController:browserVC animated:YES completion:nil];
 }

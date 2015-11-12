@@ -6,8 +6,8 @@
 //  Copyright © 2015年 董徐维. All rights reserved.
 //
 
-#import "SpotInfoModel.h"
+#import "SpotCellModel.h"
 
-@implementation SpotInfoModel
+@implementation SpotCellModel
 
 @end

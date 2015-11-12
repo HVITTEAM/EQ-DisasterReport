@@ -35,6 +35,7 @@
                 <constraint firstItem="ACA-08-Y87" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ggA-YN-PTc"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <point key="canvasLocation" x="170" y="379"/>
         </view>
     </objects>
 </document>

@@ -13,6 +13,7 @@
 #import "SWYMapTypeSelectView.h"
 #import "SWYPhotoSetViewController.h"
 #import "CollectInfoViewController.h"
+#import "PersonCenterViewController.h"
 
 @interface SWYMapViewController ()<MAMapViewDelegate,AMapSearchDelegate,MapTypeSelectViewDelegate>
 
@@ -95,7 +96,7 @@
     bottomBar.layer.masksToBounds = YES;
     [self.view addSubview:bottomBar];
 
-    CGFloat btnWidth = bottomBar.width/3;
+    CGFloat btnWidth = bottomBar.width/4;
     CGFloat btnHeight = 40;
     
     self.photoSetBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -110,14 +111,24 @@
     self.collectInfoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.collectInfoBtn.frame = CGRectMake(btnWidth, 0, btnWidth, btnHeight);
     self.collectInfoBtn.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
-    [self.collectInfoBtn setTitle:@"数据采集" forState: UIControlStateNormal];
+    [self.collectInfoBtn setTitle:@"专业采集" forState: UIControlStateNormal];
     [self.collectInfoBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.collectInfoBtn.titleLabel.font = [UIFont systemFontOfSize:13];
     [self.collectInfoBtn addTarget:self action:@selector(bottomBarBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [bottomBar addSubview:self.collectInfoBtn];
     
+    self.collectInfoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.collectInfoBtn.frame = CGRectMake(2*btnWidth, 0, btnWidth, btnHeight);
+    self.collectInfoBtn.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
+    [self.collectInfoBtn setTitle:@"大众采集" forState: UIControlStateNormal];
+    [self.collectInfoBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    self.collectInfoBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+    [self.collectInfoBtn addTarget:self action:@selector(bottomBarBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [bottomBar addSubview:self.collectInfoBtn];
+
+    
     self.personCenterBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.personCenterBtn.frame = CGRectMake(2*btnWidth, 0,btnWidth, btnHeight);
+    self.personCenterBtn.frame = CGRectMake(3*btnWidth, 0,btnWidth, btnHeight);
     self.personCenterBtn.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
     [self.personCenterBtn setTitle:@"个人中心" forState: UIControlStateNormal];
     [self.personCenterBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -205,13 +216,20 @@
       SWYPhotoSetViewController *photoSetVC = [[SWYPhotoSetViewController alloc] init];
         UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:photoSetVC];
         [self presentViewController:navVC animated:YES completion:nil];
-    }else if ([title isEqualToString:@"数据采集"]){
+    }else if ([title isEqualToString:@"专业采集"]){
         CollectInfoViewController *collectionInfo = [[CollectInfoViewController alloc] init];
         UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:collectionInfo];
         [self presentViewController:navVC animated:YES completion:nil];
 
-    } else{
-    
+    }else if ([title isEqualToString:@"大众采集"]){
+        CollectInfoViewController *collectionInfo = [[CollectInfoViewController alloc] init];
+        UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:collectionInfo];
+        [self presentViewController:navVC animated:YES completion:nil];
+        
+    }else{
+        PersonCenterViewController *personCenter = [[PersonCenterViewController alloc] init];
+        UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:personCenter];
+        [self presentViewController:navVC animated:YES completion:nil];
     }
 }
 

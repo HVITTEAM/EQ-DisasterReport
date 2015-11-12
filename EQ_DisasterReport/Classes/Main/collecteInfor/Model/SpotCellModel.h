@@ -8,10 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SpotInfoModel : NSObject
+@interface SpotCellModel : NSObject
 
 @property(nonatomic,copy)NSString *titleStr;
 @property(nonatomic,copy)NSString *contentStr;
 @property(nonatomic,copy)NSString *placeHolderStr;
-@property(nonatomic,assign)CGFloat h;
 @end

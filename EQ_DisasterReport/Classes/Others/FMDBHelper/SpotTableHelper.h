@@ -20,4 +20,10 @@
 /**创建表**/
 - (void)createTable;
 
+-(NSMutableArray *)fetchAllData;
+
+-(BOOL)insertDataWithDictionary:(NSDictionary *)dict;
+
+-(BOOL)updateDataWithDictionary:(NSDictionary *)dict;
+
 @end

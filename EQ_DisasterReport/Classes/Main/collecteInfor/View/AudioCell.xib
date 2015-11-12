@@ -15,7 +15,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X2d-Fi-hXF" customClass="D3RecordButton">
-                        <rect key="frame" x="0.0" y="0.0" width="90" height="56.5"/>
+                        <rect key="frame" x="0.0" y="5" width="90" height="46.5"/>
                         <animations/>
                         <color key="backgroundColor" red="0.98823529409999999" green="0.40000000000000002" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -60,8 +60,8 @@
                     <constraint firstItem="l1o-Jz-vNz" firstAttribute="leading" secondItem="X2d-Fi-hXF" secondAttribute="trailing" constant="30" id="CUn-yV-Ogb"/>
                     <constraint firstAttribute="bottom" secondItem="Wz8-Y6-g82" secondAttribute="bottom" constant="16" id="JlQ-Su-pbV"/>
                     <constraint firstItem="Wz8-Y6-g82" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="KoW-mY-wcZ"/>
-                    <constraint firstAttribute="bottom" secondItem="X2d-Fi-hXF" secondAttribute="bottom" id="NPi-0N-XwY"/>
-                    <constraint firstItem="X2d-Fi-hXF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Td1-Dh-0HP"/>
+                    <constraint firstAttribute="bottom" secondItem="X2d-Fi-hXF" secondAttribute="bottom" constant="5" id="NPi-0N-XwY"/>
+                    <constraint firstItem="X2d-Fi-hXF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Td1-Dh-0HP"/>
                     <constraint firstItem="4Re-9m-J7e" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="VRR-SQ-8t5"/>
                     <constraint firstItem="Wz8-Y6-g82" firstAttribute="leading" secondItem="4Re-9m-J7e" secondAttribute="trailing" constant="12" id="eUo-q3-15c"/>
                     <constraint firstItem="l1o-Jz-vNz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="oCz-QN-KuO"/>

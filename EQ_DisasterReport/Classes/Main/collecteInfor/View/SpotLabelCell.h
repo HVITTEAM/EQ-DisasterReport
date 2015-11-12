@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SpotInfoModel.h"
+@class SpotCellModel;
 
 @interface SpotLabelCell : UITableViewCell
-@property(nonatomic,strong)SpotInfoModel *cellModel;
-+(instancetype)cellWithTableView:(UITableView *)tableView model:(SpotInfoModel *)model;
--(CGFloat)calulateCellHeightWithModel:(SpotInfoModel *)model;
+@property(nonatomic,strong)SpotCellModel *cellModel;
++(instancetype)cellWithTableView:(UITableView *)tableView model:(SpotCellModel *)model;
+-(CGFloat)calulateCellHeightWithModel:(SpotCellModel *)model;
 - (void)setIndexPath:(NSIndexPath *)indexPath rowsInSection:(int)rows;
+-(NSString *)getContent;
 @end
