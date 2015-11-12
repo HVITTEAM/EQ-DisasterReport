@@ -79,27 +79,27 @@
         SpotCellModel *model2 = [[SpotCellModel alloc] init];
         model2.titleStr = @"震级(级):";
         //model2.contentStr = self.spotInfoModel.level;
-        model2.placeHolderStr = @"震级";
+        model2.placeHolderStr = @"输入震级";
         
         SpotCellModel *model3 = [[SpotCellModel alloc] init];
         model3.titleStr = @"震深(m):";
         //model3.contentStr = self.spotInfoModel.depth;
-        model3.placeHolderStr = @"震深";
+        model3.placeHolderStr = @"输入震深";
         
         SpotCellModel *model4 = [[SpotCellModel alloc] init];
         model4.titleStr = @"经度(度):";
         //model4.contentStr = self.spotInfoModel.lon;
-        model4.placeHolderStr = @"经度";
+        model4.placeHolderStr = @"输入经度";
         
         SpotCellModel *model5 = [[SpotCellModel alloc] init];
         model5.titleStr = @"纬度(度):";
         //model5.contentStr = self.spotInfoModel.lat;
-        model5.placeHolderStr = @"纬度";
+        model5.placeHolderStr = @"输入纬度";
         
         SpotCellModel *model6 = [[SpotCellModel alloc] init];
         model6.titleStr = @"地址:";
         //model6.contentStr = self.spotInfoModel.address;
-        model6.placeHolderStr = @"地址";
+        model6.placeHolderStr = @"输入地址";
     
         SpotCellModel *model7 = [[SpotCellModel alloc] init];
         model7.titleStr = @"备注:";
