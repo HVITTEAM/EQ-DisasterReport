@@ -5,7 +5,7 @@
 //  Created by shi on 15/11/4.
 //  Copyright © 2015年 董徐维. All rights reserved.
 //
-#define collectionViewInset 200
+#define collectionViewInset 257
 #import "SWYPhotoSetViewController.h"
 #import "PhotoSetCell.h"
 #import "SWYCollectDetailViewController.h"
@@ -26,7 +26,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initPhotoCollectionView];
-    [self initLoopImageView];
+    //[self initLoopImageView];
+    [self initHeadView];
     [self initNaviBar];
     self.automaticallyAdjustsScrollViewInsets = NO;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -47,6 +48,7 @@
     self.naviBar = [[SWYNavigationBar alloc]initCustomNavigatinBar];
     self.naviBar.titleStr = @"标题";
     self.naviBar.delegate = self;
+    self.naviBar.backgroundColor = HMColor(79, 127, 175);
     [self.view addSubview:self.naviBar];
     
 //    UISearchBar *searbar = [[UISearchBar alloc]init];
@@ -56,7 +58,7 @@
     searchTextField.returnKeyType = UIReturnKeyDone;
     searchTextField.borderStyle = UITextBorderStyleRoundedRect;
     searchTextField.textColor = [UIColor whiteColor];
-    searchTextField.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
+    searchTextField.backgroundColor = [UIColor whiteColor];
     UIImageView *leftView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     leftView.image = [UIImage imageNamed:@"search_icon"];
     searchTextField.leftViewMode = UITextFieldViewModeAlways;
@@ -99,16 +101,24 @@
     //[self.photoCollectionView.header beginRefreshing];
 }
 
-/**
- *  初始化轮播视图
- */
--(void)initLoopImageView
+///**
+// *  初始化轮播视图
+// */
+//-(void)initLoopImageView
+//{
+//    self.photoCollectionView.contentInset = UIEdgeInsetsMake(collectionViewInset, 0, 0, 0);
+//    self.loopView = [[LoopImagesView alloc] initWithFrame:CGRectMake(0,-235, MTScreenW, 230)];
+//    self.loopView.imageArr = self.dataProvider;
+//    self.loopView.delegate = self;
+//    [self.photoCollectionView addSubview:self.loopView];
+//}
+
+-(void)initHeadView
 {
     self.photoCollectionView.contentInset = UIEdgeInsetsMake(collectionViewInset, 0, 0, 0);
-    self.loopView = [[LoopImagesView alloc] initWithFrame:CGRectMake(0,-235, MTScreenW, 230)];
-    self.loopView.imageArr = self.dataProvider;
-    self.loopView.delegate = self;
-    [self.photoCollectionView addSubview:self.loopView];
+    UIImageView *imgv = [[UIImageView alloc] initWithFrame:CGRectMake(0, -193, MTScreenW, 193)];
+    imgv.image = [UIImage imageNamed:@"1.jpg"];
+    [self.photoCollectionView addSubview:imgv];
 }
 
 /**
@@ -167,22 +177,22 @@
 #pragma mark UIScrollViewDelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    CGFloat offsetY = scrollView.contentOffset.y;
-    CGFloat alph;
-    if (offsetY>0) {
-        alph = offsetY/200;
-        if (alph>=1.0) {
-            alph = 1.0;
-        }
-    }else{
-        alph = 0.0;
-    }
-    self.naviBar.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:alph];
-    self.naviBar.titleView.backgroundColor = [[UIColor whiteColor]colorWithAlphaComponent:alph];
-    
-    if (alph <= 0.2) {
-        self.naviBar.titleView.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent:0.1];
-    }
+//    CGFloat offsetY = scrollView.contentOffset.y;
+//    CGFloat alph;
+//    if (offsetY>0) {
+//        alph = offsetY/200;
+//        if (alph>=1.0) {
+//            alph = 1.0;
+//        }
+//    }else{
+//        alph = 0.0;
+//    }
+//    self.naviBar.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:alph];
+//    self.naviBar.titleView.backgroundColor = [[UIColor whiteColor]colorWithAlphaComponent:alph];
+//    
+//    if (alph <= 0.2) {
+//        self.naviBar.titleView.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent:0.1];
+//    }
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField

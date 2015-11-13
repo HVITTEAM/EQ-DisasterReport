@@ -71,13 +71,13 @@
 -(void)initControlButton
 {
     //切换交通情况按钮
-    self.trafficSwitchBtn = [self createBtnWithNormalImageName:@"locationIcon" selectedImageName:@"locationIcon"];
+    self.trafficSwitchBtn = [self createBtnWithNormalImageName:@"trafficSwitch_icon_normal" selectedImageName:@"trafficSwitch_icon_selected"];
     self.trafficSwitchBtn.x = MTScreenW - 50;
     self.trafficSwitchBtn.y = 90;
     self.trafficSwitchBtn.tag = 20;
     
     //切换地图类型掉按钮
-    self.mapTypeSwitchBtn = [self createBtnWithNormalImageName:@"locationIcon" selectedImageName:@"locationIcon"];
+    self.mapTypeSwitchBtn = [self createBtnWithNormalImageName:@"mapTypeSwitch_icon" selectedImageName:@"mapTypeSwitch_icon"];
     self.mapTypeSwitchBtn.x = MTScreenW - 50;
     self.mapTypeSwitchBtn.y = 140;
     self.mapTypeSwitchBtn.tag = 21;

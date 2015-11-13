@@ -38,7 +38,7 @@
     self.rightBtn = [[UIButton alloc] init];
     [self.rightBtn setImage:[UIImage imageNamed:@"share_icon"] forState:UIControlStateNormal];
     [self.rightBtn addTarget:self action:@selector(rightBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:self.rightBtn];
+    //[self addSubview:self.rightBtn];
 
     //导航条的标题
     self.titleLb = [[ UILabel alloc] init];

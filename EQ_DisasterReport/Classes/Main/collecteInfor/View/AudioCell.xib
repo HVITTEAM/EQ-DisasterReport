@@ -17,26 +17,26 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X2d-Fi-hXF" customClass="D3RecordButton">
                         <rect key="frame" x="0.0" y="5" width="90" height="46.5"/>
                         <animations/>
-                        <color key="backgroundColor" red="0.98823529409999999" green="0.40000000000000002" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="90" id="QgP-PB-UpY"/>
                         </constraints>
-                        <state key="normal" title="点击录音">
+                        <state key="normal">
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60&quot;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wz8-Y6-g82">
-                        <rect key="frame" x="262" y="16" width="40" height="24.5"/>
+                        <rect key="frame" x="277" y="16" width="25" height="24.5"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Re-9m-J7e">
-                        <rect key="frame" x="100" y="8" width="150" height="40.5"/>
+                        <rect key="frame" x="15" y="8" width="250" height="40.5"/>
                         <animations/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="150" id="oP4-kg-aJC"/>
+                            <constraint firstAttribute="width" constant="250" id="oP4-kg-aJC"/>
                         </constraints>
                         <state key="normal" backgroundImage="fs_chat_bubble"/>
                         <connections>
@@ -44,7 +44,7 @@
                         </connections>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fs_icon_wave_0" translatesAutoresizingMaskIntoConstraints="NO" id="l1o-Jz-vNz">
-                        <rect key="frame" x="120" y="10" width="35" height="36.5"/>
+                        <rect key="frame" x="46" y="10" width="35" height="36.5"/>
                         <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="35" id="y42-DV-JUg"/>
@@ -53,17 +53,17 @@
                 </subviews>
                 <animations/>
                 <constraints>
-                    <constraint firstItem="4Re-9m-J7e" firstAttribute="leading" secondItem="X2d-Fi-hXF" secondAttribute="trailing" constant="10" id="2jd-ZR-DQj"/>
                     <constraint firstAttribute="bottom" secondItem="4Re-9m-J7e" secondAttribute="bottom" constant="8" id="3aK-ia-1pP"/>
                     <constraint firstItem="X2d-Fi-hXF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="4k6-Vq-TZh"/>
                     <constraint firstAttribute="bottom" secondItem="l1o-Jz-vNz" secondAttribute="bottom" constant="10" id="CEq-Uh-fDN"/>
-                    <constraint firstItem="l1o-Jz-vNz" firstAttribute="leading" secondItem="X2d-Fi-hXF" secondAttribute="trailing" constant="30" id="CUn-yV-Ogb"/>
+                    <constraint firstItem="l1o-Jz-vNz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="46" id="HqF-Hj-KVX"/>
                     <constraint firstAttribute="bottom" secondItem="Wz8-Y6-g82" secondAttribute="bottom" constant="16" id="JlQ-Su-pbV"/>
                     <constraint firstItem="Wz8-Y6-g82" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="KoW-mY-wcZ"/>
                     <constraint firstAttribute="bottom" secondItem="X2d-Fi-hXF" secondAttribute="bottom" constant="5" id="NPi-0N-XwY"/>
                     <constraint firstItem="X2d-Fi-hXF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Td1-Dh-0HP"/>
                     <constraint firstItem="4Re-9m-J7e" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="VRR-SQ-8t5"/>
                     <constraint firstItem="Wz8-Y6-g82" firstAttribute="leading" secondItem="4Re-9m-J7e" secondAttribute="trailing" constant="12" id="eUo-q3-15c"/>
+                    <constraint firstItem="4Re-9m-J7e" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="miE-am-38a"/>
                     <constraint firstItem="l1o-Jz-vNz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="oCz-QN-KuO"/>
                     <constraint firstAttribute="trailing" secondItem="Wz8-Y6-g82" secondAttribute="trailing" constant="18" id="p2P-Gi-y4m"/>
                 </constraints>
