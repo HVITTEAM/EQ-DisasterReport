@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="224"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="11.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="g2o-Ig-7cw">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headViewimage" translatesAutoresizingMaskIntoConstraints="NO" id="g2o-Ig-7cw">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="224"/>
                     <animations/>
                 </imageView>
@@ -52,7 +52,7 @@
         </view>
     </objects>
     <resources>
-        <image name="11.jpg" width="1024" height="583"/>
         <image name="headIcon" width="30" height="30"/>
+        <image name="headViewimage" width="375" height="192"/>
     </resources>
 </document>

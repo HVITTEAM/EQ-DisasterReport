@@ -117,7 +117,7 @@
 {
     self.photoCollectionView.contentInset = UIEdgeInsetsMake(collectionViewInset, 0, 0, 0);
     UIImageView *imgv = [[UIImageView alloc] initWithFrame:CGRectMake(0, -193, MTScreenW, 193)];
-    imgv.image = [UIImage imageNamed:@"1.jpg"];
+    imgv.image = [UIImage imageNamed:@"headViewimage"];
     [self.photoCollectionView addSubview:imgv];
 }
 
@@ -160,9 +160,10 @@
     if (kind == UICollectionElementKindSectionHeader)
     {
        reusableV = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"photoSetReusableHeadView" forIndexPath:indexPath];
-        reusableV.backgroundColor = [UIColor redColor];
+        reusableV.backgroundColor = HMColor(79, 127, 175);
+        reusableV.frame = CGRectMake(0, 0, MTScreenW, 30);
     }
-    reusableV.titleLb.text = @"sdfsfsfsfsdfs";
+    reusableV.titleLb.text = @"2015/11/13";
     return reusableV;
 }
 
