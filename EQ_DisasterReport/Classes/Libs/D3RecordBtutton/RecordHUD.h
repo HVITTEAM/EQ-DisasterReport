@@ -7,12 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-@class RecordHUD;
-@protocol RecordHudDelegate <NSObject>
-
--(void)finishRecord:(RecordHUD *)recordHUD;
--(void)cancelRecord:(RecordHUD *)recordHUD;
-@end
 
 @interface RecordHUD : UIView{
     UIImageView *imgView;
@@ -20,9 +14,6 @@
     UILabel *timeLabel;
 }
 @property (nonatomic, strong, readonly) UIWindow *overlayWindow;
-@property (nonatomic,weak)id<RecordHudDelegate>delegate;
-
-+ (RecordHUD*)shareView;  //by swy
 
 + (void)show;
 

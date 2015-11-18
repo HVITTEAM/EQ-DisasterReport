@@ -15,6 +15,9 @@ typedef NS_ENUM(NSInteger, ActionType) {
 };
 
 @interface SpotInfoViewController : UIViewController
+{
+   SpotInforModel *_spotInfoModel;
+}
 @property(nonatomic,strong)SpotInforModel *spotInfoModel;     //除图片和声音之外的采集数据
 @property(nonatomic,assign)ActionType actionType;                   //操作类型
 @end

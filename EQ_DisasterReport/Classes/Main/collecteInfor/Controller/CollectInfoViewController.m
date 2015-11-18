@@ -11,11 +11,10 @@
 #import "SpotInforModel.h"
 #import "SpotTableHelper.h"
 #import "SpotInfoViewController.h"
-//#import "ImageCollectionView.h"
 
 @interface CollectInfoViewController ()
 
-@property(nonatomic,strong)__block NSMutableArray *dataProvider;   // tableview数据源
+@property(nonatomic,strong)NSMutableArray *dataProvider;   // tableview数据源
 
 @end
 
@@ -41,13 +40,21 @@
  */
 -(void)initNaviBar
 {
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    self.navigationController.navigationBar.barTintColor = HMColor(79, 127, 175);
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+
+    //左侧按钮
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     self.navigationItem.leftBarButtonItem = leftItem;
+    //右侧按钮
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"新增" style:UIBarButtonItemStylePlain target:self action:@selector(addNewSpotInfo)];
     self.navigationItem.rightBarButtonItem = rightItem;
-    
+    //下一级的返回按钮
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = item;
+
     self.navigationItem.title = @"采集信息列表";
 }
 

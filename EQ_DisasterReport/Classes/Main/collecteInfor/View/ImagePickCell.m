@@ -41,6 +41,9 @@
     self.imagePickVC.parentVC = parentVC;;
 }
 
-
+-(void)setImages:(NSMutableArray *)images
+{
+    self.imagePickVC.dataProvider = images;
+}
 
 @end

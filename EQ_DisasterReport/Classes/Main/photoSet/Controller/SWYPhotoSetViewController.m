@@ -8,15 +8,12 @@
 #define collectionViewInset 257
 #import "SWYPhotoSetViewController.h"
 #import "PhotoSetCell.h"
+#import "PhotoSetHeadCell.h"
 #import "SWYCollectDetailViewController.h"
-#import "SWYNavigationBar.h"
 #import "PhotoSetReusableHeadView.h"
-#import "LoopImagesView.h"
 
-@interface SWYPhotoSetViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate,NavigationBarDelegate,LoopImagesViewDelegate,UITextFieldDelegate>
+@interface SWYPhotoSetViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UITextFieldDelegate>
 @property(nonatomic,strong)UICollectionView *photoCollectionView;
-@property(nonatomic,strong)SWYNavigationBar *naviBar;
-@property(nonatomic,strong)LoopImagesView *loopView;
 @property(nonatomic,strong)NSMutableArray *dataProvider;
 @end
 
@@ -26,65 +23,25 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initPhotoCollectionView];
-    //[self initLoopImageView];
-    [self initHeadView];
     [self initNaviBar];
-    self.automaticallyAdjustsScrollViewInsets = NO;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
-}
-
 #pragma mark 初始化方法、setter和getter方法
-/**
- *  初始化自定义导航栏
- */
--(void)initNaviBar
-{
-    self.naviBar = [[SWYNavigationBar alloc]initCustomNavigatinBar];
-    self.naviBar.titleStr = @"标题";
-    self.naviBar.delegate = self;
-    self.naviBar.backgroundColor = HMColor(79, 127, 175);
-    [self.view addSubview:self.naviBar];
-    
-//    UISearchBar *searbar = [[UISearchBar alloc]init];
-//    [searbar setSearchBarStyle:UISearchBarStyleMinimal];
-    UITextField *searchTextField = [[UITextField alloc] init];
-    searchTextField.delegate = self;
-    searchTextField.returnKeyType = UIReturnKeyDone;
-    searchTextField.borderStyle = UITextBorderStyleRoundedRect;
-    searchTextField.textColor = [UIColor whiteColor];
-    searchTextField.backgroundColor = [UIColor whiteColor];
-    UIImageView *leftView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-    leftView.image = [UIImage imageNamed:@"search_icon"];
-    searchTextField.leftViewMode = UITextFieldViewModeAlways;
-    searchTextField.leftView = leftView;
-
-    self.naviBar.titleView = searchTextField;
-}
-
 /**
  *  初始化集合视图
  */
 -(void)initPhotoCollectionView
 {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.itemSize = CGSizeMake((MTScreenW-2)/3, (MTScreenW-2)/3);
+    
     flowLayout.minimumLineSpacing = 1;
     flowLayout.minimumInteritemSpacing = 1;
-    flowLayout.sectionInset = UIEdgeInsetsMake(5, 0, 5, 0);
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    flowLayout.headerReferenceSize = CGSizeMake(MTScreenW,20);
 
     self.photoCollectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
     self.photoCollectionView.delegate = self;
     self.photoCollectionView.dataSource = self;
-    self.photoCollectionView.backgroundColor = [UIColor whiteColor];
-    self.photoCollectionView.bounces = YES;
     self.photoCollectionView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:self.photoCollectionView];
     
@@ -92,33 +49,48 @@
     UINib *photoCellNib = [UINib nibWithNibName:@"PhotoSetCell" bundle:nil];
     [self.photoCollectionView registerNib:photoCellNib forCellWithReuseIdentifier:@"photoSetCell"];
     
-    UINib *photoHeadView = [UINib nibWithNibName:@"PhotoSetReusableHeadView" bundle:nil];
-    [self.photoCollectionView registerNib:photoHeadView forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"photoSetReusableHeadView"];
-    
+    UINib *photoHeadCellNib = [UINib nibWithNibName:@"PhotoSetHeadCell" bundle:nil];
+    [self.photoCollectionView registerNib:photoHeadCellNib forCellWithReuseIdentifier:@"photoSetHeadCell"];
+
     //设置上下拉刷新
-   // self.photoCollectionView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    self.photoCollectionView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     self.photoCollectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
-    //[self.photoCollectionView.header beginRefreshing];
-}
+    [self.photoCollectionView.header beginRefreshing];
 
-///**
-// *  初始化轮播视图
-// */
-//-(void)initLoopImageView
-//{
-//    self.photoCollectionView.contentInset = UIEdgeInsetsMake(collectionViewInset, 0, 0, 0);
-//    self.loopView = [[LoopImagesView alloc] initWithFrame:CGRectMake(0,-235, MTScreenW, 230)];
-//    self.loopView.imageArr = self.dataProvider;
-//    self.loopView.delegate = self;
-//    [self.photoCollectionView addSubview:self.loopView];
-//}
+ }
 
--(void)initHeadView
+/**
+ *  初始化导航条
+ */
+-(void)initNaviBar
 {
-    self.photoCollectionView.contentInset = UIEdgeInsetsMake(collectionViewInset, 0, 0, 0);
-    UIImageView *imgv = [[UIImageView alloc] initWithFrame:CGRectMake(0, -193, MTScreenW, 193)];
-    imgv.image = [UIImage imageNamed:@"headViewimage"];
-    [self.photoCollectionView addSubview:imgv];
+    self.navigationItem.title = @"照片墙";
+    self.navigationController.navigationBar.barTintColor = HMColor(79, 127, 175);
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = item;
+    
+//    UISearchBar *searchbar = [[UISearchBar alloc] init];
+//    searchbar.searchBarStyle = UISearchBarStyleDefault;
+//    searchbar.barTintColor = [UIColor clearColor];
+//    self.navigationItem.titleView = searchbar;
+    UITextField *searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(7, 7, MTScreenW - 100, 30)];
+    searchTextField.delegate = self;
+    searchTextField.returnKeyType = UIReturnKeyDone;
+    searchTextField.borderStyle = UITextBorderStyleRoundedRect;
+    searchTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    searchTextField.textColor = [UIColor lightGrayColor];
+    searchTextField.font = [UIFont systemFontOfSize:13];
+    searchTextField.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:1];
+    UIImageView *leftView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    leftView.image = [UIImage imageNamed:@"search_icon"];
+    searchTextField.leftViewMode = UITextFieldViewModeAlways;
+    searchTextField.leftView = leftView;
+    self.navigationItem.titleView = searchTextField;
 }
 
 /**
@@ -140,32 +112,29 @@
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+    if (section == 0) {
+        return 1;
+    }
     return self.dataProvider.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *photoSetCellId = @"photoSetCell";
-    PhotoSetCell *cell = [self.photoCollectionView dequeueReusableCellWithReuseIdentifier:photoSetCellId forIndexPath:indexPath];
-    
-    CGFloat imgvWidth = (MTScreenW-2)/3;
-    UIImage *img = [UIImage imageNamed:self.dataProvider[indexPath.row]];
-    cell.photoImageV.image = [img scaleImageToSize:CGSizeMake(imgvWidth, imgvWidth)];
-    return cell;
+    if (indexPath.section == 0) {
+        static NSString *photoSetHeadCellId = @"photoSetHeadCell";
+        PhotoSetHeadCell *cell = [self.photoCollectionView dequeueReusableCellWithReuseIdentifier:photoSetHeadCellId forIndexPath:indexPath];
+        cell.headImageView.image = [UIImage imageNamed:@"headViewimage"];
+        return cell;
+    }else{
+        static NSString *photoSetCellId = @"photoSetCell";
+        PhotoSetCell *cell = [self.photoCollectionView dequeueReusableCellWithReuseIdentifier:photoSetCellId forIndexPath:indexPath];
+        CGFloat imgvWidth = (MTScreenW-2)/3;
+        UIImage *img = [UIImage imageNamed:self.dataProvider[indexPath.row]];
+        cell.photoImageV.image = [img scaleImageToSize:CGSizeMake(imgvWidth, imgvWidth)];
+        return cell;
+    }
 }
 
--(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-{
-     PhotoSetReusableHeadView *reusableV;
-    if (kind == UICollectionElementKindSectionHeader)
-    {
-       reusableV = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"photoSetReusableHeadView" forIndexPath:indexPath];
-        reusableV.backgroundColor = HMColor(79, 127, 175);
-        reusableV.frame = CGRectMake(0, 0, MTScreenW, 30);
-    }
-    reusableV.titleLb.text = @"2015/11/13";
-    return reusableV;
-}
 
 #pragma mark UICollectionViewDelegate
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -175,46 +144,26 @@
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
-#pragma mark UIScrollViewDelegate
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-//    CGFloat offsetY = scrollView.contentOffset.y;
-//    CGFloat alph;
-//    if (offsetY>0) {
-//        alph = offsetY/200;
-//        if (alph>=1.0) {
-//            alph = 1.0;
-//        }
-//    }else{
-//        alph = 0.0;
-//    }
-//    self.naviBar.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:alph];
-//    self.naviBar.titleView.backgroundColor = [[UIColor whiteColor]colorWithAlphaComponent:alph];
-//    
-//    if (alph <= 0.2) {
-//        self.naviBar.titleView.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent:0.1];
-//    }
+    if (section == 0) {
+        return UIEdgeInsetsMake(0 , 0, 0, 0);
+    }else return UIEdgeInsetsMake(5, 0, 5, 0);
 }
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        return CGSizeMake(MTScreenW, 193);
+    }
+    return CGSizeMake((MTScreenW-2)/3, (MTScreenW-2)/3);
+}
+
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
     return YES;
-}
-
-#pragma mark NavigationBarDelegate
-/**
- *  自定义导航条的协议方法
- */
--(void)navigationBar:(SWYNavigationBar *)naviBar didClickLeftBtn:(UIButton *)leftBtn
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-#pragma mark LoopImagesViewDelegate
--(void)loopImagesView:(LoopImagesView *)loopImageView didImageClickedIndex:(NSInteger)index
-{
-    //NSLog(@"%d",index);
 }
 
 #pragma mark 事件方法

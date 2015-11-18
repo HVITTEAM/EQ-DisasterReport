@@ -14,6 +14,7 @@
 #import "SWYPhotoSetViewController.h"
 #import "CollectInfoViewController.h"
 #import "PersonCenterViewController.h"
+#import "AppDelegate.h"
 
 @interface SWYMapViewController ()<MAMapViewDelegate,AMapSearchDelegate,MapTypeSelectViewDelegate>
 
@@ -151,9 +152,10 @@
 {
     if(updatingLocation)
     {
-        //取出当前位置的坐标
-        //NSLog(@"latitude : %f,longitude: %f",userLocation.coordinate.latitude,userLocation.coordinate.longitude);
         self.currentLocation = userLocation;
+        
+        AppDelegate *appdel = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        appdel.currentLocation = userLocation;
     }
 }
 

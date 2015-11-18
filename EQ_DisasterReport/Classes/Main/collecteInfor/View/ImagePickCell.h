@@ -13,10 +13,11 @@
 @interface ImagePickCell : UITableViewCell
 @property (nonatomic, strong) UIViewController *parentVC;
 @property (nonatomic, weak)id<ImagePickCellDelegate>delegate;
+@property (nonatomic,strong)NSMutableArray *images;
 @end
 
 @protocol ImagePickCellDelegate <NSObject>
 
--(void)imagePickCell:(ImagePickCell *)cell pickedImages:(NSArray *)images imagePickViewheight:(CGFloat)height;
+-(void)imagePickCell:(ImagePickCell *)cell pickedImages:(NSMutableArray *)images imagePickViewheight:(CGFloat)height;
 
 @end

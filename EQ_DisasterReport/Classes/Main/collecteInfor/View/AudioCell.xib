@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,34 +14,17 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="56.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X2d-Fi-hXF" customClass="D3RecordButton">
-                        <rect key="frame" x="0.0" y="5" width="90" height="46.5"/>
-                        <animations/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="90" id="QgP-PB-UpY"/>
-                        </constraints>
-                        <state key="normal">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60&quot;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wz8-Y6-g82">
-                        <rect key="frame" x="277" y="16" width="25" height="24.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0&quot;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wz8-Y6-g82">
+                        <rect key="frame" x="289" y="16" width="13" height="24.5"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Re-9m-J7e">
-                        <rect key="frame" x="15" y="8" width="250" height="40.5"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Re-9m-J7e" customClass="D3RecordButton">
+                        <rect key="frame" x="15" y="8" width="262" height="40.5"/>
                         <animations/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="250" id="oP4-kg-aJC"/>
-                        </constraints>
                         <state key="normal" backgroundImage="fs_chat_bubble"/>
-                        <connections>
-                            <action selector="playAudio:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="BXj-wA-WjO"/>
-                        </connections>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fs_icon_wave_0" translatesAutoresizingMaskIntoConstraints="NO" id="l1o-Jz-vNz">
                         <rect key="frame" x="46" y="10" width="35" height="36.5"/>
@@ -54,13 +37,10 @@
                 <animations/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="4Re-9m-J7e" secondAttribute="bottom" constant="8" id="3aK-ia-1pP"/>
-                    <constraint firstItem="X2d-Fi-hXF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="4k6-Vq-TZh"/>
                     <constraint firstAttribute="bottom" secondItem="l1o-Jz-vNz" secondAttribute="bottom" constant="10" id="CEq-Uh-fDN"/>
                     <constraint firstItem="l1o-Jz-vNz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="46" id="HqF-Hj-KVX"/>
                     <constraint firstAttribute="bottom" secondItem="Wz8-Y6-g82" secondAttribute="bottom" constant="16" id="JlQ-Su-pbV"/>
                     <constraint firstItem="Wz8-Y6-g82" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="KoW-mY-wcZ"/>
-                    <constraint firstAttribute="bottom" secondItem="X2d-Fi-hXF" secondAttribute="bottom" constant="5" id="NPi-0N-XwY"/>
-                    <constraint firstItem="X2d-Fi-hXF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Td1-Dh-0HP"/>
                     <constraint firstItem="4Re-9m-J7e" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="VRR-SQ-8t5"/>
                     <constraint firstItem="Wz8-Y6-g82" firstAttribute="leading" secondItem="4Re-9m-J7e" secondAttribute="trailing" constant="12" id="eUo-q3-15c"/>
                     <constraint firstItem="4Re-9m-J7e" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="miE-am-38a"/>
@@ -71,7 +51,7 @@
             <animations/>
             <connections>
                 <outlet property="audioDuration" destination="Wz8-Y6-g82" id="SMx-eZ-ghd"/>
-                <outlet property="recordBtn" destination="X2d-Fi-hXF" id="PfL-NV-5Lt"/>
+                <outlet property="recordBtn" destination="4Re-9m-J7e" id="ZMq-r0-2F4"/>
                 <outlet property="signalImage" destination="l1o-Jz-vNz" id="fv1-ye-Num"/>
             </connections>
             <point key="canvasLocation" x="327" y="366.5"/>

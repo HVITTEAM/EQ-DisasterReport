@@ -117,9 +117,6 @@
     return res;
 }
 
-
-
-
 -(BOOL)updateDataWithDictionary:(NSDictionary *)dict
 {
     BOOL res = NO;
@@ -140,5 +137,18 @@
     return res;
 }
 
+-(NSInteger)getMaxIdOfRecords
+{
+    NSInteger maxid = 0;
+    if ([db open]) {
+        NSString *sql = [NSString stringWithFormat:@"SELECT MAX(pointid) AS maxid FROM %@ ",TABLENAME];
+        FMResultSet * rs = [db executeQuery:sql];
+        while ([rs next]) {
+            maxid = [rs intForColumn:@"maxid"];
+        }
+    }
+    [db close];
+    return maxid;
+}
 
 @end

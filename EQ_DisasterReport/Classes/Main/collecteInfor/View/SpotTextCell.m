@@ -89,4 +89,9 @@
     return YES;
 }
 
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    self.cellModel.contentStr = textField.text;
+}
+
 @end

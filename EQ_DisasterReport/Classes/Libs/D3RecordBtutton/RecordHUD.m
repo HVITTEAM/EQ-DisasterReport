@@ -18,80 +18,61 @@
     dispatch_once(&once, ^ {
         sharedView = [[RecordHUD alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         sharedView.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent:0.5];
-
     });
     return sharedView;
 }
 
 + (void)show{
-    
     [[RecordHUD shareView] show];
 }
 
 
 - (void)show{
-        if(!self.superview){
-            [self.overlayWindow addSubview:self];
-        }
-        
-        imgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"mic_0.png"]];
-        imgView.frame = CGRectMake(0, 0, 154, 180);
-        imgView.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2,[[UIScreen mainScreen] bounds].size.height/2);
-        imgView.layer.cornerRadius = 10.0f;
-        imgView.clipsToBounds = YES;
+    if(!self.superview){
+        [self.overlayWindow addSubview:self];
+    }
     
-    //by swy
-    imgView.userInteractionEnabled = YES;
-    //单击手势
-    UITapGestureRecognizer *sigleGestureRe = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(stopRecord:)];
-    sigleGestureRe.numberOfTouchesRequired = 1;
-    sigleGestureRe.numberOfTapsRequired = 1;
-    [imgView addGestureRecognizer:sigleGestureRe];
-    
-    //双击手势
-    UITapGestureRecognizer *doubleGestureRe = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelRecord:)];
-    doubleGestureRe.numberOfTouchesRequired = 1;
-    doubleGestureRe.numberOfTapsRequired = 2;
-    [imgView addGestureRecognizer:doubleGestureRe];
-    [sigleGestureRe requireGestureRecognizerToFail:doubleGestureRe];
-    //end
-
+    imgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"mic_0.png"]];
+    imgView.frame = CGRectMake(0, 0, 154, 180);
+    imgView.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2,[[UIScreen mainScreen] bounds].size.height/2);
+    imgView.layer.cornerRadius = 10.0f;
+    imgView.clipsToBounds = YES;
     
     
-        if (!titleLabel){
-            titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 150, 40)];
-            titleLabel.backgroundColor = [UIColor clearColor];
-        }
-        titleLabel.center = CGPointMake(imgView.center.x, imgView.center.y + 65);
-        titleLabel.text = @"离开按钮取消录音";
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.font = [UIFont boldSystemFontOfSize:13];
-        titleLabel.textColor = [UIColor whiteColor];
-        
-        if (!timeLabel) {
-            timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 150, 40)];
-            timeLabel.backgroundColor = [UIColor clearColor];
-        }
-        timeLabel.center = CGPointMake(imgView.center.x, imgView.center.y - 77);
-        timeLabel.text = @"录音: 0\"";
-        timeLabel.textAlignment = NSTextAlignmentCenter;
-        timeLabel.font = [UIFont boldSystemFontOfSize:14];
-        timeLabel.textColor = [UIColor whiteColor];
-        
-        
-        [self addSubview:imgView];
-        [self addSubview:titleLabel];
-        [self addSubview:timeLabel];
-        
-        [UIView animateWithDuration:0.3
-                              delay:0
-                            options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
-                         animations:^{
-                             self.alpha = 1;
-                         }
-                         completion:^(BOOL finished){
-                         }];
-        [self setNeedsDisplay];
+    if (!titleLabel){
+        titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 150, 40)];
+        titleLabel.backgroundColor = [UIColor clearColor];
+    }
+    titleLabel.center = CGPointMake(imgView.center.x, imgView.center.y + 65);
+    titleLabel.text = @"离开按钮取消录音";
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.font = [UIFont boldSystemFontOfSize:15];
+    titleLabel.textColor = [UIColor whiteColor];
+    
+    if (!timeLabel) {
+        timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 150, 40)];
+        timeLabel.backgroundColor = [UIColor clearColor];
+    }
+    timeLabel.center = CGPointMake(imgView.center.x, imgView.center.y - 77);
+    timeLabel.text = @"录音: 0\"";
+    timeLabel.textAlignment = NSTextAlignmentCenter;
+    timeLabel.font = [UIFont boldSystemFontOfSize:14];
+    timeLabel.textColor = [UIColor whiteColor];
+    
+    
+    [self addSubview:imgView];
+    [self addSubview:titleLabel];
+    [self addSubview:timeLabel];
+    
+    [UIView animateWithDuration:0.3
+                          delay:0
+                        options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{
+                         self.alpha = 1;
+                     }
+                     completion:^(BOOL finished){
+                     }];
+    [self setNeedsDisplay];
 }
 
 
@@ -100,33 +81,33 @@
 }
 
 - (void)dismiss{
-        [UIView animateWithDuration:0.3
-                              delay:0
-                            options:UIViewAnimationCurveEaseIn | UIViewAnimationOptionAllowUserInteraction
-                         animations:^{
-                             self.alpha = 0;
+    [UIView animateWithDuration:0.3
+                          delay:0
+                        options:UIViewAnimationCurveEaseIn | UIViewAnimationOptionAllowUserInteraction
+                     animations:^{
+                         self.alpha = 0;
+                     }
+                     completion:^(BOOL finished){
+                         if(self.alpha == 0) {
+                             [imgView removeFromSuperview];
+                             imgView = nil;
+                             [titleLabel removeFromSuperview];
+                             titleLabel.text = nil;
+                             [timeLabel removeFromSuperview];
+                             timeLabel.text = nil;
+                             
+                             NSMutableArray *windows = [[NSMutableArray alloc] initWithArray:[UIApplication sharedApplication].windows];
+                             [windows removeObject:overlayWindow];
+                             overlayWindow = nil;
+                             
+                             [windows enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(UIWindow *window, NSUInteger idx, BOOL *stop) {
+                                 if([window isKindOfClass:[UIWindow class]] && window.windowLevel == UIWindowLevelNormal) {
+                                     [window makeKeyWindow];
+                                     *stop = YES;
+                                 }
+                             }];
                          }
-                         completion:^(BOOL finished){
-                             if(self.alpha == 0) {
-                                 [imgView removeFromSuperview];
-                                 imgView = nil;
-                                 [titleLabel removeFromSuperview];
-                                 titleLabel.text = nil;
-                                 [timeLabel removeFromSuperview];
-                                 timeLabel.text = nil;
-                                 
-                                 NSMutableArray *windows = [[NSMutableArray alloc] initWithArray:[UIApplication sharedApplication].windows];
-                                 [windows removeObject:overlayWindow];
-                                 overlayWindow = nil;
-                                 
-                                 [windows enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(UIWindow *window, NSUInteger idx, BOOL *stop) {
-                                     if([window isKindOfClass:[UIWindow class]] && window.windowLevel == UIWindowLevelNormal) {
-                                         [window makeKeyWindow];
-                                         *stop = YES;
-                                     }
-                                 }];
-                             }
-                         }];
+                     }];
 }
 
 
@@ -164,28 +145,9 @@
     if(!overlayWindow) {
         overlayWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
         overlayWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        overlayWindow.userInteractionEnabled = YES;  //by swy
-        
-        
+        overlayWindow.userInteractionEnabled = NO;
         [overlayWindow makeKeyAndVisible];
     }
     return overlayWindow;
 }
-
-//by swy
--(void)stopRecord:(UITapGestureRecognizer *)recognizer
-{
-    if ([self.delegate respondsToSelector:@selector(finishRecord:)]) {
-        [self.delegate finishRecord:self];
-    }
-}
-
-//by swy
--(void)cancelRecord:(UITapGestureRecognizer *)recognizer
-{
-    if ([self.delegate respondsToSelector:@selector(cancelRecord:)]) {
-        [self.delegate cancelRecord:self];
-    }
-}
-
 @end

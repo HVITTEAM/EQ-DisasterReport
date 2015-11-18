@@ -10,8 +10,9 @@
 @implementation AudioCell
 
 - (void)awakeFromNib {
-    // Initialization code
-    [self.recordBtn initRecord:self maxtime:60 title:@"单击话筒结束,双击取消"];
+    // Initialization code    
+    [self.recordBtn initRecord:self maxtime:10 title:@"上滑取消录音"];
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

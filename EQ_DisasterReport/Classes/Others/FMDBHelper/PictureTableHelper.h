@@ -19,4 +19,8 @@
 - (void)initDataBase;
 /**创建表**/
 - (void)createTable;
+-(BOOL)insertDataWithDictionary:(NSDictionary *)dict;
+-(NSMutableArray *) selectDataByReleteTable:(NSString *)reltable Releteid:(NSString *)relid;
+-(BOOL) deleteDataByReleteTable:(NSString *)reltable Releteid:(NSString *)relid;
+-(BOOL) deleteImageByAttribute:(NSString *)attribute value:(NSString *)value;
 @end

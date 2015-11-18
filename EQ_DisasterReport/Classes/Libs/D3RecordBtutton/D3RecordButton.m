@@ -17,14 +17,11 @@
     title = _title;
     mp3 = [[Mp3Recorder alloc]initWithDelegate:self];
     
-//    [self addTarget:self action:@selector(startRecord) forControlEvents:UIControlEventTouchDown];
-//    [self addTarget:self action:@selector(stopRecord) forControlEvents:UIControlEventTouchUpInside];
-//    [self addTarget:self action:@selector(cancelRecord) forControlEvents:UIControlEventTouchUpOutside | UIControlEventTouchCancel];
-//    [self addTarget:self action:@selector(RemindDragExit:) forControlEvents:UIControlEventTouchDragExit];
-//    [self addTarget:self action:@selector(RemindDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
-    
-    [self addTarget:self action:@selector(startRecord) forControlEvents:UIControlEventTouchUpInside];
-//    [self addTarget:self action:@selector(stopRecord) forControlEvents:UIControlEventTouchUpOutside | UIControlEventTouchCancel];
+    [self addTarget:self action:@selector(startRecord) forControlEvents:UIControlEventTouchDown];
+    [self addTarget:self action:@selector(stopRecord) forControlEvents:UIControlEventTouchUpInside];
+    [self addTarget:self action:@selector(cancelRecord) forControlEvents:UIControlEventTouchUpOutside | UIControlEventTouchCancel];
+    [self addTarget:self action:@selector(RemindDragExit:) forControlEvents:UIControlEventTouchDragExit];
+    [self addTarget:self action:@selector(RemindDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
 }
 
 -(void)initRecord:(id<D3RecordDelegate>)delegate maxtime:(int)_maxTime{
@@ -34,10 +31,6 @@
 
 //开始录音
 -(void)startRecord{
-    //by swy
-    RecordHUD *recordHud = [RecordHUD shareView];
-    recordHud.delegate = self;
-    
     [mp3 startRecord];
     [RecordHUD show];
     [self setHUDTitle];
@@ -110,17 +103,4 @@
     [RecordHUD setImage:[NSString stringWithFormat:@"mic_%.0f.png",volume*10 > 5 ? 5 : volume*10]];
     [RecordHUD setTimeTitle:[NSString stringWithFormat:@"录音: %.0f\"",recordTime]];
 }
-
-#pragma mark RecordHudDelegate
-//by swy
--(void)finishRecord:(RecordHUD *)recordHUD
-{
-    [self stopRecord];
-}
-
--(void)cancelRecord:(RecordHUD *)recordHUD
-{
-    [self cancelRecord];
-}
-
 @end

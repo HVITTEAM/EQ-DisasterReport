@@ -9,19 +9,23 @@
 #import "SpotInfoViewController.h"
 #import "SpotTableHelper.h"
 #import "SpotInforModel.h"
+#import "VoiceModel.h"
+#import "PhotoModel.h"
 #import "SpotTextCell.h"
 #import "SpotLabelCell.h"
 #import "SpotCellModel.h"
 #import "FillContentViewController.h"
 #import "ImagePickCell.h"
 #import "AudioCell.h"
+#import "PictureVO.h"
+#import "PictureTableHelper.h"
 
 
 @interface SpotInfoViewController ()<UITableViewDataSource,UITableViewDelegate,FillContentViewControllerDelegate,ImagePickCellDelegate,AudioCellDelegate>
 @property(nonatomic,strong)UITableView *infoTableView;
 @property(nonatomic,strong)NSArray *dataProvider;              //section 0 数据源
-@property(nonatomic,strong)NSArray *images;                    //图片数组
-//@property (nonatomic,strong) NSMutableArray *audioNames;       
+@property(nonatomic,strong)NSMutableArray *images;                    //图片数组
+@property(nonatomic,strong)NSData *voiceData;
 
 @end
 
@@ -34,6 +38,11 @@
     [self initTableView];
     [self initNavitionBar];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    if (self.actionType == kActionTypeShow) {
+        NSMutableArray *images = [self getImagesWithReleteId:self.spotInfoModel.pointid releteTable:nil];
+        self.images = images;
+        [self.infoTableView reloadData];
+    }
 }
 
 #pragma mark 初始化方法、setter和getter方法
@@ -57,6 +66,11 @@
 {
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style: UIBarButtonItemStylePlain target:self action:@selector(saveData)];
     self.navigationItem.rightBarButtonItem = rightItem;
+    
+    //下一级的返回按钮
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = item;
+
 }
 
 /**
@@ -64,57 +78,40 @@
  */
 -(NSArray *)dataProvider
 {
-    
     if (!_dataProvider) {
         SpotCellModel *model0 = [[SpotCellModel alloc] init];
         model0.titleStr = @"采集点ID:";
-        //model0.contentStr = self.spotInfoModel.pointid;
         model0.placeHolderStr = @"采集点ID将自动生成";
         
         SpotCellModel *model1 = [[SpotCellModel alloc] init];
         model1.titleStr = @"发震时刻:";
-        //model1.contentStr = self.spotInfoModel.collecttime;
         model1.placeHolderStr = @"发震时间";
         
         SpotCellModel *model2 = [[SpotCellModel alloc] init];
         model2.titleStr = @"震级(级):";
-        //model2.contentStr = self.spotInfoModel.level;
         model2.placeHolderStr = @"输入震级";
         
         SpotCellModel *model3 = [[SpotCellModel alloc] init];
         model3.titleStr = @"震深(m):";
-        //model3.contentStr = self.spotInfoModel.depth;
         model3.placeHolderStr = @"输入震深";
         
         SpotCellModel *model4 = [[SpotCellModel alloc] init];
         model4.titleStr = @"经度(度):";
-        //model4.contentStr = self.spotInfoModel.lon;
         model4.placeHolderStr = @"输入经度";
         
         SpotCellModel *model5 = [[SpotCellModel alloc] init];
         model5.titleStr = @"纬度(度):";
-        //model5.contentStr = self.spotInfoModel.lat;
         model5.placeHolderStr = @"输入纬度";
         
         SpotCellModel *model6 = [[SpotCellModel alloc] init];
         model6.titleStr = @"地址:";
-        //model6.contentStr = self.spotInfoModel.address;
         model6.placeHolderStr = @"输入地址";
     
         SpotCellModel *model7 = [[SpotCellModel alloc] init];
         model7.titleStr = @"备注:";
-        //model7.contentStr = self.spotInfoModel.descr;
 
         _dataProvider = @[model0,model1,model2,model3,model4,model5,model6,model7];
     }
-    ((SpotCellModel *)_dataProvider[0]).contentStr = self.spotInfoModel.pointid;
-    ((SpotCellModel *)_dataProvider[1]).contentStr = self.spotInfoModel.collecttime;
-    ((SpotCellModel *)_dataProvider[2]).contentStr = self.spotInfoModel.level;
-    ((SpotCellModel *)_dataProvider[3]).contentStr = self.spotInfoModel.depth;
-    ((SpotCellModel *)_dataProvider[4]).contentStr = self.spotInfoModel.lon;
-    ((SpotCellModel *)_dataProvider[5]).contentStr = self.spotInfoModel.lat;
-    ((SpotCellModel *)_dataProvider[6]).contentStr = self.spotInfoModel.address;
-    ((SpotCellModel *)_dataProvider[7]).contentStr = self.spotInfoModel.descr;
     return _dataProvider;
 }
 
@@ -129,13 +126,26 @@
     return _spotInfoModel;
 }
 
+-(void)setSpotInfoModel:(SpotInforModel *)spotInfoModel
+{
+    _spotInfoModel = spotInfoModel;
+    ((SpotCellModel *)self.dataProvider[0]).contentStr = self.spotInfoModel.pointid;
+    ((SpotCellModel *)self.dataProvider[1]).contentStr = self.spotInfoModel.collecttime;
+    ((SpotCellModel *)self.dataProvider[2]).contentStr = self.spotInfoModel.level;
+    ((SpotCellModel *)self.dataProvider[3]).contentStr = self.spotInfoModel.depth;
+    ((SpotCellModel *)self.dataProvider[4]).contentStr = self.spotInfoModel.lon;
+    ((SpotCellModel *)self.dataProvider[5]).contentStr = self.spotInfoModel.lat;
+    ((SpotCellModel *)self.dataProvider[6]).contentStr = self.spotInfoModel.address;
+    ((SpotCellModel *)self.dataProvider[7]).contentStr = self.spotInfoModel.descr;
+}
+
 /**
  *  图片数组的 getter 方法
  */
--(NSArray *)images
+-(NSMutableArray *)images
 {
     if (!_images) {
-        _images = [[NSArray alloc] init];
+        _images = [[NSMutableArray alloc] init];
     }
     return _images;
 }
@@ -161,6 +171,9 @@
         SpotCellModel *model = self.dataProvider[indexPath.row];
         SpotTextCell *cell = [SpotTextCell cellWithTableView:tableView model:model];
         [cell setIndexPath:indexPath rowsInSection:(int)self.dataProvider.count];
+        if (indexPath.row == 0) {
+            cell.userInteractionEnabled = NO;
+        }
         return cell;
     }else if(indexPath.section ==0 && indexPath.row ==7){
         SpotCellModel *model = self.dataProvider[indexPath.row];
@@ -175,6 +188,7 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"ImagePickCell" owner:nil options:nil] lastObject];
             cell.parentVC = self;
             cell.delegate = self;
+            cell.images = self.images;
         }
         return cell;
     }else{
@@ -244,41 +258,23 @@
 #pragma mark - FillContentViewControllerDelegate
 -(void)fillContentViewController:(FillContentViewController *)fillContentVC filledContent:(NSString *)content indexPath:(NSIndexPath *)indexpath
 {
-    SpotCellModel *model = self.dataProvider[indexpath.row];
-    model.contentStr = content;
+   ((SpotCellModel *)self.dataProvider[7]).contentStr = content;
     [self.infoTableView reloadRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark - ImagePickCellDelegate
--(void)imagePickCell:(ImagePickCell *)cell pickedImages:(NSArray *)images imagePickViewheight:(CGFloat)height
+-(void)imagePickCell:(ImagePickCell *)cell pickedImages:(NSMutableArray *)images imagePickViewheight:(CGFloat)height
 {
     self.images = images;
-    
-    NSMutableArray *indexPathArr = [[NSMutableArray alloc] init];
-    NSMutableArray *cellArr = [[NSMutableArray alloc] init];
-    for (int i= 0; i<8; i++) {
-        NSIndexPath *indexP = [NSIndexPath indexPathForItem:i inSection:0];
-        SpotLabelCell *cell = [self.infoTableView cellForRowAtIndexPath:indexP];
-        [indexPathArr addObject:indexP];
-        [cellArr addObject:cell];
-    }
-    
-    self.spotInfoModel.pointid = [cellArr[0] getContent];
-    self.spotInfoModel.collecttime = [cellArr[1] getContent];
-    self.spotInfoModel.level = [cellArr[2] getContent];
-    self.spotInfoModel.depth = [cellArr[3] getContent];
-    self.spotInfoModel.lon = [cellArr[4] getContent];
-    self.spotInfoModel.lat = [cellArr[5] getContent];
-    self.spotInfoModel.address = [cellArr[6] getContent];
-    self.spotInfoModel.descr = [cellArr[7] getContent];
-    
+
     [self.infoTableView reloadData];
+
 }
 
 #pragma mark - AudioCellDelegate
 -(void)audioCell:(AudioCell *)audioCell finishRecod:(NSData *)voiceData
 {
-    NSLog(@"voicedata");
+    self.voiceData = voiceData;
 }
 
 #pragma mark 事件方法
@@ -287,58 +283,151 @@
  */
 -(void)saveData
 {
-    NSMutableArray *indexPathArr = [[NSMutableArray alloc] init];
-    NSMutableArray *cellArr = [[NSMutableArray alloc] init];
-    
-    for (int i= 0; i<8; i++) {
-       NSIndexPath *indexP = [NSIndexPath indexPathForItem:i inSection:0];
-       SpotLabelCell *cell = [self.infoTableView cellForRowAtIndexPath:indexP];
-        [indexPathArr addObject:indexP];
-        [cellArr addObject:cell];
-    }
-    
-    for (int i= 1; i<7;i++) {
-        NSString *string = [cellArr[i] getContent];
-        if (string == nil || string.length<=0) {
-            [[[UIAlertView alloc] initWithTitle:@"提示" message:@"内容不能为空" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil] show];
-            return;
+    NSMutableArray *tempArr = [NSMutableArray array];
+    for (int i= 0; i<self.dataProvider.count;i++) {
+        NSString *string = ((SpotCellModel *)self.dataProvider[i]).contentStr;
+        if (i>0&&i<=6) {
+            if (string == nil || string.length<=0) {
+                [[[UIAlertView alloc] initWithTitle:@"提示" message:@"内容不能为空" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil] show];
+                return;
+            }
+        }else {
+            if (string == nil || string.length <= 0) {
+                string = @"";
+            }
         }
-    }
-    
-    NSString *string1 = [cellArr[1] getContent];
-    NSString *string2 = [cellArr[2] getContent];
-    NSString *string3 = [cellArr[3] getContent];
-    NSString *string4 = [cellArr[4] getContent];
-    NSString *string5 = [cellArr[5] getContent];
-    NSString *string6 = [cellArr[6] getContent];
-    NSString *string7 = [cellArr[7] getContent];
-    if (string7 == nil || string7.length <= 0) {
-        string7 = @"";
+        [tempArr addObject:string];
     }
     
     NSMutableDictionary *dict = [NSMutableDictionary new];
     
-    [dict setObject:string1 forKey:@"collecttime"];
-    [dict setObject:string2 forKey:@"level"];
-    [dict setObject:string3 forKey:@"depth"];
-    [dict setObject:string4 forKey:@"lon"];
-    [dict setObject:string5 forKey:@"lat"];
-    [dict setObject:string6 forKey:@"address"];
-    [dict setObject:string7 forKey:@"descr"];
+    [dict setObject:tempArr[0] forKey:@"pointid"];
+    [dict setObject:tempArr[1] forKey:@"collecttime"];
+    [dict setObject:tempArr[2] forKey:@"level"];
+    [dict setObject:tempArr[3] forKey:@"depth"];
+    [dict setObject:tempArr[4] forKey:@"lon"];
+    [dict setObject:tempArr[5] forKey:@"lat"];
+    [dict setObject:tempArr[6] forKey:@"address"];
+    [dict setObject:tempArr[7] forKey:@"descr"];
     [dict setObject:@"keykeykeykey" forKey:@"keys"];
-    
-    //NSLog(@"%@",dict);
     
     if (self.actionType == kActionTypeAdd) {
         [[SpotTableHelper sharedInstance] insertDataWithDictionary:dict];
-    }else{
+        NSString *releteid = [NSString stringWithFormat:@"%ld",(long)[[SpotTableHelper sharedInstance] getMaxIdOfRecords]];
+        [self saveVoice:self.voiceData releteId:releteid releteTable:nil];
+        [self saveImages:self.images releteId:releteid releteTable:nil];
         
-        [dict setObject:[cellArr[0] getContent] forKey:@"pointid"];
+    }else{
         [[SpotTableHelper sharedInstance] updateDataWithDictionary:dict];
+        //[self saveVoice:self.voiceData releteId:releteid releteTable:nil];
+        [[PictureTableHelper sharedInstance] deleteDataByReleteTable:nil Releteid:tempArr[0]];
+        [self saveImages:self.images releteId:tempArr[0] releteTable:nil];
     }
-    
     [self.navigationController popViewControllerAnimated:YES];
-    
 }
+
+/**
+ * 保存图片
+ **/
+-(void)saveImages:(NSArray *)images releteId:(NSString *)releteID releteTable:(NSString *)releteTable
+{
+    //保存图片
+    for (int i = 0; i < images.count ; i++)
+    {
+        if ([images[i] isKindOfClass:[PictureVO class]])
+        {
+            PictureVO *v = (PictureVO*)images[i];
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+            NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg", v.name]];
+            BOOL result = [v.imageData writeToFile: filePath atomically:YES]; // 写入本地沙盒
+            //实例化一个NSDateFormatter对象
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            //设定时间格式,这里可以设置成自己需要的格式
+            [dateFormatter setDateFormat:@"yyyy-MM-dd HH-mm-ss"];
+            //用[NSDate date]可以获取系统当前时间
+            NSString *currentDate = [dateFormatter stringFromDate:[NSDate date]];
+            if (result)
+            {
+                NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                      v.name,@"photoName",
+                                      currentDate,@"phototime",
+                                      filePath,@"photoPath",
+                                      releteID,@"releteid",
+                                      nil];
+                //保存数据库
+                [[PictureTableHelper sharedInstance] insertDataWithDictionary:dict];
+            }
+        }
+    }
+}
+
+/**
+ * 获取图片
+ **/
+-(NSMutableArray *)getImagesWithReleteId:(NSString *)releteID releteTable:(NSString *)releteTable
+{
+    NSMutableArray *images = [[NSMutableArray alloc] init];
+    NSMutableArray * pictureModes= [[PictureTableHelper sharedInstance] selectDataByReleteTable:releteTable Releteid:releteID];
+    //循环添加图片
+    for(PhotoModel* pic in pictureModes)
+    {
+        PictureVO *vo = [[PictureVO alloc] init];
+        vo.name = pic.photoName;
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+        NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg", pic.photoName]];
+        vo.imageData = [NSData dataWithContentsOfFile:filePath];
+        [images addObject:vo];
+    }
+    return images;
+}
+
+/**
+ *  保存声音
+ **/
+-(void)saveVoice:(NSData *)voiceData releteId:(NSString *)releteID releteTable:(NSString *)releteTable
+{
+    if (!voiceData||voiceData.length<=0) {
+        NSLog(@"1223");
+        return;
+    }
+    //实例化一个NSDateFormatter对象
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //设定时间格式,这里可以设置成自己需要的格式
+    [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
+    //用[NSDate date]可以获取系统当前时间
+    NSString *voiceName = [dateFormatter stringFromDate:[NSDate date]];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH-mm-ss"];
+    //用[NSDate date]可以获取系统当前时间
+    NSString *voiceTime = [dateFormatter stringFromDate:[NSDate date]];
+
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mp3", voiceName]];
+    
+    BOOL result = [self.voiceData writeToFile: filePath atomically:YES]; // 写入本地沙盒
+    if (result) {
+        NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:
+                              voiceName,@"voiceName",
+                              voiceTime,@"voicetime",
+                              filePath,@"voicePath",
+                              @"voiceinfo",@"voiceinfo",
+                              releteID,@"releteid",
+                              nil];
+        //保存数据库
+        [[VoiceTableHelper sharedInstance] insertDataWithDictionary:dict];
+
+    }
+}
+
+/**
+ *  获取声音
+ **/
+-(NSData *)getVoiceWithReleteId:(NSString *)releteID releteTable:(NSString *)releteTable
+{
+    NSMutableArray * voiceModes= [[VoiceTableHelper sharedInstance] selectDataByReleteTable:releteTable Releteid:releteID];
+    VoiceModel *voiceModel = (VoiceModel *)voiceModes[0];
+    NSData *voicedata = [NSData dataWithContentsOfFile:voiceModel.voicePath];
+    return voicedata;
+ }
 
 @end

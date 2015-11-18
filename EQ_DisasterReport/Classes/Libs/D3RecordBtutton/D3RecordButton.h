@@ -10,7 +10,6 @@
 #import "Mp3Recorder.h"
 #import "lame.h"
 #import <AVFoundation/AVFoundation.h>
-#import "RecordHUD.h"
 
 @protocol D3RecordDelegate <NSObject>
 - (void)endRecord:(NSData *)voiceData;
@@ -21,7 +20,7 @@
 - (void)dragEnter;
 @end
 
-@interface D3RecordButton : UIButton<Mp3RecorderDelegate,RecordHudDelegate>{
+@interface D3RecordButton : UIButton<Mp3RecorderDelegate>{
     int maxTime;
     Mp3Recorder *mp3;
     NSString *title;
@@ -35,3 +34,4 @@
 - (void)cancelRecord;
 
 @end
+

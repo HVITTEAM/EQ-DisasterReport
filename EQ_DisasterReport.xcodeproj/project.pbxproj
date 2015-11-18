@@ -41,6 +41,9 @@
 		D29647671BF1BDF6004B8877 /* SQCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D29647661BF1BDF6004B8877 /* SQCollectionCell.xib */; };
 		D296476A1BF1C74A004B8877 /* ImgeCollectinViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D29647691BF1C74A004B8877 /* ImgeCollectinViewFlowLayout.m */; };
 		D296476D1BF1DB1C004B8877 /* PictureVO.m in Sources */ = {isa = PBXBuildFile; fileRef = D296476C1BF1DB1C004B8877 /* PictureVO.m */; };
+		D29EEBBA1BFAFC860015C268 /* PhotoSetHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D29EEBB81BFAFC860015C268 /* PhotoSetHeadCell.m */; };
+		D29EEBBB1BFAFC860015C268 /* PhotoSetHeadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D29EEBB91BFAFC860015C268 /* PhotoSetHeadCell.xib */; };
+		D29EEBC01BFB2C2F0015C268 /* VoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D29EEBBF1BFB2C2F0015C268 /* VoiceModel.m */; };
 		D2AD16A71BF2DC7A000D2182 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AD16A61BF2DC79000D2182 /* AVFoundation.framework */; };
 		D2AD16CF1BF2FDF8000D2182 /* D3RecordButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AD16C01BF2FDF8000D2182 /* D3RecordButton.m */; };
 		D2AD16D01BF2FDF8000D2182 /* mic_0.png in Resources */ = {isa = PBXBuildFile; fileRef = D2AD16C21BF2FDF8000D2182 /* mic_0.png */; };
@@ -76,6 +79,7 @@
 		D2BFE59F1BE9FD8800B65E91 /* UserInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2BFE59D1BE9FD8800B65E91 /* UserInfoCell.xib */; };
 		D2BFE5A21BE9FFFF00B65E91 /* TableHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2BFE5A11BE9FFFF00B65E91 /* TableHeadView.m */; };
 		D2BFE5A41BEA063400B65E91 /* TableHeadViw.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2BFE5A31BEA063400B65E91 /* TableHeadViw.xib */; };
+		D2D6B0F61BFC094C00B14A7E /* PhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D6B0F51BFC094C00B14A7E /* PhotoModel.m */; };
 		D2EC97DB1BE70E4A00ED8661 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC97C91BE70E4A00ED8661 /* AFHTTPRequestOperation.m */; };
 		D2EC97DC1BE70E4A00ED8661 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC97CB1BE70E4A00ED8661 /* AFHTTPRequestOperationManager.m */; };
 		D2EC97DD1BE70E4A00ED8661 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC97CD1BE70E4A00ED8661 /* AFHTTPSessionManager.m */; };
@@ -263,6 +267,11 @@
 		D29647691BF1C74A004B8877 /* ImgeCollectinViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImgeCollectinViewFlowLayout.m; sourceTree = "<group>"; };
 		D296476B1BF1DB1C004B8877 /* PictureVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureVO.h; sourceTree = "<group>"; };
 		D296476C1BF1DB1C004B8877 /* PictureVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureVO.m; sourceTree = "<group>"; };
+		D29EEBB71BFAFC860015C268 /* PhotoSetHeadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoSetHeadCell.h; sourceTree = "<group>"; };
+		D29EEBB81BFAFC860015C268 /* PhotoSetHeadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoSetHeadCell.m; sourceTree = "<group>"; };
+		D29EEBB91BFAFC860015C268 /* PhotoSetHeadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoSetHeadCell.xib; sourceTree = "<group>"; };
+		D29EEBBE1BFB2C2F0015C268 /* VoiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceModel.h; sourceTree = "<group>"; };
+		D29EEBBF1BFB2C2F0015C268 /* VoiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceModel.m; sourceTree = "<group>"; };
 		D2AD16A61BF2DC79000D2182 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D2AD16BF1BF2FDF8000D2182 /* D3RecordButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = D3RecordButton.h; sourceTree = "<group>"; };
 		D2AD16C01BF2FDF8000D2182 /* D3RecordButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = D3RecordButton.m; sourceTree = "<group>"; };
@@ -310,6 +319,8 @@
 		D2BFE5A01BE9FFFF00B65E91 /* TableHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableHeadView.h; sourceTree = "<group>"; };
 		D2BFE5A11BE9FFFF00B65E91 /* TableHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableHeadView.m; sourceTree = "<group>"; };
 		D2BFE5A31BEA063400B65E91 /* TableHeadViw.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableHeadViw.xib; sourceTree = "<group>"; };
+		D2D6B0F41BFC094C00B14A7E /* PhotoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoModel.h; sourceTree = "<group>"; };
+		D2D6B0F51BFC094C00B14A7E /* PhotoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoModel.m; sourceTree = "<group>"; };
 		D2EC97C21BE7076800ED8661 /* EQ_DisasterReport.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EQ_DisasterReport.pch; sourceTree = "<group>"; };
 		D2EC97C81BE70E4A00ED8661 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		D2EC97C91BE70E4A00ED8661 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
@@ -717,6 +728,9 @@
 				D2BFE57C1BE9DB5F00B65E91 /* PhotoSetCell.h */,
 				D2BFE57D1BE9DB5F00B65E91 /* PhotoSetCell.m */,
 				D2BFE57E1BE9DB5F00B65E91 /* PhotoSetCell.xib */,
+				D29EEBB71BFAFC860015C268 /* PhotoSetHeadCell.h */,
+				D29EEBB81BFAFC860015C268 /* PhotoSetHeadCell.m */,
+				D29EEBB91BFAFC860015C268 /* PhotoSetHeadCell.xib */,
 				D2656EA71BEBA2B400BA127F /* PhotoSetReusableHeadView.h */,
 				D2656EA81BEBA2B400BA127F /* PhotoSetReusableHeadView.m */,
 				D2656EA91BEBA2B400BA127F /* PhotoSetReusableHeadView.xib */,
@@ -1146,6 +1160,10 @@
 				D29647371BF173CE004B8877 /* SpotCellModel.m */,
 				D296476B1BF1DB1C004B8877 /* PictureVO.h */,
 				D296476C1BF1DB1C004B8877 /* PictureVO.m */,
+				D2D6B0F41BFC094C00B14A7E /* PhotoModel.h */,
+				D2D6B0F51BFC094C00B14A7E /* PhotoModel.m */,
+				D29EEBBE1BFB2C2F0015C268 /* VoiceModel.h */,
+				D29EEBBF1BFB2C2F0015C268 /* VoiceModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1349,6 +1367,7 @@
 				D29647331BF1739C004B8877 /* SpotLabelCell.xib in Resources */,
 				D2BFE5901BE9E0D800B65E91 /* 4.jpg in Resources */,
 				D2AD16D01BF2FDF8000D2182 /* mic_0.png in Resources */,
+				D29EEBBB1BFAFC860015C268 /* PhotoSetHeadCell.xib in Resources */,
 				D2BFE5A41BEA063400B65E91 /* TableHeadViw.xib in Resources */,
 				D29647671BF1BDF6004B8877 /* SQCollectionCell.xib in Resources */,
 				D2EDC4C21BEC966600AEDFB4 /* SpotInforCell.xib in Resources */,
@@ -1423,6 +1442,7 @@
 				D2EC984F1BE7109A00ED8661 /* NSString+MJExtension.m in Sources */,
 				D2EC987E1BE7112700ED8661 /* MJRefreshBackFooter.m in Sources */,
 				D296472B1BF17363004B8877 /* SpotInfoViewController.m in Sources */,
+				D29EEBC01BFB2C2F0015C268 /* VoiceModel.m in Sources */,
 				D2EC97DF1BE70E4A00ED8661 /* AFSecurityPolicy.m in Sources */,
 				D2AD16CF1BF2FDF8000D2182 /* D3RecordButton.m in Sources */,
 				D296474B1BF1B56C004B8877 /* ImageCollectionView.m in Sources */,
@@ -1432,6 +1452,7 @@
 				D2AD16D91BF2FDF8000D2182 /* RecordHUD.m in Sources */,
 				D29647321BF1739C004B8877 /* SpotLabelCell.m in Sources */,
 				D29647441BF19977004B8877 /* FillContentViewController.m in Sources */,
+				D2D6B0F61BFC094C00B14A7E /* PhotoModel.m in Sources */,
 				D2AD16DD1BF31B6C000D2182 /* AudioCell.m in Sources */,
 				D2BFE5991BE9FA3400B65E91 /* SWYCollectDetailViewController.m in Sources */,
 				D2EC98071BE70E6B00ED8661 /* NSData+ImageContentType.m in Sources */,
@@ -1478,6 +1499,7 @@
 				01EBA1551BE6F4CA00F2701D /* AppDelegate.m in Sources */,
 				D296475F1BF1B814004B8877 /* UzysAssetsPickerController.m in Sources */,
 				D2EEA3761BF45D2B00F2FD20 /* HMBadgeView.m in Sources */,
+				D29EEBBA1BFAFC860015C268 /* PhotoSetHeadCell.m in Sources */,
 				D2EC98151BE70E6B00ED8661 /* UIView+WebCacheOperation.m in Sources */,
 				D2EC97DD1BE70E4A00ED8661 /* AFHTTPSessionManager.m in Sources */,
 				D2EEA3711BF45D2100F2FD20 /* HMCommonTextfieldItem.m in Sources */,
@@ -1598,6 +1620,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1642,6 +1665,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;

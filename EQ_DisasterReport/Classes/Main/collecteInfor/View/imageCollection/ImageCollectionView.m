@@ -26,15 +26,25 @@
     [self initCollectionView];
     
     self.isShowAddBtn = YES;
+     _dataProvider =[[NSMutableArray alloc]init];
 }
 
--(NSMutableArray *)dataProvider
+-(void)setDataProvider:(NSMutableArray *)dataProvider
 {
-    if (!_dataProvider) {
-        _dataProvider =[[NSMutableArray alloc]init];
-    }
-    return _dataProvider;
+    _dataProvider = dataProvider;
+    [self setAddBtn];
+    [self.collectionView reloadData];
+    //调整view高度
+    [self changeViewHeight];
 }
+
+//-(NSMutableArray *)dataProvider
+//{
+//    if (!_dataProvider) {
+//        _dataProvider =[[NSMutableArray alloc]init];
+//    }
+//    return _dataProvider;
+//}
 
 
 /**
@@ -109,15 +119,16 @@
 #pragma mark --UICollectionViewDelegate
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger index = indexPath.section * 5 +indexPath.row;
+//    NSInteger index = indexPath.section * 5 +indexPath.row;
+    NSInteger index = indexPath.row;
     //在不显示新增图片按钮时，index 最大是self.dataProvider.count-1，如果等于self.dataProvider.count，说明当前显示新增图片按钮，且点击了新增图片按钮
     if (index == self.dataProvider.count) {
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"请选择图片来源" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从手机相册选择", nil];
         [alert show];
-    }
-    else
-    {
-        //如果是新增，点击就直接从数组中删除
+    }else{
+        //如果不是新增按钮，点击就直接从数组中删除
+        PictureVO *picvo = self.dataProvider[index];
+        [[PictureTableHelper sharedInstance] deleteImageByAttribute:@"photoName" value:picvo.name];
         [self.dataProvider removeObjectAtIndex:index];
         [self setAddBtn];
         [self.collectionView reloadData];

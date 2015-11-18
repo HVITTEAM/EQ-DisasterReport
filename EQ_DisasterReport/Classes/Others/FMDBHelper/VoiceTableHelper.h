@@ -19,4 +19,6 @@
 - (void)initDataBase;
 /**创建表**/
 - (void)createTable;
+-(BOOL)insertDataWithDictionary:(NSDictionary *)dict;
+-(NSMutableArray *) selectDataByReleteTable:(NSString *)reltable Releteid:(NSString *)relid;
 @end

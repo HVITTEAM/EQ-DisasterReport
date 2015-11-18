@@ -11,6 +11,7 @@
 @interface PictureVO : NSObject
 
 @property (nonatomic,copy) NSString *name;
+//@property (nonatomic,copy) NSString *photoTime;
 //@property (strong, nonatomic)UIImage *image;
 @property (strong, nonatomic)NSData *imageData;
 //@property (nonatomic,copy)NSString *fileUrl;

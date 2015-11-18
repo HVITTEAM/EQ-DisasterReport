@@ -28,6 +28,7 @@
     
     self.tableView.rowHeight = 50;
     self.tableView.delegate = self;
+    self.view.backgroundColor = HMGlobalBg;
     self.automaticallyAdjustsScrollViewInsets = NO;
 
 }
@@ -51,11 +52,12 @@
 -(void)initNavigation
 {
     self.title = @"个人中心";
-    self.view.backgroundColor = HMGlobalBg;
-    
+    self.navigationController.navigationBar.barTintColor = HMColor(79, 127, 175);
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 # pragma  mark 设置数据源
