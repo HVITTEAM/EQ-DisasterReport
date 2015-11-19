@@ -290,6 +290,6 @@
 }
 
 -(void)dealloc{
-    NSLog(@"imagepicker dealloc");
+    NSLog(@"imageCollectionView dealloc");
 }
 @end

@@ -39,5 +39,9 @@
     }
 }
 
+-(void)dealloc
+{
+    NSLog(@"FillContentViewController  释放了吗");
+}
 
 @end

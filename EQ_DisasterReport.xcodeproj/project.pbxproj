@@ -14,6 +14,8 @@
 		01EBA1601BE6F4CA00F2701D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01EBA15E1BE6F4CA00F2701D /* LaunchScreen.storyboard */; };
 		01EBA16B1BE6F4CA00F2701D /* EQ_DisasterReportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EBA16A1BE6F4CA00F2701D /* EQ_DisasterReportTests.m */; };
 		01EBA1761BE6F4CA00F2701D /* EQ_DisasterReportUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EBA1751BE6F4CA00F2701D /* EQ_DisasterReportUITests.m */; };
+		D22C72621BFD9253007F08E8 /* AudioVO.m in Sources */ = {isa = PBXBuildFile; fileRef = D22C72611BFD9253007F08E8 /* AudioVO.m */; };
+		D22C72671BFDC79F007F08E8 /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22C72661BFDC79F007F08E8 /* MAMapKit.framework */; };
 		D2550B581BEAE93C00904D35 /* SWYPhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2550B571BEAE93C00904D35 /* SWYPhotoBrowserViewController.m */; };
 		D2550BC61BEB2C9400904D35 /* SWYNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D2550BC51BEB2C9400904D35 /* SWYNavigationBar.m */; };
 		D2656EAA1BEBA2B400BA127F /* PhotoSetReusableHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2656EA81BEBA2B400BA127F /* PhotoSetReusableHeadView.m */; };
@@ -150,7 +152,6 @@
 		D2EC98A21BE7157500ED8661 /* PictureTableHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC98A11BE7157500ED8661 /* PictureTableHelper.m */; };
 		D2EC98A51BE715A100ED8661 /* VoiceTableHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC98A41BE715A100ED8661 /* VoiceTableHelper.m */; };
 		D2EC98A81BE72EF300ED8661 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D2EC98A71BE72EF300ED8661 /* libsqlite3.tbd */; };
-		D2EC98AC1BE7371B00ED8661 /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2EC98AB1BE7371B00ED8661 /* MAMapKit.framework */; };
 		D2EC98AE1BE7372C00ED8661 /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2EC98AD1BE7372C00ED8661 /* AMapSearchKit.framework */; };
 		D2EC98B11BE738A800ED8661 /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D2EC98B01BE738A800ED8661 /* AMap.bundle */; };
 		D2EC98B31BE7392D00ED8661 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2EC98B21BE7392D00ED8661 /* UIKit.framework */; };
@@ -221,6 +222,9 @@
 		01EBA1711BE6F4CA00F2701D /* EQ_DisasterReportUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EQ_DisasterReportUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01EBA1751BE6F4CA00F2701D /* EQ_DisasterReportUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EQ_DisasterReportUITests.m; sourceTree = "<group>"; };
 		01EBA1771BE6F4CA00F2701D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D22C72601BFD9253007F08E8 /* AudioVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioVO.h; sourceTree = "<group>"; };
+		D22C72611BFD9253007F08E8 /* AudioVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioVO.m; sourceTree = "<group>"; };
+		D22C72661BFDC79F007F08E8 /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = MAMap/MAMapKit.framework; sourceTree = "<group>"; };
 		D2550B561BEAE93C00904D35 /* SWYPhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWYPhotoBrowserViewController.h; sourceTree = "<group>"; };
 		D2550B571BEAE93C00904D35 /* SWYPhotoBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWYPhotoBrowserViewController.m; sourceTree = "<group>"; };
 		D2550BC41BEB2C9400904D35 /* SWYNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWYNavigationBar.h; sourceTree = "<group>"; };
@@ -464,7 +468,6 @@
 		D2EC98A31BE715A100ED8661 /* VoiceTableHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceTableHelper.h; sourceTree = "<group>"; };
 		D2EC98A41BE715A100ED8661 /* VoiceTableHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceTableHelper.m; sourceTree = "<group>"; };
 		D2EC98A71BE72EF300ED8661 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		D2EC98AB1BE7371B00ED8661 /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = MAMap/MAMapKit.framework; sourceTree = "<group>"; };
 		D2EC98AD1BE7372C00ED8661 /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapSearchKit.framework; path = MAMap/AMapSearchKit.framework; sourceTree = "<group>"; };
 		D2EC98B01BE738A800ED8661 /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AMap.bundle; sourceTree = "<group>"; };
 		D2EC98B21BE7392D00ED8661 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -526,6 +529,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D22C72671BFDC79F007F08E8 /* MAMapKit.framework in Frameworks */,
 				D2AD16D71BF2FDF8000D2182 /* libmp3lame.a in Frameworks */,
 				D2AD16A71BF2DC7A000D2182 /* AVFoundation.framework in Frameworks */,
 				D2EC98D31BE7458200ED8661 /* Security.framework in Frameworks */,
@@ -541,7 +545,6 @@
 				D2EC98B51BE7393B00ED8661 /* Foundation.framework in Frameworks */,
 				D2EC98B31BE7392D00ED8661 /* UIKit.framework in Frameworks */,
 				D2EC98AE1BE7372C00ED8661 /* AMapSearchKit.framework in Frameworks */,
-				D2EC98AC1BE7371B00ED8661 /* MAMapKit.framework in Frameworks */,
 				D2EC98A81BE72EF300ED8661 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -817,10 +820,10 @@
 		D2EC97C41BE70C7300ED8661 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				D22C72661BFDC79F007F08E8 /* MAMapKit.framework */,
+				D2EC98AD1BE7372C00ED8661 /* AMapSearchKit.framework */,
 				D2AD16BE1BF2FDF8000D2182 /* D3RecordBtutton */,
 				D296474E1BF1B814004B8877 /* MutilSelector */,
-				D2EC98AD1BE7372C00ED8661 /* AMapSearchKit.framework */,
-				D2EC98AB1BE7371B00ED8661 /* MAMapKit.framework */,
 				D2EC98501BE7112700ED8661 /* MJRefresh */,
 				D2EC982D1BE7109A00ED8661 /* MJExtension */,
 				D2EC981C1BE70EFD00ED8661 /* fmdb */,
@@ -1162,6 +1165,8 @@
 				D296476C1BF1DB1C004B8877 /* PictureVO.m */,
 				D2D6B0F41BFC094C00B14A7E /* PhotoModel.h */,
 				D2D6B0F51BFC094C00B14A7E /* PhotoModel.m */,
+				D22C72601BFD9253007F08E8 /* AudioVO.h */,
+				D22C72611BFD9253007F08E8 /* AudioVO.m */,
 				D29EEBBE1BFB2C2F0015C268 /* VoiceModel.h */,
 				D29EEBBF1BFB2C2F0015C268 /* VoiceModel.m */,
 			);
@@ -1511,6 +1516,7 @@
 				D2EDC4C11BEC966600AEDFB4 /* SpotInforCell.m in Sources */,
 				D29647621BF1B814004B8877 /* UzysGroupPickerView.m in Sources */,
 				D2EEA3581BF45D1700F2FD20 /* HMCommonViewController.m in Sources */,
+				D22C72621BFD9253007F08E8 /* AudioVO.m in Sources */,
 				D2EDC4BC1BEC959A00AEDFB4 /* CollectInfoViewController.m in Sources */,
 				D2EEA3701BF45D2100F2FD20 /* HMCommonSwitchItem.m in Sources */,
 				D2EC97DC1BE70E4A00ED8661 /* AFHTTPRequestOperationManager.m in Sources */,

@@ -21,4 +21,6 @@
 - (void)createTable;
 -(BOOL)insertDataWithDictionary:(NSDictionary *)dict;
 -(NSMutableArray *) selectDataByReleteTable:(NSString *)reltable Releteid:(NSString *)relid;
+-(BOOL) deleteVoiceByAttribute:(NSString *)attribute value:(NSString *)value;
+-(BOOL) deleteDataByReleteTable:(NSString *)reltable Releteid:(NSString *)relid;
 @end

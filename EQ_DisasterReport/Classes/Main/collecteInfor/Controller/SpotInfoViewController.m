@@ -18,14 +18,15 @@
 #import "ImagePickCell.h"
 #import "AudioCell.h"
 #import "PictureVO.h"
+#import "AudioVO.h"
 #import "PictureTableHelper.h"
 
 
 @interface SpotInfoViewController ()<UITableViewDataSource,UITableViewDelegate,FillContentViewControllerDelegate,ImagePickCellDelegate,AudioCellDelegate>
 @property(nonatomic,strong)UITableView *infoTableView;
 @property(nonatomic,strong)NSArray *dataProvider;              //section 0 数据源
-@property(nonatomic,strong)NSMutableArray *images;                    //图片数组
-@property(nonatomic,strong)NSData *voiceData;
+@property(nonatomic,strong)NSMutableArray *images;            //图片数组
+@property(nonatomic,strong)AudioVO *audioVO;                //声音数据
 
 @end
 
@@ -41,6 +42,7 @@
     if (self.actionType == kActionTypeShow) {
         NSMutableArray *images = [self getImagesWithReleteId:self.spotInfoModel.pointid releteTable:nil];
         self.images = images;
+        self.audioVO = [self getVoiceWithReleteId:self.spotInfoModel.pointid releteTable:nil];
         [self.infoTableView reloadData];
     }
 }
@@ -150,6 +152,17 @@
     return _images;
 }
 
+/**
+ *  声音数据的 getter 方法
+ */
+-(AudioVO *)audioVO
+{
+    if (!_audioVO) {
+        _audioVO = [[AudioVO alloc] init];
+    }
+    return _audioVO;
+}
+
 #pragma mark 协议方法
 #pragma mark - TableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -197,7 +210,10 @@
         if (!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"AudioCell" owner:nil options:nil] lastObject];
             cell.delegate = self;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+        cell.indexpath = indexPath;
+        cell.audioData = self.audioVO.audioData;
         return cell;
     }
 }
@@ -208,12 +224,12 @@
     if (indexPath.section ==0 && indexPath.row !=7) {
         return 50;
     }else if(indexPath.section ==0 && indexPath.row ==7){
-        static SpotLabelCell *cell = nil;
+         static SpotLabelCell *calulateCell = nil;
         SpotCellModel *model = self.dataProvider[indexPath.row];
-        if (!cell) {
-            cell = [SpotLabelCell cellWithTableView:tableView model:model];
+        if (!calulateCell) {
+            calulateCell = [SpotLabelCell cellWithTableView:tableView model:model];
         }
-        CGFloat height = [cell calulateCellHeightWithModel:model];
+        CGFloat height = [calulateCell calulateCellHeightWithModel:model];
         return height>50?height:50;
     }else if(indexPath.section == 1){
         NSUInteger cellNum = self.images.count+1;
@@ -274,7 +290,22 @@
 #pragma mark - AudioCellDelegate
 -(void)audioCell:(AudioCell *)audioCell finishRecod:(NSData *)voiceData
 {
-    self.voiceData = voiceData;
+    //实例化一个NSDateFormatter对象
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //设定时间格式,这里可以设置成自己需要的格式
+    [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
+    //用[NSDate date]可以获取系统当前时间
+    NSString *voiceName = [dateFormatter stringFromDate:[NSDate date]];
+    self.audioVO.name = voiceName;
+    self.audioVO.audioData = voiceData;
+}
+
+-(void)audiocell:(AudioCell *)audiocell resetAudioBtnClickedWithIndexpath:(NSIndexPath *)indexpath
+{
+    if (self.actionType == kActionTypeShow) {
+        [[VoiceTableHelper sharedInstance] deleteVoiceByAttribute:@"releteid" value:self.spotInfoModel.pointid];
+        self.audioVO = nil;
+    }
 }
 
 #pragma mark 事件方法
@@ -314,12 +345,15 @@
     if (self.actionType == kActionTypeAdd) {
         [[SpotTableHelper sharedInstance] insertDataWithDictionary:dict];
         NSString *releteid = [NSString stringWithFormat:@"%ld",(long)[[SpotTableHelper sharedInstance] getMaxIdOfRecords]];
-        [self saveVoice:self.voiceData releteId:releteid releteTable:nil];
+        [self saveVoice:self.audioVO releteId:releteid releteTable:nil];
         [self saveImages:self.images releteId:releteid releteTable:nil];
         
     }else{
         [[SpotTableHelper sharedInstance] updateDataWithDictionary:dict];
-        //[self saveVoice:self.voiceData releteId:releteid releteTable:nil];
+        
+        [[VoiceTableHelper sharedInstance] deleteDataByReleteTable:nil Releteid:tempArr[0]];
+        [self saveVoice:self.audioVO releteId:tempArr[0] releteTable:nil];
+        
         [[PictureTableHelper sharedInstance] deleteDataByReleteTable:nil Releteid:tempArr[0]];
         [self saveImages:self.images releteId:tempArr[0] releteTable:nil];
     }
@@ -385,29 +419,25 @@
 /**
  *  保存声音
  **/
--(void)saveVoice:(NSData *)voiceData releteId:(NSString *)releteID releteTable:(NSString *)releteTable
+-(void)saveVoice:(AudioVO *)audioVO releteId:(NSString *)releteID releteTable:(NSString *)releteTable
 {
-    if (!voiceData||voiceData.length<=0) {
+    if (!audioVO.audioData||audioVO.audioData.length<=0) {
         NSLog(@"1223");
         return;
     }
     //实例化一个NSDateFormatter对象
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    //设定时间格式,这里可以设置成自己需要的格式
-    [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
-    //用[NSDate date]可以获取系统当前时间
-    NSString *voiceName = [dateFormatter stringFromDate:[NSDate date]];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH-mm-ss"];
     //用[NSDate date]可以获取系统当前时间
     NSString *voiceTime = [dateFormatter stringFromDate:[NSDate date]];
 
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
-    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mp3", voiceName]];
+    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mp3", audioVO.name]];
     
-    BOOL result = [self.voiceData writeToFile: filePath atomically:YES]; // 写入本地沙盒
+    BOOL result = [audioVO.audioData writeToFile: filePath atomically:YES]; // 写入本地沙盒
     if (result) {
         NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:
-                              voiceName,@"voiceName",
+                              audioVO.name,@"voiceName",
                               voiceTime,@"voicetime",
                               filePath,@"voicePath",
                               @"voiceinfo",@"voiceinfo",
@@ -422,12 +452,22 @@
 /**
  *  获取声音
  **/
--(NSData *)getVoiceWithReleteId:(NSString *)releteID releteTable:(NSString *)releteTable
+-(AudioVO *)getVoiceWithReleteId:(NSString *)releteID releteTable:(NSString *)releteTable
 {
     NSMutableArray * voiceModes= [[VoiceTableHelper sharedInstance] selectDataByReleteTable:releteTable Releteid:releteID];
-    VoiceModel *voiceModel = (VoiceModel *)voiceModes[0];
-    NSData *voicedata = [NSData dataWithContentsOfFile:voiceModel.voicePath];
-    return voicedata;
+    if (voiceModes.count>0) {
+        VoiceModel *voiceModel = (VoiceModel *)voiceModes[0];
+        NSData *voicedata = [NSData dataWithContentsOfFile:voiceModel.voicePath];
+        self.audioVO.audioData = voicedata;
+        self.audioVO.name = voiceModel.voiceName;
+    }
+    return self.audioVO;
  }
+
+
+-(void)dealloc
+{
+    NSLog(@"SpotInfoViewController 释放");
+}
 
 @end

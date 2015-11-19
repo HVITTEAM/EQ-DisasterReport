@@ -131,5 +131,73 @@
     return dataCollect;
 }
 
+/**
+ *  从沙盒目录中删除声音并删除数据表中的记录，通常是根据声音名来删除
+ *
+ *  @param attribute 属性名
+ *  @param value     属性值
+ *
+ *  @return   成功返回 yes，失败返回 no
+ */
+-(BOOL) deleteVoiceByAttribute:(NSString *)attribute value:(NSString *)value
+{
+    BOOL result = NO;
+    NSString * voiceFilepath;
+    if ([db open])
+    {
+        NSString *selectsql = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@='%@'",VOICEPATH,TABLENAME,attribute,value];
+        NSString *deleteSql = [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@ = '%@'",TABLENAME, attribute, value];
+        FMResultSet *rs = [db executeQuery:selectsql];
+        while ([rs next]) {
+            voiceFilepath = [rs stringForColumn:VOICEPATH];
+        }
+        
+        if (voiceFilepath!=nil) {
+            result = [[NSFileManager defaultManager] removeItemAtPath:voiceFilepath error:nil];
+            if (result) {
+                result = [db executeUpdate:deleteSql];
+                if (!result) {
+                    NSLog(@"error when delete voice table");
+                } else {
+                    NSLog(@"success to delete voice table");
+                }
+                
+            }
+        }
+        [db close];
+    }
+    return result;
+}
+
+/**
+ *  根据releteid，reletetable 字段删除相应的记录,不删除沙盒中的声音
+ *
+ *  @param reletetable 关联的表名
+ *  @param releteid    关联表中某条记录的id
+ */
+-(BOOL) deleteDataByReleteTable:(NSString *)reltable Releteid:(NSString *)relid
+{
+    BOOL result = NO;
+    if ([db open])
+    {
+        
+        NSString *deleteSql = [NSString stringWithFormat:
+                               @"delete from %@ where %@ = '%@'",
+                               TABLENAME,RELETEID, relid];
+        BOOL res = [db executeUpdate:deleteSql];
+        
+        if (!res) {
+            NSLog(@"error when delete voice table");
+            result = NO;
+        } else {
+            NSLog(@"success to delete voice table");
+            result = YES;
+        }
+        [db close];
+    }
+    return result;
+}
+
+
 @end
 

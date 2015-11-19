@@ -190,4 +190,9 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
+-(void)dealloc
+{
+    NSLog(@"SWYPhotoSetViewController 释放");
+}
+
 @end

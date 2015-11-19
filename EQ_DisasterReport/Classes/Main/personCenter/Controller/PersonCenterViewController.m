@@ -118,10 +118,11 @@
         frame.origin.y = y;
         self.headView.frame = frame;
     }
-//    if (scrollView.contentOffset.y >=-224) {
-//        self.headView.y = -224;
-//    }
-    
+}
+
+- (void)dealloc
+{
+    NSLog(@"PersonCenterViewController 释放");
 }
 
 @end

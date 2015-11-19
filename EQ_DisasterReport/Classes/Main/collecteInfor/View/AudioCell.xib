@@ -14,44 +14,76 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="56.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0&quot;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wz8-Y6-g82">
-                        <rect key="frame" x="289" y="16" width="13" height="24.5"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Re-9m-J7e" customClass="D3RecordButton">
+                        <rect key="frame" x="15" y="8" width="290" height="40.5"/>
+                        <animations/>
+                        <color key="backgroundColor" red="0.38823529410000002" green="0.58039215690000001" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrv-Rg-cD1">
+                        <rect key="frame" x="15" y="8" width="216" height="40.5"/>
+                        <animations/>
+                        <state key="normal" backgroundImage="fs_chat_bubble"/>
+                        <connections>
+                            <action selector="playAudio:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="yhQ-B3-bXP"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="gjkh" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wz8-Y6-g82">
+                        <rect key="frame" x="236" y="16" width="24" height="24.5"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Re-9m-J7e" customClass="D3RecordButton">
-                        <rect key="frame" x="15" y="8" width="262" height="40.5"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ser-di-1SW">
+                        <rect key="frame" x="265" y="8" width="40" height="40.5"/>
                         <animations/>
-                        <state key="normal" backgroundImage="fs_chat_bubble"/>
+                        <color key="backgroundColor" red="0.89604749179999998" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="vzq-dt-VTI"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="重录">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="reset:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="MdB-0C-qDQ"/>
+                        </connections>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fs_icon_wave_0" translatesAutoresizingMaskIntoConstraints="NO" id="l1o-Jz-vNz">
-                        <rect key="frame" x="46" y="10" width="35" height="36.5"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fs_icon_wave_2" translatesAutoresizingMaskIntoConstraints="NO" id="l1o-Jz-vNz">
+                        <rect key="frame" x="27" y="13" width="35" height="30.5"/>
                         <animations/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="35" id="y42-DV-JUg"/>
+                            <constraint firstAttribute="width" constant="35" id="4B4-dO-H60"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <animations/>
                 <constraints>
+                    <constraint firstItem="Ser-di-1SW" firstAttribute="leading" secondItem="Wz8-Y6-g82" secondAttribute="trailing" constant="5" id="27j-G5-dRK"/>
+                    <constraint firstItem="l1o-Jz-vNz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="27" id="2lj-XM-vfN"/>
                     <constraint firstAttribute="bottom" secondItem="4Re-9m-J7e" secondAttribute="bottom" constant="8" id="3aK-ia-1pP"/>
-                    <constraint firstAttribute="bottom" secondItem="l1o-Jz-vNz" secondAttribute="bottom" constant="10" id="CEq-Uh-fDN"/>
-                    <constraint firstItem="l1o-Jz-vNz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="46" id="HqF-Hj-KVX"/>
+                    <constraint firstItem="zrv-Rg-cD1" firstAttribute="leading" secondItem="4Re-9m-J7e" secondAttribute="leading" id="9lT-sS-qkj"/>
+                    <constraint firstItem="Ser-di-1SW" firstAttribute="top" secondItem="4Re-9m-J7e" secondAttribute="top" id="CCa-tX-VWG"/>
+                    <constraint firstItem="zrv-Rg-cD1" firstAttribute="bottom" secondItem="4Re-9m-J7e" secondAttribute="bottom" id="DHX-EH-law"/>
+                    <constraint firstItem="l1o-Jz-vNz" firstAttribute="top" secondItem="zrv-Rg-cD1" secondAttribute="top" constant="5" id="FKw-u4-tYN"/>
+                    <constraint firstItem="Ser-di-1SW" firstAttribute="bottom" secondItem="4Re-9m-J7e" secondAttribute="bottom" id="Iyp-lt-9IR"/>
                     <constraint firstAttribute="bottom" secondItem="Wz8-Y6-g82" secondAttribute="bottom" constant="16" id="JlQ-Su-pbV"/>
                     <constraint firstItem="Wz8-Y6-g82" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="KoW-mY-wcZ"/>
+                    <constraint firstAttribute="trailing" secondItem="4Re-9m-J7e" secondAttribute="trailing" constant="15" id="RLv-wm-uCs"/>
+                    <constraint firstItem="Wz8-Y6-g82" firstAttribute="leading" secondItem="zrv-Rg-cD1" secondAttribute="trailing" constant="5" id="TZD-Nc-ng1"/>
                     <constraint firstItem="4Re-9m-J7e" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="VRR-SQ-8t5"/>
-                    <constraint firstItem="Wz8-Y6-g82" firstAttribute="leading" secondItem="4Re-9m-J7e" secondAttribute="trailing" constant="12" id="eUo-q3-15c"/>
+                    <constraint firstItem="zrv-Rg-cD1" firstAttribute="top" secondItem="4Re-9m-J7e" secondAttribute="top" id="chu-b4-dBt"/>
+                    <constraint firstItem="Ser-di-1SW" firstAttribute="trailing" secondItem="4Re-9m-J7e" secondAttribute="trailing" id="f9S-zy-h2h"/>
+                    <constraint firstItem="l1o-Jz-vNz" firstAttribute="bottom" secondItem="zrv-Rg-cD1" secondAttribute="bottom" constant="-5" id="kex-Iv-3Op"/>
                     <constraint firstItem="4Re-9m-J7e" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="miE-am-38a"/>
-                    <constraint firstItem="l1o-Jz-vNz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="oCz-QN-KuO"/>
-                    <constraint firstAttribute="trailing" secondItem="Wz8-Y6-g82" secondAttribute="trailing" constant="18" id="p2P-Gi-y4m"/>
                 </constraints>
             </tableViewCellContentView>
             <animations/>
             <connections>
                 <outlet property="audioDuration" destination="Wz8-Y6-g82" id="SMx-eZ-ghd"/>
+                <outlet property="playBtn" destination="zrv-Rg-cD1" id="VKO-VL-px2"/>
                 <outlet property="recordBtn" destination="4Re-9m-J7e" id="ZMq-r0-2F4"/>
+                <outlet property="resetBtn" destination="Ser-di-1SW" id="Uig-K6-As6"/>
                 <outlet property="signalImage" destination="l1o-Jz-vNz" id="fv1-ye-Num"/>
             </connections>
             <point key="canvasLocation" x="327" y="366.5"/>
@@ -59,6 +91,6 @@
     </objects>
     <resources>
         <image name="fs_chat_bubble" width="190" height="53"/>
-        <image name="fs_icon_wave_0" width="20" height="20"/>
+        <image name="fs_icon_wave_2" width="20" height="20"/>
     </resources>
 </document>

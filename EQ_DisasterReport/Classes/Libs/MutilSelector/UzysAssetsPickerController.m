@@ -74,7 +74,7 @@
 }
 - (void)dealloc
 {
-//    NSLog(@"dealloc");
+    NSLog(@"UzysAssetsPickerController 释放");
     [[NSNotificationCenter defaultCenter] removeObserver:self name:ALAssetsLibraryChangedNotification object:nil];
     self.assetsLibrary = nil;
     self.assetsGroup = nil;

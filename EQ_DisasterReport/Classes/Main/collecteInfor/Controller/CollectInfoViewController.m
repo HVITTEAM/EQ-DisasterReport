@@ -22,7 +22,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self initNaviBar];
     self.tableView.tableFooterView = [[UIView alloc] init];
 }
@@ -136,4 +135,9 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+-(void)dealloc
+{
+    NSLog(@"CollectInfoViewController 释放");
+}
 @end

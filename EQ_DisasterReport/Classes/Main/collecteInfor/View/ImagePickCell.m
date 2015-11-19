@@ -38,7 +38,7 @@
 
 -(void)setParentVC:(UIViewController *)parentVC
 {
-    self.imagePickVC.parentVC = parentVC;;
+    self.imagePickVC.parentVC = parentVC;
 }
 
 -(void)setImages:(NSMutableArray *)images

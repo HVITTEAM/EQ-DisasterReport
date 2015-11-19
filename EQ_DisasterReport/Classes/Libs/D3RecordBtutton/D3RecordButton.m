@@ -103,4 +103,11 @@
     [RecordHUD setImage:[NSString stringWithFormat:@"mic_%.0f.png",volume*10 > 5 ? 5 : volume*10]];
     [RecordHUD setTimeTitle:[NSString stringWithFormat:@"录音: %.0f\"",recordTime]];
 }
+
+
+
+-(void)setHighlighted:(BOOL)highlighted
+{
+
+}
 @end

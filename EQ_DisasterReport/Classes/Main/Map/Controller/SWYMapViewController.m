@@ -8,7 +8,7 @@
 
 #import "SWYMapViewController.h"
 #import <MAMapKit/MAMapKit.h>
-#import <AMapSearchKit/AMapSearchKit.h>
+#import <AMapSearchKit/AMapSearchAPI.h>
 #import "SWYButton.h"
 #import "SWYMapTypeSelectView.h"
 #import "SWYPhotoSetViewController.h"
@@ -58,7 +58,7 @@
     [self.view addSubview:self.mapView];
     
     self.mapView.mapType = MAMapTypeStandard;
-    self.mapView.zoomLevel = 14;
+    self.mapView.zoomLevel = 14.0f;
     self.mapView.compassOrigin = CGPointMake(self.mapView.compassOrigin.x, 30);
     self.mapView.showsScale = NO;
 
@@ -256,9 +256,5 @@
     btn.backgroundColor = [UIColor whiteColor];
     return btn;
 }
-
-
-
-
 
 @end

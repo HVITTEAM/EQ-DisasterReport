@@ -11,7 +11,7 @@
 @protocol ImagePickCellDelegate;
 
 @interface ImagePickCell : UITableViewCell
-@property (nonatomic, strong) UIViewController *parentVC;
+@property (nonatomic, weak) UIViewController *parentVC;
 @property (nonatomic, weak)id<ImagePickCellDelegate>delegate;
 @property (nonatomic,strong)NSMutableArray *images;
 @end
