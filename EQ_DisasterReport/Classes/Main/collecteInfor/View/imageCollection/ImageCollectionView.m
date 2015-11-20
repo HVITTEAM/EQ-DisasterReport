@@ -34,18 +34,9 @@
     _dataProvider = dataProvider;
     [self setAddBtn];
     [self.collectionView reloadData];
-    //调整view高度
-    [self changeViewHeight];
+//    //调整view高度
+//    [self changeViewHeight];
 }
-
-//-(NSMutableArray *)dataProvider
-//{
-//    if (!_dataProvider) {
-//        _dataProvider =[[NSMutableArray alloc]init];
-//    }
-//    return _dataProvider;
-//}
-
 
 /**
  *  初始化服务类别列表

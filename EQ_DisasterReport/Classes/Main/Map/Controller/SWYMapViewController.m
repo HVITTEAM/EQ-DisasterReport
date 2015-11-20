@@ -45,6 +45,7 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
 }
 
 
@@ -61,6 +62,8 @@
     self.mapView.zoomLevel = 14.0f;
     self.mapView.compassOrigin = CGPointMake(self.mapView.compassOrigin.x, 30);
     self.mapView.showsScale = NO;
+    self.mapView.rotateCameraEnabled= NO;
+    self.mapView.rotateEnabled = NO;
 
     self.mapView.showsUserLocation = YES;
     [self.mapView setUserTrackingMode: MAUserTrackingModeFollow animated:YES]; //地图跟着位置移动
@@ -84,7 +87,7 @@
     self.mapTypeSwitchBtn.tag = 21;
     
     //切换跟随模式按钮
-    self.mylocationBtn = [self createBtnWithNormalImageName:@"locationIcon" selectedImageName:@"locationIcon"];
+    self.mylocationBtn = [self createBtnWithNormalImageName:@"locationIconNone" selectedImageName:@"locationIconNone"];
     self.mylocationBtn.x = 30;
     self.mylocationBtn.y = MTScreenH-140;
     self.mylocationBtn.tag = 22;
@@ -155,7 +158,7 @@
         self.currentLocation = userLocation;
         
         AppDelegate *appdel = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        appdel.currentLocation = userLocation;
+        appdel.currentLocation = userLocation.location;
     }
 }
 
@@ -164,13 +167,15 @@
 {
     switch (type) {
         case mapTypeStandard:
+            [self.mapView setCameraDegree:0 animated:YES duration:0.5];
             self.mapView.mapType = MAMapTypeStandard;
             break;
         case mapTypeSatellite:
+            [self.mapView setCameraDegree:0 animated:YES duration:0.5];
             self.mapView.mapType = MAMapTypeSatellite;
             break;
         case mapType3D:
-            
+            [self.mapView setCameraDegree:70.0f animated:YES duration:0.5];
             break;
     }
 }
@@ -186,20 +191,32 @@
         sender.selected = !sender.isSelected;
         self.mapView.showTraffic = sender.isSelected;
     }else if (sender.tag == 22){
+        UIImage *image;
         //切换用户跟随模式
         switch (self.mapView.userTrackingMode) {
             case MAUserTrackingModeNone:
-                [self.mapView setCenterCoordinate:self.currentLocation.coordinate animated:YES];
-                [self.mapView setZoomLevel:13 animated:YES];
+                //切换成Follow模式
                 [self.mapView setUserTrackingMode: MAUserTrackingModeFollow animated:YES];
+                image = [UIImage imageNamed:@"locationIconFollow"];
+                NSLog(@"Follow");
                 break;
             case MAUserTrackingModeFollow:
+                //切换成Heading模式
                 [self.mapView setUserTrackingMode: MAUserTrackingModeFollowWithHeading animated:YES];
+                image = [UIImage imageNamed:@"locationIconHeading"];
+                 NSLog(@"Heading");
                 break;
             case MAUserTrackingModeFollowWithHeading:
+                //切换成None模式
                 [self.mapView setUserTrackingMode: MAUserTrackingModeNone animated:YES];
+                [self.mapView setCenterCoordinate:self.currentLocation.coordinate animated:YES];
+                [self.mapView setZoomLevel:17.0f animated:YES];
+                image = [UIImage imageNamed:@"locationIconNone"];
+                NSLog(@"None");
                 break;
         }
+        [sender setImage:image forState:UIControlStateNormal];
+        NSLog(@"%f",self.mapView.zoomLevel);
     }else{
         //切换地图类型
         sender.selected = !sender.isSelected;

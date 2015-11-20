@@ -15,7 +15,6 @@
 		01EBA16B1BE6F4CA00F2701D /* EQ_DisasterReportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EBA16A1BE6F4CA00F2701D /* EQ_DisasterReportTests.m */; };
 		01EBA1761BE6F4CA00F2701D /* EQ_DisasterReportUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EBA1751BE6F4CA00F2701D /* EQ_DisasterReportUITests.m */; };
 		D22C72621BFD9253007F08E8 /* AudioVO.m in Sources */ = {isa = PBXBuildFile; fileRef = D22C72611BFD9253007F08E8 /* AudioVO.m */; };
-		D22C726F1BFDD14A007F08E8 /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22C726E1BFDD14A007F08E8 /* MAMapKit.framework */; };
 		D2550B581BEAE93C00904D35 /* SWYPhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2550B571BEAE93C00904D35 /* SWYPhotoBrowserViewController.m */; };
 		D2550BC61BEB2C9400904D35 /* SWYNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D2550BC51BEB2C9400904D35 /* SWYNavigationBar.m */; };
 		D2656EAA1BEBA2B400BA127F /* PhotoSetReusableHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2656EA81BEBA2B400BA127F /* PhotoSetReusableHeadView.m */; };
@@ -46,6 +45,7 @@
 		D29EEBBA1BFAFC860015C268 /* PhotoSetHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D29EEBB81BFAFC860015C268 /* PhotoSetHeadCell.m */; };
 		D29EEBBB1BFAFC860015C268 /* PhotoSetHeadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D29EEBB91BFAFC860015C268 /* PhotoSetHeadCell.xib */; };
 		D29EEBC01BFB2C2F0015C268 /* VoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D29EEBBF1BFB2C2F0015C268 /* VoiceModel.m */; };
+		D2A5C86D1BFDEEEF00C298CF /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2A5C86C1BFDEEEF00C298CF /* MAMapKit.framework */; };
 		D2AD16A71BF2DC7A000D2182 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AD16A61BF2DC79000D2182 /* AVFoundation.framework */; };
 		D2AD16CF1BF2FDF8000D2182 /* D3RecordButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AD16C01BF2FDF8000D2182 /* D3RecordButton.m */; };
 		D2AD16D01BF2FDF8000D2182 /* mic_0.png in Resources */ = {isa = PBXBuildFile; fileRef = D2AD16C21BF2FDF8000D2182 /* mic_0.png */; };
@@ -223,7 +223,6 @@
 		01EBA1771BE6F4CA00F2701D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D22C72601BFD9253007F08E8 /* AudioVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioVO.h; sourceTree = "<group>"; };
 		D22C72611BFD9253007F08E8 /* AudioVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioVO.m; sourceTree = "<group>"; };
-		D22C726E1BFDD14A007F08E8 /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = MAMap/MAMapKit.framework; sourceTree = "<group>"; };
 		D2550B561BEAE93C00904D35 /* SWYPhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWYPhotoBrowserViewController.h; sourceTree = "<group>"; };
 		D2550B571BEAE93C00904D35 /* SWYPhotoBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWYPhotoBrowserViewController.m; sourceTree = "<group>"; };
 		D2550BC41BEB2C9400904D35 /* SWYNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWYNavigationBar.h; sourceTree = "<group>"; };
@@ -275,6 +274,7 @@
 		D29EEBB91BFAFC860015C268 /* PhotoSetHeadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoSetHeadCell.xib; sourceTree = "<group>"; };
 		D29EEBBE1BFB2C2F0015C268 /* VoiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceModel.h; sourceTree = "<group>"; };
 		D29EEBBF1BFB2C2F0015C268 /* VoiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceModel.m; sourceTree = "<group>"; };
+		D2A5C86C1BFDEEEF00C298CF /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = MAMap/MAMapKit.framework; sourceTree = "<group>"; };
 		D2AD16A61BF2DC79000D2182 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D2AD16BF1BF2FDF8000D2182 /* D3RecordButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = D3RecordButton.h; sourceTree = "<group>"; };
 		D2AD16C01BF2FDF8000D2182 /* D3RecordButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = D3RecordButton.m; sourceTree = "<group>"; };
@@ -528,7 +528,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D22C726F1BFDD14A007F08E8 /* MAMapKit.framework in Frameworks */,
+				D2A5C86D1BFDEEEF00C298CF /* MAMapKit.framework in Frameworks */,
 				D2AD16D71BF2FDF8000D2182 /* libmp3lame.a in Frameworks */,
 				D2AD16A71BF2DC7A000D2182 /* AVFoundation.framework in Frameworks */,
 				D2EC98D31BE7458200ED8661 /* Security.framework in Frameworks */,
@@ -818,7 +818,7 @@
 		D2EC97C41BE70C7300ED8661 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				D22C726E1BFDD14A007F08E8 /* MAMapKit.framework */,
+				D2A5C86C1BFDEEEF00C298CF /* MAMapKit.framework */,
 				D2EC98AD1BE7372C00ED8661 /* AMapSearchKit.framework */,
 				D2AD16BE1BF2FDF8000D2182 /* D3RecordBtutton */,
 				D296474E1BF1B814004B8877 /* MutilSelector */,

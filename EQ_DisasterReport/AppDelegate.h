@@ -12,7 +12,7 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (nonatomic, strong) MAUserLocation *currentLocation;    //用户当前位置
+@property (nonatomic, assign) CLLocation *currentLocation;    //用户当前位置
 
 
 @end

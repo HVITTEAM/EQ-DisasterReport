@@ -20,6 +20,7 @@
 #import "PictureVO.h"
 #import "AudioVO.h"
 #import "PictureTableHelper.h"
+#import "AppDelegate.h"
 
 
 @interface SpotInfoViewController ()<UITableViewDataSource,UITableViewDelegate,FillContentViewControllerDelegate,ImagePickCellDelegate,AudioCellDelegate>
@@ -39,12 +40,7 @@
     [self initTableView];
     [self initNavitionBar];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    if (self.actionType == kActionTypeShow) {
-        NSMutableArray *images = [self getImagesWithReleteId:self.spotInfoModel.pointid releteTable:nil];
-        self.images = images;
-        self.audioVO = [self getVoiceWithReleteId:self.spotInfoModel.pointid releteTable:nil];
-        [self.infoTableView reloadData];
-    }
+    [self showData];
 }
 
 #pragma mark 初始化方法、setter和getter方法
@@ -163,6 +159,32 @@
     return _audioVO;
 }
 
+-(void)showData
+{
+    if (self.actionType == kActionTypeShow) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSMutableArray *images = [self getImagesWithReleteId:self.spotInfoModel.pointid releteTable:nil];
+            self.images = images;
+            self.audioVO = [self getVoiceWithReleteId:self.spotInfoModel.pointid releteTable:nil];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.infoTableView reloadData];
+            });
+        });
+    }else{
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"YYYY-MM-dd hh:mm:ss"];
+        NSDate *currentdate = [NSDate date];
+        NSString *dateStr = [formatter stringFromDate:currentdate];
+        ((SpotCellModel *)self.dataProvider[1]).contentStr = dateStr;
+        
+        AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        CLLocationCoordinate2D coordinate = appdelegate.currentLocation.coordinate;
+        ((SpotCellModel *)self.dataProvider[4]).contentStr = [NSString stringWithFormat:@"%f",coordinate.longitude];
+        ((SpotCellModel *)self.dataProvider[5]).contentStr = [NSString stringWithFormat:@"%f",coordinate.latitude];
+    }
+
+}
+
 #pragma mark 协议方法
 #pragma mark - TableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -201,8 +223,8 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"ImagePickCell" owner:nil options:nil] lastObject];
             cell.parentVC = self;
             cell.delegate = self;
-            cell.images = self.images;
         }
+        cell.images = self.images;
         return cell;
     }else{
         static NSString *cellID = @"audioCell";
