@@ -92,8 +92,22 @@
     self.bkView.frame = superView.bounds;
     [superView addSubview:self.bkView];
     
-    self.frame = CGRectMake(10, loc.y, width, height);
+//    self.frame = CGRectMake(10, loc.y, width, height);
+//    [superView addSubview:self];
+//    
+//    //设置出现动画
+//    CGAffineTransform transform = CGAffineTransformMakeScale(0, 0);
+//    transform = CGAffineTransformTranslate(transform,-(width-10), 0);
+//    self.transform = transform;
+//    [UIView animateWithDuration:0.5 animations:^{
+//        self.transform = CGAffineTransformIdentity;
+//    }];
+    
+    
     [superView addSubview:self];
+    
+    self.layer.anchorPoint = CGPointMake(1, 0);
+    self.frame = CGRectMake(10, loc.y, width, height);
     
     //设置出现动画
     CGAffineTransform transform = CGAffineTransformMakeScale(0, 0);
@@ -101,7 +115,9 @@
     self.transform = transform;
     [UIView animateWithDuration:0.5 animations:^{
         self.transform = CGAffineTransformIdentity;
+        
     }];
+
 }
 
 /**

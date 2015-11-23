@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SWYPhotoBrowserViewController : UIViewController
-@property(nonatomic,strong)NSArray *imageNames;    //图片数组
+@property(nonatomic,strong)NSArray *imageNames;    //图片名字数组
+@property(nonatomic,strong)NSArray *images;       //图片image 对象数组
 @property(nonatomic,assign)NSInteger currentIndex; //当前显示哪张
 @end

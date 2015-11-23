@@ -124,7 +124,7 @@
     self.collectInfoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.collectInfoBtn.frame = CGRectMake(2*btnWidth, 0, btnWidth, btnHeight);
     self.collectInfoBtn.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
-    [self.collectInfoBtn setTitle:@"大众采集" forState: UIControlStateNormal];
+    [self.collectInfoBtn setTitle:@"公众采集" forState: UIControlStateNormal];
     [self.collectInfoBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.collectInfoBtn.titleLabel.font = [UIFont systemFontOfSize:13];
     [self.collectInfoBtn addTarget:self action:@selector(bottomBarBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -147,6 +147,10 @@
     UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(2*btnWidth, (btnHeight-10)/2, 1, btnHeight-30)];
     line2.backgroundColor = [UIColor lightGrayColor];
     [bottomBar addSubview:line2];
+    
+    UIView *line3 = [[UIView alloc] initWithFrame:CGRectMake(3*btnWidth, (btnHeight-10)/2, 1, btnHeight-30)];
+    line3.backgroundColor = [UIColor lightGrayColor];
+    [bottomBar addSubview:line3];
 }
 
 #pragma mark 协议方法
@@ -219,12 +223,15 @@
         NSLog(@"%f",self.mapView.zoomLevel);
     }else{
         //切换地图类型
-        sender.selected = !sender.isSelected;
-        if (sender.selected) {
-            SWYMapTypeSelectView *selectView =  [[SWYMapTypeSelectView alloc] init];
-            selectView.delegate = self;
-            [selectView showMapTypeViewToView:self.view position:CGPointMake(sender.x, CGRectGetMaxY(sender.frame))];
-        }
+//        sender.selected = !sender.isSelected;
+//        if (sender.selected) {
+//            SWYMapTypeSelectView *selectView =  [[SWYMapTypeSelectView alloc] init];
+//            selectView.delegate = self;
+//            [selectView showMapTypeViewToView:self.view position:CGPointMake(sender.x, CGRectGetMaxY(sender.frame))];
+//        }
+        SWYMapTypeSelectView *selectView =  [[SWYMapTypeSelectView alloc] init];
+        selectView.delegate = self;
+        [selectView showMapTypeViewToView:self.view position:CGPointMake(sender.x, CGRectGetMaxY(sender.frame))];
     }
 }
 
@@ -240,7 +247,7 @@
         UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:collectionInfo];
         [self presentViewController:navVC animated:YES completion:nil];
 
-    }else if ([title isEqualToString:@"大众采集"]){
+    }else if ([title isEqualToString:@"公众采集"]){
         CollectInfoViewController *collectionInfo = [[CollectInfoViewController alloc] init];
         UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:collectionInfo];
         [self presentViewController:navVC animated:YES completion:nil];

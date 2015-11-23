@@ -10,6 +10,9 @@
 #import "HMCommonArrowItem.h"
 #import "HMCommonGroup.h"
 #import "PersonCenterHeadView.h"
+#import "AboutViewController.h"
+#import "FeedbackView.h"
+#import "AccountTableViewController.h"
 
 @interface PersonCenterViewController ()<UIScrollViewDelegate>
 @property(nonatomic,strong)PersonCenterHeadView *headView;
@@ -81,6 +84,8 @@
 
 - (void)setupGroup1
 {
+    __weak typeof(self)weakSelf = self;
+    
     // 1.创建组
     HMCommonGroup *group = [HMCommonGroup group];
     [self.groups addObject:group];
@@ -88,20 +93,22 @@
     // 设置组的所有行数据
     HMCommonArrowItem *account = [HMCommonArrowItem itemWithTitle:@"帐号管理" icon:nil];
     account.icon = @"headIcon";
+    account.destVcClass = [AccountTableViewController class];
     
-    HMCommonArrowItem *version = [HMCommonArrowItem itemWithTitle:@"版本信息" icon:nil];
-    version.icon = @"headIcon";
-    //version.destVcClass = [VersionViewController class];
-    version.operation = ^{
+    HMCommonArrowItem *about = [HMCommonArrowItem itemWithTitle:@"关于软件" icon:nil];
+    about.icon = @"headIcon";
+    about.destVcClass = [AboutViewController class];
+    about.operation = ^{
     };
-    
-    HMCommonArrowItem *help = [HMCommonArrowItem itemWithTitle:@"使用帮助" icon:nil];
-    help.icon = @"headIcon";
     
     HMCommonArrowItem *advice = [HMCommonArrowItem itemWithTitle:@"意见反馈" icon:nil];
     advice.icon = @"headIcon";
+    advice.operation = ^{
+        FeedbackView *feedbackView = [[FeedbackView alloc] init];
+        [feedbackView showViewtoFatherView:weakSelf.navigationController.view];
+    };
     
-    group.items = @[account,version,help,advice];
+    group.items = @[account,about,advice];
 }
 
 -(void)back

@@ -25,5 +25,8 @@
 -(BOOL)insertDataWithDictionary:(NSDictionary *)dict;
 
 -(BOOL)updateDataWithDictionary:(NSDictionary *)dict;
+
+-(BOOL) deleteDataByAttribute:(NSString *)attribute value:(NSString *)value;
+
 -(NSInteger)getMaxIdOfRecords;
 @end

@@ -12,6 +12,7 @@
 @interface SpotLabelCell ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLb;
 @property (weak, nonatomic) IBOutlet UILabel *contentLb;
+@property (weak, nonatomic) IBOutlet UILabel *placeHolderLabel;
 
 @end
 
@@ -51,6 +52,12 @@
     _cellModel = cellModel;
     self.titleLb.text =cellModel.titleStr;
     self.contentLb.text = cellModel.contentStr;
+    self.placeHolderLabel.text = cellModel.placeHolderStr;
+    if (cellModel.contentStr&&cellModel.contentStr.length>0) {
+        self.placeHolderLabel.hidden = YES;
+    }else{
+        self.placeHolderLabel.hidden = NO;
+    }
 }
 
 -(CGFloat)calulateCellHeightWithModel:(SpotCellModel *)model

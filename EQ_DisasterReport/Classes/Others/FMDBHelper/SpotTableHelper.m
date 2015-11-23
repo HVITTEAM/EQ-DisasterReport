@@ -137,6 +137,27 @@
     return res;
 }
 
+-(BOOL) deleteDataByAttribute:(NSString *)attribute value:(NSString *)value
+{
+    BOOL result = NO;
+    if ([db open])
+    {
+        
+        NSString *deleteSql = [NSString stringWithFormat:
+                               @"delete from %@ where %@ = '%@'",
+                               TABLENAME, attribute, value];
+        result = [db executeUpdate:deleteSql];
+        
+        if (!result) {
+            NSLog(@"error when delete spot table");
+        } else {
+            NSLog(@"success to delete spot table");
+        }
+        [db close];
+    }
+    return result;
+}
+
 -(NSInteger)getMaxIdOfRecords
 {
     NSInteger maxid = 0;
@@ -150,5 +171,7 @@
     [db close];
     return maxid;
 }
+
+
 
 @end

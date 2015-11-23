@@ -44,7 +44,7 @@
         self.remainTime = self.audioPlayer.duration;
         self.audioDuration.text = [NSString stringWithFormat:@"%.1f秒",self.remainTime];
         self.signalImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"fs_icon_wave_%d",(int)self.imageIndex%3]];
-        NSLog(@"错误%@",error);
+        NSLog(@"音频错误%@",error);
         
         [self setBtnState:YES];
     }else{

@@ -43,6 +43,12 @@
     [self showData];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
+}
+
 #pragma mark 初始化方法、setter和getter方法
 /**
  *  初始化tableView
@@ -78,7 +84,7 @@
 {
     if (!_dataProvider) {
         SpotCellModel *model0 = [[SpotCellModel alloc] init];
-        model0.titleStr = @"采集点ID:";
+        model0.titleStr = @"采集信息ID:";
         model0.placeHolderStr = @"采集点ID将自动生成";
         
         SpotCellModel *model1 = [[SpotCellModel alloc] init];
@@ -107,6 +113,7 @@
     
         SpotCellModel *model7 = [[SpotCellModel alloc] init];
         model7.titleStr = @"备注:";
+        model7.placeHolderStr = @"输入备注内容";
 
         _dataProvider = @[model0,model1,model2,model3,model4,model5,model6,model7];
     }

@@ -139,6 +139,9 @@
 #pragma mark UICollectionViewDelegate
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 0) {
+        return;
+    }
     SWYCollectDetailViewController *detailVC = [[SWYCollectDetailViewController alloc] init];
     detailVC.headImageName = self.dataProvider[indexPath.row];
     [self.navigationController pushViewController:detailVC animated:YES];

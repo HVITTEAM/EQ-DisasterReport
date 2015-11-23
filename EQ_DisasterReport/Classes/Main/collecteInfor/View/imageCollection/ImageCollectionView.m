@@ -12,9 +12,11 @@
 #import "ImageCollectionView.h"
 #import "ImgeCollectinViewFlowLayout.h"
 #import "PictureVO.h"
+#import "SQCollectionCell.h"
+#import "SWYPhotoBrowserViewController.h"
 
 
-@interface ImageCollectionView ()
+@interface ImageCollectionView ()<SQCollectionCellDelegate>
 
 @end
 
@@ -86,22 +88,20 @@
 {
     static NSString *kcellIdentifier = @"collectionCellID";
     //重用cell
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kcellIdentifier forIndexPath:indexPath];
-    
-    UIImageView *imageV = (UIImageView *)[cell viewWithTag:1];
-    UIImageView *delImageV  = (UIImageView *)[cell viewWithTag:2];
-    
+    SQCollectionCell *cell = (SQCollectionCell *)[collectionView dequeueReusableCellWithReuseIdentifier:kcellIdentifier forIndexPath:indexPath];
+    cell.delegate = self;
+    cell.indexpath = indexPath;
     //在不显示新增图片按钮时，index 最大是self.dataProvider.count-1，如果等于self.dataProvider.count，说明当前显示的是新增图片按钮
     if (indexPath.row ==self.dataProvider.count) {
-        delImageV.hidden = YES;
-        imageV.image = [UIImage imageNamed:@"icon_addpic"];
+        cell.delButton.hidden = YES;
+        cell.imgView.image = [UIImage imageNamed:@"icon_addpic"];
     }else{
-        delImageV.hidden = NO;
+        cell.delButton.hidden = NO;
         
         PictureVO *vo = self.dataProvider[indexPath.row];
         //创建缩略图来显示
         UIImage *img = [[UIImage alloc] initWithData:vo.imageData];
-        imageV.image = [img scaleImageToSize:CGSizeMake(cellWidth,cellHeight)];
+        cell.imgView.image = [img scaleImageToSize:CGSizeMake(cellWidth,cellHeight)];
 
       }
     return cell;
@@ -117,14 +117,34 @@
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"请选择图片来源" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从手机相册选择", nil];
         [alert show];
     }else{
-        //如果不是新增按钮，点击就直接从数组中删除
-        PictureVO *picvo = self.dataProvider[index];
-        [[PictureTableHelper sharedInstance] deleteImageByAttribute:@"photoName" value:picvo.name];
-        [self.dataProvider removeObjectAtIndex:index];
-        [self setAddBtn];
-        [self.collectionView reloadData];
-        [self changeViewHeight];
+        
+        NSLog(@"查看大图");
+        //进图片浏览器查看大图
+        SWYPhotoBrowserViewController *browserVC = [[SWYPhotoBrowserViewController alloc] init];
+        browserVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        
+        NSMutableArray *images = [[NSMutableArray alloc] init];
+        for(PictureVO* vo in self.dataProvider)
+        {
+            UIImage *img = [[UIImage alloc] initWithData:vo.imageData];
+            [images addObject:img];
+        }
+        browserVC.images = images;
+        browserVC.currentIndex = indexPath.row;
+        [self.parentVC presentViewController:browserVC animated:YES completion:^{
+        }];
      }
+}
+
+-(void)SQCollectionCell:(SQCollectionCell *)cell deletePhotoWithIndexpath:(NSIndexPath *)indexpath
+{
+    //如果不是新增按钮，点击就直接从数组中删除
+    PictureVO *picvo = self.dataProvider[indexpath.row];
+    [[PictureTableHelper sharedInstance] deleteImageByAttribute:@"photoName" value:picvo.name];
+    [self.dataProvider removeObjectAtIndex:indexpath.row];
+    [self setAddBtn];
+    [self.collectionView reloadData];
+    [self changeViewHeight];
 }
 
 #pragma mark -- 拍照选择模块

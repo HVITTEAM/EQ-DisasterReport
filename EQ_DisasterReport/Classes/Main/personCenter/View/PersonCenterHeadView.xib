@@ -11,11 +11,18 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="224"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headViewimage" translatesAutoresizingMaskIntoConstraints="NO" id="g2o-Ig-7cw">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="12.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="g2o-Ig-7cw">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="224"/>
                     <animations/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Uru-fe-HaH">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="王大锤" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRN-kB-pJu">
+                    <rect key="frame" x="137" y="164" width="45" height="18"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headIcon_0" translatesAutoresizingMaskIntoConstraints="NO" id="Uru-fe-HaH">
                     <rect key="frame" x="130" y="94" width="60" height="60"/>
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.51567778716216217" colorSpace="calibratedWhite"/>
@@ -24,13 +31,6 @@
                         <constraint firstAttribute="height" constant="60" id="y5n-LF-qBp"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="王大锤" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRN-kB-pJu">
-                    <rect key="frame" x="137.5" y="164" width="45" height="18"/>
-                    <animations/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -52,7 +52,7 @@
         </view>
     </objects>
     <resources>
-        <image name="headIcon" width="30" height="30"/>
-        <image name="headViewimage" width="375" height="192"/>
+        <image name="12.jpg" width="1024" height="580"/>
+        <image name="headIcon_0" width="60" height="60"/>
     </resources>
 </document>

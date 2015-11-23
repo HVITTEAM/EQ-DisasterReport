@@ -11,6 +11,8 @@
 #import "SpotInforModel.h"
 #import "SpotTableHelper.h"
 #import "SpotInfoViewController.h"
+#import "PictureTableHelper.h"
+#import "VoiceTableHelper.h"
 
 @interface CollectInfoViewController ()
 
@@ -101,6 +103,38 @@
     spotInfoVC.spotInfoModel = self.dataProvider[indexPath.row];
     spotInfoVC.actionType = kActionTypeShow; //设置页面类型为显示和更新
     [self.navigationController pushViewController:spotInfoVC animated:YES];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        SpotInforModel *model = self.dataProvider[indexPath.row];
+        BOOL result = NO;
+        result = [[PictureTableHelper sharedInstance] deleteImageByAttribute:@"releteid" value:model.pointid];
+        if (result) {
+           result = [[VoiceTableHelper sharedInstance] deleteVoiceByAttribute:@"releteid" value:model.pointid];
+            if (result) {
+               result = [[SpotTableHelper sharedInstance] deleteDataByAttribute:@"pointid" value:model.pointid];
+                if (result) {
+                    [self.dataProvider removeObjectAtIndex:indexPath.row];
+                    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+                }
+            }
+        }
+        
+        if (!result) {
+            [[[UIAlertView alloc] initWithTitle:nil message:@"删除失败！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil] show];
+        }
+        
+    }
+}
+
+- (nullable NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"删除";
 }
 
 #pragma mark 事件方法
