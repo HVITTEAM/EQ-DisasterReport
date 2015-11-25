@@ -13,6 +13,7 @@ typedef NS_ENUM(NSInteger, movingDirection) {
 };
 
 #import "SWYPhotoBrowserViewController.h"
+#import "UIImageView+WebCache.h"
 
 @interface SWYPhotoBrowserViewController ()<UIScrollViewDelegate>
 
@@ -24,24 +25,56 @@ typedef NS_ENUM(NSInteger, movingDirection) {
 @property(nonatomic,strong)UIImageView *currentImageView;      //中间scrollView上的imageView
 @property(nonatomic,strong)UIImageView *rightImageView;        //右侧scrollView上的imageView
 
+@property(nonatomic,strong)NSArray *imageNames;      //图片名字数组
+@property(nonatomic,strong)NSArray *images;          //图片image对象数组
+@property(nonatomic,strong)NSArray *imageURls;       //图片URL字符串数组
+@property(nonatomic,copy)NSString *placeholderImageName;                 //临时图片
+
+@property(nonatomic,assign)NSInteger currentIndex;   //当前显示哪张
 @property(nonatomic,assign)BOOL isDoubleTapBigger;      //双击时是放大还是还原图片大小
-//@property(nonatomic,assign)BOOL isSiglePhoto;
 
 @end
 
 @implementation SWYPhotoBrowserViewController
+#pragma mark 初始化方法
+-(instancetype)initPhotoBrowserWithImageNames:(NSArray *)imageNames currentIndex:(NSInteger)currentIndex
+{
+    self = [super initWithNibName:nil bundle:nil];
+    if (self) {
+        _imageNames = imageNames;
+        _currentIndex = currentIndex;
+    }
+    return self;
+}
 
+-(instancetype)initPhotoBrowserWithImages:(NSArray *)images currentIndex:(NSInteger)currentIndex
+{
+    self = [super initWithNibName:nil bundle:nil];
+    if (self) {
+        _images = images;
+        _currentIndex = currentIndex;
+    }
+    return self;
+}
+
+-(instancetype)initPhotoBrowserWithImageURls:(NSArray *)imageURLs currentIndex:(NSInteger)currentIndex placeholderImageNmae:(NSString *)placeholderImageName
+{
+    self = [super initWithNibName:nil bundle:nil];
+    if (self) {
+        _imageURls = imageURLs;
+        _currentIndex = currentIndex;
+        _placeholderImageName = placeholderImageName;
+        
+    }
+    return self;
+}
+
+#pragma mark 生命周期方法
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initScrollView];
     [self initGestureRecognizer];
-    
-    [self changeImageWithMovingDirection:movingDirectionNone];
-    
-    if (self.images.count == 1||self.imageNames.count == 1) {
-        self.bkScrollView.scrollEnabled = NO;
-    }
 }
 
 -(void)viewDidLayoutSubviews
@@ -60,9 +93,11 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     self.leftImageView.frame = self.leftScrollView.bounds;
     self.currentImageView.frame = self.currentScrollView.bounds;
     self.rightImageView.frame = self.rightScrollView.bounds;
+    
+    [self changeImageWithMovingDirection:movingDirectionNone];
 }
 
-#pragma mark 初始化方法、setter和getter方法
+#pragma mark 视图的初始化方法、setter和getter方法
 /**
  *  初始化ScrollView
  */
@@ -78,7 +113,7 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     self.leftScrollView = [[UIScrollView alloc] init];
     self.leftScrollView.delegate = self;
     self.leftScrollView.minimumZoomScale=1;
-    self.leftScrollView.maximumZoomScale=2;
+    self.leftScrollView.maximumZoomScale=4;
     self.leftImageView = [[UIImageView alloc] init];
     self.leftImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.leftScrollView addSubview:self.leftImageView];
@@ -87,20 +122,25 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     self.currentScrollView = [[UIScrollView alloc] init];
     self.currentScrollView.delegate = self;
     self.currentScrollView.minimumZoomScale=1;
-    self.currentScrollView.maximumZoomScale=2;
+    self.currentScrollView.maximumZoomScale=4;
     self.currentImageView = [[UIImageView alloc] init];
     self.currentImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.currentScrollView addSubview:self.currentImageView];
     [self.bkScrollView addSubview:self.currentScrollView];
+    self.currentImageView.backgroundColor = [UIColor redColor];
 
     self.rightScrollView = [[UIScrollView alloc] init];
     self.rightScrollView.delegate = self;
     self.rightScrollView.minimumZoomScale=1;
-    self.rightScrollView.maximumZoomScale=2;
+    self.rightScrollView.maximumZoomScale=4;
     self.rightImageView = [[UIImageView alloc] init];
     self.rightImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.rightScrollView addSubview:self.rightImageView];
     [self.bkScrollView addSubview:self.rightScrollView];
+    
+    if (self.images.count == 1||self.imageNames.count == 1 ||self.imageURls.count ==1) {
+        self.bkScrollView.scrollEnabled = NO;
+    }
 }
 
 /**
@@ -123,18 +163,7 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     
     //双击是否放大还是还原
     self.isDoubleTapBigger = YES;
-    
 }
-
-//-(void)setImageNames:(NSArray *)imageNames
-//{
-//    _pictures = imageNames;
-//}
-//
-//-(void)setImages:(NSArray *)images
-//{
-//    _pictures = images;
-//}
 
 #pragma mark 协议方法
 #pragma mark  UIScrollViewDelegate
@@ -145,36 +174,59 @@ typedef NS_ENUM(NSInteger, movingDirection) {
             //如果小于等于0表示图片向右侧移动
             [self changeImageWithMovingDirection:movingDirectionRight];
         }else if (scrollView.contentOffset.x>=2*MTScreenW){
-            //如果小于等于0表示图片向左侧移动
+            //如果大于等于 2*MTScreenW 表示图片向左侧移动
             [self changeImageWithMovingDirection:movingDirectionleft];
         }
     }
 }
 
-
-/**
- *  确定要放大的view
- */
 -(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
     return self.currentImageView;
 }
+
+-(void)scrollViewDidZoom:(UIScrollView *)scrollView
+{
+    [self centerScrollViewContents];
+}
+
+#pragma mark 事件方法
+/**
+ *  双击手势时调用，来放大或缩小图片
+ */
+-(void)scaleImage:(UITapGestureRecognizer *)gestureRecognizer
+{
+    CGFloat newscale = 1.5;
+    
+    CGRect zoomRect = [self zoomRectForScale:newscale withCenter:[gestureRecognizer locationInView:self.currentImageView] andScrollView:self.currentScrollView];
+    
+    if (self.isDoubleTapBigger == YES)  {
+        [self.currentScrollView zoomToRect:zoomRect animated:YES];
+    }else {
+        [self.currentScrollView setZoomScale:self.currentScrollView.minimumZoomScale animated:YES];
+    }
+    self.isDoubleTapBigger = !self.isDoubleTapBigger;
+}
+
+-(void)back
+{
+    [self dismissViewControllerAnimated:NO completion:nil];
+}
+
+#pragma mark 私有方法
 
 /**
  *  根据滚动方向重新设置图片
  */
 -(void)changeImageWithMovingDirection:(movingDirection)direction
 {
-    //重新设置图片时缩放比例复原
-    if (self.currentScrollView.zoomScale !=1.0) {
-        self.currentScrollView.zoomScale = 1.0;
-    }
-    
-    NSInteger imgCount;
+    NSInteger imgCount = 0;
     if (self.imageNames) {
        imgCount = self.imageNames.count;
     }else if (self.images){
        imgCount = self.images.count;
+    }else if (self.imageURls){
+        imgCount = self.imageURls.count;
     }
     
     //确定当前要显示的图片的index,
@@ -192,8 +244,6 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     NSInteger leftIndex = (self.currentIndex -1+imgCount)%imgCount;
     NSInteger rigthIndex = (self.currentIndex+1)%imgCount;
     
-    //NSLog(@"l:%d  c:%d  r:%d",leftIndex,self.currentIndex,rigthIndex);
-    
     //设置图片
     if (self.imageNames) {
         self.leftImageView.image = [UIImage imageNamed:self.imageNames[leftIndex]];
@@ -203,31 +253,73 @@ typedef NS_ENUM(NSInteger, movingDirection) {
         self.leftImageView.image = self.images[leftIndex];
         self.currentImageView.image = self.images[self.currentIndex];
         self.rightImageView.image = self.images[rigthIndex];
+    }else if (self.imageURls){
+        
+        [self.leftImageView sd_setImageWithURL:self.imageURls[leftIndex] placeholderImage:[UIImage imageNamed:self.placeholderImageName] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        }];
+        
+        [self.currentImageView sd_setImageWithURL:self.imageURls[self.currentIndex] placeholderImage:[UIImage imageNamed:self.placeholderImageName] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [self setimageViewFrame];
+        }];
+        
+        [self.rightImageView sd_setImageWithURL:self.imageURls[rigthIndex] placeholderImage:[UIImage imageNamed:self.placeholderImageName] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        }];
     }
+    
     //将currentScrollView这个视图显示在屏幕上
     self.bkScrollView.contentOffset = CGPointMake(MTScreenW, 0);
-    
     self.isDoubleTapBigger = YES;
+    
+    //设置currentImageView的大小位置
+    [self setimageViewFrame];
 }
 
 /**
- *  双击手势时调用，来放大或缩小图片
+ *  设置currentImageView的大小位置以及currentScrollView的缩放比例
  */
--(void)scaleImage:(UITapGestureRecognizer *)gestureRecognizer
+-(void)setimageViewFrame
 {
-    CGFloat newscale = 1.9;
-
-    CGRect zoomRect = [self zoomRectForScale:newscale withCenter:[gestureRecognizer locationInView:gestureRecognizer.view] andScrollView:self.currentScrollView];
+    CGSize imageSize = self.currentImageView.image.size;
+    self.currentImageView.bounds = CGRectMake(0, 0, imageSize.width, imageSize.height);
+    self.currentScrollView.contentSize = imageSize;
     
-    if (self.isDoubleTapBigger == YES)  {
-        
-        [self.currentScrollView zoomToRect:zoomRect animated:YES];
-        
-    }else {
-        
-        [self.currentScrollView zoomToRect:self.currentScrollView.frame animated:YES];
+    CGSize scrollviewSize = self.currentScrollView.bounds.size;
+    CGFloat scaleW = scrollviewSize.width / imageSize.width;
+    CGFloat scaleH = scrollviewSize.height / imageSize.height;
+    CGFloat finalScale;
+    if (scaleW > scaleH) {
+        finalScale = scaleH;
+    }else{
+        finalScale = scaleW;
     }
-    self.isDoubleTapBigger = !self.isDoubleTapBigger;
+    self.currentScrollView.minimumZoomScale = finalScale;
+    self.currentScrollView.zoomScale = finalScale;
+    
+    [self centerScrollViewContents];
+//    self.currentImageView.center = CGPointMake(self.currentScrollView.bounds.size.width/2, self.currentScrollView.bounds.size.height/2);
+    
+}
+
+/**
+ *  设置中心
+ */
+- (void)centerScrollViewContents {
+    CGSize scrollviewSize = self.currentScrollView.bounds.size;
+    CGRect contentsFrame = self.currentImageView.frame;
+    
+    if (contentsFrame.size.width < scrollviewSize.width) {
+        contentsFrame.origin.x = (scrollviewSize.width - contentsFrame.size.width) / 2.0f;
+    } else {
+        contentsFrame.origin.x = 0.0f;
+    }
+    
+    if (contentsFrame.size.height < scrollviewSize.height) {
+        contentsFrame.origin.y = (scrollviewSize.height - contentsFrame.size.height) / 2.0f;
+    } else {
+        contentsFrame.origin.y = 0.0f;
+    }
+    
+    self.currentImageView.frame = contentsFrame;
 }
 
 /**
@@ -244,13 +336,8 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     zoomRect.origin.y = center.y - (zoomRect.size.height / 2.0);
 
     return zoomRect;
-    
 }
 
--(void)back
-{
-    [self dismissViewControllerAnimated:NO completion:nil];
-}
 
 
 -(void)dealloc
@@ -264,6 +351,7 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     _rightImageView = nil;
     _imageNames = nil;
     _images = nil;
+    _imageURls = nil;
     NSLog(@"SWYPhotoBrowserViewController 释放");
 }
 

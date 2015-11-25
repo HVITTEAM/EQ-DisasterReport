@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "SWYMapViewController.h"
 #import <MAMapKit/MAMapKit.h>
+#import "LoginViewController.h"
+#import "HMControllerTool.h"
 
 #define MAPKEY @"4bc6c5298b30d483ce75d69247d5b2df"
 @interface AppDelegate ()
@@ -23,15 +25,14 @@
     //创建窗口
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
+    //显示窗口
+    [self.window makeKeyAndVisible];
     
     //配置地图key
     [self configureAPIKey];
+    [HMControllerTool setLoginViewController];
     
-    SWYMapViewController *mapVC = [[SWYMapViewController alloc] init];
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:mapVC];
-    
-    //显示窗口
-    [self.window makeKeyAndVisible];
+
     return YES;
 }
 

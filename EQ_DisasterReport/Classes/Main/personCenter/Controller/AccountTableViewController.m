@@ -11,6 +11,7 @@
 #import "SpotLabelCell.h"
 #import "SpotTextCell.h"
 #import "FillContentViewController.h"
+#import "HMControllerTool.h"
 
 @interface AccountTableViewController ()<FillContentViewControllerDelegate>
 @property(nonatomic,strong)NSArray *dataProvider;              //数据源
@@ -167,6 +168,7 @@
 -(void)loginOut:(UIButton *)sender
 {
     NSLog(@"退出");
+    [HMControllerTool setLoginViewController];
 }
 
 @end

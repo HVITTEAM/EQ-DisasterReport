@@ -15,6 +15,7 @@
 #import "CollectInfoViewController.h"
 #import "PersonCenterViewController.h"
 #import "AppDelegate.h"
+#import "LoginViewController.h"
 
 @interface SWYMapViewController ()<MAMapViewDelegate,AMapSearchDelegate,MapTypeSelectViewDelegate>
 

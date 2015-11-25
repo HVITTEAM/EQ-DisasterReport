@@ -97,6 +97,12 @@
     [self setupGroupPickerview];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
 - (void)initVariable
 {
     self.assetsFilter = [ALAssetsFilter allPhotos];

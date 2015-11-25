@@ -9,7 +9,19 @@
 #import <UIKit/UIKit.h>
 
 @interface SWYPhotoBrowserViewController : UIViewController
-@property(nonatomic,strong)NSArray *imageNames;    //图片名字数组
-@property(nonatomic,strong)NSArray *images;       //图片image 对象数组
-@property(nonatomic,assign)NSInteger currentIndex; //当前显示哪张
+
+/**
+ * 根据图片名字
+ */
+-(instancetype)initPhotoBrowserWithImageNames:(NSArray *)imageNames currentIndex:(NSInteger)currentIndex;
+
+/**
+ * 根据图片的UIImage对象
+ */
+-(instancetype)initPhotoBrowserWithImages:(NSArray *)images currentIndex:(NSInteger)currentIndex;
+
+/**
+ * 根据图片的URL字符串
+ */
+-(instancetype)initPhotoBrowserWithImageURls:(NSArray *)imageURLs currentIndex:(NSInteger)currentIndex placeholderImageNmae:(NSString *)placeholderImageName;
 @end

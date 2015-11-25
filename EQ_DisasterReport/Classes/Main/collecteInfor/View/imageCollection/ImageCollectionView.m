@@ -117,20 +117,17 @@
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"请选择图片来源" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从手机相册选择", nil];
         [alert show];
     }else{
-        
         NSLog(@"查看大图");
         //进图片浏览器查看大图
-        SWYPhotoBrowserViewController *browserVC = [[SWYPhotoBrowserViewController alloc] init];
-        browserVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        
         NSMutableArray *images = [[NSMutableArray alloc] init];
         for(PictureVO* vo in self.dataProvider)
         {
             UIImage *img = [[UIImage alloc] initWithData:vo.imageData];
             [images addObject:img];
         }
-        browserVC.images = images;
-        browserVC.currentIndex = indexPath.row;
+        SWYPhotoBrowserViewController *browserVC = [[SWYPhotoBrowserViewController alloc] initPhotoBrowserWithImages:images currentIndex:indexPath.row];
+        browserVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+
         [self.parentVC presentViewController:browserVC animated:YES completion:^{
         }];
      }

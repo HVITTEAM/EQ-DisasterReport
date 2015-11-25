@@ -25,6 +25,7 @@
 		D2550BC61BEB2C9400904D35 /* SWYNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D2550BC51BEB2C9400904D35 /* SWYNavigationBar.m */; };
 		D2656EAA1BEBA2B400BA127F /* PhotoSetReusableHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2656EA81BEBA2B400BA127F /* PhotoSetReusableHeadView.m */; };
 		D2656EAB1BEBA2B400BA127F /* PhotoSetReusableHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2656EA91BEBA2B400BA127F /* PhotoSetReusableHeadView.xib */; };
+		D285F7FC1C0332A600421F06 /* HMControllerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D285F7FB1C0332A600421F06 /* HMControllerTool.m */; };
 		D296472B1BF17363004B8877 /* SpotInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D296472A1BF17363004B8877 /* SpotInfoViewController.m */; };
 		D29647321BF1739C004B8877 /* SpotLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D296472D1BF1739C004B8877 /* SpotLabelCell.m */; };
 		D29647331BF1739C004B8877 /* SpotLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D296472E1BF1739C004B8877 /* SpotLabelCell.xib */; };
@@ -96,6 +97,8 @@
 		D2BFE59F1BE9FD8800B65E91 /* UserInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2BFE59D1BE9FD8800B65E91 /* UserInfoCell.xib */; };
 		D2BFE5A21BE9FFFF00B65E91 /* TableHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2BFE5A11BE9FFFF00B65E91 /* TableHeadView.m */; };
 		D2BFE5A41BEA063400B65E91 /* TableHeadViw.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2BFE5A31BEA063400B65E91 /* TableHeadViw.xib */; };
+		D2D50E511C03153500D306A1 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D50E4F1C03153500D306A1 /* LoginViewController.m */; };
+		D2D50E521C03153500D306A1 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2D50E501C03153500D306A1 /* LoginViewController.xib */; };
 		D2D6B0F61BFC094C00B14A7E /* PhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D6B0F51BFC094C00B14A7E /* PhotoModel.m */; };
 		D2EC97DB1BE70E4A00ED8661 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC97C91BE70E4A00ED8661 /* AFHTTPRequestOperation.m */; };
 		D2EC97DC1BE70E4A00ED8661 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC97CB1BE70E4A00ED8661 /* AFHTTPRequestOperationManager.m */; };
@@ -254,6 +257,8 @@
 		D2656EA71BEBA2B400BA127F /* PhotoSetReusableHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoSetReusableHeadView.h; sourceTree = "<group>"; };
 		D2656EA81BEBA2B400BA127F /* PhotoSetReusableHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoSetReusableHeadView.m; sourceTree = "<group>"; };
 		D2656EA91BEBA2B400BA127F /* PhotoSetReusableHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoSetReusableHeadView.xib; sourceTree = "<group>"; };
+		D285F7FA1C0332A600421F06 /* HMControllerTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMControllerTool.h; sourceTree = "<group>"; };
+		D285F7FB1C0332A600421F06 /* HMControllerTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMControllerTool.m; sourceTree = "<group>"; };
 		D29647291BF17363004B8877 /* SpotInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotInfoViewController.h; sourceTree = "<group>"; };
 		D296472A1BF17363004B8877 /* SpotInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotInfoViewController.m; sourceTree = "<group>"; };
 		D296472C1BF1739C004B8877 /* SpotLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotLabelCell.h; sourceTree = "<group>"; };
@@ -360,6 +365,9 @@
 		D2BFE5A01BE9FFFF00B65E91 /* TableHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableHeadView.h; sourceTree = "<group>"; };
 		D2BFE5A11BE9FFFF00B65E91 /* TableHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableHeadView.m; sourceTree = "<group>"; };
 		D2BFE5A31BEA063400B65E91 /* TableHeadViw.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableHeadViw.xib; sourceTree = "<group>"; };
+		D2D50E4E1C03153500D306A1 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		D2D50E4F1C03153500D306A1 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		D2D50E501C03153500D306A1 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		D2D6B0F41BFC094C00B14A7E /* PhotoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoModel.h; sourceTree = "<group>"; };
 		D2D6B0F51BFC094C00B14A7E /* PhotoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoModel.m; sourceTree = "<group>"; };
 		D2EC97C21BE7076800ED8661 /* EQ_DisasterReport.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EQ_DisasterReport.pch; sourceTree = "<group>"; };
@@ -814,6 +822,16 @@
 			path = images;
 			sourceTree = "<group>";
 		};
+		D2D50E471C03102500D306A1 /* login */ = {
+			isa = PBXGroup;
+			children = (
+				D2D50E4E1C03153500D306A1 /* LoginViewController.h */,
+				D2D50E4F1C03153500D306A1 /* LoginViewController.m */,
+				D2D50E501C03153500D306A1 /* LoginViewController.xib */,
+			);
+			path = login;
+			sourceTree = "<group>";
+		};
 		D2EC97C01BE7061E00ED8661 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -882,6 +900,7 @@
 		D2EC97C51BE70C7300ED8661 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				D2D50E471C03102500D306A1 /* login */,
 				D2EEA3521BF45C8100F2FD20 /* personCenter */,
 				D2EDC4B01BEC938800AEDFB4 /* collecteInfor */,
 				D2BFE5721BE9D8A500B65E91 /* photoSet */,
@@ -893,6 +912,8 @@
 		D2EC97C61BE70C7300ED8661 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				D285F7FA1C0332A600421F06 /* HMControllerTool.h */,
+				D285F7FB1C0332A600421F06 /* HMControllerTool.m */,
 				D2EC989C1BE711C800ED8661 /* FMDBHelper */,
 			);
 			path = Others;
@@ -1458,6 +1479,7 @@
 				D2AD16D31BF2FDF8000D2182 /* mic_3.png in Resources */,
 				D22A0F9E1C02AFB0006C345D /* DescriptionCell.xib in Resources */,
 				D2BFE5801BE9DB5F00B65E91 /* PhotoSetCell.xib in Resources */,
+				D2D50E521C03153500D306A1 /* LoginViewController.xib in Resources */,
 				D2BFE5911BE9E0D800B65E91 /* 5.jpg in Resources */,
 				D2AD16D61BF2FDF8000D2182 /* mic_cancel.png in Resources */,
 				D2BFE59A1BE9FA3400B65E91 /* SWYCollectDetailViewController.xib in Resources */,
@@ -1551,6 +1573,7 @@
 				D2A5343B1C00C50800140F50 /* WebsitViewController.m in Sources */,
 				D2EC982A1BE70EFD00ED8661 /* FMDatabasePool.m in Sources */,
 				D2EC98861BE7112700ED8661 /* MJRefreshBackNormalFooter.m in Sources */,
+				D2D50E511C03153500D306A1 /* LoginViewController.m in Sources */,
 				D2EC98981BE7117800ED8661 /* UIBarButtonItem+Extension.m in Sources */,
 				D2EC98061BE70E6B00ED8661 /* MKAnnotationView+WebCache.m in Sources */,
 				D2EC98091BE70E6B00ED8661 /* SDWebImageCompat.m in Sources */,
@@ -1607,6 +1630,7 @@
 				D2EC98121BE70E6B00ED8661 /* UIImage+WebP.m in Sources */,
 				D2EC980D1BE70E6B00ED8661 /* SDWebImageManager.m in Sources */,
 				D2EC988D1BE7112700ED8661 /* UIScrollView+MJExtension.m in Sources */,
+				D285F7FC1C0332A600421F06 /* HMControllerTool.m in Sources */,
 				D2EC97DE1BE70E4A00ED8661 /* AFNetworkReachabilityManager.m in Sources */,
 				D2EC982C1BE70EFD00ED8661 /* FMResultSet.m in Sources */,
 				D2EC98831BE7112700ED8661 /* MJRefreshAutoNormalFooter.m in Sources */,

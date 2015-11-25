@@ -129,10 +129,8 @@
 -(void)tableheadView:(TableHeadView *)headVeiw didClickImageName:(NSString *)imageName
 {
     //进图片浏览器查看大图
-    SWYPhotoBrowserViewController *browserVC = [[SWYPhotoBrowserViewController alloc] init];
+    SWYPhotoBrowserViewController *browserVC = [[SWYPhotoBrowserViewController alloc] initPhotoBrowserWithImageNames:@[imageName] currentIndex:0];
     browserVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    browserVC.imageNames = @[imageName];
-
     [self presentViewController:browserVC animated:YES completion:nil];
 }
 
