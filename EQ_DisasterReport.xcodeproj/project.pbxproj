@@ -100,6 +100,9 @@
 		D2D50E511C03153500D306A1 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D50E4F1C03153500D306A1 /* LoginViewController.m */; };
 		D2D50E521C03153500D306A1 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2D50E501C03153500D306A1 /* LoginViewController.xib */; };
 		D2D6B0F61BFC094C00B14A7E /* PhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D6B0F51BFC094C00B14A7E /* PhotoModel.m */; };
+		D2EC414B1C153101002F5FA4 /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC414A1C153101002F5FA4 /* MenuView.m */; };
+		D2EC414E1C15597F002F5FA4 /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC414D1C15597F002F5FA4 /* MenuItem.m */; };
+		D2EC41511C1567EC002F5FA4 /* MenuContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC41501C1567EC002F5FA4 /* MenuContentView.m */; };
 		D2EC97DB1BE70E4A00ED8661 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC97C91BE70E4A00ED8661 /* AFHTTPRequestOperation.m */; };
 		D2EC97DC1BE70E4A00ED8661 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC97CB1BE70E4A00ED8661 /* AFHTTPRequestOperationManager.m */; };
 		D2EC97DD1BE70E4A00ED8661 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC97CD1BE70E4A00ED8661 /* AFHTTPSessionManager.m */; };
@@ -370,6 +373,12 @@
 		D2D50E501C03153500D306A1 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		D2D6B0F41BFC094C00B14A7E /* PhotoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoModel.h; sourceTree = "<group>"; };
 		D2D6B0F51BFC094C00B14A7E /* PhotoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoModel.m; sourceTree = "<group>"; };
+		D2EC41491C153101002F5FA4 /* MenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuView.h; sourceTree = "<group>"; };
+		D2EC414A1C153101002F5FA4 /* MenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuView.m; sourceTree = "<group>"; };
+		D2EC414C1C15597F002F5FA4 /* MenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuItem.h; sourceTree = "<group>"; };
+		D2EC414D1C15597F002F5FA4 /* MenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItem.m; sourceTree = "<group>"; };
+		D2EC414F1C1567EC002F5FA4 /* MenuContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuContentView.h; sourceTree = "<group>"; };
+		D2EC41501C1567EC002F5FA4 /* MenuContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuContentView.m; sourceTree = "<group>"; };
 		D2EC97C21BE7076800ED8661 /* EQ_DisasterReport.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EQ_DisasterReport.pch; sourceTree = "<group>"; };
 		D2EC97C81BE70E4A00ED8661 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		D2EC97C91BE70E4A00ED8661 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
@@ -1258,6 +1267,12 @@
 				D2AD16DA1BF31B6C000D2182 /* AudioCell.h */,
 				D2AD16DB1BF31B6C000D2182 /* AudioCell.m */,
 				D2AD16DC1BF31B6C000D2182 /* AudioCell.xib */,
+				D2EC41491C153101002F5FA4 /* MenuView.h */,
+				D2EC414A1C153101002F5FA4 /* MenuView.m */,
+				D2EC414F1C1567EC002F5FA4 /* MenuContentView.h */,
+				D2EC41501C1567EC002F5FA4 /* MenuContentView.m */,
+				D2EC414C1C15597F002F5FA4 /* MenuItem.h */,
+				D2EC414D1C15597F002F5FA4 /* MenuItem.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1409,7 +1424,7 @@
 				TargetAttributes = {
 					01EBA14C1BE6F4CA00F2701D = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = JFNYWLMD9N;
+						DevelopmentTeam = G688QXM6YK;
 					};
 					01EBA1651BE6F4CA00F2701D = {
 						CreatedOnToolsVersion = 7.1;
@@ -1522,6 +1537,7 @@
 				D2EC981B1BE70EDC00ED8661 /* README.mdown in Sources */,
 				D2EC98821BE7112700ED8661 /* MJRefreshAutoGifFooter.m in Sources */,
 				D2EC98481BE7109A00ED8661 /* MJProperty.m in Sources */,
+				D2EC414E1C15597F002F5FA4 /* MenuItem.m in Sources */,
 				D2EC98101BE70E6B00ED8661 /* UIImage+GIF.m in Sources */,
 				D2EEA3771BF45D2B00F2FD20 /* HMCommonCell.m in Sources */,
 				D2A534321C00B34300140F50 /* FeedbackView.m in Sources */,
@@ -1536,6 +1552,7 @@
 				D2EC984F1BE7109A00ED8661 /* NSString+MJExtension.m in Sources */,
 				D22A0F9D1C02AFB0006C345D /* DescriptionCell.m in Sources */,
 				D2EC987E1BE7112700ED8661 /* MJRefreshBackFooter.m in Sources */,
+				D2EC414B1C153101002F5FA4 /* MenuView.m in Sources */,
 				D296472B1BF17363004B8877 /* SpotInfoViewController.m in Sources */,
 				D29EEBC01BFB2C2F0015C268 /* VoiceModel.m in Sources */,
 				D241C3801BFF05FA0098FC9E /* SQCollectionCell.m in Sources */,
@@ -1602,6 +1619,7 @@
 				D2EEA3761BF45D2B00F2FD20 /* HMBadgeView.m in Sources */,
 				D29EEBBA1BFAFC860015C268 /* PhotoSetHeadCell.m in Sources */,
 				D2EC98151BE70E6B00ED8661 /* UIView+WebCacheOperation.m in Sources */,
+				D2EC41511C1567EC002F5FA4 /* MenuContentView.m in Sources */,
 				D2EC97DD1BE70E4A00ED8661 /* AFHTTPSessionManager.m in Sources */,
 				D2EEA3711BF45D2100F2FD20 /* HMCommonTextfieldItem.m in Sources */,
 				D2EC984A1BE7109A00ED8661 /* MJPropertyType.m in Sources */,

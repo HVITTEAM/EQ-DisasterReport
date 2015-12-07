@@ -13,8 +13,9 @@
 #import "SpotInfoViewController.h"
 #import "PictureTableHelper.h"
 #import "VoiceTableHelper.h"
+#import "MenuView.h"
 
-@interface CollectInfoViewController ()
+@interface CollectInfoViewController ()<MenuViewDelegate>
 
 @property(nonatomic,strong)NSMutableArray *dataProvider;   // tableview数据源
 
@@ -50,7 +51,7 @@
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     self.navigationItem.leftBarButtonItem = leftItem;
     //右侧按钮
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"新增" style:UIBarButtonItemStylePlain target:self action:@selector(addNewSpotInfo)];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(showMenu)];
     self.navigationItem.rightBarButtonItem = rightItem;
     //下一级的返回按钮
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
@@ -82,7 +83,7 @@
     SpotInforCell *cell = [tableView dequeueReusableCellWithIdentifier:spotInfoCellID];
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"SpotInforCell" owner:self options:nil] lastObject];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     }
     SpotInforModel *cellModel = self.dataProvider[indexPath.row];
     cell.cellModel = cellModel;
@@ -93,11 +94,14 @@
 #pragma mark - UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 90;
+    return 125;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.tableView.isEditing) {
+        return;
+    }
     //进入详情界面
     SpotInfoViewController *spotInfoVC = [[SpotInfoViewController alloc] init];
     spotInfoVC.spotInfoModel = self.dataProvider[indexPath.row];
@@ -137,6 +141,18 @@
     return @"删除";
 }
 
+-(void)menuView:(MenuView *)menuView indexForItem:(NSInteger)idx
+{
+    if (idx == 0) {  //新增采集点
+        SpotInfoViewController *spotInfoVC = [[SpotInfoViewController alloc] init];
+        spotInfoVC.actionType = kActionTypeAdd;  //设置页面类型为新增
+        [self.navigationController pushViewController:spotInfoVC animated:YES];
+    }else if (idx == 1){
+        self.tableView.allowsMultipleSelectionDuringEditing = YES;
+        self.tableView.editing = YES;
+    }
+}
+
 #pragma mark 事件方法
 /**
  *  获取所有采集点的数据
@@ -152,13 +168,14 @@
 }
 
 /**
- *  新增采集点
+ *  显示菜单按钮
  */
--(void)addNewSpotInfo
+-(void)showMenu
 {
-    SpotInfoViewController *spotInfoVC = [[SpotInfoViewController alloc] init];
-    spotInfoVC.actionType = kActionTypeAdd;  //设置页面类型为新增
-    [self.navigationController pushViewController:spotInfoVC animated:YES];
+    MenuView *menuView = [[MenuView alloc] initWithTitles:@[@"新增",@"删除"] titleIcons:@[@"headIcon",@"headIcon"]];
+    menuView.delegate = self;
+    UIWindow *window = [[UIApplication sharedApplication]keyWindow];
+    [menuView showMenuViewInView:window frame:CGRectMake(0, 55, window.width, window.height - 55)];
 }
 
 /**

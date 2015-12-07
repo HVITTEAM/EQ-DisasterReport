@@ -94,6 +94,8 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     self.currentImageView.frame = self.currentScrollView.bounds;
     self.rightImageView.frame = self.rightScrollView.bounds;
     
+    self.bkScrollView.contentSize = CGSizeMake(3*bkWidth, bkHeight);
+    
     [self changeImageWithMovingDirection:movingDirectionNone];
 }
 
@@ -103,8 +105,9 @@ typedef NS_ENUM(NSInteger, movingDirection) {
  */
 -(void)initScrollView
 {
+    
     self.bkScrollView = [[UIScrollView alloc] init];
-    self.bkScrollView.contentSize = CGSizeMake(3*MTScreenW, MTScreenH);
+  
     self.bkScrollView.pagingEnabled = YES;
     self.bkScrollView.delegate = self;
     self.bkScrollView.backgroundColor = [UIColor blackColor];
@@ -173,7 +176,7 @@ typedef NS_ENUM(NSInteger, movingDirection) {
         if (scrollView.contentOffset.x<=0 ) {
             //如果小于等于0表示图片向右侧移动
             [self changeImageWithMovingDirection:movingDirectionRight];
-        }else if (scrollView.contentOffset.x>=2*MTScreenW){
+        }else if (scrollView.contentOffset.x>=2*self.bkScrollView.bounds.size.width){
             //如果大于等于 2*MTScreenW 表示图片向左侧移动
             [self changeImageWithMovingDirection:movingDirectionleft];
         }
@@ -267,7 +270,7 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     }
     
     //将currentScrollView这个视图显示在屏幕上
-    self.bkScrollView.contentOffset = CGPointMake(MTScreenW, 0);
+    self.bkScrollView.contentOffset = CGPointMake(self.bkScrollView.bounds.size.width, 0);
     self.isDoubleTapBigger = YES;
     
     //设置currentImageView的大小位置
@@ -337,8 +340,6 @@ typedef NS_ENUM(NSInteger, movingDirection) {
 
     return zoomRect;
 }
-
-
 
 -(void)dealloc
 {

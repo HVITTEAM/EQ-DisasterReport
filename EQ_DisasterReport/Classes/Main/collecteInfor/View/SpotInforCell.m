@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *latLb;
 @property (weak, nonatomic) IBOutlet UILabel *levelLb;
 @property (weak, nonatomic) IBOutlet UILabel *addrLb;
+@property (weak, nonatomic) IBOutlet UIImageView *uploadStateImageView;
+
 @end
 @implementation SpotInforCell
 
@@ -25,7 +27,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 
