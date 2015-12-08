@@ -89,15 +89,15 @@
     
     //切换跟随模式按钮
     self.mylocationBtn = [self createBtnWithNormalImageName:@"locationIconNone" selectedImageName:@"locationIconNone"];
-    self.mylocationBtn.x = 30;
-    self.mylocationBtn.y = MTScreenH-140;
+    self.mylocationBtn.x = 10;
+    self.mylocationBtn.y = MTScreenH-120;
     self.mylocationBtn.tag = 22;
 }
 
 -(void)initBottomBar
 {
-    UIView *bottomBar = [[UIView alloc] initWithFrame:CGRectMake(30, MTScreenH-80, MTScreenW-60, 40)];
-    bottomBar.layer.cornerRadius = 7;
+    UIView *bottomBar = [[UIView alloc] initWithFrame:CGRectMake(10, MTScreenH-50, MTScreenW-20, 40)];
+    bottomBar.layer.cornerRadius = 10;
     bottomBar.layer.masksToBounds = YES;
     [self.view addSubview:bottomBar];
 
@@ -106,7 +106,7 @@
     
     self.photoSetBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.photoSetBtn.frame = CGRectMake(0, 0, btnWidth, btnHeight);
-    self.photoSetBtn.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
+    self.photoSetBtn.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:1.0];
     [self.photoSetBtn setTitle:@"照片墙" forState: UIControlStateNormal];
     [self.photoSetBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.photoSetBtn.titleLabel.font = [UIFont systemFontOfSize:13];
@@ -115,7 +115,7 @@
     
     self.collectInfoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.collectInfoBtn.frame = CGRectMake(btnWidth, 0, btnWidth, btnHeight);
-    self.collectInfoBtn.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
+    self.collectInfoBtn.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:1.0];
     [self.collectInfoBtn setTitle:@"专业采集" forState: UIControlStateNormal];
     [self.collectInfoBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.collectInfoBtn.titleLabel.font = [UIFont systemFontOfSize:13];
@@ -124,7 +124,7 @@
     
     self.collectInfoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.collectInfoBtn.frame = CGRectMake(2*btnWidth, 0, btnWidth, btnHeight);
-    self.collectInfoBtn.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
+    self.collectInfoBtn.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:1.0];
     [self.collectInfoBtn setTitle:@"公众采集" forState: UIControlStateNormal];
     [self.collectInfoBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.collectInfoBtn.titleLabel.font = [UIFont systemFontOfSize:13];
@@ -134,7 +134,7 @@
     
     self.personCenterBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.personCenterBtn.frame = CGRectMake(3*btnWidth, 0,btnWidth, btnHeight);
-    self.personCenterBtn.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
+    self.personCenterBtn.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:1.0];
     [self.personCenterBtn setTitle:@"个人中心" forState: UIControlStateNormal];
     [self.personCenterBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.personCenterBtn.titleLabel.font = [UIFont systemFontOfSize:13];

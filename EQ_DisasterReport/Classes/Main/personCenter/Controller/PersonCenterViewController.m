@@ -38,10 +38,11 @@
 
 -(void)initHeadView
 {
-    self.tableView.contentInset = UIEdgeInsetsMake(224, 0, 0, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(250, 0, 0, 0);
     self.headView = [[[NSBundle mainBundle] loadNibNamed:@"PersonCenterHeadView" owner:self options:nil] lastObject];
-    self.headView.frame = CGRectMake(0, -244, MTScreenW, 224);
-    [self.tableView addSubview:self.headView];
+    self.headView.frame = CGRectMake(0, -250, MTScreenW, 250);
+    //[self.tableView addSubview:self.headView];
+    [self.tableView insertSubview:self.headView atIndex:0];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -55,10 +56,13 @@
 -(void)initNavigation
 {
     self.title = @"个人中心";
-    self.navigationController.navigationBar.barTintColor = HMColor(79, 127, 175);
+    //self.navigationController.navigationBar.barTintColor = HMColor(99, 148, 225);
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
@@ -119,7 +123,7 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat y = scrollView.contentOffset.y;
-    if (y<=-224) {
+    if (y<=-250) {
         CGRect frame = self.headView.frame;
         frame.size.height = -y;
         frame.origin.y = y;

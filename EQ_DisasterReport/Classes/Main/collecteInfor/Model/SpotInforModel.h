@@ -18,4 +18,5 @@
 @property(nonatomic,copy)NSString *address;
 @property(nonatomic,copy)NSString *descr;
 @property(nonatomic,copy)NSString *keys;
+
 @end

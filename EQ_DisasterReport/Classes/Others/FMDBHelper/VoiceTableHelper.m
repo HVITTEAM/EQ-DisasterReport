@@ -141,7 +141,7 @@
  */
 -(BOOL) deleteVoiceByAttribute:(NSString *)attribute value:(NSString *)value
 {
-    BOOL result = NO;
+    BOOL result = YES;
     NSString * voiceFilepath;
     if ([db open])
     {

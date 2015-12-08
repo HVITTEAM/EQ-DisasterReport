@@ -11,21 +11,20 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="224"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="12.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="g2o-Ig-7cw">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g2o-Ig-7cw">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="224"/>
                     <animations/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="王大锤" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRN-kB-pJu">
-                    <rect key="frame" x="137" y="164" width="45" height="18"/>
+                    <rect key="frame" x="137" y="152" width="45" height="18"/>
                     <animations/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headIcon_0" translatesAutoresizingMaskIntoConstraints="NO" id="Uru-fe-HaH">
-                    <rect key="frame" x="130" y="94" width="60" height="60"/>
+                    <rect key="frame" x="130" y="82" width="60" height="60"/>
                     <animations/>
-                    <color key="backgroundColor" white="0.0" alpha="0.51567778716216217" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="ubk-bH-ndj"/>
                         <constraint firstAttribute="height" constant="60" id="y5n-LF-qBp"/>
@@ -33,14 +32,14 @@
                 </imageView>
             </subviews>
             <animations/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.38823529410000002" green="0.58039215690000001" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="Uru-fe-HaH" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="74l-Te-XJc"/>
                 <constraint firstItem="SRN-kB-pJu" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="CjS-5Q-TkJ"/>
                 <constraint firstAttribute="trailing" secondItem="g2o-Ig-7cw" secondAttribute="trailing" id="K60-YW-VUC"/>
                 <constraint firstItem="g2o-Ig-7cw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="SnO-Xh-iez"/>
                 <constraint firstItem="SRN-kB-pJu" firstAttribute="top" secondItem="Uru-fe-HaH" secondAttribute="bottom" constant="10" id="mxx-23-hyQ"/>
-                <constraint firstAttribute="bottom" secondItem="Uru-fe-HaH" secondAttribute="bottom" constant="70" id="o7R-mc-VhD"/>
+                <constraint firstItem="Uru-fe-HaH" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="pcF-9Y-wKg"/>
                 <constraint firstAttribute="bottom" secondItem="g2o-Ig-7cw" secondAttribute="bottom" id="t0U-bJ-ZNq"/>
                 <constraint firstItem="g2o-Ig-7cw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="w11-lu-Xoi"/>
             </constraints>
@@ -52,7 +51,6 @@
         </view>
     </objects>
     <resources>
-        <image name="12.jpg" width="1024" height="580"/>
-        <image name="headIcon_0" width="60" height="60"/>
+        <image name="headIcon_0" width="80" height="80"/>
     </resources>
 </document>

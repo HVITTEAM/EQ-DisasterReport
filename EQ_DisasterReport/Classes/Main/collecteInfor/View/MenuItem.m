@@ -23,7 +23,7 @@
         self.iconImgV = [[UIImageView alloc] init];
         self.iconImgV.image = [UIImage imageNamed:imgNameStr];
         self.iconImgV.clipsToBounds = YES;
-        self.iconImgV.backgroundColor = [UIColor yellowColor];
+        //self.iconImgV.backgroundColor = [UIColor yellowColor];
         [self addSubview:self.iconImgV];
         
         self.titleLb = [[UILabel alloc] init];

@@ -69,7 +69,9 @@
  */
 -(void)initNavitionBar
 {
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style: UIBarButtonItemStylePlain target:self action:@selector(saveData)];
+    self.navigationItem.title = @"采集信息详情";
+    
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"上传" style: UIBarButtonItemStylePlain target:self action:@selector(saveData)];
     self.navigationItem.rightBarButtonItem = rightItem;
     
     //下一级的返回按钮
@@ -373,11 +375,13 @@
     [dict setObject:@"keykeykeykey" forKey:@"keys"];
     
     if (self.actionType == kActionTypeAdd) {
-        [[SpotTableHelper sharedInstance] insertDataWithDictionary:dict];
-        NSString *releteid = [NSString stringWithFormat:@"%ld",(long)[[SpotTableHelper sharedInstance] getMaxIdOfRecords]];
-        [self saveVoice:self.audioVO releteId:releteid releteTable:nil];
-        [self saveImages:self.images releteId:releteid releteTable:nil];
-        
+        BOOL result = NO;
+        result = [[SpotTableHelper sharedInstance] insertDataWithDictionary:dict];
+        if (result) {
+            NSString *releteid = [NSString stringWithFormat:@"%ld",(long)[[SpotTableHelper sharedInstance] getMaxIdOfRecords]];
+            [self saveVoice:self.audioVO releteId:releteid releteTable:nil];
+            [self saveImages:self.images releteId:releteid releteTable:nil];
+        }
     }else{
         [[SpotTableHelper sharedInstance] updateDataWithDictionary:dict];
         
@@ -387,49 +391,46 @@
         [[PictureTableHelper sharedInstance] deleteDataByReleteTable:nil Releteid:tempArr[0]];
         [self saveImages:self.images releteId:tempArr[0] releteTable:nil];
     }
-   // [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
     
     
     
-    //////////////////////////////////////////  测试  //////////////////////////////////////////
-    AFHTTPRequestOperationManager *manaer = [AFHTTPRequestOperationManager manager];
-    manaer.responseSerializer = [AFHTTPResponseSerializer serializer];
-   //__block NSMutableArray *times = [[NSMutableArray alloc] init];
-   // [times addObject:@"测试"];
-    //NSArray*times = @[@"1",@"2"];
-  __block  NSMutableDictionary *parameters =[[NSMutableDictionary alloc] initWithDictionary:
-                                      @{
-                                        @"key":@"sfsafdasdf",
-                                        }
-                                      ];
-    
-    [manaer POST:@"http://192.168.2.17:8080/eers/pointinfo" parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        NSMutableArray *times = [[NSMutableArray alloc] init];
-        for (int i =0; i < self.images.count; i++) {
-            PictureVO *vo = self.images[i];
-            NSData *data = vo.imageData;
-            [formData appendPartWithFileData:data name:@"file" fileName:[NSString stringWithFormat:@"%@.jpg",vo.name] mimeType:@"image/jpeg"];
-            [times addObject:@"images"];
-        }
-        
-        [formData appendPartWithFileData:self.audioVO.audioData name:@"file" fileName:[NSString stringWithFormat:@"%@.mp3",self.audioVO.name] mimeType:@"audio/mpeg3"];
-        [times addObject:@"audio"];
-        NSLog(@"%@",parameters);
-        [parameters setObject:times forKey:@"1234556666777777"];
-                NSLog(@"%@",parameters);
-    
-    } success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSLog(@"--------------%@",responseObject);
-        NSLog(@"12-----------%@",operation.request.HTTPBody);
-        
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
-        NSLog(@"Error: %@", [error debugDescription]);
-        NSLog(@"Error: %@", [error localizedDescription]);
-    }];
-    
-
-    
+//    //////////////////////////////////////////  测试  //////////////////////////////////////////
+//    AFHTTPRequestOperationManager *manaer = [AFHTTPRequestOperationManager manager];
+//    manaer.responseSerializer = [AFHTTPResponseSerializer serializer];
+//   //__block NSMutableArray *times = [[NSMutableArray alloc] init];
+//   // [times addObject:@"测试"];
+//    //NSArray*times = @[@"1",@"2"];
+//  __block  NSMutableDictionary *parameters =[[NSMutableDictionary alloc] initWithDictionary:
+//                                      @{
+//                                        @"key":@"sfsafdasdf",
+//                                        }
+//                                      ];
+//    
+//    [manaer POST:@"http://192.168.2.17:8080/eers/pointinfo" parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+//        NSMutableArray *times = [[NSMutableArray alloc] init];
+//        for (int i =0; i < self.images.count; i++) {
+//            PictureVO *vo = self.images[i];
+//            NSData *data = vo.imageData;
+//            [formData appendPartWithFileData:data name:@"file" fileName:[NSString stringWithFormat:@"%@.jpg",vo.name] mimeType:@"image/jpeg"];
+//            [times addObject:@"images"];
+//        }
+//        
+//        [formData appendPartWithFileData:self.audioVO.audioData name:@"file" fileName:[NSString stringWithFormat:@"%@.mp3",self.audioVO.name] mimeType:@"audio/mpeg3"];
+//        [times addObject:@"audio"];
+//        NSLog(@"%@",parameters);
+//        [parameters setObject:times forKey:@"1234556666777777"];
+//                NSLog(@"%@",parameters);
+//    
+//    } success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+//        NSLog(@"--------------%@",responseObject);
+//        NSLog(@"12-----------%@",operation.request.HTTPBody);
+//        
+//    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+//        NSLog(@"%@",error);
+//        NSLog(@"Error: %@", [error debugDescription]);
+//        NSLog(@"Error: %@", [error localizedDescription]);
+//    }];
 }
 
 

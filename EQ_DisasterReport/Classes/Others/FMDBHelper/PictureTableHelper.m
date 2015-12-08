@@ -139,7 +139,7 @@
  */
 -(BOOL) deleteImageByAttribute:(NSString *)attribute value:(NSString *)value
 {
-    BOOL result = NO;
+    BOOL result = YES;
     NSString *picFilepath;
     if ([db open])
     {

@@ -17,7 +17,17 @@
 
 @interface CollectInfoViewController ()<MenuViewDelegate>
 
-@property(nonatomic,strong)NSMutableArray *dataProvider;   // tableview数据源
+@property(strong,nonatomic)NSMutableArray *dataProvider;   // tableview数据源
+
+//@property(strong,nonatomic)NSMutableArray *selectedDatas;   //  选中的所有cell的数据
+
+@property(strong,nonatomic)UIBarButtonItem *backItem;
+
+@property(strong,nonatomic)UIBarButtonItem *cancelItem;
+
+@property(strong,nonatomic)UIBarButtonItem *rightItem;
+
+@property(assign,nonatomic)BOOL isAllSelected;
 
 @end
 
@@ -26,7 +36,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initNaviBar];
+
     self.tableView.tableFooterView = [[UIView alloc] init];
+    self.tableView.allowsMultipleSelectionDuringEditing = YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -36,6 +48,12 @@
     [self fetchData];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+        [self initToolBar];
+}
+
 #pragma mark 初始化方法、setter和getter方法
 /**
  *  初始化导航栏
@@ -43,21 +61,34 @@
 -(void)initNaviBar
 {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    self.navigationController.navigationBar.barTintColor = HMColor(79, 127, 175);
+    self.navigationController.navigationBar.barTintColor = HMColor(99, 148, 225);
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 
     //左侧按钮
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
-    self.navigationItem.leftBarButtonItem = leftItem;
+    self.cancelItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelAllSelect)];
+    self.backItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = self.backItem;
     //右侧按钮
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(showMenu)];
-    self.navigationItem.rightBarButtonItem = rightItem;
+     self.rightItem= [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(showMenu)];
+    self.navigationItem.rightBarButtonItem = self.rightItem;
     //下一级的返回按钮
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = item;
 
     self.navigationItem.title = @"采集信息列表";
+}
+
+/**
+ *  底部工具栏
+ */
+-(void)initToolBar
+{
+    UIBarButtonItem *leftToolbarItem = [[UIBarButtonItem alloc] initWithTitle:@"全选" style: UIBarButtonItemStylePlain target:self action:@selector(selectAllItem)];
+    UIBarButtonItem *rightToolbarItem = [[UIBarButtonItem alloc] initWithTitle:@"删除" style: UIBarButtonItemStylePlain target:self action:@selector(deleteSelectedItem)];
+    UIBarButtonItem *flexibleSpaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    [self setToolbarItems:@[leftToolbarItem,flexibleSpaceItem,rightToolbarItem] animated:YES];
 }
 
 /**
@@ -70,6 +101,17 @@
     }
     return _dataProvider;
 }
+
+///**
+// *  selectedDatas的 getter 方法
+// */
+//-(NSMutableArray *)selectedDatas
+//{
+//    if (!_selectedDatas) {
+//        _selectedDatas = [[NSMutableArray alloc] init];
+//    }
+//    return _selectedDatas;
+//}
 
 #pragma mark 协议方法
 #pragma mark - TableViewDataSource
@@ -99,6 +141,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"didSelectRowAtIndexPath调用了吗");
     if (self.tableView.isEditing) {
         return;
     }
@@ -109,6 +152,12 @@
     [self.navigationController pushViewController:spotInfoVC animated:YES];
 }
 
+-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"didDeselectRowAtIndexPath调用了吗");
+    self.isAllSelected = NO;
+}
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
@@ -116,23 +165,13 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         SpotInforModel *model = self.dataProvider[indexPath.row];
-        BOOL result = NO;
-        result = [[PictureTableHelper sharedInstance] deleteImageByAttribute:@"releteid" value:model.pointid];
+        BOOL result = [self deleteItemByModel:model];
         if (result) {
-           result = [[VoiceTableHelper sharedInstance] deleteVoiceByAttribute:@"releteid" value:model.pointid];
-            if (result) {
-               result = [[SpotTableHelper sharedInstance] deleteDataByAttribute:@"pointid" value:model.pointid];
-                if (result) {
-                    [self.dataProvider removeObjectAtIndex:indexPath.row];
-                    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-                }
-            }
-        }
-        
-        if (!result) {
+            [self.dataProvider removeObjectAtIndex:indexPath.row];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+        }else{
             [[[UIAlertView alloc] initWithTitle:nil message:@"删除失败！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil] show];
         }
-        
     }
 }
 
@@ -148,8 +187,15 @@
         spotInfoVC.actionType = kActionTypeAdd;  //设置页面类型为新增
         [self.navigationController pushViewController:spotInfoVC animated:YES];
     }else if (idx == 1){
-        self.tableView.allowsMultipleSelectionDuringEditing = YES;
+        
+        if (self.dataProvider.count == 0) {
+            return;
+        }
+        
         self.tableView.editing = YES;
+        [self.navigationController setToolbarHidden:NO animated:YES];
+        [self.navigationItem setRightBarButtonItem:nil animated:YES];
+        [self.navigationItem setLeftBarButtonItem:self.cancelItem animated:YES];
     }
 }
 
@@ -172,10 +218,67 @@
  */
 -(void)showMenu
 {
-    MenuView *menuView = [[MenuView alloc] initWithTitles:@[@"新增",@"删除"] titleIcons:@[@"headIcon",@"headIcon"]];
+    MenuView *menuView = [[MenuView alloc] initWithTitles:@[@"新增",@"删除"] titleIcons:@[@"edit_icon",@"delete_icon"]];
     menuView.delegate = self;
     UIWindow *window = [[UIApplication sharedApplication]keyWindow];
     [menuView showMenuViewInView:window frame:CGRectMake(0, 55, window.width, window.height - 55)];
+}
+
+/**
+ *  全选
+ */
+-(void)selectAllItem
+{
+    if (self.isAllSelected) {
+        return;
+    }
+    for (int i = 0; i<self.dataProvider.count; i++) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
+        
+        [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+    }
+    self.isAllSelected = !self.isAllSelected;
+    NSLog(@"全选");
+}
+
+/**
+ *  删除选中的
+ */
+-(void)deleteSelectedItem
+{
+    NSLog(@"delete");
+    NSArray *arr = [self.tableView indexPathsForSelectedRows];
+    NSLog(@"dataProvider个数%d",(int)self.dataProvider.count);
+    NSLog(@"选中个数%d",(int)arr.count);
+    NSLog(@"可见个数%d",(int) [self.tableView visibleCells].count);
+    
+    NSArray *selectedIndexPaths = [self.tableView indexPathsForSelectedRows];
+    if (selectedIndexPaths.count == 0 || selectedIndexPaths==nil) {
+        return;
+    }
+     NSLog(@"delete");
+    NSMutableArray *deleteDatas = [[NSMutableArray alloc] init];
+    for (NSIndexPath *indexpath in selectedIndexPaths) {
+        [deleteDatas addObject:self.dataProvider[indexpath.row]];
+    }
+    
+    for (SpotInforModel *model in deleteDatas) {
+        [self deleteItemByModel:model];
+        [self.dataProvider removeObject:model];
+    }
+    [self.tableView reloadData];
+    [self cancelAllSelect];
+}
+
+/**
+ * 取消
+ */
+-(void)cancelAllSelect
+{
+    self.tableView.editing = NO;
+    [self.navigationController setToolbarHidden:YES animated:YES];
+    [self.navigationItem setRightBarButtonItem:self.rightItem animated:YES];
+    [self.navigationItem setLeftBarButtonItem:self.backItem animated:YES];
 }
 
 /**
@@ -186,6 +289,21 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+/**
+ *  删除数据
+ */
+-(BOOL)deleteItemByModel:(SpotInforModel *)model
+{
+    BOOL result = NO;
+    result = [[PictureTableHelper sharedInstance] deleteImageByAttribute:@"releteid" value:model.pointid];
+    if (result) {
+        result = [[VoiceTableHelper sharedInstance] deleteVoiceByAttribute:@"releteid" value:model.pointid];
+        if (result) {
+            result = [[SpotTableHelper sharedInstance] deleteDataByAttribute:@"pointid" value:model.pointid];
+        }
+    }
+    return result;
+}
 
 -(void)dealloc
 {

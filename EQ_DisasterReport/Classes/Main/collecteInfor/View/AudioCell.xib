@@ -17,10 +17,10 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Re-9m-J7e" customClass="D3RecordButton">
                         <rect key="frame" x="15" y="8" width="290" height="40.5"/>
                         <animations/>
-                        <color key="backgroundColor" red="0.38823529410000002" green="0.58039215690000001" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.38823529411764707" green="0.58039215686274503" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrv-Rg-cD1">
-                        <rect key="frame" x="15" y="8" width="216" height="40.5"/>
+                        <rect key="frame" x="15" y="8" width="191" height="40.5"/>
                         <animations/>
                         <state key="normal" backgroundImage="fs_chat_bubble"/>
                         <connections>
@@ -28,21 +28,21 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="gjkh" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wz8-Y6-g82">
-                        <rect key="frame" x="236" y="16" width="24" height="24.5"/>
+                        <rect key="frame" x="211" y="16" width="24" height="24.5"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ser-di-1SW">
-                        <rect key="frame" x="265" y="8" width="40" height="40.5"/>
+                        <rect key="frame" x="240" y="8" width="65" height="40.5"/>
                         <animations/>
-                        <color key="backgroundColor" red="0.89604749179999998" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.38823529411764707" green="0.58039215686274503" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="40" id="vzq-dt-VTI"/>
+                            <constraint firstAttribute="width" constant="65" id="vzq-dt-VTI"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <state key="normal" title="重录">
+                        <state key="normal" title="重新录制">
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>

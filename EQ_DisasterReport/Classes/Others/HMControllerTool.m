@@ -29,10 +29,10 @@
 + (void)setLoginViewController
 {
     LoginViewController *loginVC = [[LoginViewController alloc] init];
-    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
+    //UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
     // 切换控制器
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     //将其设置为当前窗口的跟视图控制器
-    window.rootViewController = navVC;
+    window.rootViewController = loginVC;
 }
 @end

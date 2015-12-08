@@ -32,12 +32,12 @@
 
 -(void)setCellModel:(SpotInforModel *)cellModel
 {
-    self.pointIdLb.text = [NSString stringWithFormat:@"调查点ID:%@",cellModel.pointid];
-    self.timeLb.text= [NSString stringWithFormat:@"调查时间:%@",cellModel.collecttime];
+    self.pointIdLb.text = [NSString stringWithFormat:@"%@",cellModel.pointid];
+    self.timeLb.text= [NSString stringWithFormat:@"%@",cellModel.collecttime];
     self.lonLb.text = [NSString stringWithFormat:@"经度:%@",cellModel.lon];
     self.latLb.text = [NSString stringWithFormat:@"纬度:%@",cellModel.lat];
-    self.levelLb.text = [NSString stringWithFormat:@"震级:%@",cellModel.level];
-    self.addrLb.text = [NSString stringWithFormat:@"地址:%@",cellModel.address];
+    self.levelLb.text = [NSString stringWithFormat:@"%@",cellModel.level];
+    self.addrLb.text = [NSString stringWithFormat:@"%@",cellModel.address];
 }
 
 @end

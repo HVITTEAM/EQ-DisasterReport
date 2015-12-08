@@ -24,7 +24,7 @@
     // Do any additional setup after loading the view from its nib.
     [self initTableView];
     [self initNaviBar];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
 }
 
