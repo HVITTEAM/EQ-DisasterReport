@@ -19,6 +19,7 @@
 - (void)awakeFromNib {
     // Initialization code
     self.contentTextField.delegate = self;
+    [self.contentTextField addTarget:self action:@selector(textChange:) forControlEvents:UIControlEventEditingChanged];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -83,15 +84,29 @@
     return self.contentTextField.text;
 }
 
+-(void)textChange:(UITextField *)textField
+{
+    self.cellModel.contentStr = textField.text;
+    NSLog(@"self.cellModel.contentStr-----------%@",self.cellModel.contentStr);
+}
+
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
     return YES;
 }
 
--(void)textFieldDidEndEditing:(UITextField *)textField
+-(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    self.cellModel.contentStr = textField.text;
+    if ([self.delegate respondsToSelector:@selector(beginEditCellContent:)]) {
+        [self.delegate beginEditCellContent:self];
+    }
 }
+
+
+//-(void)textFieldDidEndEditing:(UITextField *)textField
+//{
+//    self.cellModel.contentStr = textField.text;
+//}
 
 @end

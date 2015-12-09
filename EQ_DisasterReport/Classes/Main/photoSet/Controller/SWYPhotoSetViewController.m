@@ -65,7 +65,7 @@
 -(void)initNaviBar
 {
     self.navigationItem.title = @"照片墙";
-    self.navigationController.navigationBar.translucent = NO;
+    //self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
@@ -89,6 +89,7 @@
     leftView.image = [UIImage imageNamed:@"search_icon"];
     searchTextField.leftViewMode = UITextFieldViewModeAlways;
     searchTextField.leftView = leftView;
+    searchTextField.placeholder = @"搜索地点";
     self.navigationItem.titleView = searchTextField;
 }
 

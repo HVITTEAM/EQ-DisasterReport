@@ -6,8 +6,9 @@
 //  Copyright (c) 2015年 董徐维. All rights reserved.
 //
 
-#define cellHeight 70
-#define cellWidth 70
+//#define cellHeight 70
+//#define cellWidth 70
+#define kCellMargin 10;
 
 #import "ImageCollectionView.h"
 #import "ImgeCollectinViewFlowLayout.h"
@@ -46,7 +47,8 @@
 -(void)initCollectionView
 {
     ImgeCollectinViewFlowLayout *flowlayout = [[ImgeCollectinViewFlowLayout alloc] init];
-    flowlayout.itemSize = CGSizeMake(cellWidth, cellHeight);
+    //flowlayout.itemSize = CGSizeMake(cellWidth, cellHeight);
+    
     self.collectionView.collectionViewLayout = flowlayout;
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"SQCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"collectionCellID"];
@@ -101,11 +103,14 @@
         PictureVO *vo = self.dataProvider[indexPath.row];
         //创建缩略图来显示
         UIImage *img = [[UIImage alloc] initWithData:vo.imageData];
-        cell.imgView.image = [img scaleImageToSize:CGSizeMake(cellWidth,cellHeight)];
+        CGFloat w = [[UIScreen mainScreen] bounds].size.width - 5 *kCellMargin;
+        NSInteger cellWidth =floor(w/5);
+        cell.imgView.image = [img scaleImageToSize:CGSizeMake(cellWidth,cellWidth)];
 
       }
     return cell;
 }
+
 
 #pragma mark --UICollectionViewDelegate
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -131,6 +136,16 @@
         [self.parentVC presentViewController:browserVC animated:YES completion:^{
         }];
      }
+}
+
+#pragma mark --UICollectionViewDelegateFlowLayout
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat w = [[UIScreen mainScreen] bounds].size.width - 5 *kCellMargin;
+    NSInteger cellWidth =floor(w/4);
+    NSLog(@"--------++++++++++++++++++++%d",(int)cellWidth);
+    return CGSizeMake(cellWidth, cellWidth);
+    
 }
 
 -(void)SQCollectionCell:(SQCollectionCell *)cell deletePhotoWithIndexpath:(NSIndexPath *)indexpath

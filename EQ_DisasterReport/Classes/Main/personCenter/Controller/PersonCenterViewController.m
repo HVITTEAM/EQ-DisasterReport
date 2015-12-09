@@ -38,16 +38,21 @@
 
 -(void)initHeadView
 {
-    self.tableView.contentInset = UIEdgeInsetsMake(250, 0, 0, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(224, 0, 0, 0);
     self.headView = [[[NSBundle mainBundle] loadNibNamed:@"PersonCenterHeadView" owner:self options:nil] lastObject];
-    self.headView.frame = CGRectMake(0, -250, MTScreenW, 250);
+    self.headView.frame = CGRectMake(0, -224, MTScreenW, 224);
+    UIImage *bkimage = [UIImage imageNamed:@"personCenterHeadBK"];
+    self.headView.headBKImageView.image = [bkimage resizableImageWithCapInsets:UIEdgeInsetsZero resizingMode:UIImageResizingModeStretch];
     //[self.tableView addSubview:self.headView];
     [self.tableView insertSubview:self.headView atIndex:0];
 }
 
--(void)viewDidAppear:(BOOL)animated
+-(void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
+    
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
 }
 
 /**
@@ -56,13 +61,13 @@
 -(void)initNavigation
 {
     self.title = @"个人中心";
-    //self.navigationController.navigationBar.barTintColor = HMColor(99, 148, 225);
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    self.navigationController.navigationBar.barTintColor = HMColor(99, 148, 225);
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
@@ -123,7 +128,7 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat y = scrollView.contentOffset.y;
-    if (y<=-250) {
+    if (y<=-224) {
         CGRect frame = self.headView.frame;
         frame.size.height = -y;
         frame.origin.y = y;

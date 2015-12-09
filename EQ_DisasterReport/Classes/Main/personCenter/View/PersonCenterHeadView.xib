@@ -19,7 +19,6 @@
                     <rect key="frame" x="137" y="152" width="45" height="18"/>
                     <animations/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headIcon_0" translatesAutoresizingMaskIntoConstraints="NO" id="Uru-fe-HaH">
@@ -45,6 +44,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="headBKImageView" destination="g2o-Ig-7cw" id="XAu-gL-gdk"/>
                 <outlet property="userIcon" destination="Uru-fe-HaH" id="5Sb-xm-crI"/>
             </connections>
             <point key="canvasLocation" x="280" y="191"/>

@@ -15,15 +15,22 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="229"/>
                     <animations/>
                 </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dOs-JP-pWF">
+                    <rect key="frame" x="0.0" y="184" width="320" height="45"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="7FL-vQ-U89"/>
+                    </constraints>
+                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xpa-AX-kRR">
-                    <rect key="frame" x="45" y="195" width="275" height="16"/>
+                    <rect key="frame" x="45" y="204" width="275" height="16"/>
                     <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location_icon" translatesAutoresizingMaskIntoConstraints="NO" id="vD2-7c-Vvr">
-                    <rect key="frame" x="15" y="187" width="20" height="32"/>
+                    <rect key="frame" x="15" y="192" width="20" height="32"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="6vf-Ei-bXK"/>
@@ -34,14 +41,17 @@
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="dOs-JP-pWF" firstAttribute="leading" secondItem="bgg-ZA-MSn" secondAttribute="leading" id="I2p-QY-bM2"/>
+                <constraint firstAttribute="bottom" secondItem="dOs-JP-pWF" secondAttribute="bottom" id="KNm-Vw-GOe"/>
                 <constraint firstItem="T0h-e8-8xC" firstAttribute="leading" secondItem="bgg-ZA-MSn" secondAttribute="leading" id="NdY-N0-TLG"/>
                 <constraint firstItem="Xpa-AX-kRR" firstAttribute="leading" secondItem="vD2-7c-Vvr" secondAttribute="trailing" constant="10" id="UY0-uc-g0m"/>
                 <constraint firstAttribute="trailing" secondItem="Xpa-AX-kRR" secondAttribute="trailing" id="ZPY-i2-1WC"/>
                 <constraint firstAttribute="trailing" secondItem="T0h-e8-8xC" secondAttribute="trailing" id="dUU-14-4xU"/>
                 <constraint firstItem="T0h-e8-8xC" firstAttribute="top" secondItem="bgg-ZA-MSn" secondAttribute="top" id="gNr-4W-xMY"/>
+                <constraint firstAttribute="trailing" secondItem="dOs-JP-pWF" secondAttribute="trailing" id="hlB-Hf-Mpr"/>
                 <constraint firstItem="vD2-7c-Vvr" firstAttribute="leading" secondItem="bgg-ZA-MSn" secondAttribute="leading" constant="15" id="l68-2L-BqV"/>
-                <constraint firstItem="Xpa-AX-kRR" firstAttribute="centerY" secondItem="vD2-7c-Vvr" secondAttribute="centerY" id="nek-QM-qHm"/>
-                <constraint firstAttribute="bottom" secondItem="vD2-7c-Vvr" secondAttribute="bottom" constant="10" id="qSQ-7x-xW2"/>
+                <constraint firstItem="Xpa-AX-kRR" firstAttribute="centerY" secondItem="vD2-7c-Vvr" secondAttribute="centerY" constant="4" id="nek-QM-qHm"/>
+                <constraint firstAttribute="bottom" secondItem="vD2-7c-Vvr" secondAttribute="bottom" constant="5" id="qSQ-7x-xW2"/>
                 <constraint firstAttribute="bottom" secondItem="T0h-e8-8xC" secondAttribute="bottom" id="wnM-ep-dmg"/>
             </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
@@ -49,6 +59,7 @@
             <connections>
                 <outlet property="addressLb" destination="Xpa-AX-kRR" id="bb3-yf-Kg3"/>
                 <outlet property="bigImagV" destination="T0h-e8-8xC" id="THq-DQ-FxD"/>
+                <outlet property="gradientBKView" destination="dOs-JP-pWF" id="x5C-us-1U9"/>
             </connections>
             <point key="canvasLocation" x="261" y="154.5"/>
         </view>

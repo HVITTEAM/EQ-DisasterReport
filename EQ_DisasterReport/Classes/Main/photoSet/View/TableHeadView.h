@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *bigImagV;    //头部大图 view
 @property (weak, nonatomic) IBOutlet UILabel *addressLb;       //地址label
 @property (strong,nonatomic)NSString *bigimageName;            //大图名字
+@property (weak, nonatomic) IBOutlet UIImageView *gradientBKView;
 
 @property(weak,nonatomic)id<TableHeadViewDelegate>delegate;
 @end

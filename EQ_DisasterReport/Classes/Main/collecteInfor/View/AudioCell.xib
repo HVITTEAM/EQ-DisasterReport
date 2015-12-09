@@ -27,7 +27,7 @@
                             <action selector="playAudio:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="yhQ-B3-bXP"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="gjkh" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wz8-Y6-g82">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="gjkh" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wz8-Y6-g82">
                         <rect key="frame" x="211" y="16" width="24" height="24.5"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -37,7 +37,7 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ser-di-1SW">
                         <rect key="frame" x="240" y="8" width="65" height="40.5"/>
                         <animations/>
-                        <color key="backgroundColor" red="0.38823529411764707" green="0.58039215686274503" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.89604749179999998" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="65" id="vzq-dt-VTI"/>
                         </constraints>

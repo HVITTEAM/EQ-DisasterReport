@@ -10,5 +10,6 @@
 
 @interface PersonCenterHeadView : UIView
 @property (weak, nonatomic) IBOutlet UIImageView *userIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *headBKImageView;
 
 @end

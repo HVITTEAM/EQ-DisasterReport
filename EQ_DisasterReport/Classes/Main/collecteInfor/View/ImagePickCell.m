@@ -8,6 +8,7 @@
 
 #import "ImagePickCell.h"
 #import "ImageCollectionView.h"
+#define kCellMargin 10
 
 @interface ImagePickCell ()
 @property(nonatomic,strong)ImageCollectionView *imagePickVC;
@@ -24,7 +25,10 @@
         }
     };
     UICollectionView *collectionView = (UICollectionView *)self.imagePickVC.view;
-    collectionView.frame = CGRectMake(0, 0, MTScreenW, 240);
+    
+    CGFloat w = [[UIScreen mainScreen] bounds].size.width - 5 *kCellMargin;
+    NSInteger cellWidth =floor(w/4);
+    collectionView.frame = CGRectMake(0, 0, MTScreenW, cellWidth *3+4*kCellMargin);
     [self addSubview:collectionView];
     
     self.clipsToBounds = YES;

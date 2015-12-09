@@ -117,6 +117,6 @@
         </view>
     </objects>
     <resources>
-        <image name="headIcon_0" width="60" height="60"/>
+        <image name="headIcon_0" width="80" height="80"/>
     </resources>
 </document>

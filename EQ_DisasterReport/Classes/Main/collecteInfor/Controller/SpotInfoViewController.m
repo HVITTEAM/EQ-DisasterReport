@@ -22,8 +22,10 @@
 #import "PictureTableHelper.h"
 #import "AppDelegate.h"
 
+#define kCellMargin 10
 
-@interface SpotInfoViewController ()<UITableViewDataSource,UITableViewDelegate,FillContentViewControllerDelegate,ImagePickCellDelegate,AudioCellDelegate>
+
+@interface SpotInfoViewController ()<UITableViewDataSource,UITableViewDelegate,FillContentViewControllerDelegate,ImagePickCellDelegate,AudioCellDelegate,SpotTextCellDelegate>
 @property(nonatomic,strong)UITableView *infoTableView;
 @property(nonatomic,strong)NSArray *dataProvider;              //section 0 数据源
 @property(nonatomic,strong)NSMutableArray *images;            //图片数组
@@ -181,6 +183,9 @@
             });
         });
     }else{
+        
+        self.navigationItem.rightBarButtonItem.title = @"完成";
+        
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"YYYY-MM-dd hh:mm:ss"];
         NSDate *currentdate = [NSDate date];
@@ -216,6 +221,7 @@
         SpotCellModel *model = self.dataProvider[indexPath.row];
         SpotTextCell *cell = [SpotTextCell cellWithTableView:tableView model:model];
         [cell setIndexPath:indexPath rowsInSection:(int)self.dataProvider.count];
+        cell.delegate = self;
         if (indexPath.row == 0) {
             cell.userInteractionEnabled = NO;
         }
@@ -265,13 +271,17 @@
         return height>50?height:50;
     }else if(indexPath.section == 1){
         NSUInteger cellNum = self.images.count+1;
+        
+        CGFloat w = [[UIScreen mainScreen] bounds].size.width - 5 *kCellMargin;
+        NSInteger cellHeight =floor(w/4);
+        
         CGFloat h = 90;
-        if (cellNum<=3) {
-            h = 90;
-        }else if (cellNum<=6){
-            h = 170;
+        if (cellNum<=4) {
+            h = cellHeight + 2*kCellMargin;
+        }else if (cellNum<=8){
+            h = 2 * cellHeight + 3*kCellMargin;
         }else{
-            h = 250;
+            h = 3 * cellHeight + 4*kCellMargin;
         }
         return h;
     }else{
@@ -303,9 +313,16 @@
     return 5;
 }
 
+#pragma mark - SpotTextCellDelegate
+-(void)beginEditCellContent:(SpotTextCell *)cell
+{
+    self.navigationItem.rightBarButtonItem.title = @"完成";
+}
+
 #pragma mark - FillContentViewControllerDelegate
 -(void)fillContentViewController:(FillContentViewController *)fillContentVC filledContent:(NSString *)content indexPath:(NSIndexPath *)indexpath
 {
+    self.navigationItem.rightBarButtonItem.title = @"完成";
    ((SpotCellModel *)self.dataProvider[7]).contentStr = content;
     [self.infoTableView reloadRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationNone];
 }

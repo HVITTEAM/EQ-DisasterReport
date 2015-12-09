@@ -17,6 +17,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                         <animations/>
                     </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradientBK_black" translatesAutoresizingMaskIntoConstraints="NO" id="fpD-Py-bPf">
+                        <rect key="frame" x="0.0" y="175" width="200" height="25"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="Klf-dl-eQ9"/>
+                        </constraints>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="西湖区" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Fl-jS-g7w">
                         <rect key="frame" x="10" y="183" width="180" height="12"/>
                         <animations/>
@@ -34,7 +41,10 @@
                 <constraint firstAttribute="trailing" secondItem="TG3-R4-WNe" secondAttribute="trailing" id="6tv-Bp-838"/>
                 <constraint firstAttribute="bottom" secondItem="1Fl-jS-g7w" secondAttribute="bottom" constant="5" id="Td8-iB-O5A"/>
                 <constraint firstItem="1Fl-jS-g7w" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="Xhr-Ku-cm7"/>
+                <constraint firstItem="fpD-Py-bPf" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ZA2-gb-FbY"/>
+                <constraint firstAttribute="trailing" secondItem="fpD-Py-bPf" secondAttribute="trailing" id="coX-vW-Jnl"/>
                 <constraint firstItem="TG3-R4-WNe" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="lxj-yk-9Ne"/>
+                <constraint firstAttribute="bottom" secondItem="fpD-Py-bPf" secondAttribute="bottom" id="oSL-sz-n1f"/>
                 <constraint firstItem="TG3-R4-WNe" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="txq-Rg-aeE"/>
                 <constraint firstAttribute="bottom" secondItem="TG3-R4-WNe" secondAttribute="bottom" id="vk0-GD-dQP"/>
             </constraints>
@@ -46,4 +56,7 @@
             <point key="canvasLocation" x="272" y="307"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="gradientBK_black" width="15" height="7"/>
+    </resources>
 </document>

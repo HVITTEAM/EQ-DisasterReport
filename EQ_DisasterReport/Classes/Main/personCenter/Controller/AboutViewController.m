@@ -23,6 +23,14 @@
     self.tableView.backgroundColor = HMGlobalBg;
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:nil];
+    
+}
+
 -(void)initHeadView
 {
     

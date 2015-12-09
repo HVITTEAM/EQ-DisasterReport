@@ -33,6 +33,14 @@
     self.tableView.tableFooterView = footBtn;
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:nil];
+    
+}
+
 /**
  *  dataProvider的 getter 方法
  */

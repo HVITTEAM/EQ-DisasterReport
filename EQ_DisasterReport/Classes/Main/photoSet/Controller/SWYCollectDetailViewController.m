@@ -40,12 +40,14 @@
     self.detailTableView.dataSource = self;
     self.detailTableView.backgroundColor = HMGlobalBg;
     [self.view addSubview:self.detailTableView];
-    self.detailTableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"table_bk_image"]];
+//    self.detailTableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"table_bk_image"]];
     
     //设置tableView头部视图
     TableHeadView *headView = [[[NSBundle mainBundle] loadNibNamed:@"TableHeadViw" owner:nil options:nil] lastObject];
     headView.bigimageName = self.headImageName;
     headView.addressLb.text = [NSString stringWithFormat:@"杭州西湖区文三西路%d",arc4random()%1000];
+    UIImage *gradientImg = [UIImage imageNamed:@"gradientBK_black"];
+    headView.gradientBKView.image = [gradientImg resizableImageWithCapInsets:UIEdgeInsetsZero resizingMode:UIImageResizingModeStretch];
     headView.delegate = self;
     self.detailTableView.tableHeaderView = headView;
 }
