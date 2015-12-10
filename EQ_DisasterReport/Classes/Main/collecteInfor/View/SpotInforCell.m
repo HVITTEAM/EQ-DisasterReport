@@ -10,7 +10,7 @@
 #import "SpotInforModel.h"
 
 @interface SpotInforCell ()
-@property (weak, nonatomic) IBOutlet UILabel *pointIdLb;
+@property (weak, nonatomic) IBOutlet UILabel *phoneNumLb;
 @property (weak, nonatomic) IBOutlet UILabel *timeLb;
 @property (weak, nonatomic) IBOutlet UILabel *lonLb;
 @property (weak, nonatomic) IBOutlet UILabel *latLb;
@@ -32,8 +32,8 @@
 
 -(void)setCellModel:(SpotInforModel *)cellModel
 {
-    self.pointIdLb.text = [NSString stringWithFormat:@"%@",cellModel.pointid];
-    self.timeLb.text= [NSString stringWithFormat:@"%@",cellModel.collecttime];
+    self.phoneNumLb.text = [NSString stringWithFormat:@"%@",cellModel.phoneNum];
+    self.timeLb.text= [NSString stringWithFormat:@"%@",cellModel.occurTime];
     self.lonLb.text = [NSString stringWithFormat:@"经度:%@",cellModel.lon];
     self.latLb.text = [NSString stringWithFormat:@"纬度:%@",cellModel.lat];
     self.levelLb.text = [NSString stringWithFormat:@"%@",cellModel.level];

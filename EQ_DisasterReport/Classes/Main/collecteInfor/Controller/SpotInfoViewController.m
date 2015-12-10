@@ -89,32 +89,32 @@
 {
     if (!_dataProvider) {
         SpotCellModel *model0 = [[SpotCellModel alloc] init];
-        model0.titleStr = @"采集信息ID:";
-        model0.placeHolderStr = @"采集点ID将自动生成";
+        model0.titleStr = @"手机号:";
+        model0.placeHolderStr = @"手机号";
         
         SpotCellModel *model1 = [[SpotCellModel alloc] init];
         model1.titleStr = @"发震时刻:";
-        model1.placeHolderStr = @"发震时间";
+        model1.placeHolderStr = @"发震时刻";
         
         SpotCellModel *model2 = [[SpotCellModel alloc] init];
-        model2.titleStr = @"震级(级):";
-        model2.placeHolderStr = @"输入震级";
+        model2.titleStr = @"烈度(级):";
+        model2.placeHolderStr = @"输入烈度";
         
         SpotCellModel *model3 = [[SpotCellModel alloc] init];
-        model3.titleStr = @"震深(m):";
-        model3.placeHolderStr = @"输入震深";
+        model3.titleStr = @"经度(度):";
+        model3.placeHolderStr = @"输入经度";
         
         SpotCellModel *model4 = [[SpotCellModel alloc] init];
-        model4.titleStr = @"经度(度):";
-        model4.placeHolderStr = @"输入经度";
+        model4.titleStr = @"纬度(度):";
+        model4.placeHolderStr = @"输入纬度";
         
         SpotCellModel *model5 = [[SpotCellModel alloc] init];
-        model5.titleStr = @"纬度(度):";
-        model5.placeHolderStr = @"输入纬度";
+        model5.titleStr = @"地址:";
+        model5.placeHolderStr = @"输入地址";
         
         SpotCellModel *model6 = [[SpotCellModel alloc] init];
-        model6.titleStr = @"地址:";
-        model6.placeHolderStr = @"输入地址";
+        model6.titleStr = @"详情描述:";
+        model6.placeHolderStr = @"详情描述";
     
         SpotCellModel *model7 = [[SpotCellModel alloc] init];
         model7.titleStr = @"备注:";
@@ -138,15 +138,16 @@
 
 -(void)setSpotInfoModel:(SpotInforModel *)spotInfoModel
 {
+    //将传过来的模型中的数据给数据源
     _spotInfoModel = spotInfoModel;
-    ((SpotCellModel *)self.dataProvider[0]).contentStr = self.spotInfoModel.pointid;
-    ((SpotCellModel *)self.dataProvider[1]).contentStr = self.spotInfoModel.collecttime;
+    ((SpotCellModel *)self.dataProvider[0]).contentStr = self.spotInfoModel. phoneNum;
+    ((SpotCellModel *)self.dataProvider[1]).contentStr = self.spotInfoModel.occurTime;
     ((SpotCellModel *)self.dataProvider[2]).contentStr = self.spotInfoModel.level;
-    ((SpotCellModel *)self.dataProvider[3]).contentStr = self.spotInfoModel.depth;
-    ((SpotCellModel *)self.dataProvider[4]).contentStr = self.spotInfoModel.lon;
-    ((SpotCellModel *)self.dataProvider[5]).contentStr = self.spotInfoModel.lat;
-    ((SpotCellModel *)self.dataProvider[6]).contentStr = self.spotInfoModel.address;
-    ((SpotCellModel *)self.dataProvider[7]).contentStr = self.spotInfoModel.descr;
+    ((SpotCellModel *)self.dataProvider[3]).contentStr = self.spotInfoModel.lon;
+    ((SpotCellModel *)self.dataProvider[4]).contentStr = self.spotInfoModel.lat;
+    ((SpotCellModel *)self.dataProvider[5]).contentStr = self.spotInfoModel.address;
+    ((SpotCellModel *)self.dataProvider[6]).contentStr = self.spotInfoModel.descr;
+    ((SpotCellModel *)self.dataProvider[7]).contentStr = self.spotInfoModel.note;
 }
 
 /**
@@ -186,16 +187,16 @@
         
         self.navigationItem.rightBarButtonItem.title = @"完成";
         
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"YYYY-MM-dd hh:mm:ss"];
-        NSDate *currentdate = [NSDate date];
-        NSString *dateStr = [formatter stringFromDate:currentdate];
-        ((SpotCellModel *)self.dataProvider[1]).contentStr = dateStr;
+//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//        [formatter setDateFormat:@"YYYY-MM-dd hh:mm:ss"];
+//        NSDate *currentdate = [NSDate date];
+//        NSString *dateStr = [formatter stringFromDate:currentdate];
+//        ((SpotCellModel *)self.dataProvider[1]).contentStr = dateStr;
         
         AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         CLLocationCoordinate2D coordinate = appdelegate.currentLocation.coordinate;
-        ((SpotCellModel *)self.dataProvider[4]).contentStr = [NSString stringWithFormat:@"%f",coordinate.longitude];
-        ((SpotCellModel *)self.dataProvider[5]).contentStr = [NSString stringWithFormat:@"%f",coordinate.latitude];
+        ((SpotCellModel *)self.dataProvider[3]).contentStr = [NSString stringWithFormat:@"%f",coordinate.longitude];
+        ((SpotCellModel *)self.dataProvider[4]).contentStr = [NSString stringWithFormat:@"%f",coordinate.latitude];
     }
 
 }
@@ -217,16 +218,13 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section ==0 && indexPath.row !=7){
+    if (indexPath.section ==0 && indexPath.row <=5){
         SpotCellModel *model = self.dataProvider[indexPath.row];
         SpotTextCell *cell = [SpotTextCell cellWithTableView:tableView model:model];
         [cell setIndexPath:indexPath rowsInSection:(int)self.dataProvider.count];
         cell.delegate = self;
-        if (indexPath.row == 0) {
-            cell.userInteractionEnabled = NO;
-        }
         return cell;
-    }else if(indexPath.section ==0 && indexPath.row ==7){
+    }else if(indexPath.section ==0 && indexPath.row >=6){
         SpotCellModel *model = self.dataProvider[indexPath.row];
         SpotLabelCell *cell = [SpotLabelCell cellWithTableView:tableView model:model];
         [cell setIndexPath:indexPath rowsInSection:(int)self.dataProvider.count];
@@ -259,9 +257,9 @@
 #pragma mark - UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section ==0 && indexPath.row !=7) {
+    if (indexPath.section ==0 && indexPath.row <=5) {
         return 50;
-    }else if(indexPath.section ==0 && indexPath.row ==7){
+    }else if(indexPath.section ==0 && indexPath.row >=6){
          static SpotLabelCell *calulateCell = nil;
         SpotCellModel *model = self.dataProvider[indexPath.row];
         if (!calulateCell) {
@@ -291,10 +289,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 7) {
+    if (indexPath.section ==0 && indexPath.row >=6) {
         FillContentViewController *fillVC = [[FillContentViewController alloc] init];
         fillVC.delegate = self;
-        fillVC.titleStr = @"评价内容";
+        fillVC.titleStr = @"输入内容";
         fillVC.indexpath = indexPath;
         
         SpotLabelCell *cell = [self.infoTableView cellForRowAtIndexPath:indexPath];
@@ -323,7 +321,11 @@
 -(void)fillContentViewController:(FillContentViewController *)fillContentVC filledContent:(NSString *)content indexPath:(NSIndexPath *)indexpath
 {
     self.navigationItem.rightBarButtonItem.title = @"完成";
-   ((SpotCellModel *)self.dataProvider[7]).contentStr = content;
+    if (indexpath.row == 6) {
+        ((SpotCellModel *)self.dataProvider[6]).contentStr = content;
+    }else{
+        ((SpotCellModel *)self.dataProvider[7]).contentStr = content;
+    }
     [self.infoTableView reloadRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
@@ -381,14 +383,14 @@
     
     NSMutableDictionary *dict = [NSMutableDictionary new];
     
-    [dict setObject:tempArr[0] forKey:@"pointid"];
-    [dict setObject:tempArr[1] forKey:@"collecttime"];
+    [dict setObject:tempArr[0] forKey:@"phoneNum"];
+    [dict setObject:tempArr[1] forKey:@"occurTime"];
     [dict setObject:tempArr[2] forKey:@"level"];
-    [dict setObject:tempArr[3] forKey:@"depth"];
-    [dict setObject:tempArr[4] forKey:@"lon"];
-    [dict setObject:tempArr[5] forKey:@"lat"];
-    [dict setObject:tempArr[6] forKey:@"address"];
-    [dict setObject:tempArr[7] forKey:@"descr"];
+    [dict setObject:tempArr[3] forKey:@"lon"];
+    [dict setObject:tempArr[4] forKey:@"lat"];
+    [dict setObject:tempArr[5] forKey:@"address"];
+    [dict setObject:tempArr[6] forKey:@"descr"];
+    [dict setObject:tempArr[7] forKey:@"note"];
     [dict setObject:@"keykeykeykey" forKey:@"keys"];
     
     if (self.actionType == kActionTypeAdd) {

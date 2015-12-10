@@ -8,19 +8,27 @@
 
 //采集点：采集点ID(pointid)、关键字（主题）(keys)、地址(address)、经纬度(lat  lon)、烈度等级(level)、简要描述(description)、采集时间(collecttime)、图片ID(photoid)、语音ID(voiceid)；
 
+
+//发震时刻、经度、纬度、地址、上报手机号、烈度、备注 note
+//详细信息描述 descr
+
+
 #import "SpotTableHelper.h"
 #import "SpotInforModel.h"
 
 #define TABLENAME         @"SPOTTABLE"
 #define POINTID           @"pointid"
-#define COLLECTTIME       @"collecttime"
-#define LEVEL             @"level"
-#define DEPTH             @"depth"
-#define LAT               @"lat"
+#define OCCURTIME         @"occurTime"
 #define LON               @"lon"
+#define LAT               @"lat"
 #define ADDRESS           @"address"
-#define DESCRIPTION       @"descr"
+#define LEVEL             @"level"
+#define PHONENUM          @"phoneNum"
+#define NOTE              @"note"
+#define DESCR             @"descr"
 #define KEYS              @"keys"
+//#define DEPTH             @"depth"
+//#define COLLECTTIME       @"collecttime"
 
 @implementation SpotTableHelper
 +(instancetype)sharedInstance
@@ -50,7 +58,7 @@
 - (void)createTable
 {
     if ([db open]) {
-        NSString *sqlCreateTable =  [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@'INTEGER PRIMARY KEY AUTOINCREMENT, '%@' TEXT, '%@' TEXT,'%@' TEXT,'%@' TEXT, '%@' TEXT,'%@' TEXT,'%@' TEXT,'%@' TEXT)",TABLENAME,POINTID,COLLECTTIME,LEVEL,DEPTH,LAT,LON,ADDRESS,DESCRIPTION,KEYS];
+        NSString *sqlCreateTable =  [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@'INTEGER PRIMARY KEY AUTOINCREMENT, '%@' TEXT, '%@' TEXT,'%@' TEXT,'%@' TEXT, '%@' TEXT,'%@' TEXT,'%@' TEXT,'%@' TEXT,'%@' TEXT)",TABLENAME,POINTID,OCCURTIME,LON,LAT,ADDRESS,LEVEL,PHONENUM,NOTE,DESCR,KEYS];
         BOOL res = [db executeUpdate:sqlCreateTable];
         if (!res) {
             NSLog(@"error when creating spot table");
@@ -69,25 +77,27 @@
         FMResultSet *set = [db executeQuery:sqlSelectStr];
         while ([set next]) {
             NSString * pointid     = [set stringForColumn:POINTID];
-            NSString * collecttime = [set stringForColumn:COLLECTTIME];
-            NSString * level       = [set stringForColumn:LEVEL];
-            NSString * depth       = [set stringForColumn:DEPTH];
-            NSString * lat         = [set stringForColumn:LAT];
-            NSString * lon         = [set stringForColumn:LON];
-            NSString * address     = [set stringForColumn:ADDRESS];
-            NSString * description = [set stringForColumn:DESCRIPTION];
+            NSString * occurTime = [set stringForColumn:OCCURTIME];
+            NSString * lon       = [set stringForColumn:LON];
+            NSString * lat       = [set stringForColumn:LAT];
+            NSString * address         = [set stringForColumn:ADDRESS];
+            NSString * level         = [set stringForColumn:LEVEL];
+            NSString * phoneNum     = [set stringForColumn:PHONENUM];
+            NSString * note      =    [set stringForColumn:NOTE];
+            NSString * descr        = [set stringForColumn:DESCR];
             NSString * keys        = [set stringForColumn:KEYS];
             
             NSMutableDictionary *dict = [NSMutableDictionary new];
             
             [dict setObject:pointid forKey:@"pointid"];
-            [dict setObject:collecttime forKey:@"collecttime"];
-            [dict setObject:level forKey:@"level"];
-            [dict setObject:depth forKey:@"depth"];
-            [dict setObject:lat forKey:@"lat"];
+            [dict setObject:occurTime forKey:@"occurTime"];
             [dict setObject:lon forKey:@"lon"];
+            [dict setObject:lat forKey:@"lat"];
             [dict setObject:address forKey:@"address"];
-            [dict setObject:description forKey:@"descr"];
+            [dict setObject:level forKey:@"level"];
+            [dict setObject:phoneNum forKey:@"phoneNum"];
+            [dict setObject:note forKey:@"note"];
+            [dict setObject:descr forKey:@"descr"];
             [dict setObject:keys forKey:@"keys"];
             
             [array addObject:[SpotInforModel objectWithKeyValues:dict]];
@@ -99,13 +109,14 @@
     return array;
 }
 
+
 -(BOOL)insertDataWithDictionary:(NSDictionary *)dict
 {
     BOOL res = NO;
     if ([db open]) {
         NSString *sqlInsertStr= [NSString stringWithFormat:
-                         @"INSERT INTO '%@' ('%@', '%@', '%@', '%@', '%@','%@', '%@', '%@')  VALUES ('%@', '%@','%@', '%@', '%@', '%@', '%@', '%@')",
-                        TABLENAME, COLLECTTIME,LEVEL,DEPTH,LAT,LON,ADDRESS,DESCRIPTION,KEYS,dict[@"collecttime"],dict[@"level"],dict[@"depth"], dict[@"lat"], dict[@"lon"],dict[@"address"], dict[@"descr"], dict[@"keys"]];
+                         @"INSERT INTO '%@' ('%@', '%@', '%@', '%@', '%@','%@', '%@', '%@', '%@')  VALUES ('%@', '%@','%@', '%@', '%@', '%@', '%@', '%@', '%@')",
+                        TABLENAME, OCCURTIME,LON,LAT,ADDRESS,LEVEL,PHONENUM,NOTE,DESCR,KEYS,dict[@"occurTime"],dict[@"lon"],dict[@"lat"], dict[@"address"], dict[@"level"],dict[@"phoneNum"], dict[@"note"], dict[@"descr"],dict[@"keys"]];
         res = [db executeUpdate:sqlInsertStr];
         if (!res) {
              NSLog(@"error when insert spot table");
@@ -123,7 +134,7 @@
     if ([db open])
     {
         NSString *sqlUpdateStr = [NSString stringWithFormat:
-            @"UPDATE %@ SET %@ = '%@',%@ = '%@', %@='%@', %@='%@', %@='%@', %@='%@', %@='%@', %@='%@' WHERE %@ = '%@' ",TABLENAME,COLLECTTIME,dict[@"collecttime"],LEVEL,dict[@"level"],DEPTH,dict[@"depth"],LAT,dict[@"lat"],LON,dict[@"lon"],ADDRESS,dict[@"address"],DESCRIPTION,dict[@"descr"],KEYS,dict[@"keys"],POINTID,dict[@"pointid"]];
+            @"UPDATE %@ SET %@ = '%@',%@ = '%@', %@='%@', %@='%@', %@='%@', %@='%@', %@='%@', %@='%@',%@='%@' WHERE %@ = '%@' ",TABLENAME,OCCURTIME,dict[@"occurTime"],LON,dict[@"lon"],LAT,dict[@"lat"],ADDRESS,dict[@"address"],LEVEL,dict[@"level"],PHONENUM,dict[@"phoneNum"],NOTE,dict[@"note"],DESCR,dict[@"descr"],KEYS,dict[@"keys"],POINTID,dict[@"pointid"]];
         
         NSLog(@"%@",sqlUpdateStr);
         res = [db executeUpdate:sqlUpdateStr];
@@ -171,7 +182,5 @@
     [db close];
     return maxid;
 }
-
-
 
 @end
