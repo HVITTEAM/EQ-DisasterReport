@@ -21,15 +21,19 @@
 #import "AudioVO.h"
 #import "PictureTableHelper.h"
 #import "AppDelegate.h"
+#import "AddPointinfoNTHelper.h"
+#import "SWYMultipartFormObject.h"
+#import "SWYRequestParams.h"
 
 #define kCellMargin 10
 
-
-@interface SpotInfoViewController ()<UITableViewDataSource,UITableViewDelegate,FillContentViewControllerDelegate,ImagePickCellDelegate,AudioCellDelegate,SpotTextCellDelegate>
+@interface SpotInfoViewController ()<UITableViewDataSource,UITableViewDelegate,FillContentViewControllerDelegate,ImagePickCellDelegate,AudioCellDelegate,SpotTextCellDelegate,SWYNetworkReformerDelegate,SWYNetworkParamSourceDelegate,SWYNetworkCallBackDelegate>
 @property(nonatomic,strong)UITableView *infoTableView;
 @property(nonatomic,strong)NSArray *dataProvider;              //section 0 数据源
 @property(nonatomic,strong)NSMutableArray *images;            //图片数组
 @property(nonatomic,strong)AudioVO *audioVO;                //声音数据
+
+@property(strong,nonatomic)AddPointinfoNTHelper *addPointinfoNTHelper;
 
 @end
 
@@ -93,8 +97,8 @@
         model0.placeHolderStr = @"手机号";
         
         SpotCellModel *model1 = [[SpotCellModel alloc] init];
-        model1.titleStr = @"发震时刻:";
-        model1.placeHolderStr = @"发震时刻";
+        model1.titleStr = @"采集时间:";
+        model1.placeHolderStr = @"采集时间";
         
         SpotCellModel *model2 = [[SpotCellModel alloc] init];
         model2.titleStr = @"烈度(级):";
@@ -172,6 +176,17 @@
     return _audioVO;
 }
 
+
+-(AddPointinfoNTHelper *)addPointinfoNTHelper
+{
+    if (!_addPointinfoNTHelper) {
+        _addPointinfoNTHelper = [[AddPointinfoNTHelper alloc] init];
+        _addPointinfoNTHelper.callBackDelegate = self;
+        _addPointinfoNTHelper.paramSource = self;
+    }
+    return _addPointinfoNTHelper;
+}
+
 -(void)showData
 {
     if (self.actionType == kActionTypeShow) {
@@ -187,14 +202,14 @@
         
         self.navigationItem.rightBarButtonItem.title = @"完成";
         
-//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//        [formatter setDateFormat:@"YYYY-MM-dd hh:mm:ss"];
-//        NSDate *currentdate = [NSDate date];
-//        NSString *dateStr = [formatter stringFromDate:currentdate];
-//        ((SpotCellModel *)self.dataProvider[1]).contentStr = dateStr;
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"YYYY-MM-dd hh:mm:ss"];
+        NSDate *currentdate = [NSDate date];
+        NSString *dateStr = [formatter stringFromDate:currentdate];
+        ((SpotCellModel *)self.dataProvider[1]).contentStr = dateStr;
         
         AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-        CLLocationCoordinate2D coordinate = appdelegate.currentLocation.coordinate;
+        CLLocationCoordinate2D coordinate = appdelegate.currentCoordinate;
         ((SpotCellModel *)self.dataProvider[3]).contentStr = [NSString stringWithFormat:@"%f",coordinate.longitude];
         ((SpotCellModel *)self.dataProvider[4]).contentStr = [NSString stringWithFormat:@"%f",coordinate.latitude];
     }
@@ -359,12 +374,82 @@
     }
 }
 
+#pragma mark SWYNetworkParamSourceDelegate
+- (SWYRequestParams *)paramsForRequest:(SWYBaseNetworkHelper *)networkHelper
+{
+    NSMutableArray *files = [[NSMutableArray alloc] init];
+    NSMutableArray *voiceTimes = [[NSMutableArray alloc] init];
+    NSMutableArray *photoTimes = [[NSMutableArray alloc] init];
+    
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc]
+                             initWithDictionary:@{
+                                                  @"keys":@"key",
+                                                  @"address":((SpotCellModel *)self.dataProvider[5]).contentStr,
+                                                  @"latitude":((SpotCellModel *)self.dataProvider[4]).contentStr,
+                                                  @"longitude":((SpotCellModel *)self.dataProvider[3]).contentStr,
+                                                  @"earthquakeintensity":((SpotCellModel *)self.dataProvider[2]).contentStr,
+                                                  @"description":((SpotCellModel *)self.dataProvider[6]).contentStr,
+                                                  @"collecttime":((SpotCellModel *)self.dataProvider[1]).contentStr,
+                                                  @"earthquakeid":@"earthquakeid",
+                                                  @"voicetime":voiceTimes,
+                                                  //@"voicefile":@[],
+                                                  @"phototime":photoTimes
+                                                  //@"photofile":@[]
+                                                }];
+
+    for (PictureVO *picVO in self.images ) {
+        SWYMultipartFormObject *multiObject = [[SWYMultipartFormObject alloc] init];
+        multiObject.fileData = picVO.imageData;
+        multiObject.name  = @"photofile";
+        multiObject.fileName = picVO.name;
+        multiObject.mimeType = @"image/jpeg";
+        [files addObject:multiObject];
+        [photoTimes addObject:picVO.photoTime];
+    }
+    
+    [voiceTimes addObject:self.audioVO.audioTime];
+    
+    SWYMultipartFormObject *audioMultiObject = [[SWYMultipartFormObject alloc] init];
+    audioMultiObject.fileData = self.audioVO.audioData;
+    audioMultiObject.name = @"voicefile";
+    audioMultiObject.fileName = self.audioVO.name;
+    audioMultiObject.mimeType = @"audio/mpeg3";
+    [files addObject:audioMultiObject];
+
+    SWYRequestParams *params = [[SWYRequestParams alloc] initWithParams:dict files:files];
+    return params;
+}
+
+#pragma mark SWYNetworkCallBackDelegate
+- (void)requestDidSuccess:(SWYBaseNetworkHelper *)networkHelper
+{
+
+}
+
+- (void)requestDidFailed:(SWYBaseNetworkHelper *)networkHelper
+{
+    
+}
+
+#pragma mark SWYNetworkReformerDelegate
+- (id)networkHelper:(SWYBaseNetworkHelper *)networkHelper reformData:(id)data
+{
+    return data;
+}
+
+
 #pragma mark 事件方法
 /**
  *  保存采集点的数据
  */
 -(void)saveData
 {
+    if ([self.navigationItem.rightBarButtonItem.title isEqualToString:@"上传"]) {
+        [self.addPointinfoNTHelper startSendRequest];
+        return;
+    }
+    
+    
     NSMutableArray *tempArr = [NSMutableArray array];
     for (int i= 0; i<self.dataProvider.count;i++) {
         NSString *string = ((SpotCellModel *)self.dataProvider[i]).contentStr;
@@ -402,6 +487,7 @@
             [self saveImages:self.images releteId:releteid releteTable:nil];
         }
     }else{
+        dict[@"pointid"] = self.spotInfoModel.pointid;
         [[SpotTableHelper sharedInstance] updateDataWithDictionary:dict];
         
         [[VoiceTableHelper sharedInstance] deleteDataByReleteTable:nil Releteid:tempArr[0]];
@@ -472,7 +558,7 @@
             //实例化一个NSDateFormatter对象
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             //设定时间格式,这里可以设置成自己需要的格式
-            [dateFormatter setDateFormat:@"yyyy-MM-dd HH-mm-ss"];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
             //用[NSDate date]可以获取系统当前时间
             NSString *currentDate = [dateFormatter stringFromDate:[NSDate date]];
             if (result)
@@ -502,6 +588,7 @@
     {
         PictureVO *vo = [[PictureVO alloc] init];
         vo.name = pic.photoName;
+        vo.photoTime = pic.phototime;
         
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
         NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg", pic.photoName]];
@@ -522,7 +609,7 @@
     }
     //实例化一个NSDateFormatter对象
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH-mm-ss"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     //用[NSDate date]可以获取系统当前时间
     NSString *voiceTime = [dateFormatter stringFromDate:[NSDate date]];
 
@@ -555,6 +642,7 @@
         NSData *voicedata = [NSData dataWithContentsOfFile:voiceModel.voicePath];
         self.audioVO.audioData = voicedata;
         self.audioVO.name = voiceModel.voiceName;
+        self.audioVO.audioTime = voiceModel.voicetime;
     }
     return self.audioVO;
  }

@@ -12,9 +12,15 @@
 #import "LoginViewController.h"
 #import "HMControllerTool.h"
 
-#define MAPKEY @"4bc6c5298b30d483ce75d69247d5b2df"
-@interface AppDelegate ()
+#define APIKey @"4bc6c5298b30d483ce75d69247d5b2df"
+@interface AppDelegate ()<AMapLocationManagerDelegate>
+{
+    AMapLocationManager *_locationManager;
+    NSTimer *_timer;
+    //LocationHelper *_locationHelp;
+    BOOL _isFirst;
 
+}
 @end
 
 @implementation AppDelegate
@@ -28,8 +34,14 @@
     //显示窗口
     [self.window makeKeyAndVisible];
     
-    //配置地图key
-    [self configureAPIKey];
+    _isFirst = YES;
+    
+    //配置key
+    [MAMapServices sharedServices].apiKey = APIKey;
+    [AMapLocationServices sharedServices].apiKey = APIKey;
+    //开启定位
+    [self setupLocationManager];
+    
     [HMControllerTool setLoginViewController];
     
 
@@ -58,18 +70,56 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (void)configureAPIKey
+
+#pragma mark - MALocationManager Delegate
+
+- (void)amapLocationManager:(AMapLocationManager *)manager didFailWithError:(NSError *)error
 {
-    if ([MAPKEY length] == 0)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"apiKey为空，请检查key是否正确设置" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            
-            [alert show];
-        });
-    }
-    
-    [MAMapServices sharedServices].apiKey = MAPKEY;
+    NSLog(@"定位失败");
 }
+
+- (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location
+{
+    NSLog(@"定位成功%f    %f",location.coordinate.latitude,location.coordinate.longitude);
+    self.currentCoordinate = location.coordinate;
+    if (_isFirst) {
+        _isFirst = NO;
+        //开启定时发送位置信息功能
+        //[self addTimer];
+    }
+}
+
+
+#pragma mark - 定时器方法
+
+//-(void)addTimer{
+//    _locationHelp = [[LocationHelper alloc] init];
+//    _timer = [NSTimer scheduledTimerWithTimeInterval:300 target:_locationHelp selector:@selector(uploadUserinfo) userInfo:nil repeats:YES];
+//    [_timer fire];
+//}
+//
+//-(void)removeTimer{
+//    [_timer invalidate];
+//}
+
+
+#pragma mark - 内部方法
+-(void)setupLocationManager{
+    _locationManager = [[AMapLocationManager alloc] init];
+    if ([CLLocationManager locationServicesEnabled]) {
+        _locationManager.delegate = self;
+        _locationManager.distanceFilter = 20.0;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        
+        [_locationManager setPausesLocationUpdatesAutomatically:NO];
+        [_locationManager setAllowsBackgroundLocationUpdates:YES];
+        
+        [_locationManager startUpdatingLocation];
+    }else{
+        //失败
+        [[[UIAlertView alloc] initWithTitle:@"提醒" message:@"定位失败，请确定是否开启定位功能" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
+    }
+}
+
 
 @end

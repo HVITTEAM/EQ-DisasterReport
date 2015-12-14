@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import <MAMapKit/MAMapKit.h>
+#import <AMapLocationKit/AMapLocationKit.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (nonatomic, assign) CLLocation *currentLocation;    //用户当前位置
+@property (assign,nonatomic) CLLocationCoordinate2D  currentCoordinate;    //用户当前经纬度
 
+-(void)addTimer;
+-(void)removeTimer;
 
 @end
 

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface AudioVO : NSObject
+@property (nonatomic,copy) NSString *audioTime;
 @property (nonatomic,copy) NSString *name;
 @property (strong, nonatomic)NSData *audioData;
+
 @end

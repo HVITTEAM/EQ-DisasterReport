@@ -25,7 +25,9 @@
 		D2550BC61BEB2C9400904D35 /* SWYNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D2550BC51BEB2C9400904D35 /* SWYNavigationBar.m */; };
 		D2656EAA1BEBA2B400BA127F /* PhotoSetReusableHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2656EA81BEBA2B400BA127F /* PhotoSetReusableHeadView.m */; };
 		D2656EAB1BEBA2B400BA127F /* PhotoSetReusableHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2656EA91BEBA2B400BA127F /* PhotoSetReusableHeadView.xib */; };
+		D2756FED1C1EBBF900ED3DFB /* LocationNTHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D2756FEC1C1EBBF900ED3DFB /* LocationNTHelper.m */; };
 		D285F7FC1C0332A600421F06 /* HMControllerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D285F7FB1C0332A600421F06 /* HMControllerTool.m */; };
+		D28D17D91C1D101E0086C080 /* AMapLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D28D17D81C1D101E0086C080 /* AMapLocationKit.framework */; };
 		D296472B1BF17363004B8877 /* SpotInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D296472A1BF17363004B8877 /* SpotInfoViewController.m */; };
 		D29647321BF1739C004B8877 /* SpotLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D296472D1BF1739C004B8877 /* SpotLabelCell.m */; };
 		D29647331BF1739C004B8877 /* SpotLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D296472E1BF1739C004B8877 /* SpotLabelCell.xib */; };
@@ -100,6 +102,13 @@
 		D2D50E511C03153500D306A1 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D50E4F1C03153500D306A1 /* LoginViewController.m */; };
 		D2D50E521C03153500D306A1 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2D50E501C03153500D306A1 /* LoginViewController.xib */; };
 		D2D6B0F61BFC094C00B14A7E /* PhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D6B0F51BFC094C00B14A7E /* PhotoModel.m */; };
+		D2D888071C1E85BD00B919D4 /* SWYBaseNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D887FC1C1E85BD00B919D4 /* SWYBaseNetworkHelper.m */; };
+		D2D888081C1E85BD00B919D4 /* SWYMultipartFormObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D887FE1C1E85BD00B919D4 /* SWYMultipartFormObject.m */; };
+		D2D888091C1E85BD00B919D4 /* SWYNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D888011C1E85BD00B919D4 /* SWYNetworkEngine.m */; };
+		D2D8880A1C1E85BD00B919D4 /* SWYRequestParams.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D888031C1E85BD00B919D4 /* SWYRequestParams.m */; };
+		D2D8880B1C1E85BD00B919D4 /* SWYResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D888051C1E85BD00B919D4 /* SWYResponse.m */; };
+		D2D8880E1C1E875400B919D4 /* LoginactionNTHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D8880D1C1E875400B919D4 /* LoginactionNTHelper.m */; };
+		D2D888111C1E990C00B919D4 /* AddPointinfoNTHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D888101C1E990C00B919D4 /* AddPointinfoNTHelper.m */; };
 		D2EC414B1C153101002F5FA4 /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC414A1C153101002F5FA4 /* MenuView.m */; };
 		D2EC414E1C15597F002F5FA4 /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC414D1C15597F002F5FA4 /* MenuItem.m */; };
 		D2EC41511C1567EC002F5FA4 /* MenuContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC41501C1567EC002F5FA4 /* MenuContentView.m */; };
@@ -260,8 +269,11 @@
 		D2656EA71BEBA2B400BA127F /* PhotoSetReusableHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoSetReusableHeadView.h; sourceTree = "<group>"; };
 		D2656EA81BEBA2B400BA127F /* PhotoSetReusableHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoSetReusableHeadView.m; sourceTree = "<group>"; };
 		D2656EA91BEBA2B400BA127F /* PhotoSetReusableHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoSetReusableHeadView.xib; sourceTree = "<group>"; };
+		D2756FEB1C1EBBF900ED3DFB /* LocationNTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationNTHelper.h; sourceTree = "<group>"; };
+		D2756FEC1C1EBBF900ED3DFB /* LocationNTHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationNTHelper.m; sourceTree = "<group>"; };
 		D285F7FA1C0332A600421F06 /* HMControllerTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMControllerTool.h; sourceTree = "<group>"; };
 		D285F7FB1C0332A600421F06 /* HMControllerTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMControllerTool.m; sourceTree = "<group>"; };
+		D28D17D81C1D101E0086C080 /* AMapLocationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapLocationKit.framework; path = MAMap/AMapLocationKit.framework; sourceTree = "<group>"; };
 		D29647291BF17363004B8877 /* SpotInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotInfoViewController.h; sourceTree = "<group>"; };
 		D296472A1BF17363004B8877 /* SpotInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotInfoViewController.m; sourceTree = "<group>"; };
 		D296472C1BF1739C004B8877 /* SpotLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotLabelCell.h; sourceTree = "<group>"; };
@@ -373,6 +385,21 @@
 		D2D50E501C03153500D306A1 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		D2D6B0F41BFC094C00B14A7E /* PhotoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoModel.h; sourceTree = "<group>"; };
 		D2D6B0F51BFC094C00B14A7E /* PhotoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoModel.m; sourceTree = "<group>"; };
+		D2D887FB1C1E85BD00B919D4 /* SWYBaseNetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWYBaseNetworkHelper.h; sourceTree = "<group>"; };
+		D2D887FC1C1E85BD00B919D4 /* SWYBaseNetworkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWYBaseNetworkHelper.m; sourceTree = "<group>"; };
+		D2D887FD1C1E85BD00B919D4 /* SWYMultipartFormObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWYMultipartFormObject.h; sourceTree = "<group>"; };
+		D2D887FE1C1E85BD00B919D4 /* SWYMultipartFormObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWYMultipartFormObject.m; sourceTree = "<group>"; };
+		D2D887FF1C1E85BD00B919D4 /* SWYNetworkConfigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWYNetworkConfigure.h; sourceTree = "<group>"; };
+		D2D888001C1E85BD00B919D4 /* SWYNetworkEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWYNetworkEngine.h; sourceTree = "<group>"; };
+		D2D888011C1E85BD00B919D4 /* SWYNetworkEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWYNetworkEngine.m; sourceTree = "<group>"; };
+		D2D888021C1E85BD00B919D4 /* SWYRequestParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWYRequestParams.h; sourceTree = "<group>"; };
+		D2D888031C1E85BD00B919D4 /* SWYRequestParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWYRequestParams.m; sourceTree = "<group>"; };
+		D2D888041C1E85BD00B919D4 /* SWYResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWYResponse.h; sourceTree = "<group>"; };
+		D2D888051C1E85BD00B919D4 /* SWYResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWYResponse.m; sourceTree = "<group>"; };
+		D2D8880C1C1E875400B919D4 /* LoginactionNTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginactionNTHelper.h; sourceTree = "<group>"; };
+		D2D8880D1C1E875400B919D4 /* LoginactionNTHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginactionNTHelper.m; sourceTree = "<group>"; };
+		D2D8880F1C1E990C00B919D4 /* AddPointinfoNTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPointinfoNTHelper.h; sourceTree = "<group>"; };
+		D2D888101C1E990C00B919D4 /* AddPointinfoNTHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPointinfoNTHelper.m; sourceTree = "<group>"; };
 		D2EC41491C153101002F5FA4 /* MenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuView.h; sourceTree = "<group>"; };
 		D2EC414A1C153101002F5FA4 /* MenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuView.m; sourceTree = "<group>"; };
 		D2EC414C1C15597F002F5FA4 /* MenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuItem.h; sourceTree = "<group>"; };
@@ -583,6 +610,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D28D17D91C1D101E0086C080 /* AMapLocationKit.framework in Frameworks */,
 				D2A5C86D1BFDEEEF00C298CF /* MAMapKit.framework in Frameworks */,
 				D2AD16D71BF2FDF8000D2182 /* libmp3lame.a in Frameworks */,
 				D2AD16A71BF2DC7A000D2182 /* AVFoundation.framework in Frameworks */,
@@ -841,6 +869,46 @@
 			path = login;
 			sourceTree = "<group>";
 		};
+		D2D887E81C1E766400B919D4 /* networkCenter */ = {
+			isa = PBXGroup;
+			children = (
+				D2D887FA1C1E85BD00B919D4 /* networkHelper */,
+				D2D888061C1E85BD00B919D4 /* subNetworkHelper */,
+			);
+			path = networkCenter;
+			sourceTree = "<group>";
+		};
+		D2D887FA1C1E85BD00B919D4 /* networkHelper */ = {
+			isa = PBXGroup;
+			children = (
+				D2D887FD1C1E85BD00B919D4 /* SWYMultipartFormObject.h */,
+				D2D887FE1C1E85BD00B919D4 /* SWYMultipartFormObject.m */,
+				D2D888021C1E85BD00B919D4 /* SWYRequestParams.h */,
+				D2D888031C1E85BD00B919D4 /* SWYRequestParams.m */,
+				D2D888041C1E85BD00B919D4 /* SWYResponse.h */,
+				D2D888051C1E85BD00B919D4 /* SWYResponse.m */,
+				D2D887FB1C1E85BD00B919D4 /* SWYBaseNetworkHelper.h */,
+				D2D887FC1C1E85BD00B919D4 /* SWYBaseNetworkHelper.m */,
+				D2D888001C1E85BD00B919D4 /* SWYNetworkEngine.h */,
+				D2D888011C1E85BD00B919D4 /* SWYNetworkEngine.m */,
+				D2D887FF1C1E85BD00B919D4 /* SWYNetworkConfigure.h */,
+			);
+			path = networkHelper;
+			sourceTree = "<group>";
+		};
+		D2D888061C1E85BD00B919D4 /* subNetworkHelper */ = {
+			isa = PBXGroup;
+			children = (
+				D2D8880C1C1E875400B919D4 /* LoginactionNTHelper.h */,
+				D2D8880D1C1E875400B919D4 /* LoginactionNTHelper.m */,
+				D2D8880F1C1E990C00B919D4 /* AddPointinfoNTHelper.h */,
+				D2D888101C1E990C00B919D4 /* AddPointinfoNTHelper.m */,
+				D2756FEB1C1EBBF900ED3DFB /* LocationNTHelper.h */,
+				D2756FEC1C1EBBF900ED3DFB /* LocationNTHelper.m */,
+			);
+			path = subNetworkHelper;
+			sourceTree = "<group>";
+		};
 		D2EC97C01BE7061E00ED8661 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -892,6 +960,7 @@
 		D2EC97C41BE70C7300ED8661 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				D28D17D81C1D101E0086C080 /* AMapLocationKit.framework */,
 				D2A5C86C1BFDEEEF00C298CF /* MAMapKit.framework */,
 				D2EC98AD1BE7372C00ED8661 /* AMapSearchKit.framework */,
 				D2AD16BE1BF2FDF8000D2182 /* D3RecordBtutton */,
@@ -909,6 +978,7 @@
 		D2EC97C51BE70C7300ED8661 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				D2D887E81C1E766400B919D4 /* networkCenter */,
 				D2D50E471C03102500D306A1 /* login */,
 				D2EEA3521BF45C8100F2FD20 /* personCenter */,
 				D2EDC4B01BEC938800AEDFB4 /* collecteInfor */,
@@ -1425,6 +1495,11 @@
 					01EBA14C1BE6F4CA00F2701D = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = G688QXM6YK;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					01EBA1651BE6F4CA00F2701D = {
 						CreatedOnToolsVersion = 7.1;
@@ -1586,6 +1661,7 @@
 				D2EEA36B1BF45D2100F2FD20 /* HMCommonButtonItem.m in Sources */,
 				D2BFE57B1BE9DACF00B65E91 /* SWYPhotoSetViewController.m in Sources */,
 				D2EC989B1BE7117800ED8661 /* UIView+Extension.m in Sources */,
+				D2756FED1C1EBBF900ED3DFB /* LocationNTHelper.m in Sources */,
 				D2EC980C1BE70E6B00ED8661 /* SDWebImageDownloaderOperation.m in Sources */,
 				D2A5343B1C00C50800140F50 /* WebsitViewController.m in Sources */,
 				D2EC982A1BE70EFD00ED8661 /* FMDatabasePool.m in Sources */,
@@ -1593,9 +1669,12 @@
 				D2D50E511C03153500D306A1 /* LoginViewController.m in Sources */,
 				D2EC98981BE7117800ED8661 /* UIBarButtonItem+Extension.m in Sources */,
 				D2EC98061BE70E6B00ED8661 /* MKAnnotationView+WebCache.m in Sources */,
+				D2D8880B1C1E85BD00B919D4 /* SWYResponse.m in Sources */,
 				D2EC98091BE70E6B00ED8661 /* SDWebImageCompat.m in Sources */,
 				D2EC97E21BE70E4A00ED8661 /* AFURLResponseSerialization.m in Sources */,
 				D29647381BF173CE004B8877 /* SpotCellModel.m in Sources */,
+				D2D888091C1E85BD00B919D4 /* SWYNetworkEngine.m in Sources */,
+				D2D8880A1C1E85BD00B919D4 /* SWYRequestParams.m in Sources */,
 				D2EEA34F1BF42AC900F2FD20 /* SpotInforModel.m in Sources */,
 				D2EC98FC1BE75BD500ED8661 /* SWYMapViewController.m in Sources */,
 				D2A534361C00C37000140F50 /* UseHelpViewController.m in Sources */,
@@ -1640,6 +1719,7 @@
 				D2EC98131BE70E6B00ED8661 /* UIImageView+HighlightedWebCache.m in Sources */,
 				D296473F1BF196B2004B8877 /* ImagePickCell.m in Sources */,
 				D2EC980A1BE70E6B00ED8661 /* SDWebImageDecoder.m in Sources */,
+				D2D888111C1E990C00B919D4 /* AddPointinfoNTHelper.m in Sources */,
 				D29647611BF1B814004B8877 /* UzysAssetsViewCell.m in Sources */,
 				D2EC988C1BE7112700ED8661 /* MJRefreshConst.m in Sources */,
 				D2EC984B1BE7109A00ED8661 /* NSObject+MJClass.m in Sources */,
@@ -1649,10 +1729,12 @@
 				D2EC980D1BE70E6B00ED8661 /* SDWebImageManager.m in Sources */,
 				D2EC988D1BE7112700ED8661 /* UIScrollView+MJExtension.m in Sources */,
 				D285F7FC1C0332A600421F06 /* HMControllerTool.m in Sources */,
+				D2D888081C1E85BD00B919D4 /* SWYMultipartFormObject.m in Sources */,
 				D2EC97DE1BE70E4A00ED8661 /* AFNetworkReachabilityManager.m in Sources */,
 				D2EC982C1BE70EFD00ED8661 /* FMResultSet.m in Sources */,
 				D2EC98831BE7112700ED8661 /* MJRefreshAutoNormalFooter.m in Sources */,
 				D2550BC61BEB2C9400904D35 /* SWYNavigationBar.m in Sources */,
+				D2D888071C1E85BD00B919D4 /* SWYBaseNetworkHelper.m in Sources */,
 				01EBA1521BE6F4CA00F2701D /* main.m in Sources */,
 				D2EC98811BE7112700ED8661 /* MJRefreshHeader.m in Sources */,
 				D29647651BF1B814004B8877 /* UzysWrapperPickerController.m in Sources */,
@@ -1667,6 +1749,7 @@
 				D2EC98491BE7109A00ED8661 /* MJPropertyKey.m in Sources */,
 				D2EC981A1BE70EDC00ED8661 /* MBProgressHUD.m in Sources */,
 				D2EC98801BE7112700ED8661 /* MJRefreshFooter.m in Sources */,
+				D2D8880E1C1E875400B919D4 /* LoginactionNTHelper.m in Sources */,
 				D2656EAA1BEBA2B400BA127F /* PhotoSetReusableHeadView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

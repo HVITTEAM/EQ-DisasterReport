@@ -162,8 +162,8 @@
     {
         self.currentLocation = userLocation;
         
-        AppDelegate *appdel = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        appdel.currentLocation = userLocation.location;
+//        AppDelegate *appdel = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//        appdel.currentLocation = userLocation.location;
     }
 }
 
