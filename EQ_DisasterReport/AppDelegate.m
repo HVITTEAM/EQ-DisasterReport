@@ -7,24 +7,30 @@
 //
 
 #import "AppDelegate.h"
-#import "SWYMapViewController.h"
-#import <MAMapKit/MAMapKit.h>
 #import "LoginViewController.h"
 #import "HMControllerTool.h"
+#import "MapSearchAPIHelper.h"
+#import "LocationNTHelper.h"
+#import "SWYRequestParams.h"
+#import <AMapSearchKit/AMapSearchKit.h>
+#import "LoginUser.h"
 
 #define APIKey @"4bc6c5298b30d483ce75d69247d5b2df"
-@interface AppDelegate ()<AMapLocationManagerDelegate>
-{
-    AMapLocationManager *_locationManager;
-    NSTimer *_timer;
-    //LocationHelper *_locationHelp;
-    BOOL _isFirst;
+@interface AppDelegate ()<AMapLocationManagerDelegate,MapSearchAPIHelperDelegate,SWYNetworkCallBackDelegate,SWYNetworkReformerDelegate>
 
-}
+@property(strong,nonatomic)AMapLocationManager *locationManager;
+
+@property(strong,nonatomic)MapSearchAPIHelper *searchApiHelper;
+
+@property(strong,nonatomic)LocationNTHelper *locationHelp;
+
+@property(strong,nonatomic)NSTimer *timer;
+
+@property(assign,nonatomic)BOOL shouldAddTimer;
+
 @end
 
 @implementation AppDelegate
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -34,11 +40,12 @@
     //显示窗口
     [self.window makeKeyAndVisible];
     
-    _isFirst = YES;
+    _shouldAddTimer = YES;
     
     //配置key
     [MAMapServices sharedServices].apiKey = APIKey;
     [AMapLocationServices sharedServices].apiKey = APIKey;
+    [AMapSearchServices sharedServices].apiKey = APIKey;
     //开启定位
     [self setupLocationManager];
     
@@ -71,6 +78,16 @@
 }
 
 
+-(LocationNTHelper *)locationHelp
+{
+    if (!_locationHelp) {
+        _locationHelp = [[LocationNTHelper alloc] init];
+        _locationHelp.callBackDelegate = self;
+    }
+    return _locationHelp;
+}
+
+
 #pragma mark - MALocationManager Delegate
 
 - (void)amapLocationManager:(AMapLocationManager *)manager didFailWithError:(NSError *)error
@@ -82,25 +99,63 @@
 {
     NSLog(@"定位成功%f    %f",location.coordinate.latitude,location.coordinate.longitude);
     self.currentCoordinate = location.coordinate;
-    if (_isFirst) {
-        _isFirst = NO;
-        //开启定时发送位置信息功能
-        //[self addTimer];
+    if (_shouldAddTimer) {
+        if ([[LoginUser shareInstance].login_status isEqualToString:@"success"]) {
+            //开启定时发送位置信息功能
+            [self addTimer];
+            _shouldAddTimer = NO;
+        }
     }
+}
+
+#pragma mark - MapSearchAPIHelperDelegate
+
+-(void)mapSearchAPIHelper:(MapSearchAPIHelper *)searhApiHelper reverseGeocodeFail:(NSString *)errorMsg
+{
+
+}
+
+-(void)mapSearchAPIHelper:(MapSearchAPIHelper *)searhApiHelper reverseGeocodeSuccess:(NSString *)address
+{
+    NSDictionary *dict = @{
+                           @"address":address,
+                           @"latitude":[NSString stringWithFormat:@"%f",self.currentCoordinate.latitude],
+                           @"longitude":[NSString stringWithFormat:@"%f",self.currentCoordinate.longitude]
+                           };
+    SWYRequestParams *params = [[SWYRequestParams alloc] initWithParams:[dict mutableCopy] files:nil];
+    [self.locationHelp startSendRequestWithParams:params];
+}
+
+#pragma mark SWYNetworkCallBackDelegate
+- (void)requestDidSuccess:(SWYBaseNetworkHelper *)networkHelper
+{
+    id responseData = [networkHelper fetchDataWithReformer:self];
+    NSLog(@"AppDelegate  requestDidSuccess   %@",responseData);
+}
+
+- (void)requestDidFailed:(SWYBaseNetworkHelper *)networkHelper
+{
+    
+}
+
+#pragma mark SWYNetworkReformerDelegate
+- (id)networkHelper:(SWYBaseNetworkHelper *)networkHelper reformData:(id)data
+{
+    return data;
 }
 
 
 #pragma mark - 定时器方法
+-(void)addTimer{
+    _searchApiHelper = [[MapSearchAPIHelper alloc] init];
+    _searchApiHelper.delegate = self;
+    _timer = [NSTimer scheduledTimerWithTimeInterval:300 target:_searchApiHelper selector:@selector(reverseGeocodeWithCoordinate) userInfo:nil repeats:YES];
+    [_timer fire];
+}
 
-//-(void)addTimer{
-//    _locationHelp = [[LocationHelper alloc] init];
-//    _timer = [NSTimer scheduledTimerWithTimeInterval:300 target:_locationHelp selector:@selector(uploadUserinfo) userInfo:nil repeats:YES];
-//    [_timer fire];
-//}
-//
-//-(void)removeTimer{
-//    [_timer invalidate];
-//}
+-(void)removeTimer{
+    [_timer invalidate];
+}
 
 
 #pragma mark - 内部方法

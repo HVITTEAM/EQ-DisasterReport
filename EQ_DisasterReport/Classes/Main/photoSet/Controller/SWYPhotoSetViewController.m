@@ -11,10 +11,19 @@
 #import "PhotoSetHeadCell.h"
 #import "SWYCollectDetailViewController.h"
 #import "PhotoSetReusableHeadView.h"
+#import "PhotoinfoNTHelper.h"
+#import "SWYRequestParams.h"
+#import "PhotoSetModel.h"
+#import "UIImageView+WebCache.h"
 
-@interface SWYPhotoSetViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UITextFieldDelegate>
+@interface SWYPhotoSetViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UITextFieldDelegate,SWYNetworkCallBackDelegate,SWYNetworkParamSourceDelegate,SWYNetworkReformerDelegate>
+
 @property(nonatomic,strong)UICollectionView *photoCollectionView;
+
 @property(nonatomic,strong)NSMutableArray *dataProvider;
+
+@property(nonatomic,strong)PhotoinfoNTHelper *photoinfoHelper;
+
 @end
 
 @implementation SWYPhotoSetViewController
@@ -99,9 +108,20 @@
 -(NSMutableArray*)dataProvider
 {
     if (!_dataProvider) {
-        _dataProvider = [[NSMutableArray alloc] initWithArray:@[@"1.jpg",@"2.jpg",@"3.jpg",@"4.jpg",@"5.jpg",@"6.jpg",@"7.jpg",@"8.jpg",@"9.jpg",@"10.jpg",@"1.jpg",@"2.jpg",@"3.jpg",@"4.jpg",@"5.jpg",@"6.jpg",@"7.jpg",@"8.jpg",@"9.jpg",@"10.jpg"]];
+        //_dataProvider = [[NSMutableArray alloc] initWithArray:@[@"1.jpg",@"2.jpg",@"3.jpg",@"4.jpg",@"5.jpg",@"6.jpg",@"7.jpg",@"8.jpg",@"9.jpg",@"10.jpg",@"1.jpg",@"2.jpg",@"3.jpg",@"4.jpg",@"5.jpg",@"6.jpg",@"7.jpg",@"8.jpg",@"9.jpg",@"10.jpg"]];
+        _dataProvider = [[NSMutableArray alloc] init];
     }
     return _dataProvider;
+}
+
+-(PhotoinfoNTHelper *)photoinfoHelper
+{
+    if (!_photoinfoHelper) {
+        _photoinfoHelper = [[PhotoinfoNTHelper alloc] init];
+        _photoinfoHelper.callBackDelegate = self;
+        _photoinfoHelper.paramSource = self;
+    }
+    return _photoinfoHelper;
 }
 
 #pragma mark 协议方法
@@ -128,9 +148,16 @@
     }else{
         static NSString *photoSetCellId = @"photoSetCell";
         PhotoSetCell *cell = [self.photoCollectionView dequeueReusableCellWithReuseIdentifier:photoSetCellId forIndexPath:indexPath];
-        CGFloat imgvWidth = (MTScreenW-2)/3;
-        UIImage *img = [UIImage imageNamed:self.dataProvider[indexPath.row]];
-        cell.photoImageV.image = [img scaleImageToSize:CGSizeMake(imgvWidth, imgvWidth)];
+        
+        PhotoSetModel *model = self.dataProvider[indexPath.row];
+        
+        //CGFloat imgvWidth = (MTScreenW-2)/3;
+         //UIImage *img = [UIImage imageNamed:self.dataProvider[indexPath.row]];
+        //cell.photoImageV.image = [img scaleImageToSize:CGSizeMake(imgvWidth, imgvWidth)];
+        [cell.photoImageV sd_setImageWithURL:[NSURL URLWithString:model.photopath] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+            NSLog(@"%@",image);
+        }];
         return cell;
     }
 }
@@ -162,12 +189,70 @@
     return CGSizeMake((MTScreenW-2)/3, (MTScreenW-2)/3);
 }
 
-
+#pragma mark UITextFieldDelegate
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
     return YES;
 }
+
+#pragma mark SWYNetworkParamSourceDelegate
+- (SWYRequestParams *)paramsForRequest:(SWYBaseNetworkHelper *)networkHelper
+{
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc]
+                                 initWithDictionary:@{
+                                                      @"customtag":@"pagination",
+                                                      @"page":[NSString stringWithFormat:@"%d",(int)self.photoinfoHelper.nextPageNumber],
+                                                      @"rows":[NSString stringWithFormat:@"%d",(int)self.photoinfoHelper.numbersOfEachPage],
+                                                      
+                                                      //@"intelligentsearch":@[]
+                                                      }];
+    SWYRequestParams *params = [[SWYRequestParams alloc] initWithParams:dict files:nil];
+    
+    return params;
+}
+
+#pragma mark SWYNetworkCallBackDelegate
+- (void)requestDidSuccess:(SWYBaseNetworkHelper *)networkHelper
+{
+    NSMutableArray *newDataArr = [networkHelper fetchDataWithReformer:self];
+    if (self.photoinfoHelper.isFirstPage) {
+        self.dataProvider = newDataArr;
+    }else{
+        [self.dataProvider addObjectsFromArray:newDataArr];
+    }
+    
+    NSLog(@"%@",self.dataProvider);
+    
+    [self.photoCollectionView reloadData];
+    [self.photoCollectionView.header endRefreshing];
+
+    NSLog(@"SWYPhotoSetViewController  requestDidSuccess%@",self.dataProvider);
+}
+
+- (void)requestDidFailed:(SWYBaseNetworkHelper *)networkHelper
+{
+    
+}
+
+#pragma mark SWYNetworkReformerDelegate
+//对下载的原始数据进行重组，生成可直接使用的数据
+- (id)networkHelper:(SWYBaseNetworkHelper *)networkHelper reformData:(id)data
+{
+    NSMutableArray *photoSetArr = [[NSMutableArray alloc] init];
+    if ([data isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *dataDict = (NSDictionary *)data;
+        NSArray *tempArr = dataDict[@"rows"];
+        for (NSDictionary *dict in tempArr) {
+            PhotoSetModel *model = [[PhotoSetModel alloc] init];
+            model.photopath = [NSString stringWithFormat:@"%@%@",URL_base,dict[@"photopath"]];
+            model.pointid = dict[@"pointid"];
+            [photoSetArr addObject:model];
+        }
+    }
+    return photoSetArr;
+}
+
 
 #pragma mark 事件方法
 /**
@@ -175,8 +260,8 @@
  */
 -(void)loadNewData
 {
-    [self.photoCollectionView reloadData];
-    [self.photoCollectionView.header endRefreshing];
+    self.photoinfoHelper.isFirstPage = YES;
+    [self.photoinfoHelper startSendRequest];
 }
 
 /**
@@ -184,8 +269,8 @@
  */
 -(void)loadMoreData
 {
-    [self.photoCollectionView.footer endRefreshing];
-    //[self.photoCollectionView.footer endRefreshingWithNoMoreData];
+    self.photoinfoHelper.isFirstPage = NO;
+    [self.photoinfoHelper startSendRequestForNextPage];
 }
 
 -(void)back

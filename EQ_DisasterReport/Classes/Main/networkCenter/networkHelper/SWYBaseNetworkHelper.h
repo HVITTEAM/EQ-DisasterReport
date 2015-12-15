@@ -43,13 +43,14 @@
 
 @property (nonatomic, assign, readonly) BOOL isReachable;
 
-//@property (nonatomic, assign, readonly) BOOL isLoading;
+@property (nonatomic, assign, readonly) BOOL isLoading;
 
 @property (weak,nonatomic)id<SWYNetworkCallBackDelegate>callBackDelegate;
 
 @property (weak,nonatomic)id<SWYNetworkParamSourceDelegate>paramSource;
 
 -(void)startSendRequest;
+-(void)startSendRequestWithParams:(SWYRequestParams *)params;
 
 - (id)fetchDataWithReformer:(id<SWYNetworkReformerDelegate>)reformer;
 

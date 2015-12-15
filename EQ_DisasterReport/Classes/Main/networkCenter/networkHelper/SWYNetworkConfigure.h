@@ -23,10 +23,10 @@ typedef NS_ENUM(NSUInteger, SWYResponseStatus)
     SWYResponseStatusErrorNoNetwork
 };
 
-
+#define URL_base          @"http://192.168.2.17:9000/eers/"
 #define URL_loginaction   @"http://192.168.2.17:9000/sysapi/loginaction"
 #define URL_addPointinfo  @"http://192.168.2.17:9000/eers/pointinfo"
 #define URL_location      @"http://192.168.2.17:9000/eers/location"
-
+#define URL_photoinfo     @"http://192.168.2.17:9000/eers/photoinfo"
 
 #endif /* SWYNetworkConfigure_h */

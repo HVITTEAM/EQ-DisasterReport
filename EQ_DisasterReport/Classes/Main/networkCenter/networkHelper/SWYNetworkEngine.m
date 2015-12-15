@@ -78,6 +78,7 @@
                 [self handleFailure:operation error:error failure:failure requestId:reqId];
             }];
         }else{
+            NSLog(@"SWYNetworkEngine %@  --  %@",url,params.userParams);
             self.requesOperatin = [self.magager POST:url parameters:params.userParams success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                 //post 成功
                 [self handleSuccess:operation object:responseObject success:success requestId:reqId];

@@ -37,6 +37,14 @@
     return SWYRequestTypePost;
 }
 
+-(BOOL)isLoading
+{
+    if (self.requestIdList.count > 0) {
+        return YES;
+    }
+    return NO;
+}
+
 -(NSString *)url
 {
     return nil;
@@ -56,8 +64,12 @@
 -(void)startSendRequest
 {
    SWYRequestParams *params = [self.paramSource paramsForRequest:self];
-    
-   BOOL shouldStart = [self shouldSendRequestWithParams:params];
+   [self startSendRequestWithParams:params];
+}
+
+-(void)startSendRequestWithParams:(SWYRequestParams *)params
+{
+    BOOL shouldStart = [self shouldSendRequestWithParams:params];
     if (shouldStart) {
         NSInteger requestId = 0;
         if (self.requestType == SWYRequestTypeGet) {
@@ -72,7 +84,7 @@
             } failure:^(SWYResponse *response) {
                 [self callNetworkEngineFailed:response];
             }];
-         }
+        }
         [self.requestIdList addObject:@(requestId)];
         [self afterSendRequestWithParams:params];
     }else{
@@ -131,9 +143,9 @@
 
 - (void)beforePerformSuccessedCallBackWithResponse:(SWYResponse *)response
 {
-    NSLog(@"%@",response.responseObject);
     NSLog(@"成功回调前");
 }
+
 - (void)afterPerformSuccessedCallBackWithResponse:(SWYResponse *)response
 {
     NSLog(@"成功回调后");
@@ -144,6 +156,7 @@
     NSLog(@"%d",response.responsestatus);
     NSLog(@"失败回调前");
 }
+
 - (void)afterPerformFailedCallBackWithResponse:(SWYResponse *)response
 {
     NSLog(@"失败回调后");

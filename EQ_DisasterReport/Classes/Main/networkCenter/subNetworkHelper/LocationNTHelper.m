@@ -11,7 +11,7 @@
 @implementation LocationNTHelper
 -(NSString *)url
 {
-    return URL_addPointinfo;
+    return URL_location;
 }
 
 -(SWYRequestType)requestType
