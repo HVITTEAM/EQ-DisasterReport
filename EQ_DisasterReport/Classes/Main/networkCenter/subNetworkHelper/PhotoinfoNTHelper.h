@@ -11,7 +11,7 @@
 
 @interface PhotoinfoNTHelper : SWYBaseNetworkHelper
 
-@property(assign,nonatomic,readonly)NSInteger nextPageNumber;
+@property(assign,nonatomic,readwrite)NSInteger nextPageNumber;
 
 @property(assign,nonatomic,readonly)NSInteger numbersOfEachPage;
 
@@ -20,4 +20,5 @@
 @property(assign,nonatomic)BOOL isFirstPage;
 
 -(void)startSendRequestForNextPage;
+
 @end

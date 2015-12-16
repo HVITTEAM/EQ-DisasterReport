@@ -10,8 +10,6 @@
 
 @interface PhotoinfoNTHelper ()
 
-@property(assign,nonatomic,readwrite)NSInteger nextPageNumber;
-
 @property(assign,nonatomic,readwrite)NSInteger numbersOfEachPage;
 
 @property(assign,nonatomic,readwrite)NSInteger totalNumbers;

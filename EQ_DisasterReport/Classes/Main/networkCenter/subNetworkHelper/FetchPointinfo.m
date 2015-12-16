@@ -1,14 +1,15 @@
 //
-//  AddPointinfoNTHelper.m
+//  FetchPointinfo.m
 //  EQ_DisasterReport
 //
-//  Created by shi on 15/12/14.
+//  Created by shi on 15/12/16.
 //  Copyright © 2015年 董徐维. All rights reserved.
 //
 
-#import "AddPointinfoNTHelper.h"
+#import "FetchPointinfo.h"
 
-@implementation AddPointinfoNTHelper
+@implementation FetchPointinfo
+
 -(NSString *)url
 {
     return URL_pointinfo;
@@ -16,6 +17,7 @@
 
 -(SWYRequestType)requestType
 {
-    return SWYRequestTypePost;
+    return SWYRequestTypeGet;
 }
+
 @end

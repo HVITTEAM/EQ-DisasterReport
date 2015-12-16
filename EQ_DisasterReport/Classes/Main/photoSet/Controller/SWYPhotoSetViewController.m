@@ -152,8 +152,7 @@
         PhotoSetModel *model = self.dataProvider[indexPath.row];
         
         //CGFloat imgvWidth = (MTScreenW-2)/3;
-         //UIImage *img = [UIImage imageNamed:self.dataProvider[indexPath.row]];
-        //cell.photoImageV.image = [img scaleImageToSize:CGSizeMake(imgvWidth, imgvWidth)];
+        
         [cell.photoImageV sd_setImageWithURL:[NSURL URLWithString:model.photopath] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
             NSLog(@"%@",image);
@@ -222,8 +221,6 @@
         [self.dataProvider addObjectsFromArray:newDataArr];
     }
     
-    NSLog(@"%@",self.dataProvider);
-    
     [self.photoCollectionView reloadData];
     [self.photoCollectionView.header endRefreshing];
 
@@ -232,6 +229,7 @@
 
 - (void)requestDidFailed:(SWYBaseNetworkHelper *)networkHelper
 {
+    NSLog(@"失败");
     
 }
 
@@ -261,11 +259,12 @@
 -(void)loadNewData
 {
     self.photoinfoHelper.isFirstPage = YES;
+    self.photoinfoHelper.nextPageNumber = 1;
     [self.photoinfoHelper startSendRequest];
 }
 
 /**
- *  下拉刷新时加载数据
+ *  新一页数据
  */
 -(void)loadMoreData
 {
@@ -280,6 +279,7 @@
 
 -(void)dealloc
 {
+    [self.photoinfoHelper cancelAllRequests];
     NSLog(@"SWYPhotoSetViewController 释放");
 }
 

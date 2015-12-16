@@ -20,6 +20,7 @@
 		D22A0F9E1C02AFB0006C345D /* DescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D22A0F9C1C02AFB0006C345D /* DescriptionCell.xib */; };
 		D22A0FA31C02D525006C345D /* 12.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D22A0FA21C02D525006C345D /* 12.jpg */; };
 		D22C72621BFD9253007F08E8 /* AudioVO.m in Sources */ = {isa = PBXBuildFile; fileRef = D22C72611BFD9253007F08E8 /* AudioVO.m */; };
+		D22C74361C21028700BCD604 /* FetchPointinfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D22C74351C21028700BCD604 /* FetchPointinfo.m */; };
 		D241C3801BFF05FA0098FC9E /* SQCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D241C37F1BFF05FA0098FC9E /* SQCollectionCell.m */; };
 		D2550B581BEAE93C00904D35 /* SWYPhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2550B571BEAE93C00904D35 /* SWYPhotoBrowserViewController.m */; };
 		D2550BC61BEB2C9400904D35 /* SWYNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D2550BC51BEB2C9400904D35 /* SWYNavigationBar.m */; };
@@ -265,6 +266,8 @@
 		D22A0FA21C02D525006C345D /* 12.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 12.jpg; sourceTree = "<group>"; };
 		D22C72601BFD9253007F08E8 /* AudioVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioVO.h; sourceTree = "<group>"; };
 		D22C72611BFD9253007F08E8 /* AudioVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioVO.m; sourceTree = "<group>"; };
+		D22C74341C21028700BCD604 /* FetchPointinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchPointinfo.h; sourceTree = "<group>"; };
+		D22C74351C21028700BCD604 /* FetchPointinfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchPointinfo.m; sourceTree = "<group>"; };
 		D241C37E1BFF05FA0098FC9E /* SQCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQCollectionCell.h; sourceTree = "<group>"; };
 		D241C37F1BFF05FA0098FC9E /* SQCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQCollectionCell.m; sourceTree = "<group>"; };
 		D2550B561BEAE93C00904D35 /* SWYPhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWYPhotoBrowserViewController.h; sourceTree = "<group>"; };
@@ -919,6 +922,8 @@
 				D2D8880D1C1E875400B919D4 /* LoginactionNTHelper.m */,
 				D2D8880F1C1E990C00B919D4 /* AddPointinfoNTHelper.h */,
 				D2D888101C1E990C00B919D4 /* AddPointinfoNTHelper.m */,
+				D22C74341C21028700BCD604 /* FetchPointinfo.h */,
+				D22C74351C21028700BCD604 /* FetchPointinfo.m */,
 				D2756FEB1C1EBBF900ED3DFB /* LocationNTHelper.h */,
 				D2756FEC1C1EBBF900ED3DFB /* LocationNTHelper.m */,
 				D2E0A7F11C1FDF79002FE750 /* PhotoinfoNTHelper.h */,
@@ -1706,6 +1711,7 @@
 				D2EC980F1BE70E6B00ED8661 /* UIButton+WebCache.m in Sources */,
 				D2EC987D1BE7112700ED8661 /* MJRefreshAutoFooter.m in Sources */,
 				D2EEA36B1BF45D2100F2FD20 /* HMCommonButtonItem.m in Sources */,
+				D22C74361C21028700BCD604 /* FetchPointinfo.m in Sources */,
 				D2BFE57B1BE9DACF00B65E91 /* SWYPhotoSetViewController.m in Sources */,
 				D2EC989B1BE7117800ED8661 /* UIView+Extension.m in Sources */,
 				D2756FED1C1EBBF900ED3DFB /* LocationNTHelper.m in Sources */,
