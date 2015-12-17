@@ -23,6 +23,8 @@
     [super viewDidLoad];
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon_white"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    
     UIButton *footBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     footBtn.height = 40;
     footBtn.backgroundColor = [UIColor redColor];
@@ -177,6 +179,11 @@
 {
     NSLog(@"退出");
     [HMControllerTool setLoginViewController];
+}
+
+-(void)back
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

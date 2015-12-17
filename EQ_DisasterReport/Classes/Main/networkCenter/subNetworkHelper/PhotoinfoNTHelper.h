@@ -11,14 +11,16 @@
 
 @interface PhotoinfoNTHelper : SWYBaseNetworkHelper
 
-@property(assign,nonatomic,readwrite)NSInteger nextPageNumber;
+@property(assign,nonatomic,readonly)NSInteger nextPageNumber;
 
-@property(assign,nonatomic,readonly)NSInteger numbersOfEachPage;
+@property(assign,nonatomic,readonly)CGFloat numbersOfEachPage;
 
-@property(assign,nonatomic,readonly)NSInteger totalNumbers;
+@property(assign,nonatomic,readonly)BOOL isFirstPage;     //当前下载的数据是否是第一页的数据
 
-@property(assign,nonatomic)BOOL isFirstPage;
+@property(assign,nonatomic,readonly)BOOL isFinshedAllLoad;
 
 -(void)startSendRequestForNextPage;
+
+-(void)resetState;
 
 @end

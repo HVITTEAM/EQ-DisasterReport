@@ -74,13 +74,9 @@
 -(void)initNaviBar
 {
     self.navigationItem.title = @"照片墙";
-    //self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
-    
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    self.navigationItem.backBarButtonItem = item;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon_black"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     
 //    UISearchBar *searchbar = [[UISearchBar alloc] init];
 //    searchbar.searchBarStyle = UISearchBarStyleDefault;
@@ -108,7 +104,6 @@
 -(NSMutableArray*)dataProvider
 {
     if (!_dataProvider) {
-        //_dataProvider = [[NSMutableArray alloc] initWithArray:@[@"1.jpg",@"2.jpg",@"3.jpg",@"4.jpg",@"5.jpg",@"6.jpg",@"7.jpg",@"8.jpg",@"9.jpg",@"10.jpg",@"1.jpg",@"2.jpg",@"3.jpg",@"4.jpg",@"5.jpg",@"6.jpg",@"7.jpg",@"8.jpg",@"9.jpg",@"10.jpg"]];
         _dataProvider = [[NSMutableArray alloc] init];
     }
     return _dataProvider;
@@ -153,9 +148,8 @@
         
         //CGFloat imgvWidth = (MTScreenW-2)/3;
         
-        [cell.photoImageV sd_setImageWithURL:[NSURL URLWithString:model.photopath] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [cell.photoImageV sd_setImageWithURL:[NSURL URLWithString:model.thumbpath] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
-            NSLog(@"%@",image);
         }];
         return cell;
     }
@@ -169,7 +163,7 @@
         return;
     }
     SWYCollectDetailViewController *detailVC = [[SWYCollectDetailViewController alloc] init];
-    detailVC.headImageName = self.dataProvider[indexPath.row];
+    detailVC.photoInfor = self.dataProvider[indexPath.row];
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
@@ -223,12 +217,20 @@
     
     [self.photoCollectionView reloadData];
     [self.photoCollectionView.header endRefreshing];
+    
+    if (self.photoinfoHelper.isFinshedAllLoad) {
+        [self.photoCollectionView.footer endRefreshingWithNoMoreData];
+    }else{
+        [self.photoCollectionView.footer endRefreshing];
+    }
 
     NSLog(@"SWYPhotoSetViewController  requestDidSuccess%@",self.dataProvider);
 }
 
 - (void)requestDidFailed:(SWYBaseNetworkHelper *)networkHelper
 {
+    [self.photoCollectionView.header endRefreshing];
+    [self.photoCollectionView.footer endRefreshing];
     NSLog(@"失败");
     
 }
@@ -244,10 +246,12 @@
         for (NSDictionary *dict in tempArr) {
             PhotoSetModel *model = [[PhotoSetModel alloc] init];
             model.photopath = [NSString stringWithFormat:@"%@%@",URL_base,dict[@"photopath"]];
+            model.thumbpath = [NSString stringWithFormat:@"%@%@",URL_base,dict[@"thumbpath"]];
             model.pointid = dict[@"pointid"];
             [photoSetArr addObject:model];
         }
     }
+    NSLog(@"SWYPhotoSetViewController  SWYNetworkReformerDelegate %@",data);
     return photoSetArr;
 }
 
@@ -258,8 +262,7 @@
  */
 -(void)loadNewData
 {
-    self.photoinfoHelper.isFirstPage = YES;
-    self.photoinfoHelper.nextPageNumber = 1;
+    [self.photoinfoHelper resetState];
     [self.photoinfoHelper startSendRequest];
 }
 
@@ -268,7 +271,6 @@
  */
 -(void)loadMoreData
 {
-    self.photoinfoHelper.isFirstPage = NO;
     [self.photoinfoHelper startSendRequestForNextPage];
 }
 

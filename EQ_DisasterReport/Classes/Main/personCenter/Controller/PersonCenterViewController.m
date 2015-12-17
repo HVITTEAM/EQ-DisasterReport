@@ -62,8 +62,7 @@
 {
     self.title = @"个人中心";
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon_white"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.navigationController.navigationBar.barTintColor = HMColor(99, 148, 225);
@@ -101,17 +100,17 @@
     
     // 设置组的所有行数据
     HMCommonArrowItem *account = [HMCommonArrowItem itemWithTitle:@"帐号管理" icon:nil];
-    account.icon = @"headIcon";
+    account.icon = @"account_icon";
     account.destVcClass = [AccountTableViewController class];
     
-    HMCommonArrowItem *about = [HMCommonArrowItem itemWithTitle:@"关于软件" icon:nil];
-    about.icon = @"headIcon";
+    HMCommonArrowItem *about = [HMCommonArrowItem itemWithTitle:@"关于" icon:nil];
+    about.icon = @"about_icon";
     about.destVcClass = [AboutViewController class];
     about.operation = ^{
     };
     
     HMCommonArrowItem *advice = [HMCommonArrowItem itemWithTitle:@"意见反馈" icon:nil];
-    advice.icon = @"headIcon";
+    advice.icon = @"user_info_Icon";
     advice.operation = ^{
         FeedbackView *feedbackView = [[FeedbackView alloc] init];
         [feedbackView showViewtoFatherView:weakSelf.navigationController.view];

@@ -10,6 +10,8 @@
 
 @interface PhotoSetModel : NSObject
 
+@property(strong,nonatomic)NSString *thumbpath;
+
 @property(strong,nonatomic)NSString *photopath;
 
 @property(strong,nonatomic)NSNumber *pointid;

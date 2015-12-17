@@ -24,6 +24,8 @@
     
     self.navigationItem.title = @"我们网站";
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon_white"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    
     NSString *reqAddr = @"http://www.baidu.com";
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:reqAddr]];
     [self.webView loadRequest:request];
@@ -53,5 +55,10 @@
 -(void)hudWasHidden:(MBProgressHUD *)hud
 {
     [hud removeFromSuperview];
+}
+
+-(void)back
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

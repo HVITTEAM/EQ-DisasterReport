@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "SWYBaseNetworkHelper.h"
 
-@interface FetchPointinfo : SWYBaseNetworkHelper
-@property(copy,nonatomic)NSString *detailUrl;
+@interface FetchPointinfoNTHelper : SWYBaseNetworkHelper
+
 @end

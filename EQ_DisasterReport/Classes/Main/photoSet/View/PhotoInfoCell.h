@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface PhotoInfoCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *lonLb;
+@property (weak, nonatomic) IBOutlet UILabel *latLb;
+@property (weak, nonatomic) IBOutlet UILabel *levelLb;
 
 @end

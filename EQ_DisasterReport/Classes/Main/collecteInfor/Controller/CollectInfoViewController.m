@@ -21,7 +21,7 @@
 
 //@property(strong,nonatomic)NSMutableArray *selectedDatas;   //  选中的所有cell的数据
 
-@property(strong,nonatomic)UIBarButtonItem *backItem;
+@property(strong,nonatomic)UIBarButtonItem *leftItem;
 
 @property(strong,nonatomic)UIBarButtonItem *cancelItem;
 
@@ -67,8 +67,8 @@
 
     //左侧按钮
     self.cancelItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelAllSelect)];
-    self.backItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
-    self.navigationItem.leftBarButtonItem = self.backItem;
+    self.leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon_white"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = self.leftItem;
     //右侧按钮
      self.rightItem= [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(showMenu)];
     self.navigationItem.rightBarButtonItem = self.rightItem;
@@ -278,7 +278,7 @@
     self.tableView.editing = NO;
     [self.navigationController setToolbarHidden:YES animated:YES];
     [self.navigationItem setRightBarButtonItem:self.rightItem animated:YES];
-    [self.navigationItem setLeftBarButtonItem:self.backItem animated:YES];
+    [self.navigationItem setLeftBarButtonItem:self.leftItem animated:YES];
 }
 
 /**
@@ -286,7 +286,7 @@
  */
 -(void)back
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 /**

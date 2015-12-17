@@ -18,6 +18,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"常见问题";
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon_white"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -25,5 +27,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)back
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 @end

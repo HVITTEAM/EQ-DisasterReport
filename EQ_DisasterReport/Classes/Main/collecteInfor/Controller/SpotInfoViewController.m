@@ -77,13 +77,11 @@
 {
     self.navigationItem.title = @"采集信息详情";
     
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon_white"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = leftItem;
+    
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"上传" style: UIBarButtonItemStylePlain target:self action:@selector(saveData)];
     self.navigationItem.rightBarButtonItem = rightItem;
-    
-    //下一级的返回按钮
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    self.navigationItem.backBarButtonItem = item;
-
 }
 
 /**
@@ -612,6 +610,10 @@
     return self.audioVO;
  }
 
+-(void)back
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 -(void)dealloc
 {

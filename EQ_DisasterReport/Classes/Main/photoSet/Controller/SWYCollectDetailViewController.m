@@ -12,9 +12,18 @@
 #import "DescriptionCell.h"
 #import "TableHeadView.h"
 #import "SWYPhotoBrowserViewController.h"
+#import "UIImageView+WebCache.h"
+#import "FetchPointinfoNTHelper.h"
+#import "PhotoDetailModel.h"
 
-@interface SWYCollectDetailViewController ()<UITableViewDataSource,UITableViewDelegate,TableHeadViewDelegate>
+@interface SWYCollectDetailViewController ()<UITableViewDataSource,UITableViewDelegate,TableHeadViewDelegate,SWYNetworkCallBackDelegate,SWYNetworkParamSourceDelegate,SWYNetworkReformerDelegate>
+
 @property(nonatomic,strong)UITableView *detailTableView;
+
+@property(nonatomic,strong)FetchPointinfoNTHelper *fetchPointinfoHelper;
+
+@property(nonatomic,strong)PhotoDetailModel *photoDetailInfor;
+
 @end
 
 @implementation SWYCollectDetailViewController
@@ -26,6 +35,9 @@
     [self initNaviBar];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
+    self.fetchPointinfoHelper.detailUrl = [NSString stringWithFormat:@"%ld",(long)[self.photoInfor.pointid integerValue]];
+    [self.fetchPointinfoHelper startSendRequest];
+    
 }
 
 #pragma mark 初始化方法、setter和getter方法
@@ -35,17 +47,17 @@
 -(void)initTableView
 {
     self.detailTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH) style:UITableViewStyleGrouped];
-    //self.detailTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.detailTableView.delegate = self;
     self.detailTableView.dataSource = self;
     self.detailTableView.backgroundColor = HMGlobalBg;
     [self.view addSubview:self.detailTableView];
-//    self.detailTableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"table_bk_image"]];
     
     //设置tableView头部视图
     TableHeadView *headView = [[[NSBundle mainBundle] loadNibNamed:@"TableHeadViw" owner:nil options:nil] lastObject];
-    headView.bigimageName = self.headImageName;
-    headView.addressLb.text = [NSString stringWithFormat:@"杭州西湖区文三西路%d",arc4random()%1000];
+    [headView.bigImagV sd_setImageWithURL:[NSURL URLWithString:self.photoInfor.photopath] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        NSLog(@"SWYCollectDetailViewController 头部大图片完成");
+    }];
+
     UIImage *gradientImg = [UIImage imageNamed:@"gradientBK_black"];
     headView.gradientBKView.image = [gradientImg resizableImageWithCapInsets:UIEdgeInsetsZero resizingMode:UIImageResizingModeStretch];
     headView.delegate = self;
@@ -58,6 +70,25 @@
 -(void)initNaviBar
 {
     self.navigationItem.title = @"照片详情";
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon_black"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+}
+
+-(FetchPointinfoNTHelper *)fetchPointinfoHelper
+{
+    if (!_fetchPointinfoHelper) {
+        _fetchPointinfoHelper = [[FetchPointinfoNTHelper alloc] init];
+        _fetchPointinfoHelper.callBackDelegate = self;
+        _fetchPointinfoHelper.paramSource = self;
+    }
+    return _fetchPointinfoHelper;
+}
+
+-(PhotoDetailModel *)photoDetailInfor
+{
+    if (!_photoDetailInfor) {
+        _photoDetailInfor = [[PhotoDetailModel alloc] init];
+    }
+    return _photoDetailInfor;
 }
 
 #pragma mark 协议方法
@@ -81,6 +112,8 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"UserInfoCell" owner:nil options:nil] lastObject];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+        cell.userNameLb.text = self.photoDetailInfor.username;
+        cell.timeLb.text = [NSString stringWithFormat:@"%@  上传",self.photoDetailInfor.collecttime];
         return cell;
     }else if(indexPath.row == 1){
         static NSString *photoInfoCellId = @"photoInfoCell";
@@ -89,6 +122,9 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"PhotoInfoCell" owner:nil options:nil] lastObject];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+        cell.latLb.text = self.photoDetailInfor.latitude;
+        cell.lonLb.text = self.photoDetailInfor.longitude;
+        cell.levelLb.text = self.photoDetailInfor.earthquakeintensity;
         return cell;
     }else{
         static NSString *descriptionCellId = @"descriptionCell";
@@ -97,7 +133,11 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"DescriptionCell" owner:nil options:nil] lastObject];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        cell.descriptionStr = @"据统计，地球上每年约发生500多万次地震，即每天要发生上万次的震。其中绝大多数太小或太远，以至于人们感觉不到；真正能对人类造成严重危害的地震大约有十几二十次；能造成特别严重灾害的地震大约有一两次。人们感觉不到的地震，必须用地震仪才能记录下来；不同类型的地震仪能记录不同强度、不同远近的地震。世界上运转着数以千计的各种地震仪器日夜监测着地震的动向。";
+        if (self.photoDetailInfor.descr == nil) {
+            cell.descriptionStr = @"";
+        }else{
+            cell.descriptionStr = self.photoDetailInfor.descr;
+        }
         return cell;
     }
 
@@ -116,12 +156,60 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"DescriptionCell" owner:nil options:nil] lastObject];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        cell.descriptionStr = @"据统计，地球上每年约发生500多万次地震，即每天要发生上万次的震。其中绝大多数太小或太远，以至于人们感觉不到；真正能对人类造成严重危害的地震大约有十几二十次；能造成特别严重灾害的地震大约有一两次。人们感觉不到的地震，必须用地震仪才能记录下来；不同类型的地震仪能记录不同强度、不同远近的地震。世界上运转着数以千计的各种地震仪器日夜监测着地震的动向。";
+        if (self.photoDetailInfor.descr == nil) {
+            cell.descriptionStr = @"";
+        }else{
+            cell.descriptionStr = self.photoDetailInfor.descr;
+        }
+        
         CGFloat h = [cell calculateCellHeight];
         return h;
 
     }
     return 64;
+}
+
+
+#pragma mark SWYNetworkParamSourceDelegate
+- (SWYRequestParams *)paramsForRequest:(SWYBaseNetworkHelper *)networkHelper
+{
+    return nil;
+}
+
+#pragma mark SWYNetworkCallBackDelegate
+- (void)requestDidSuccess:(SWYBaseNetworkHelper *)networkHelper
+{
+   self.photoDetailInfor = [networkHelper fetchDataWithReformer:self];
+    ((TableHeadView *)self.detailTableView.tableHeaderView).addressLb.text = self.photoDetailInfor.address;
+   [self.detailTableView reloadData];
+    NSLog(@"成功");
+}
+
+- (void)requestDidFailed:(SWYBaseNetworkHelper *)networkHelper
+{
+    NSLog(@"失败");
+    
+}
+
+#pragma mark SWYNetworkReformerDelegate
+//对下载的原始数据进行重组，生成可直接使用的数据
+- (id)networkHelper:(SWYBaseNetworkHelper *)networkHelper reformData:(id)data
+{
+    NSLog(@"---------%@",data);
+    PhotoDetailModel *model = [[PhotoDetailModel alloc] init];
+    
+    model.address = data[@"address"];
+    model.collecttime = data[@"collecttime"];
+    model.descr = data[@"description"];
+    model.earthquakeintensity = [NSString stringWithFormat:@"%@",data[@"earthquakeintensity"]];
+    model.keys = data[@"keys"];
+    model.latitude = [NSString stringWithFormat:@"%@",data[@"latitude"]];
+    model.longitude = [NSString stringWithFormat:@"%@",data[@"longitude"]];
+    model.pointid = [NSString stringWithFormat:@"%@",data[@"pointid"]];
+    model.username = data[@"username"];
+    model.loginname = data[@"loginname"];
+    
+    return model;
 }
 
 #pragma mark TableHeadViewDelegate
@@ -131,9 +219,14 @@
 -(void)tableheadView:(TableHeadView *)headVeiw didClickImageName:(NSString *)imageName
 {
     //进图片浏览器查看大图
-    SWYPhotoBrowserViewController *browserVC = [[SWYPhotoBrowserViewController alloc] initPhotoBrowserWithImageNames:@[imageName] currentIndex:0];
+    SWYPhotoBrowserViewController *browserVC = [[SWYPhotoBrowserViewController alloc] initPhotoBrowserWithImages:@[headVeiw.bigImagV.image] currentIndex:0];
     browserVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentViewController:browserVC animated:YES completion:nil];
+}
+
+-(void)back
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)dealloc

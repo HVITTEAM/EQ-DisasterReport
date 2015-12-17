@@ -10,7 +10,7 @@
 
 @implementation SWYResponse
 
--(instancetype)initWithResponseString:(NSString *)responseString responseObject:(id)responseObject responseData:(NSData *)responseData request:(NSURLRequest *)request
+-(instancetype)initWithResponseString:(NSString *)responseString responseObject:(id)responseObject responseData:(NSData *)responseData request:(NSURLRequest *)request requestId:(NSInteger)requestId
 {
     self = [super init];
     if (self) {
@@ -19,6 +19,7 @@
         _responseData = responseData;
         _request = request;
         _responsestatus = SWYResponseStatusSuccess;
+        _requestId = requestId;
         
         //从服务器返回的数据，没有进行过缓存
         _isCache = NO;
@@ -26,7 +27,7 @@
     return self;
 }
 
--(instancetype)initWithResponseString:(NSString *)responseString responseObject:(id)responseObject responseData:(NSData *)responseData request:(NSURLRequest *)request error:(NSError *)error
+-(instancetype)initWithResponseString:(NSString *)responseString responseObject:(id)responseObject responseData:(NSData *)responseData request:(NSURLRequest *)request requestId:(NSInteger)requestId error:(NSError *)error
 {
     self = [super init];
     if (self) {
@@ -35,6 +36,7 @@
         _responseData = responseData;
         _request = request;
         _responsestatus = [self responseStatusWithError:error];
+        _requestId = requestId;
         
         //从服务器返回的数据，没有进行过缓存
         _isCache = NO;
@@ -44,6 +46,7 @@
 
 -(SWYResponseStatus)responseStatusWithError:(NSError *)error
 {
+    NSLog(@"%@",error);
     if (error) {
         SWYResponseStatus result = SWYResponseStatusErrorNoNetwork;
         

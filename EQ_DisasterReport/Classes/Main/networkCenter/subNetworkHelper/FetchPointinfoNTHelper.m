@@ -6,13 +6,13 @@
 //  Copyright © 2015年 董徐维. All rights reserved.
 //
 
-#import "FetchPointinfo.h"
+#import "FetchPointinfoNTHelper.h"
 
-@implementation FetchPointinfo
+@implementation FetchPointinfoNTHelper
 
 -(NSString *)url
 {
-    return URL_pointinfo;
+    return [NSString stringWithFormat:@"%@/%@",URL_pointinfo,self.detailUrl];
 }
 
 -(SWYRequestType)requestType

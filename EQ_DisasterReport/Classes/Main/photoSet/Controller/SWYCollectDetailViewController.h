@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PhotoSetModel.h"
 
 @interface SWYCollectDetailViewController : UIViewController
-@property(nonatomic,strong)NSString *headImageName;
+
+@property(nonatomic,strong)PhotoSetModel *photoInfor;
+
 @end

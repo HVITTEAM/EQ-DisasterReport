@@ -21,6 +21,8 @@
     [self initHeadView];
     [self initFootView];
     self.tableView.backgroundColor = HMGlobalBg;
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon_white"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -155,6 +157,11 @@
     NSURL *telURL =[NSURL URLWithString:[NSString stringWithFormat:@"tel:8888-88888888"]];
     [callWebview loadRequest:[NSURLRequest requestWithURL:telURL]];
     [self.tableView addSubview:callWebview];
+}
+
+-(void)back
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

@@ -93,34 +93,35 @@
     return [reqId integerValue];
 }
 
--(void)handleSuccess:(AFHTTPRequestOperation *)operation object:(id)responseObject success:(networkCallBack)success requestId:reqId
+-(void)handleSuccess:(AFHTTPRequestOperation *)operation object:(id)responseObject success:(networkCallBack)success requestId:(NSNumber *)reqId
 {
-    AFHTTPRequestOperation *op = self.requestsRecord[_requestId];
+    AFHTTPRequestOperation *op = self.requestsRecord[reqId];
     if (op == nil) {
         // 如果这个operation是被cancel的，那就不用处理回调了。
         return;
     } else {
-        [self.requestsRecord removeObjectForKey:_requestId];
+        [self.requestsRecord removeObjectForKey:reqId];
     }
 
     if (success) {
         SWYResponse *response = [[SWYResponse alloc]initWithResponseString:operation.responseString
                                                             responseObject:responseObject
                                                               responseData:operation.responseData
-                                                                   request:operation.request];
+                                                                   request:operation.request
+                                                                 requestId:[reqId integerValue]];
         success(response);
     }
 }
 
--(void)handleFailure:(AFHTTPRequestOperation *)operation error:(NSError *)error failure:(networkCallBack)failure requestId:reqId
+-(void)handleFailure:(AFHTTPRequestOperation *)operation error:(NSError *)error failure:(networkCallBack)failure requestId:(NSNumber *)reqId
 {
     
-    AFHTTPRequestOperation *op = self.requestsRecord[_requestId];
+    AFHTTPRequestOperation *op = self.requestsRecord[reqId];
     if (op == nil) {
         // 如果这个operation是被cancel的，那就不用处理回调了。
         return;
     } else {
-        [self.requestsRecord removeObjectForKey:_requestId];
+        [self.requestsRecord removeObjectForKey:reqId];
     }
     
     if (failure) {
@@ -128,6 +129,7 @@
                                                              responseObject:nil
                                                                responseData:operation.responseData
                                                                     request:operation.request
+                                                                  requestId:[reqId integerValue]
                                                                       error:error];
         failure(response);
     }

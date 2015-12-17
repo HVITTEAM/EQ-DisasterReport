@@ -94,6 +94,8 @@
 
 -(void)callNetworkEngineSuccessed:(SWYResponse *)response
 {
+    [self removeRequestIdWithRequestID:response.requestId];
+    
     if (response.responseObject) {
         self.rawData = [response.responseObject copy];
     } else {
@@ -109,6 +111,8 @@
 
 -(void)callNetworkEngineFailed:(SWYResponse *)response
 {
+    [self removeRequestIdWithRequestID:response.requestId];
+    
     [self beforePerformFailedCallBackWithResponse:response];
     
     [self.callBackDelegate requestDidFailed:self];

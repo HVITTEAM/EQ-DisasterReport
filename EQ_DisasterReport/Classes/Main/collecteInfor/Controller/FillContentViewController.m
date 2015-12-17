@@ -28,6 +28,10 @@
 
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.title = self.titleStr;
+    
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon_white"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = leftItem;
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -37,6 +41,11 @@
     if ([self.delegate respondsToSelector:@selector(fillContentViewController:filledContent:indexPath:)]) {
         [self.delegate fillContentViewController:self filledContent:self.contentTextView.text indexPath:self.indexpath];
     }
+}
+
+-(void)back
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)dealloc

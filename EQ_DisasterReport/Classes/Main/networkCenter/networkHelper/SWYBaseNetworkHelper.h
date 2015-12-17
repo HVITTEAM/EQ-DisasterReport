@@ -37,9 +37,11 @@
 
 @interface SWYBaseNetworkHelper : NSObject
 
-@property (nonatomic, copy,readonly)NSString *url;
+@property (nonatomic, copy,readonly)NSString *url;   //子类需重写 getter 方法，返回最后的 url
 
-@property (nonatomic, assign,readonly)SWYRequestType requestType;
+@property(copy,nonatomic)NSString *detailUrl;        
+
+@property (nonatomic, assign,readonly)SWYRequestType requestType;   //子类需重写 getter 方法，返回请求类型
 
 @property (nonatomic, assign, readonly) BOOL isReachable;
 
