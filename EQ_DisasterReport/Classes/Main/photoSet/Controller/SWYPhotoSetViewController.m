@@ -145,7 +145,7 @@
         PhotoSetCell *cell = [self.photoCollectionView dequeueReusableCellWithReuseIdentifier:photoSetCellId forIndexPath:indexPath];
         
         PhotoSetModel *model = self.dataProvider[indexPath.row];
-        
+        cell.addressLb.text = model.address;
         //CGFloat imgvWidth = (MTScreenW-2)/3;
         
         [cell.photoImageV sd_setImageWithURL:[NSURL URLWithString:model.thumbpath] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -248,6 +248,7 @@
             model.photopath = [NSString stringWithFormat:@"%@%@",URL_base,dict[@"photopath"]];
             model.thumbpath = [NSString stringWithFormat:@"%@%@",URL_base,dict[@"thumbpath"]];
             model.pointid = dict[@"pointid"];
+            model.address = dict[@"address"];
             [photoSetArr addObject:model];
         }
     }

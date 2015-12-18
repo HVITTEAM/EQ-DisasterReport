@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,23 +15,20 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxD-9h-QE1">
-                        <rect key="frame" x="10" y="0.0" width="80" height="43.5"/>
-                        <animations/>
+                        <rect key="frame" x="10" y="0.0" width="70" height="43.5"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="80" id="POc-mC-4d2"/>
+                            <constraint firstAttribute="width" constant="70" id="POc-mC-4d2"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="dfs" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="3c4-pG-nfj">
-                        <rect key="frame" x="100" y="0.0" width="210" height="43.5"/>
-                        <animations/>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="dfs" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="3c4-pG-nfj">
+                        <rect key="frame" x="90" y="0.0" width="220" height="43.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                     </textField>
                 </subviews>
-                <animations/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="3c4-pG-nfj" secondAttribute="bottom" id="0Wd-qK-0rl"/>
                     <constraint firstItem="3c4-pG-nfj" firstAttribute="leading" secondItem="xxD-9h-QE1" secondAttribute="trailing" constant="10" id="Lwi-fu-kCp"/>
@@ -42,7 +39,6 @@
                     <constraint firstItem="3c4-pG-nfj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="zs9-Jh-Ekx"/>
                 </constraints>
             </tableViewCellContentView>
-            <animations/>
             <connections>
                 <outlet property="contentTextField" destination="3c4-pG-nfj" id="Y4H-JA-RSg"/>
                 <outlet property="titleLb" destination="xxD-9h-QE1" id="DTv-dB-FSX"/>

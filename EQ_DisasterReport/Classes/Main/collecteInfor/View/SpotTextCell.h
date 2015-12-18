@@ -19,6 +19,7 @@
 @interface SpotTextCell : UITableViewCell
 
 @property(nonatomic,strong)SpotCellModel *cellModel;
+
 @property(nonatomic,weak)id<SpotTextCellDelegate>delegate;
 
 +(instancetype)cellWithTableView:(UITableView *)tableView model:(SpotCellModel *)model;

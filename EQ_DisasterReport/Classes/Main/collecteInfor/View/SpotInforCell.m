@@ -38,6 +38,13 @@
     self.latLb.text = [NSString stringWithFormat:@"纬度:%@",cellModel.lat];
     self.levelLb.text = [NSString stringWithFormat:@"%@",cellModel.level];
     self.addrLb.text = [NSString stringWithFormat:@"%@",cellModel.address];
+    if ([cellModel.isUpload isEqualToString:kdidUpload]) {
+        self.uploadStateImageView.hidden = YES;
+    }else{
+        self.uploadStateImageView.hidden = NO;
+    }
 }
+
+
 
 @end

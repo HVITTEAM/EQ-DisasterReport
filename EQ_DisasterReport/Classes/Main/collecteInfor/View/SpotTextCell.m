@@ -96,6 +96,11 @@
     return YES;
 }
 
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    return YES;
+}
+
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if ([self.delegate respondsToSelector:@selector(beginEditCellContent:)]) {

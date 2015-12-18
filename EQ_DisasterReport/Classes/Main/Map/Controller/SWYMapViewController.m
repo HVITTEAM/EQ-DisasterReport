@@ -61,7 +61,7 @@
     
     self.mapView.mapType = MAMapTypeStandard;
     self.mapView.zoomLevel = 14.0f;
-    self.mapView.compassOrigin = CGPointMake(self.mapView.compassOrigin.x, 30);
+    self.mapView.compassOrigin = CGPointMake(self.mapView.compassOrigin.x - 8, 30);
     self.mapView.showsScale = NO;
     self.mapView.rotateCameraEnabled= NO;
     self.mapView.rotateEnabled = NO;
@@ -107,7 +107,7 @@
     self.photoSetBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.photoSetBtn.frame = CGRectMake(0, 0, btnWidth, btnHeight);
     self.photoSetBtn.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:1.0];
-    [self.photoSetBtn setTitle:@"照片墙" forState: UIControlStateNormal];
+    [self.photoSetBtn setTitle:@"专业采集" forState: UIControlStateNormal];
     [self.photoSetBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.photoSetBtn.titleLabel.font = [UIFont systemFontOfSize:13];
     [self.photoSetBtn addTarget:self action:@selector(bottomBarBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -116,7 +116,7 @@
     self.collectInfoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.collectInfoBtn.frame = CGRectMake(btnWidth, 0, btnWidth, btnHeight);
     self.collectInfoBtn.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:1.0];
-    [self.collectInfoBtn setTitle:@"专业采集" forState: UIControlStateNormal];
+    [self.collectInfoBtn setTitle:@"公众采集" forState: UIControlStateNormal];
     [self.collectInfoBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.collectInfoBtn.titleLabel.font = [UIFont systemFontOfSize:13];
     [self.collectInfoBtn addTarget:self action:@selector(bottomBarBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -125,7 +125,7 @@
     self.collectInfoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.collectInfoBtn.frame = CGRectMake(2*btnWidth, 0, btnWidth, btnHeight);
     self.collectInfoBtn.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:1.0];
-    [self.collectInfoBtn setTitle:@"公众采集" forState: UIControlStateNormal];
+    [self.collectInfoBtn setTitle:@"照片墙" forState: UIControlStateNormal];
     [self.collectInfoBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.collectInfoBtn.titleLabel.font = [UIFont systemFontOfSize:13];
     [self.collectInfoBtn addTarget:self action:@selector(bottomBarBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -239,20 +239,19 @@
 -(void)bottomBarBtnClicked:(UIButton *)sender
 {
     NSString *title = sender.titleLabel.text;
-    if ([title isEqualToString:@"照片墙"]) {
-      SWYPhotoSetViewController *photoSetVC = [[SWYPhotoSetViewController alloc] init];
-        UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:photoSetVC];
-        [self presentViewController:navVC animated:YES completion:nil];
-    }else if ([title isEqualToString:@"专业采集"]){
-        CollectInfoViewController *collectionInfo = [[CollectInfoViewController alloc] init];
-        UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:collectionInfo];
-        [self presentViewController:navVC animated:YES completion:nil];
-
-    }else if ([title isEqualToString:@"公众采集"]){
+    if ([title isEqualToString:@"专业采集"]) {
         CollectInfoViewController *collectionInfo = [[CollectInfoViewController alloc] init];
         UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:collectionInfo];
         [self presentViewController:navVC animated:YES completion:nil];
         
+    }else if ([title isEqualToString:@"公众采集"]){
+        CollectInfoViewController *collectionInfo = [[CollectInfoViewController alloc] init];
+        UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:collectionInfo];
+        [self presentViewController:navVC animated:YES completion:nil];
+    }else if ([title isEqualToString:@"照片墙"]){
+        SWYPhotoSetViewController *photoSetVC = [[SWYPhotoSetViewController alloc] init];
+        UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:photoSetVC];
+        [self presentViewController:navVC animated:YES completion:nil];
     }else{
         PersonCenterViewController *personCenter = [[PersonCenterViewController alloc] init];
         UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:personCenter];

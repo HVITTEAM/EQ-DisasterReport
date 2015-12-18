@@ -200,7 +200,12 @@
     
     model.address = data[@"address"];
     model.collecttime = data[@"collecttime"];
-    model.descr = data[@"description"];
+    if (data[@"description"] == nil || data[@"description"] == [NSNull null]) {
+        model.descr = @"";
+    }else{
+        model.descr = data[@"description"];
+    }
+    
     model.earthquakeintensity = [NSString stringWithFormat:@"%@",data[@"earthquakeintensity"]];
     model.keys = data[@"keys"];
     model.latitude = [NSString stringWithFormat:@"%@",data[@"latitude"]];

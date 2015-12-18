@@ -15,7 +15,7 @@
 #import "VoiceTableHelper.h"
 #import "MenuView.h"
 
-@interface CollectInfoViewController ()<MenuViewDelegate>
+@interface CollectInfoViewController ()<MenuViewDelegate,SpotInfoUploadDelegate>
 
 @property(strong,nonatomic)NSMutableArray *dataProvider;   // tableview数据源
 
@@ -102,17 +102,6 @@
     return _dataProvider;
 }
 
-///**
-// *  selectedDatas的 getter 方法
-// */
-//-(NSMutableArray *)selectedDatas
-//{
-//    if (!_selectedDatas) {
-//        _selectedDatas = [[NSMutableArray alloc] init];
-//    }
-//    return _selectedDatas;
-//}
-
 #pragma mark 协议方法
 #pragma mark - TableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -148,6 +137,8 @@
     //进入详情界面
     SpotInfoViewController *spotInfoVC = [[SpotInfoViewController alloc] init];
     spotInfoVC.spotInfoModel = self.dataProvider[indexPath.row];
+    spotInfoVC.currentIdx = indexPath;
+    spotInfoVC.delegate = self;
     spotInfoVC.actionType = kActionTypeShow; //设置页面类型为显示和更新
     [self.navigationController pushViewController:spotInfoVC animated:YES];
 }
@@ -197,6 +188,13 @@
         [self.navigationItem setRightBarButtonItem:nil animated:YES];
         [self.navigationItem setLeftBarButtonItem:self.cancelItem animated:YES];
     }
+}
+
+-(void)spotInfoViewController:(SpotInfoViewController *)spotInfoVC uploadSuccessIndexPath:(NSIndexPath *)idx
+{
+    SpotInforModel *model = self.dataProvider[idx.row];
+    [[SpotTableHelper sharedInstance] updateUploadFlag:kdidUpload ID:model.pointid];
+    [self.navigationController popToViewController:self animated:YES];
 }
 
 #pragma mark 事件方法

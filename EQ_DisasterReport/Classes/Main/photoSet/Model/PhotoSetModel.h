@@ -16,4 +16,6 @@
 
 @property(strong,nonatomic)NSNumber *pointid;
 
+@property(strong,nonatomic)NSString *address;
+
 @end

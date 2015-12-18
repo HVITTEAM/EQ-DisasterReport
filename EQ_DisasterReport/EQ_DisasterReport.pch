@@ -84,3 +84,7 @@
 
 
 #define IOS_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]
+
+#define kdidUpload @"1"
+#define kdidNotUpload  @"0"
+

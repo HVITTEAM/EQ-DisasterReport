@@ -28,5 +28,7 @@
 
 -(BOOL) deleteDataByAttribute:(NSString *)attribute value:(NSString *)value;
 
+-(BOOL)updateUploadFlag:(NSString *)uploadFlag ID:(NSString *)idString;
+
 -(NSInteger)getMaxIdOfRecords;
 @end

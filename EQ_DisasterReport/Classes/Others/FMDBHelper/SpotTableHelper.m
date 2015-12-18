@@ -27,6 +27,8 @@
 #define NOTE              @"note"
 #define DESCR             @"descr"
 #define KEYS              @"keys"
+
+#define ISUPLOAD          @"isUpload"
 //#define DEPTH             @"depth"
 //#define COLLECTTIME       @"collecttime"
 
@@ -58,7 +60,7 @@
 - (void)createTable
 {
     if ([db open]) {
-        NSString *sqlCreateTable =  [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@'INTEGER PRIMARY KEY AUTOINCREMENT, '%@' TEXT, '%@' TEXT,'%@' TEXT,'%@' TEXT, '%@' TEXT,'%@' TEXT,'%@' TEXT,'%@' TEXT,'%@' TEXT)",TABLENAME,POINTID,OCCURTIME,LON,LAT,ADDRESS,LEVEL,PHONENUM,NOTE,DESCR,KEYS];
+        NSString *sqlCreateTable =  [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@'INTEGER PRIMARY KEY AUTOINCREMENT, '%@' TEXT, '%@' TEXT,'%@' TEXT,'%@' TEXT, '%@' TEXT,'%@' TEXT,'%@' TEXT,'%@' TEXT,'%@' TEXT,'%@' TEXT)",TABLENAME,POINTID,OCCURTIME,LON,LAT,ADDRESS,LEVEL,PHONENUM,NOTE,DESCR,KEYS,ISUPLOAD];
         BOOL res = [db executeUpdate:sqlCreateTable];
         if (!res) {
             NSLog(@"error when creating spot table");
@@ -68,6 +70,7 @@
         [db close];
     }
 }
+
 
 -(NSMutableArray *)fetchAllData
 {
@@ -86,6 +89,7 @@
             NSString * note      =    [set stringForColumn:NOTE];
             NSString * descr        = [set stringForColumn:DESCR];
             NSString * keys        = [set stringForColumn:KEYS];
+            NSString * isupload        = [set stringForColumn:ISUPLOAD];
             
             NSMutableDictionary *dict = [NSMutableDictionary new];
             
@@ -99,6 +103,7 @@
             [dict setObject:note forKey:@"note"];
             [dict setObject:descr forKey:@"descr"];
             [dict setObject:keys forKey:@"keys"];
+            [dict setObject:isupload forKey:@"isUpload"];
             
             [array addObject:[SpotInforModel objectWithKeyValues:dict]];
         }
@@ -115,8 +120,8 @@
     BOOL res = NO;
     if ([db open]) {
         NSString *sqlInsertStr= [NSString stringWithFormat:
-                         @"INSERT INTO '%@' ('%@', '%@', '%@', '%@', '%@','%@', '%@', '%@', '%@')  VALUES ('%@', '%@','%@', '%@', '%@', '%@', '%@', '%@', '%@')",
-                        TABLENAME, OCCURTIME,LON,LAT,ADDRESS,LEVEL,PHONENUM,NOTE,DESCR,KEYS,dict[@"occurTime"],dict[@"lon"],dict[@"lat"], dict[@"address"], dict[@"level"],dict[@"phoneNum"], dict[@"note"], dict[@"descr"],dict[@"keys"]];
+                         @"INSERT INTO '%@' ('%@', '%@', '%@', '%@', '%@','%@', '%@', '%@', '%@','%@')  VALUES ('%@', '%@','%@', '%@', '%@', '%@', '%@', '%@', '%@','%@')",
+                        TABLENAME, OCCURTIME,LON,LAT,ADDRESS,LEVEL,PHONENUM,NOTE,DESCR,KEYS,ISUPLOAD,dict[@"occurTime"],dict[@"lon"],dict[@"lat"], dict[@"address"], dict[@"level"],dict[@"phoneNum"], dict[@"note"], dict[@"descr"],dict[@"keys"],dict[@"isUpload"]];
         res = [db executeUpdate:sqlInsertStr];
         if (!res) {
              NSLog(@"error when insert spot table");
@@ -134,7 +139,7 @@
     if ([db open])
     {
         NSString *sqlUpdateStr = [NSString stringWithFormat:
-            @"UPDATE %@ SET %@ = '%@',%@ = '%@', %@='%@', %@='%@', %@='%@', %@='%@', %@='%@', %@='%@',%@='%@' WHERE %@ = '%@' ",TABLENAME,OCCURTIME,dict[@"occurTime"],LON,dict[@"lon"],LAT,dict[@"lat"],ADDRESS,dict[@"address"],LEVEL,dict[@"level"],PHONENUM,dict[@"phoneNum"],NOTE,dict[@"note"],DESCR,dict[@"descr"],KEYS,dict[@"keys"],POINTID,dict[@"pointid"]];
+            @"UPDATE %@ SET %@ = '%@',%@ = '%@', %@='%@', %@='%@', %@='%@', %@='%@', %@='%@', %@='%@',%@='%@',%@='%@' WHERE %@ = '%@' ",TABLENAME,OCCURTIME,dict[@"occurTime"],LON,dict[@"lon"],LAT,dict[@"lat"],ADDRESS,dict[@"address"],LEVEL,dict[@"level"],PHONENUM,dict[@"phoneNum"],NOTE,dict[@"note"],DESCR,dict[@"descr"],KEYS,dict[@"keys"],ISUPLOAD,dict[@"isUpload"],POINTID,dict[@"pointid"]];
         
         NSLog(@"%@",sqlUpdateStr);
         res = [db executeUpdate:sqlUpdateStr];
@@ -146,6 +151,25 @@
         [db close];
     }
     return res;
+}
+
+
+-(BOOL)updateUploadFlag:(NSString *)uploadFlag ID:(NSString *)idString
+{
+    BOOL result = NO;
+    if ([db open]) {
+        NSString *updateSql = [NSString stringWithFormat:
+                               @"UPDATE %@ SET %@ = '%@' WHERE %@ = '%@' ",TABLENAME,ISUPLOAD,uploadFlag,POINTID,idString];
+        NSLog(@"updateUploadFlag %@",updateSql);
+        result = [db executeUpdate:updateSql];
+        if (!result) {
+            NSLog(@"error when update upload table");
+        }else{
+            NSLog(@"success to update upload table");
+        }
+        [db close];
+    }
+    return result;
 }
 
 -(BOOL) deleteDataByAttribute:(NSString *)attribute value:(NSString *)value

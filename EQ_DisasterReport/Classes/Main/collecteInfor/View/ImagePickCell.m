@@ -18,6 +18,7 @@
 - (void)awakeFromNib {
     // Initialization code
     self.imagePickVC = [[ImageCollectionView alloc] initWithNibName:@"ImageCollectionView" bundle:nil];
+    
     __weak typeof(self) weakSelf = self;
     self.imagePickVC.changeHeightBlock = ^(CGFloat viewHeight,NSMutableArray *images){
         if ([weakSelf.delegate respondsToSelector:@selector(imagePickCell:pickedImages:imagePickViewheight:)]) {
@@ -47,6 +48,7 @@
 
 -(void)setImages:(NSMutableArray *)images
 {
+    self.imagePickVC.canEdit = self.canEdit;
     self.imagePickVC.dataProvider = images;
 }
 

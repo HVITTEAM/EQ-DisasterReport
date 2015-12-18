@@ -16,7 +16,10 @@ typedef void(^changeHeight)(CGFloat,NSMutableArray *);
 @property (nonatomic, strong)NSMutableArray *dataProvider;
 @property (nonatomic, assign)BOOL isShowAddBtn;
 @property (nonatomic, assign)BOOL isExitThread;
+@property (nonatomic, assign)BOOL canEdit;
 @property (nonatomic, weak)UIViewController *parentVC;
+
+
 
 /**根据图片的数改变view的高度,并传出所选择的图片**/
 @property (nonatomic,copy)changeHeight changeHeightBlock;

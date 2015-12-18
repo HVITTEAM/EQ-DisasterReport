@@ -20,4 +20,6 @@
 @property(nonatomic,copy)NSString *descr;
 @property(nonatomic,copy)NSString *keys;
 
+@property(nonatomic,copy)NSString *isUpload;
+
 @end

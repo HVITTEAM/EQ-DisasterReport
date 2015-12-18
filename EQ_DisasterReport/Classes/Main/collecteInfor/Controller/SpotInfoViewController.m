@@ -24,16 +24,21 @@
 #import "AddPointinfoNTHelper.h"
 #import "SWYMultipartFormObject.h"
 #import "SWYRequestParams.h"
+#import "MapSearchAPIHelper.h"
 
 #define kCellMargin 10
 
-@interface SpotInfoViewController ()<UITableViewDataSource,UITableViewDelegate,FillContentViewControllerDelegate,ImagePickCellDelegate,AudioCellDelegate,SpotTextCellDelegate,SWYNetworkReformerDelegate,SWYNetworkParamSourceDelegate,SWYNetworkCallBackDelegate>
+@interface SpotInfoViewController ()<UITableViewDataSource,UITableViewDelegate,FillContentViewControllerDelegate,ImagePickCellDelegate,AudioCellDelegate,SpotTextCellDelegate,SWYNetworkReformerDelegate,SWYNetworkParamSourceDelegate,SWYNetworkCallBackDelegate,MapSearchAPIHelperDelegate>
 @property(nonatomic,strong)UITableView *infoTableView;
 @property(nonatomic,strong)NSArray *dataProvider;              //section 0 数据源
 @property(nonatomic,strong)NSMutableArray *images;            //图片数组
 @property(nonatomic,strong)AudioVO *audioVO;                //声音数据
 
 @property(strong,nonatomic)AddPointinfoNTHelper *addPointinfoNTHelper;
+
+@property(strong,nonatomic)MapSearchAPIHelper *searchApiHelper;
+
+@property(assign,nonatomic)BOOL uploadState;
 
 @end
 
@@ -116,11 +121,11 @@
         
         SpotCellModel *model6 = [[SpotCellModel alloc] init];
         model6.titleStr = @"详情描述:";
-        model6.placeHolderStr = @"详情描述";
+        model6.placeHolderStr = @"";
     
         SpotCellModel *model7 = [[SpotCellModel alloc] init];
         model7.titleStr = @"备注:";
-        model7.placeHolderStr = @"输入备注内容";
+        model7.placeHolderStr = @"";
 
         _dataProvider = @[model0,model1,model2,model3,model4,model5,model6,model7];
     }
@@ -185,9 +190,22 @@
     return _addPointinfoNTHelper;
 }
 
+-(MapSearchAPIHelper *)searchApiHelper
+{
+    if (!_searchApiHelper) {
+        _searchApiHelper = [[MapSearchAPIHelper alloc] init];
+        _searchApiHelper.delegate = self;
+    }
+    return _searchApiHelper;
+}
+
 -(void)showData
 {
     if (self.actionType == kActionTypeShow) {
+        if ([self.spotInfoModel.isUpload isEqualToString:kdidUpload]) {
+            self.uploadState = YES;
+            self.navigationItem.rightBarButtonItem = nil;
+        }
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSMutableArray *images = [self getImagesWithReleteId:self.spotInfoModel.pointid releteTable:nil];
             self.images = images;
@@ -210,6 +228,8 @@
         CLLocationCoordinate2D coordinate = appdelegate.currentCoordinate;
         ((SpotCellModel *)self.dataProvider[3]).contentStr = [NSString stringWithFormat:@"%f",coordinate.longitude];
         ((SpotCellModel *)self.dataProvider[4]).contentStr = [NSString stringWithFormat:@"%f",coordinate.latitude];
+        
+        [self.searchApiHelper reverseGeocodeWithCoordinate];
     }
 
 }
@@ -218,6 +238,13 @@
 #pragma mark - TableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if (self.actionType == kActionTypeShow && self.uploadState) {
+        if (self.images.count == 0 && self.audioVO.audioData == nil) {
+            return 1;
+        }else if (self.images.count == 0 || self.audioVO.audioData == nil){
+            return 2;
+        }
+    }
     return 3;
 }
 
@@ -236,14 +263,20 @@
         SpotTextCell *cell = [SpotTextCell cellWithTableView:tableView model:model];
         [cell setIndexPath:indexPath rowsInSection:(int)self.dataProvider.count];
         cell.delegate = self;
+        cell.userInteractionEnabled = !self.uploadState;
         return cell;
     }else if(indexPath.section ==0 && indexPath.row >=6){
         SpotCellModel *model = self.dataProvider[indexPath.row];
         SpotLabelCell *cell = [SpotLabelCell cellWithTableView:tableView model:model];
         [cell setIndexPath:indexPath rowsInSection:(int)self.dataProvider.count];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.userInteractionEnabled = !self.uploadState;
         return cell;
     }else if(indexPath.section == 1){
+        if ( self.uploadState && self.images.count == 0) {
+            AudioCell *cell = [self createAudioCellWithTableView:tableView indexPath:indexPath];
+            return cell;
+        }
         static NSString *cellID = @"imagePickCell";
         ImagePickCell *cell = (ImagePickCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
         if (!cell) {
@@ -251,18 +284,11 @@
             cell.parentVC = self;
             cell.delegate = self;
         }
+        cell.canEdit = !self.uploadState;
         cell.images = self.images;
         return cell;
     }else{
-        static NSString *cellID = @"audioCell";
-        AudioCell *cell = (AudioCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
-        if (!cell) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"AudioCell" owner:nil options:nil] lastObject];
-            cell.delegate = self;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-        cell.indexpath = indexPath;
-        cell.audioData = self.audioVO.audioData;
+       AudioCell *cell = [self createAudioCellWithTableView:tableView indexPath:indexPath];
         return cell;
     }
 }
@@ -281,6 +307,11 @@
         CGFloat height = [calulateCell calulateCellHeightWithModel:model];
         return height>50?height:50;
     }else if(indexPath.section == 1){
+        
+        if ( self.uploadState && self.images.count == 0) {
+            return 60;
+        }
+
         NSUInteger cellNum = self.images.count+1;
         
         CGFloat w = [[UIScreen mainScreen] bounds].size.width - 5 *kCellMargin;
@@ -301,7 +332,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+{    
     if (indexPath.section ==0 && indexPath.row >=6) {
         FillContentViewController *fillVC = [[FillContentViewController alloc] init];
         fillVC.delegate = self;
@@ -390,9 +421,7 @@
                                                   @"collecttime":((SpotCellModel *)self.dataProvider[1]).contentStr,
                                                   @"earthquakeid":@"earthquakeid",
                                                   @"voicetime":voiceTimes,
-                                                  //@"voicefile":@[],
                                                   @"phototime":photoTimes
-                                                  //@"photofile":@[]
                                                 }];
 
     for (PictureVO *picVO in self.images ) {
@@ -402,20 +431,21 @@
         multiObject.fileName = [NSString stringWithFormat:@"%@.jpg", picVO.name];
         multiObject.mimeType = @"image/jpeg";
         [files addObject:multiObject];
+        
         [photoTimes addObject:picVO.photoTime];
     }
     
-    if (self.audioVO) {
-        [voiceTimes addObject:self.audioVO.audioTime];
-        
+    if (self.audioVO.audioData) {
         SWYMultipartFormObject *audioMultiObject = [[SWYMultipartFormObject alloc] init];
         audioMultiObject.fileData = self.audioVO.audioData;
         audioMultiObject.name = @"voicefile";
         audioMultiObject.fileName = [NSString stringWithFormat:@"%@.mp3", self.audioVO.name];
         audioMultiObject.mimeType = @"audio/mpeg3";
         [files addObject:audioMultiObject];
+        
+        [voiceTimes addObject:self.audioVO.audioTime];
     }
-
+    
     SWYRequestParams *params = [[SWYRequestParams alloc] initWithParams:dict files:files];
     return params;
 }
@@ -423,18 +453,36 @@
 #pragma mark SWYNetworkCallBackDelegate
 - (void)requestDidSuccess:(SWYBaseNetworkHelper *)networkHelper
 {
+    
    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    if ([self.delegate respondsToSelector:@selector(spotInfoViewController:uploadSuccessIndexPath:)]) {
+        [self.delegate spotInfoViewController:self uploadSuccessIndexPath:self.currentIdx];
+    }
 }
 
 - (void)requestDidFailed:(SWYBaseNetworkHelper *)networkHelper
 {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [[[UIAlertView alloc] initWithTitle:nil message:@"上传失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil] show];
 }
 
 #pragma mark SWYNetworkReformerDelegate
 - (id)networkHelper:(SWYBaseNetworkHelper *)networkHelper reformData:(id)data
 {
     return data;
+}
+
+#pragma mark - MapSearchAPIHelperDelegate
+
+-(void)mapSearchAPIHelper:(MapSearchAPIHelper *)searhApiHelper reverseGeocodeFail:(NSString *)errorMsg
+{
+    
+}
+
+-(void)mapSearchAPIHelper:(MapSearchAPIHelper *)searhApiHelper reverseGeocodeSuccess:(NSString *)address
+{
+     ((SpotCellModel *)self.dataProvider[5]).contentStr = address;
+    [self.infoTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:5 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 
@@ -450,11 +498,10 @@
         return;
     }
     
-    
     NSMutableArray *tempArr = [NSMutableArray array];
     for (int i= 0; i<self.dataProvider.count;i++) {
         NSString *string = ((SpotCellModel *)self.dataProvider[i]).contentStr;
-        if (i>0&&i<=6) {
+        if (i>0&&i<=5) {
             if (string == nil || string.length<=0) {
                 [[[UIAlertView alloc] initWithTitle:@"提示" message:@"内容不能为空" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil] show];
                 return;
@@ -480,6 +527,9 @@
     [dict setObject:@"keykeykeykey" forKey:@"keys"];
     
     if (self.actionType == kActionTypeAdd) {
+        
+        dict[@"isUpload"] = kdidNotUpload;
+        
         BOOL result = NO;
         result = [[SpotTableHelper sharedInstance] insertDataWithDictionary:dict];
         if (result) {
@@ -489,6 +539,8 @@
         }
     }else{
         dict[@"pointid"] = self.spotInfoModel.pointid;
+        dict[@"isUpload"] = self.spotInfoModel.isUpload;
+        
         [[SpotTableHelper sharedInstance] updateDataWithDictionary:dict];
         
         [[VoiceTableHelper sharedInstance] deleteDataByReleteTable:nil Releteid:self.spotInfoModel.pointid];
@@ -500,9 +552,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 
 }
-
-
-
 
 /**
  * 保存图片
@@ -613,6 +662,27 @@
 -(void)back
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+/**
+ *  创建AudioCell
+ **/
+
+-(AudioCell *)createAudioCellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)idx
+{
+    static NSString *cellID = @"audioCell";
+    AudioCell *cell = (AudioCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+    if (!cell) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"AudioCell" owner:nil options:nil] lastObject];
+        cell.delegate = self;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    cell.indexpath = idx;
+    cell.audioData = self.audioVO.audioData;
+    if (self.uploadState) {
+        cell.resetBtn.hidden = YES;
+    }
+    return cell;
 }
 
 -(void)dealloc

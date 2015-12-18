@@ -68,6 +68,9 @@
         self.isShowAddBtn = YES;
     }else self.isShowAddBtn = NO;
     
+    if (!self.canEdit) {
+        self.isShowAddBtn = NO;
+    }
     //[self.collectionView reloadData];
 }
 
@@ -108,6 +111,11 @@
         cell.imgView.image = [img scaleImageToSize:CGSizeMake(cellWidth,cellWidth)];
 
       }
+    
+    if (!self.canEdit) {
+        cell.delButton.hidden = YES;
+    }
+    
     return cell;
 }
 

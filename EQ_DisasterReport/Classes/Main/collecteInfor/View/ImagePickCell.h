@@ -14,6 +14,7 @@
 @property (nonatomic, weak) UIViewController *parentVC;
 @property (nonatomic, weak)id<ImagePickCellDelegate>delegate;
 @property (nonatomic,strong)NSMutableArray *images;
+@property (nonatomic,assign)BOOL canEdit;
 @end
 
 @protocol ImagePickCellDelegate <NSObject>
