@@ -14,8 +14,15 @@
 #import "SWYPhotoSetViewController.h"
 #import "CollectInfoViewController.h"
 #import "PersonCenterViewController.h"
+#import "SpotInfoViewController.h"
 #import "AppDelegate.h"
-#import "LoginViewController.h"
+//#import "LoginViewController.h"
+
+typedef NS_ENUM(NSInteger, BottomButtonType) {
+    BottomButtonTypeCollectInfo = 0,
+    BottomButtonTypePhotoSet,
+    BottomButtonTypePersonCenter,
+};
 
 @interface SWYMapViewController ()<MAMapViewDelegate,AMapSearchDelegate,MapTypeSelectViewDelegate>
 
@@ -101,43 +108,38 @@
     bottomBar.layer.masksToBounds = YES;
     [self.view addSubview:bottomBar];
 
-    CGFloat btnWidth = bottomBar.width/4;
+    CGFloat btnWidth = bottomBar.width/3;
     CGFloat btnHeight = 40;
     
+    self.collectInfoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.collectInfoBtn.frame = CGRectMake(0, 0, btnWidth, btnHeight);
+    self.collectInfoBtn.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:1.0];
+    [self.collectInfoBtn setTitle:@"灾情采集" forState: UIControlStateNormal];
+    [self.collectInfoBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    self.collectInfoBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+    self.collectInfoBtn.tag = BottomButtonTypeCollectInfo;
+    [self.collectInfoBtn addTarget:self action:@selector(bottomBarBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [bottomBar addSubview:self.collectInfoBtn];
+    
+    
     self.photoSetBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.photoSetBtn.frame = CGRectMake(0, 0, btnWidth, btnHeight);
+    self.photoSetBtn.frame = CGRectMake(1*btnWidth, 0, btnWidth, btnHeight);
     self.photoSetBtn.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:1.0];
-    [self.photoSetBtn setTitle:@"专业采集" forState: UIControlStateNormal];
+    [self.photoSetBtn setTitle:@"照片墙" forState: UIControlStateNormal];
     [self.photoSetBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.photoSetBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+    self.photoSetBtn.tag = BottomButtonTypePhotoSet;
     [self.photoSetBtn addTarget:self action:@selector(bottomBarBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [bottomBar addSubview:self.photoSetBtn];
     
-    self.collectInfoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.collectInfoBtn.frame = CGRectMake(btnWidth, 0, btnWidth, btnHeight);
-    self.collectInfoBtn.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:1.0];
-    [self.collectInfoBtn setTitle:@"公众采集" forState: UIControlStateNormal];
-    [self.collectInfoBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    self.collectInfoBtn.titleLabel.font = [UIFont systemFontOfSize:13];
-    [self.collectInfoBtn addTarget:self action:@selector(bottomBarBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [bottomBar addSubview:self.collectInfoBtn];
-    
-    self.collectInfoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.collectInfoBtn.frame = CGRectMake(2*btnWidth, 0, btnWidth, btnHeight);
-    self.collectInfoBtn.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:1.0];
-    [self.collectInfoBtn setTitle:@"照片墙" forState: UIControlStateNormal];
-    [self.collectInfoBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    self.collectInfoBtn.titleLabel.font = [UIFont systemFontOfSize:13];
-    [self.collectInfoBtn addTarget:self action:@selector(bottomBarBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [bottomBar addSubview:self.collectInfoBtn];
-
     
     self.personCenterBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.personCenterBtn.frame = CGRectMake(3*btnWidth, 0,btnWidth, btnHeight);
+    self.personCenterBtn.frame = CGRectMake(2*btnWidth, 0,btnWidth, btnHeight);
     self.personCenterBtn.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:1.0];
     [self.personCenterBtn setTitle:@"个人中心" forState: UIControlStateNormal];
     [self.personCenterBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.personCenterBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+    self.personCenterBtn.tag = BottomButtonTypePersonCenter;
     [self.personCenterBtn addTarget:self action:@selector(bottomBarBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [bottomBar addSubview:self.personCenterBtn];
 
@@ -149,9 +151,9 @@
     line2.backgroundColor = [UIColor lightGrayColor];
     [bottomBar addSubview:line2];
     
-    UIView *line3 = [[UIView alloc] initWithFrame:CGRectMake(3*btnWidth, (btnHeight-10)/2, 1, btnHeight-30)];
-    line3.backgroundColor = [UIColor lightGrayColor];
-    [bottomBar addSubview:line3];
+//    UIView *line3 = [[UIView alloc] initWithFrame:CGRectMake(3*btnWidth, (btnHeight-10)/2, 1, btnHeight-30)];
+//    line3.backgroundColor = [UIColor lightGrayColor];
+//    [bottomBar addSubview:line3];
 }
 
 #pragma mark 协议方法
@@ -238,25 +240,26 @@
 
 -(void)bottomBarBtnClicked:(UIButton *)sender
 {
-    NSString *title = sender.titleLabel.text;
-    if ([title isEqualToString:@"专业采集"]) {
+    if (sender.tag == BottomButtonTypeCollectInfo) {
         CollectInfoViewController *collectionInfo = [[CollectInfoViewController alloc] init];
         UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:collectionInfo];
         [self presentViewController:navVC animated:YES completion:nil];
         
-    }else if ([title isEqualToString:@"公众采集"]){
-        CollectInfoViewController *collectionInfo = [[CollectInfoViewController alloc] init];
-        UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:collectionInfo];
-        [self presentViewController:navVC animated:YES completion:nil];
-    }else if ([title isEqualToString:@"照片墙"]){
+//        SpotInfoViewController *spotInfoVC = [[SpotInfoViewController alloc] init];
+//        UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:spotInfoVC];
+//        [self presentViewController:navVC animated:YES completion:nil];
+        
+    }else if (sender.tag == BottomButtonTypePhotoSet){
         SWYPhotoSetViewController *photoSetVC = [[SWYPhotoSetViewController alloc] init];
         UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:photoSetVC];
         [self presentViewController:navVC animated:YES completion:nil];
-    }else{
+    }else if (sender.tag == BottomButtonTypePersonCenter){
         PersonCenterViewController *personCenter = [[PersonCenterViewController alloc] init];
         UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:personCenter];
         [self presentViewController:navVC animated:YES completion:nil];
-    }
+     }else{
+
+     }
 }
 
 

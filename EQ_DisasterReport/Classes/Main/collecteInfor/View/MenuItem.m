@@ -7,7 +7,7 @@
 //
 
 #import "MenuItem.h"
-#define marginH 30
+#define marginH 20
 #define marginV 10
 
 @interface MenuItem ()
@@ -29,7 +29,7 @@
         self.titleLb = [[UILabel alloc] init];
         self.titleLb.text = titleStr;
         self.titleLb.textAlignment = NSTextAlignmentLeft;
-        self.titleLb.font = [UIFont systemFontOfSize:16];
+        self.titleLb.font = [UIFont systemFontOfSize:14];
         self.titleLb.textColor = [UIColor whiteColor];
         [self addSubview:self.titleLb];
     }

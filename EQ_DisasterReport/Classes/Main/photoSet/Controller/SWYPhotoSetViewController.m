@@ -51,7 +51,7 @@
     self.photoCollectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
     self.photoCollectionView.delegate = self;
     self.photoCollectionView.dataSource = self;
-    self.photoCollectionView.backgroundColor = [UIColor blackColor];
+    self.photoCollectionView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.photoCollectionView];
     
     //注册 cell

@@ -359,6 +359,9 @@
 -(void)beginEditCellContent:(SpotTextCell *)cell
 {
     self.navigationItem.rightBarButtonItem.title = @"完成";
+//    NSIndexPath *idx = [self.infoTableView indexPathForCell:cell];
+//    
+//    [self.infoTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(idx.row +1) inSection:idx.section] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 #pragma mark - FillContentViewControllerDelegate

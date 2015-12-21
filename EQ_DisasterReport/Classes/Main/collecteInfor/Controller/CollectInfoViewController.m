@@ -15,7 +15,7 @@
 #import "VoiceTableHelper.h"
 #import "MenuView.h"
 
-@interface CollectInfoViewController ()<MenuViewDelegate,SpotInfoUploadDelegate>
+@interface CollectInfoViewController ()<MenuViewDelegate,SpotInfoUploadDelegate,UIAlertViewDelegate>
 
 @property(strong,nonatomic)NSMutableArray *dataProvider;   // tableview数据源
 
@@ -171,6 +171,38 @@
     return @"删除";
 }
 
+#pragma mark - UIAlertViewDelegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        return;
+    }
+    
+    NSLog(@"delete");
+    NSArray *arr = [self.tableView indexPathsForSelectedRows];
+    NSLog(@"dataProvider个数%d",(int)self.dataProvider.count);
+    NSLog(@"选中个数%d",(int)arr.count);
+    NSLog(@"可见个数%d",(int) [self.tableView visibleCells].count);
+    
+    NSArray *selectedIndexPaths = [self.tableView indexPathsForSelectedRows];
+    if (selectedIndexPaths.count == 0 || selectedIndexPaths==nil) {
+        return;
+    }
+    NSLog(@"delete");
+    NSMutableArray *deleteDatas = [[NSMutableArray alloc] init];
+    for (NSIndexPath *indexpath in selectedIndexPaths) {
+        [deleteDatas addObject:self.dataProvider[indexpath.row]];
+    }
+    
+    for (SpotInforModel *model in deleteDatas) {
+        [self deleteItemByModel:model];
+        [self.dataProvider removeObject:model];
+    }
+    [self.tableView reloadData];
+    [self cancelAllSelect];
+    
+}
+
 -(void)menuView:(MenuView *)menuView indexForItem:(NSInteger)idx
 {
     if (idx == 0) {  //新增采集点
@@ -244,28 +276,7 @@
  */
 -(void)deleteSelectedItem
 {
-    NSLog(@"delete");
-    NSArray *arr = [self.tableView indexPathsForSelectedRows];
-    NSLog(@"dataProvider个数%d",(int)self.dataProvider.count);
-    NSLog(@"选中个数%d",(int)arr.count);
-    NSLog(@"可见个数%d",(int) [self.tableView visibleCells].count);
-    
-    NSArray *selectedIndexPaths = [self.tableView indexPathsForSelectedRows];
-    if (selectedIndexPaths.count == 0 || selectedIndexPaths==nil) {
-        return;
-    }
-     NSLog(@"delete");
-    NSMutableArray *deleteDatas = [[NSMutableArray alloc] init];
-    for (NSIndexPath *indexpath in selectedIndexPaths) {
-        [deleteDatas addObject:self.dataProvider[indexpath.row]];
-    }
-    
-    for (SpotInforModel *model in deleteDatas) {
-        [self deleteItemByModel:model];
-        [self.dataProvider removeObject:model];
-    }
-    [self.tableView reloadData];
-    [self cancelAllSelect];
+    [[[UIAlertView alloc] initWithTitle:nil message:@"确认删除吗？删除后将不可恢复！" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil] show];
 }
 
 /**

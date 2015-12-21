@@ -100,8 +100,9 @@
  */
 - (IBAction)loginNow:(id)sender {
     [self.view endEditing:YES];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self.loginNetWorkHelper startSendRequest];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [self.loginNetWorkHelper startSendRequest];
+    [HMControllerTool setRootViewController];
 }
 
 

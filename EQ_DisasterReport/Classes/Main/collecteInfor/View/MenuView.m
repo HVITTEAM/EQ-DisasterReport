@@ -9,8 +9,8 @@
 #import "MenuView.h"
 #import "MenuContentView.h"
 #define margin 10
-#define contentViewWidth 150
-#define itemHeight 50
+#define contentViewWidth 110
+#define itemHeight 40
 
 @interface MenuView ()<MenuContentViewDelegate>
 
