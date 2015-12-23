@@ -55,6 +55,10 @@
 		D296476D1BF1DB1C004B8877 /* PictureVO.m in Sources */ = {isa = PBXBuildFile; fileRef = D296476C1BF1DB1C004B8877 /* PictureVO.m */; };
 		D29CAC581C0181F100F02FDB /* AccountTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D29CAC561C0181F100F02FDB /* AccountTableViewController.m */; };
 		D29CAC591C0181F100F02FDB /* AccountTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D29CAC571C0181F100F02FDB /* AccountTableViewController.xib */; };
+		D29EE3F31C29250700B9629F /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29EE3F21C29250700B9629F /* libPushSDK-1.8.8.a */; };
+		D29EE3F51C29254600B9629F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29EE3F41C29254600B9629F /* CFNetwork.framework */; };
+		D29EE3F71C29257D00B9629F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29EE3F61C29257D00B9629F /* CoreFoundation.framework */; };
+		D29EE3F91C29270B00B9629F /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = D29EE3F81C29270B00B9629F /* PushConfig.plist */; };
 		D29EEBBA1BFAFC860015C268 /* PhotoSetHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D29EEBB81BFAFC860015C268 /* PhotoSetHeadCell.m */; };
 		D29EEBBB1BFAFC860015C268 /* PhotoSetHeadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D29EEBB91BFAFC860015C268 /* PhotoSetHeadCell.xib */; };
 		D29EEBC01BFB2C2F0015C268 /* VoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D29EEBBF1BFB2C2F0015C268 /* VoiceModel.m */; };
@@ -327,6 +331,11 @@
 		D29CAC551C0181F100F02FDB /* AccountTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountTableViewController.h; sourceTree = "<group>"; };
 		D29CAC561C0181F100F02FDB /* AccountTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountTableViewController.m; sourceTree = "<group>"; };
 		D29CAC571C0181F100F02FDB /* AccountTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountTableViewController.xib; sourceTree = "<group>"; };
+		D29EE3F11C29250700B9629F /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APService.h; path = JPush/APService.h; sourceTree = "<group>"; };
+		D29EE3F21C29250700B9629F /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPushSDK-1.8.8.a"; path = "JPush/libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
+		D29EE3F41C29254600B9629F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		D29EE3F61C29257D00B9629F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		D29EE3F81C29270B00B9629F /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		D29EEBB71BFAFC860015C268 /* PhotoSetHeadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoSetHeadCell.h; sourceTree = "<group>"; };
 		D29EEBB81BFAFC860015C268 /* PhotoSetHeadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoSetHeadCell.m; sourceTree = "<group>"; };
 		D29EEBB91BFAFC860015C268 /* PhotoSetHeadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoSetHeadCell.xib; sourceTree = "<group>"; };
@@ -629,12 +638,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2EC98D31BE7458200ED8661 /* Security.framework in Frameworks */,
+				D29EE3F71C29257D00B9629F /* CoreFoundation.framework in Frameworks */,
+				D29EE3F51C29254600B9629F /* CFNetwork.framework in Frameworks */,
+				D29EE3F31C29250700B9629F /* libPushSDK-1.8.8.a in Frameworks */,
 				D2E0A7E51C1FB545002FE750 /* AMapSearchKit.framework in Frameworks */,
 				D28D17D91C1D101E0086C080 /* AMapLocationKit.framework in Frameworks */,
 				D2A5C86D1BFDEEEF00C298CF /* MAMapKit.framework in Frameworks */,
 				D2AD16D71BF2FDF8000D2182 /* libmp3lame.a in Frameworks */,
 				D2AD16A71BF2DC7A000D2182 /* AVFoundation.framework in Frameworks */,
-				D2EC98D31BE7458200ED8661 /* Security.framework in Frameworks */,
 				D2EC98D11BE7448900ED8661 /* libc++.tbd in Frameworks */,
 				D2EC98CF1BE7445D00ED8661 /* OpenGLES.framework in Frameworks */,
 				D2EC98C71BE73AF100ED8661 /* libstdc++.6.0.9.tbd in Frameworks */,
@@ -708,6 +720,7 @@
 				01EBA1611BE6F4CA00F2701D /* Info.plist */,
 				01EBA1511BE6F4CA00F2701D /* main.m */,
 				D2EC97C21BE7076800ED8661 /* EQ_DisasterReport.pch */,
+				D29EE3F81C29270B00B9629F /* PushConfig.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -978,6 +991,8 @@
 		D2EC97C11BE7062D00ED8661 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D29EE3F61C29257D00B9629F /* CoreFoundation.framework */,
+				D29EE3F41C29254600B9629F /* CFNetwork.framework */,
 				D2EC98C61BE73AF100ED8661 /* libstdc++.6.0.9.tbd */,
 				D2EC98C41BE73AC900ED8661 /* libz.tbd */,
 				D2EC98D01BE7448900ED8661 /* libc++.tbd */,
@@ -1014,6 +1029,8 @@
 		D2EC97C41BE70C7300ED8661 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				D29EE3F11C29250700B9629F /* APService.h */,
+				D29EE3F21C29250700B9629F /* libPushSDK-1.8.8.a */,
 				D2E0A7E41C1FB545002FE750 /* AMapSearchKit.framework */,
 				D28D17D81C1D101E0086C080 /* AMapLocationKit.framework */,
 				D2A5C86C1BFDEEEF00C298CF /* MAMapKit.framework */,
@@ -1550,7 +1567,7 @@
 				TargetAttributes = {
 					01EBA14C1BE6F4CA00F2701D = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = G688QXM6YK;
+						DevelopmentTeam = P5A3MJD6BG;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1636,6 +1653,7 @@
 				D2AD16D51BF2FDF8000D2182 /* mic_5.png in Resources */,
 				D29647451BF19977004B8877 /* FillContentViewController.xib in Resources */,
 				D2A5343C1C00C50800140F50 /* WebsitViewController.xib in Resources */,
+				D29EE3F91C29270B00B9629F /* PushConfig.plist in Resources */,
 				D2BFE58D1BE9E0D800B65E91 /* 10.jpg in Resources */,
 				D2EEA3821BF468EE00F2FD20 /* PersonCenterHeadView.xib in Resources */,
 				D2EDC4BD1BEC959A00AEDFB4 /* CollectInfoViewController.xib in Resources */,
@@ -1908,6 +1926,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1946,6 +1965,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1955,7 +1975,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1968,10 +1989,13 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/EQ_DisasterReport/Classes/Libs/D3RecordBtutton",
+					"$(PROJECT_DIR)/EQ_DisasterReport/Classes/Libs/JPush",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hvit.EQ-DisasterReport";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hvit.EQDisasterReport;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ca1b117c-f5b2-43dc-a20d-76122c1dfdc1";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/EQ_DisasterReport/Classes/Libs/JPush";
 			};
 			name = Debug;
 		};
@@ -1979,7 +2003,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1992,10 +2017,13 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/EQ_DisasterReport/Classes/Libs/D3RecordBtutton",
+					"$(PROJECT_DIR)/EQ_DisasterReport/Classes/Libs/JPush",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hvit.EQ-DisasterReport";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hvit.EQDisasterReport;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ca1b117c-f5b2-43dc-a20d-76122c1dfdc1";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/EQ_DisasterReport/Classes/Libs/JPush";
 			};
 			name = Release;
 		};

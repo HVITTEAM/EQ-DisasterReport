@@ -82,6 +82,9 @@
 #define MapNav_Archiver_Path @"mapnavpath"
 
 
+//高德AMapAPIKey
+#define AMapAPIKey @"4bc6c5298b30d483ce75d69247d5b2df"
+
 
 #define IOS_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]
 

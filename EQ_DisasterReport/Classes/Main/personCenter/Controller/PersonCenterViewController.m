@@ -13,18 +13,25 @@
 #import "AboutViewController.h"
 #import "FeedbackView.h"
 #import "AccountTableViewController.h"
+#import "LoginUser.h"
+
+#define headViewHeight 224
 
 @interface PersonCenterViewController ()<UIScrollViewDelegate>
-@property(nonatomic,strong)PersonCenterHeadView *headView;
+
+@property(nonatomic,strong)PersonCenterHeadView *headView;         //头部 view
 
 @end
 
 @implementation PersonCenterViewController
 
+#pragma mark -- 生命周期方法 --
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self initNavigation];
+    
     [self initHeadView];
     
     [self setupGroups];
@@ -33,18 +40,6 @@
     self.tableView.delegate = self;
     self.view.backgroundColor = HMGlobalBg;
     self.automaticallyAdjustsScrollViewInsets = NO;
-
-}
-
--(void)initHeadView
-{
-    self.tableView.contentInset = UIEdgeInsetsMake(224, 0, 0, 0);
-    self.headView = [[[NSBundle mainBundle] loadNibNamed:@"PersonCenterHeadView" owner:self options:nil] lastObject];
-    self.headView.frame = CGRectMake(0, -224, MTScreenW, 224);
-    UIImage *bkimage = [UIImage imageNamed:@"personCenterHeadBK"];
-    self.headView.headBKImageView.image = [bkimage resizableImageWithCapInsets:UIEdgeInsetsZero resizingMode:UIImageResizingModeStretch];
-    //[self.tableView addSubview:self.headView];
-    [self.tableView insertSubview:self.headView atIndex:0];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -53,6 +48,25 @@
     
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+}
+
+#pragma mark -- 初始化子控件方法 --
+/**
+ *  初始化头部视图
+ */
+-(void)initHeadView
+{
+    self.tableView.contentInset = UIEdgeInsetsMake(headViewHeight, 0, 0, 0);
+    
+    self.headView = [[[NSBundle mainBundle] loadNibNamed:@"PersonCenterHeadView" owner:self options:nil] lastObject];
+    self.headView.frame = CGRectMake(0, -headViewHeight, MTScreenW, headViewHeight);
+    
+    UIImage *bkimage = [UIImage imageNamed:@"personCenterHeadBK"];
+    self.headView.headBKImageView.image = [bkimage resizableImageWithCapInsets:UIEdgeInsetsZero resizingMode:UIImageResizingModeStretch];
+    
+    self.headView.userNameLb.text = [LoginUser shareInstance].username;
+    
+    [self.tableView insertSubview:self.headView atIndex:0];
 }
 
 /**
@@ -71,6 +85,20 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
+#pragma mark -- 协议方法 --
+#pragma mark UIScrollViewDelegate
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat y = scrollView.contentOffset.y;
+    if (y<=-headViewHeight) {
+        CGRect frame = self.headView.frame;
+        frame.size.height = -y;
+        frame.origin.y = y;
+        self.headView.frame = frame;
+    }
+}
+
+#pragma mark -- 内部方法 --
 # pragma  mark 设置数据源
 /**
  *  初始化模型数据
@@ -81,10 +109,7 @@
     [self.groups removeAllObjects];
     
     //重置数据源
-    //[self setupGroup0];
     [self setupGroup1];
-    
-    //[self setupFooter];
     
     //刷新表格
     [self.tableView reloadData];
@@ -122,17 +147,6 @@
 -(void)back
 {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
-
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    CGFloat y = scrollView.contentOffset.y;
-    if (y<=-224) {
-        CGRect frame = self.headView.frame;
-        frame.size.height = -y;
-        frame.origin.y = y;
-        self.headView.frame = frame;
-    }
 }
 
 - (void)dealloc

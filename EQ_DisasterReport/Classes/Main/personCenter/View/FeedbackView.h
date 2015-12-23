@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface FeedbackView : UIControl
+
+/**
+ *  显示意见反馈输入视图
+ */
 -(void)showViewtoFatherView:(UIView *)fatherView;
+
 @end

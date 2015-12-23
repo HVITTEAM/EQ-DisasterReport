@@ -5,7 +5,9 @@
 //  Created by shi on 15/11/4.
 //  Copyright © 2015年 董徐维. All rights reserved.
 //
-#define collectionViewInset 257
+
+#define headViewHeight 193
+
 #import "SWYPhotoSetViewController.h"
 #import "PhotoSetCell.h"
 #import "PhotoSetHeadCell.h"
@@ -20,9 +22,9 @@
 
 @property(nonatomic,strong)UICollectionView *photoCollectionView;
 
-@property(nonatomic,strong)NSMutableArray *dataProvider;
+@property(nonatomic,strong)NSMutableArray *dataProvider;              //数据源
 
-@property(nonatomic,strong)PhotoinfoNTHelper *photoinfoHelper;
+@property(nonatomic,strong)PhotoinfoNTHelper *photoinfoHelper;        //照片墙数据下载的接口对象
 
 @end
 
@@ -31,8 +33,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     [self initPhotoCollectionView];
+    
     [self initNaviBar];
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
@@ -63,9 +68,9 @@
 
     //设置上下拉刷新
     self.photoCollectionView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    
     self.photoCollectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     [self.photoCollectionView.header beginRefreshing];
-
  }
 
 /**
@@ -78,10 +83,6 @@
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon_black"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     
-//    UISearchBar *searchbar = [[UISearchBar alloc] init];
-//    searchbar.searchBarStyle = UISearchBarStyleDefault;
-//    searchbar.barTintColor = [UIColor clearColor];
-//    self.navigationItem.titleView = searchbar;
     UITextField *searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(7, 7, MTScreenW - 100, 30)];
     searchTextField.delegate = self;
     searchTextField.returnKeyType = UIReturnKeyDone;
@@ -109,6 +110,9 @@
     return _dataProvider;
 }
 
+/**
+ *  photoinfoHelper的 getter 方法
+ */
 -(PhotoinfoNTHelper *)photoinfoHelper
 {
     if (!_photoinfoHelper) {
@@ -125,6 +129,7 @@
 {
     return 2;
 }
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     if (section == 0) {
@@ -146,7 +151,6 @@
         
         PhotoSetModel *model = self.dataProvider[indexPath.row];
         cell.addressLb.text = model.address;
-        //CGFloat imgvWidth = (MTScreenW-2)/3;
         
         [cell.photoImageV sd_setImageWithURL:[NSURL URLWithString:model.thumbpath] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
@@ -154,7 +158,6 @@
         return cell;
     }
 }
-
 
 #pragma mark UICollectionViewDelegate
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -171,13 +174,13 @@
 {
     if (section == 0) {
         return UIEdgeInsetsMake(0 , 0, 0, 0);
-    }else return UIEdgeInsetsMake(5, 0, 5, 0);
+    }else return UIEdgeInsetsMake(1, 0, 5, 0);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        return CGSizeMake(MTScreenW, 193);
+        return CGSizeMake(MTScreenW, headViewHeight);
     }
     return CGSizeMake((MTScreenW-2)/3, (MTScreenW-2)/3);
 }
@@ -192,15 +195,15 @@
 #pragma mark SWYNetworkParamSourceDelegate
 - (SWYRequestParams *)paramsForRequest:(SWYBaseNetworkHelper *)networkHelper
 {
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc]
-                                 initWithDictionary:@{
-                                                      @"customtag":@"pagination",
-                                                      @"page":[NSString stringWithFormat:@"%d",(int)self.photoinfoHelper.nextPageNumber],
-                                                      @"rows":[NSString stringWithFormat:@"%d",(int)self.photoinfoHelper.numbersOfEachPage],
-                                                      
-                                                      //@"intelligentsearch":@[]
-                                                      }];
-    SWYRequestParams *params = [[SWYRequestParams alloc] initWithParams:dict files:nil];
+    NSDictionary *dict = @{
+                           @"customtag":@"pagination",
+                           @"page":[NSString stringWithFormat:@"%d",(int)self.photoinfoHelper.nextPageNumber],
+                           @"rows":[NSString stringWithFormat:@"%d",(int)self.photoinfoHelper.numbersOfEachPage],
+                           
+                           //@"intelligentsearch":@[]
+                           };
+    
+    SWYRequestParams *params = [[SWYRequestParams alloc] initWithParams:[dict mutableCopy] files:nil];
     
     return params;
 }

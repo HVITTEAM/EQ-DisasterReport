@@ -10,10 +10,15 @@
 #import "SpotCellModel.h"
 
 @interface SpotTextCell ()<UITextFieldDelegate>
+
 @property (weak, nonatomic) IBOutlet UILabel *titleLb;
+
 @property (weak, nonatomic) IBOutlet UITextField *contentTextField;
 
+@property(nonatomic,strong)SpotCellModel *cellModel;
+
 @end
+
 @implementation SpotTextCell
 
 - (void)awakeFromNib {
@@ -22,20 +27,7 @@
     [self.contentTextField addTarget:self action:@selector(textChange:) forControlEvents:UIControlEventEditingChanged];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
--(void)setCellModel:(SpotCellModel *)cellModel
-{
-    _cellModel = cellModel;
-    self.titleLb.text =cellModel.titleStr;
-    self.contentTextField.placeholder = cellModel.placeHolderStr;
-    self.contentTextField.text = cellModel.contentStr;
-}
-
+#pragma mark -- 初始化方法 --
 +(instancetype)cellWithTableView:(UITableView *)tableView model:(SpotCellModel *)model
 {
     static NSString *cellID = @"spotTextCell";
@@ -51,12 +43,47 @@
         cell.selectedBackgroundView = [[UIImageView alloc] init];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+        
     }
     cell.cellModel = model;
     return cell;
 }
 
+#pragma mark -- setter 方法和 getter方法 --
+-(void)setCellModel:(SpotCellModel *)cellModel
+{
+    _cellModel = cellModel;
+    self.titleLb.text =cellModel.titleStr;
+    self.contentTextField.placeholder = cellModel.placeHolderStr;
+    self.contentTextField.text = cellModel.contentStr;
+}
+
+#pragma mark -- UITextField delegate 方法 --
+-(void)textChange:(UITextField *)textField
+{
+    self.cellModel.contentStr = textField.text;
+    NSLog(@"SpotTextCell-----------%@",self.cellModel.contentStr);
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    return YES;
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if ([self.delegate respondsToSelector:@selector(beginEditCellContent:)]) {
+        [self.delegate beginEditCellContent:self];
+    }
+}
+
+#pragma mark -- 公开方法 --
 - (void)setIndexPath:(NSIndexPath *)indexPath rowsInSection:(int)rows
 {
     // 1.取出背景view
@@ -84,34 +111,5 @@
     return self.contentTextField.text;
 }
 
--(void)textChange:(UITextField *)textField
-{
-    self.cellModel.contentStr = textField.text;
-    NSLog(@"self.cellModel.contentStr-----------%@",self.cellModel.contentStr);
-}
-
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
-
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    return YES;
-}
-
--(void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    if ([self.delegate respondsToSelector:@selector(beginEditCellContent:)]) {
-        [self.delegate beginEditCellContent:self];
-    }
-}
-
-
-//-(void)textFieldDidEndEditing:(UITextField *)textField
-//{
-//    self.cellModel.contentStr = textField.text;
-//}
 
 @end

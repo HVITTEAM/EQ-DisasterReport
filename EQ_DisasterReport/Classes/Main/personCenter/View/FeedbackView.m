@@ -8,14 +8,28 @@
 
 #import "FeedbackView.h"
 
+#define textViewHeight 150
+#define textViewMargin 30
+#define naviHeight 64
+#define btnWidth 60
+#define btnHeight 30
+
 @interface FeedbackView ()
+
 @property(strong,nonatomic)UITextView *contentTextView;
-@property(strong,nonatomic)UIView *fatherView;
-@property(strong,nonatomic)UIView *naviView;
-@property(strong,nonatomic)UILabel *titleLable;
-@property(strong,nonatomic)UIButton *backBtn;
-@property(strong,nonatomic)UIButton *sendBtn;
+
+@property(strong,nonatomic)UIView *fatherView;          //当前 view 的父视图
+
+@property(strong,nonatomic)UIView *naviView;            //导航视图
+
+@property(strong,nonatomic)UILabel *titleLable;         //导航视图的标题
+
+@property(strong,nonatomic)UIButton *backBtn;           //导航视图的返回按钮
+
+@property(strong,nonatomic)UIButton *sendBtn;           //导航视图的发送按钮
+
 @end
+
 
 @implementation FeedbackView
 
@@ -27,19 +41,22 @@
     return self;
 }
 
+#pragma mark -- 初始化子控件方法 --
+/**
+ *  初始化视图
+ */
 -(void)initView
 {
     self. backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
     self.frame = CGRectMake(0, 0, MTScreenW, MTScreenH);
     self.userInteractionEnabled = YES;
-    //[self addTarget:self action:@selector(backgroundClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    self.contentTextView = [[UITextView alloc] initWithFrame:CGRectMake(30, 64-150, MTScreenW-60, 150)];
+    self.contentTextView = [[UITextView alloc] initWithFrame:CGRectMake(textViewMargin, naviHeight - textViewHeight, MTScreenW-2*textViewMargin, textViewHeight)];
     self.contentTextView.layer.cornerRadius = 6.0f;
     self.contentTextView.layer.masksToBounds = YES;
     [self addSubview:self.contentTextView];
     
-    self.naviView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 64)];
+    self.naviView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, naviHeight)];
     self.naviView.backgroundColor = [UIColor colorWithRed:45/255.0 green:45/255.0 blue:45/255.0 alpha:1.0];
     [self addSubview:self.naviView];
     
@@ -51,7 +68,7 @@
     [self.naviView addSubview:self.titleLable];
     
     self.backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.backBtn.frame = CGRectMake(10,27, 60, 30);
+    self.backBtn.frame = CGRectMake(10,27, btnWidth, btnHeight);
     [self.backBtn setTitle:@"返回" forState:UIControlStateNormal];
     [self.backBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.backBtn.backgroundColor = [UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0];
@@ -61,7 +78,7 @@
     [self.naviView addSubview:self.backBtn];
     
     self.sendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.sendBtn.frame = CGRectMake( MTScreenW-60-10,27, 60, 30);
+    self.sendBtn.frame = CGRectMake( MTScreenW-60-10,27, btnWidth, btnHeight);
     [self.sendBtn setTitle:@"发送" forState:UIControlStateNormal];
     [self.sendBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.sendBtn.titleLabel.textColor = [UIColor whiteColor];
@@ -70,24 +87,30 @@
     self.sendBtn.layer.masksToBounds = YES;
     [self.sendBtn addTarget:self action:@selector(sendBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.naviView addSubview:self.sendBtn];
-    
 }
 
+#pragma mark -- 事件方法 --
+//返回按钮被点击
 -(void)bakcBtnClicked:(UIButton *)sender
 {
     [self hideView];
 }
 
+//发送按钮被点击
 -(void)sendBtnClicked:(UIButton *)sender
 {
     [self hideView];
 }
 
+//背景 View 被点击
 -(void)backgroundClicked:(UIView *)sender
 {
     [self hideView];
 }
 
+/**
+ *  显示视图
+ */
 -(void)showViewtoFatherView:(UIView *)fatherView
 {
     self.fatherView = fatherView;
@@ -102,6 +125,9 @@
     }];
 }
 
+/**
+ *  隐藏视图
+ */
 -(void)hideView
 {
     [UIView animateWithDuration:0.3f animations:^{
@@ -114,6 +140,5 @@
         self.fatherView = nil;
     }];
 }
-
 
 @end

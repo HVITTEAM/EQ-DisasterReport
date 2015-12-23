@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface PersonCenterHeadView : UIView
+
 @property (weak, nonatomic) IBOutlet UIImageView *userIcon;
+
 @property (weak, nonatomic) IBOutlet UIImageView *headBKImageView;
+
+@property (weak, nonatomic) IBOutlet UILabel *userNameLb;
 
 @end

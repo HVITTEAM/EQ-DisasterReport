@@ -10,7 +10,15 @@
 
 @interface LoginUser : NSObject
 
+@property(copy,nonatomic)NSString *loginname;
+
+@property(copy,nonatomic)NSString *username;
+
+@property(strong,nonatomic)NSNumber *userid;
+
 @property(copy,nonatomic)NSString *login_status;
+
+@property(copy,nonatomic)NSString *station;
 
 +(instancetype)shareInstance;
 

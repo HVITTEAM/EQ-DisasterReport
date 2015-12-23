@@ -10,16 +10,26 @@
 #import "UseHelpViewController.h"
 #import "WebsitViewController.h"
 
+#define tableHeadViewHeight 150
+#define iconWidth 60
+#define marginTop 20
+#define lbHeight  20
+
 @interface AboutViewController ()
 
 @end
 
 @implementation AboutViewController
 
+#pragma mark -- 生命周期方法 --
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self initHeadView];
+    
     [self initFootView];
+    
     self.tableView.backgroundColor = HMGlobalBg;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon_white"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
@@ -33,26 +43,30 @@
     
 }
 
+#pragma mark -- 初始化子控件方法 --
+/**
+ *  创建tableView 的头部视图
+ */
 -(void)initHeadView
 {
-    
-    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 150)];
+    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, tableHeadViewHeight)];
     self.tableView.tableHeaderView = headView;
     
-    CGFloat x = (MTScreenW-60)/2;
-    CGFloat y = 20;
-    UIImageView *iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(x, y, 60, 60)];
+    CGFloat x = (MTScreenW-iconWidth)/2;
+    CGFloat y = marginTop;
+    UIImageView *iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(x, y,iconWidth, iconWidth)];
     iconImageView.image = [UIImage imageNamed:@"headIcon"];
     [headView addSubview:iconImageView];
     
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(iconImageView.frame)+5,MTScreenW, 20)];
+    
+    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(iconImageView.frame)+5,MTScreenW, lbHeight)];
     nameLabel.font = [UIFont boldSystemFontOfSize:13];
     nameLabel.textColor = [UIColor darkTextColor];
     nameLabel.textAlignment = NSTextAlignmentCenter;
     nameLabel.text = @"地震信息采集";
     [headView addSubview:nameLabel];
     
-    UILabel *versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(nameLabel.frame), MTScreenW, 20)];
+    UILabel *versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(nameLabel.frame), MTScreenW, lbHeight)];
     versionLabel.font = [UIFont systemFontOfSize:15];
     versionLabel.textColor = [UIColor redColor];
     versionLabel.textAlignment = NSTextAlignmentCenter;
@@ -60,20 +74,22 @@
     [headView addSubview:versionLabel];
 }
 
+/**
+ *  创建底部文字信息视图
+ */
 -(void)initFootView
 {
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, MTScreenH-144, MTScreenW, 60)];
-    //footView.backgroundColor = [UIColor redColor];
     [self.tableView addSubview: footView];
     
-    UILabel *promtLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 20)];
+    UILabel *promtLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, lbHeight)];
     promtLabel.textColor = [UIColor lightGrayColor];
     promtLabel.font = [UIFont systemFontOfSize:10];
     promtLabel.textAlignment = NSTextAlignmentCenter;
     promtLabel.text = @"客服电话(按当地市话标准计算)";
     [footView addSubview:promtLabel];
     
-    UILabel *phoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(promtLabel.frame), MTScreenW, 20)];
+    UILabel *phoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(promtLabel.frame), MTScreenW, lbHeight)];
     NSString *str = @"联系电话: 8888-88888888";
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:str];
     
@@ -91,12 +107,13 @@
     phoneLabel.textAlignment = NSTextAlignmentCenter;
     [footView addSubview:phoneLabel];
 
-    UILabel *copyrightLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(phoneLabel.frame), MTScreenW, 20)];
+    UILabel *copyrightLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(phoneLabel.frame), MTScreenW, lbHeight)];
     copyrightLabel.textColor = [UIColor lightGrayColor];
     copyrightLabel.font = [UIFont systemFontOfSize:10];
     copyrightLabel.textAlignment = NSTextAlignmentCenter;
-    copyrightLabel.text = @"Copyright ©1996-2015 SINA Corporation)";
+    copyrightLabel.text = @"Copyright ©1996-2015  HVIT Corporation)";
     [footView addSubview:copyrightLabel];
+    
     //为 phoneLabel添加手势 用来打电话
     phoneLabel.userInteractionEnabled = YES;
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(callPhone:)];
@@ -106,6 +123,8 @@
     
 }
 
+#pragma mark -- Table view data source --
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -114,7 +133,6 @@
 
     return 3;
 }
-
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -126,6 +144,7 @@
         cell.textLabel.font = [UIFont boldSystemFontOfSize:15];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    
     NSInteger rowNum = indexPath.row;
     
     if (rowNum == 0) {
@@ -138,6 +157,7 @@
     return cell;
 }
 
+#pragma mark -- UITableViewDelegate --
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
@@ -151,6 +171,10 @@
     }
 }
 
+#pragma mark -- 事件方法 --
+/**
+ *  打电话
+ */
 -(void)callPhone:(UITapGestureRecognizer *)recognizer
 {
     UIWebView*callWebview =[[UIWebView alloc] init];

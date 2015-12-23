@@ -157,7 +157,6 @@
 
 - (void)beforePerformFailedCallBackWithResponse:(SWYResponse *)response
 {
-    NSLog(@"%d",response.responsestatus);
     NSLog(@"失败回调前");
 }
 
