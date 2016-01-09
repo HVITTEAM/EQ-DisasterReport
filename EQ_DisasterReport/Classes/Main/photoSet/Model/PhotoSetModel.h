@@ -10,12 +10,12 @@
 
 @interface PhotoSetModel : NSObject
 
-@property(strong,nonatomic)NSString *thumbpath;
+@property(copy,nonatomic)NSString *thumbpath;
 
-@property(strong,nonatomic)NSString *photopath;
+@property(copy,nonatomic)NSString *photopath;
 
 @property(strong,nonatomic)NSNumber *pointid;
 
-@property(strong,nonatomic)NSString *address;
+@property(copy,nonatomic)NSString *address;
 
 @end

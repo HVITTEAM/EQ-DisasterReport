@@ -11,6 +11,6 @@
 
 @interface SWYCollectDetailViewController : UIViewController
 
-@property(nonatomic,strong)PhotoSetModel *photoInfor;
+@property(nonatomic,strong)PhotoSetModel *photoInfor;      //照片信息对象，由上一级传递过来
 
 @end

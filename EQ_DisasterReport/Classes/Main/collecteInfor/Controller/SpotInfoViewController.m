@@ -488,7 +488,6 @@
     [self.infoTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:5 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
 }
 
-
 #pragma mark 事件方法
 /**
  *  保存采集点的数据

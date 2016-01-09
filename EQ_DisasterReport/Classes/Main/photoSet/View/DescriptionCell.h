@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface DescriptionCell : UITableViewCell
+
 @property (copy,nonatomic)NSString *descriptionStr;
+
 -(CGFloat)calculateCellHeight;
+
 @end

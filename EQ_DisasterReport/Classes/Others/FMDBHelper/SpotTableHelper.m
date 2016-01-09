@@ -122,6 +122,8 @@
         NSString *sqlInsertStr= [NSString stringWithFormat:
                          @"INSERT INTO '%@' ('%@', '%@', '%@', '%@', '%@','%@', '%@', '%@', '%@','%@')  VALUES ('%@', '%@','%@', '%@', '%@', '%@', '%@', '%@', '%@','%@')",
                         TABLENAME, OCCURTIME,LON,LAT,ADDRESS,LEVEL,PHONENUM,NOTE,DESCR,KEYS,ISUPLOAD,dict[@"occurTime"],dict[@"lon"],dict[@"lat"], dict[@"address"], dict[@"level"],dict[@"phoneNum"], dict[@"note"], dict[@"descr"],dict[@"keys"],dict[@"isUpload"]];
+        
+         NSLog(@"------sqlInsertStr-------%@",sqlInsertStr);
         res = [db executeUpdate:sqlInsertStr];
         if (!res) {
              NSLog(@"error when insert spot table");

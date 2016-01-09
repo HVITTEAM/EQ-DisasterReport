@@ -14,14 +14,17 @@
 @property (weak, nonatomic) IBOutlet UIImageView *bigImagV;    //头部大图 view
 @property (weak, nonatomic) IBOutlet UILabel *addressLb;       //地址label
 @property (strong,nonatomic)NSString *bigimageName;            //大图名字
-@property (weak, nonatomic) IBOutlet UIImageView *gradientBKView;
+@property (weak, nonatomic) IBOutlet UIImageView *gradientBKView;     //显示一个渐变图片，防止图片与文字颜色太近字看不清
 
 @property(weak,nonatomic)id<TableHeadViewDelegate>delegate;
+
 @end
 
-/*点击头部图片后回调*/
-@protocol TableHeadViewDelegate <NSObject>
 
+@protocol TableHeadViewDelegate <NSObject>
+/**
+ *  点击头部图片后回调
+ */
 -(void)tableheadView:(TableHeadView *)headVeiw didClickImageName:(NSString *)imageName;
 
 @end

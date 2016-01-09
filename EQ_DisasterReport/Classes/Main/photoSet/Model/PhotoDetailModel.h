@@ -10,33 +10,33 @@
 
 @interface PhotoDetailModel : NSObject
 
-@property(strong,nonatomic)NSString *address;
+@property(copy,nonatomic)NSString *address;
 
-@property(strong,nonatomic)NSString *collecttime;
+@property(copy,nonatomic)NSString *collecttime;
 
-@property(strong,nonatomic)NSString *descr;
+@property(copy,nonatomic)NSString *descr;
 
-@property(strong,nonatomic)NSString *earthquakeid;
+@property(copy,nonatomic)NSString *earthquakeid;
 
-@property(strong,nonatomic)NSString *earthquakeintensity;
+@property(copy,nonatomic)NSString *earthquakeintensity;
 
-@property(strong,nonatomic)NSString *investigatorid;
+@property(copy,nonatomic)NSString *investigatorid;
 
-@property(strong,nonatomic)NSString *keys;
+@property(copy,nonatomic)NSString *keys;
 
-@property(strong,nonatomic)NSString *latitude;
+@property(copy,nonatomic)NSString *latitude;
 
-@property(strong,nonatomic)NSString *longitude;
+@property(copy,nonatomic)NSString *longitude;
 
-@property(strong,nonatomic)NSString *pointid;
+@property(copy,nonatomic)NSString *pointid;
 
-@property(strong,nonatomic)NSString *status;
+@property(copy,nonatomic)NSString *status;
 
-@property(strong,nonatomic)NSString *userid;
+@property(copy,nonatomic)NSString *userid;
 
-@property(strong,nonatomic)NSString *username;
+@property(copy,nonatomic)NSString *username;
 
-@property(strong,nonatomic)NSString *loginname;
+@property(copy,nonatomic)NSString *loginname;
 
 
 @end

@@ -62,6 +62,7 @@
 		D29EEBBA1BFAFC860015C268 /* PhotoSetHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D29EEBB81BFAFC860015C268 /* PhotoSetHeadCell.m */; };
 		D29EEBBB1BFAFC860015C268 /* PhotoSetHeadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D29EEBB91BFAFC860015C268 /* PhotoSetHeadCell.xib */; };
 		D29EEBC01BFB2C2F0015C268 /* VoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D29EEBBF1BFB2C2F0015C268 /* VoiceModel.m */; };
+		D2A3F0CF1C2B82F400297FC5 /* NSObject+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A3F0CE1C2B82F400297FC5 /* NSObject+Extension.m */; };
 		D2A417B31C0099620037370C /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A417B11C0099620037370C /* AboutViewController.m */; };
 		D2A417B41C0099620037370C /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2A417B21C0099620037370C /* AboutViewController.xib */; };
 		D2A534321C00B34300140F50 /* FeedbackView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A534311C00B34300140F50 /* FeedbackView.m */; };
@@ -341,6 +342,8 @@
 		D29EEBB91BFAFC860015C268 /* PhotoSetHeadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoSetHeadCell.xib; sourceTree = "<group>"; };
 		D29EEBBE1BFB2C2F0015C268 /* VoiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceModel.h; sourceTree = "<group>"; };
 		D29EEBBF1BFB2C2F0015C268 /* VoiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceModel.m; sourceTree = "<group>"; };
+		D2A3F0CD1C2B82F400297FC5 /* NSObject+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Extension.h"; sourceTree = "<group>"; };
+		D2A3F0CE1C2B82F400297FC5 /* NSObject+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Extension.m"; sourceTree = "<group>"; };
 		D2A417B01C0099620037370C /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		D2A417B11C0099620037370C /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		D2A417B21C0099620037370C /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
@@ -1014,6 +1017,8 @@
 		D2EC97C31BE70C7300ED8661 /* Cateogrys */ = {
 			isa = PBXGroup;
 			children = (
+				D2A3F0CD1C2B82F400297FC5 /* NSObject+Extension.h */,
+				D2A3F0CE1C2B82F400297FC5 /* NSObject+Extension.m */,
 				D2EC98901BE7117800ED8661 /* UIBarButtonItem+Extension.h */,
 				D2EC98911BE7117800ED8661 /* UIBarButtonItem+Extension.m */,
 				D2EC98921BE7117800ED8661 /* UIImage+Extension.h */,
@@ -1777,6 +1782,7 @@
 				D29EEBBA1BFAFC860015C268 /* PhotoSetHeadCell.m in Sources */,
 				D2EC98151BE70E6B00ED8661 /* UIView+WebCacheOperation.m in Sources */,
 				D2EC41511C1567EC002F5FA4 /* MenuContentView.m in Sources */,
+				D2A3F0CF1C2B82F400297FC5 /* NSObject+Extension.m in Sources */,
 				D2EC97DD1BE70E4A00ED8661 /* AFHTTPSessionManager.m in Sources */,
 				D2EEA3711BF45D2100F2FD20 /* HMCommonTextfieldItem.m in Sources */,
 				D2EC984A1BE7109A00ED8661 /* MJPropertyType.m in Sources */,
@@ -1994,7 +2000,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hvit.EQDisasterReport;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ca1b117c-f5b2-43dc-a20d-76122c1dfdc1";
+				PROVISIONING_PROFILE = "3c67c03b-9d5e-43a6-bd96-f01086425ac1";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/EQ_DisasterReport/Classes/Libs/JPush";
 			};
 			name = Debug;
@@ -2022,7 +2028,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hvit.EQDisasterReport;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ca1b117c-f5b2-43dc-a20d-76122c1dfdc1";
+				PROVISIONING_PROFILE = "3c67c03b-9d5e-43a6-bd96-f01086425ac1";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/EQ_DisasterReport/Classes/Libs/JPush";
 			};
 			name = Release;

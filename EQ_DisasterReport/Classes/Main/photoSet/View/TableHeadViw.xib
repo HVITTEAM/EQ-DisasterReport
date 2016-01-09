@@ -34,7 +34,7 @@
                     </constraints>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="dOs-JP-pWF" firstAttribute="leading" secondItem="bgg-ZA-MSn" secondAttribute="leading" id="I2p-QY-bM2"/>
                 <constraint firstAttribute="bottom" secondItem="dOs-JP-pWF" secondAttribute="bottom" id="KNm-Vw-GOe"/>
@@ -60,6 +60,6 @@
         </view>
     </objects>
     <resources>
-        <image name="location_icon" width="50" height="80"/>
+        <image name="location_icon" width="20" height="31"/>
     </resources>
 </document>

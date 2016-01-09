@@ -17,6 +17,7 @@
 #import "SWYRequestParams.h"
 #import "PhotoSetModel.h"
 #import "UIImageView+WebCache.h"
+#import "NSObject+Extension.h"
 
 @interface SWYPhotoSetViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UITextFieldDelegate,SWYNetworkCallBackDelegate,SWYNetworkParamSourceDelegate,SWYNetworkReformerDelegate>
 
@@ -25,6 +26,12 @@
 @property(nonatomic,strong)NSMutableArray *dataProvider;              //数据源
 
 @property(nonatomic,strong)PhotoinfoNTHelper *photoinfoHelper;        //照片墙数据下载的接口对象
+
+@property(nonatomic,strong)UIBarButtonItem *leftItem;
+
+@property(nonatomic,strong)UIBarButtonItem *rightItem;
+
+@property(nonatomic,strong)UITextField *searchTextField;
 
 @end
 
@@ -70,6 +77,8 @@
     self.photoCollectionView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     
     self.photoCollectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+    //self.photoCollectionView.footer.automaticallyHidden = NO;
+    
     [self.photoCollectionView.header beginRefreshing];
  }
 
@@ -81,22 +90,26 @@
     self.navigationItem.title = @"照片墙";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon_black"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     
-    UITextField *searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(7, 7, MTScreenW - 100, 30)];
-    searchTextField.delegate = self;
-    searchTextField.returnKeyType = UIReturnKeyDone;
-    searchTextField.borderStyle = UITextBorderStyleRoundedRect;
-    searchTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    searchTextField.textColor = [UIColor lightGrayColor];
-    searchTextField.font = [UIFont systemFontOfSize:13];
-    searchTextField.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:1];
+    self.leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon_black"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = self.leftItem;
+    
+    self.rightItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style: UIBarButtonItemStylePlain target:self action:@selector(cancelSearch)];
+    
+    self.searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(7, 7, MTScreenW - 100, 30)];
+    self.searchTextField.delegate = self;
+    self.searchTextField.returnKeyType = UIReturnKeyDone;
+    self.searchTextField.borderStyle = UITextBorderStyleRoundedRect;
+    self.searchTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    self.searchTextField.textColor = [UIColor lightGrayColor];
+    self.searchTextField.font = [UIFont systemFontOfSize:13];
+    self.searchTextField.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:1];
     UIImageView *leftView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     leftView.image = [UIImage imageNamed:@"search_icon"];
-    searchTextField.leftViewMode = UITextFieldViewModeAlways;
-    searchTextField.leftView = leftView;
-    searchTextField.placeholder = @"搜索地点";
-    self.navigationItem.titleView = searchTextField;
+    self.searchTextField.leftViewMode = UITextFieldViewModeAlways;
+    self.searchTextField.leftView = leftView;
+    self.searchTextField.placeholder = @"搜索地点";
+    self.navigationItem.titleView = self.searchTextField;
 }
 
 /**
@@ -152,9 +165,10 @@
         PhotoSetModel *model = self.dataProvider[indexPath.row];
         cell.addressLb.text = model.address;
         
-        [cell.photoImageV sd_setImageWithURL:[NSURL URLWithString:model.thumbpath] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [cell.photoImageV sd_setImageWithURL:[NSURL URLWithString:model.thumbpath] placeholderImage:[UIImage imageNamed:@"placeholder_image"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
         }];
+        
         return cell;
     }
 }
@@ -189,19 +203,41 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
+    
+    [self.photoinfoHelper cancelAllRequests];
+    [self loadNewData];
+    
     return YES;
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    self.navigationItem.rightBarButtonItem = self.rightItem;
+    [UIView animateWithDuration:0.3f animations:^{
+        self.navigationItem.leftBarButtonItem = nil;
+        
+        CGRect titleFrame = self.navigationItem.titleView.frame;
+        self.navigationItem.titleView.frame = CGRectMake(20, titleFrame.origin.y, titleFrame.size.width + 30, titleFrame.size.height);
+    } completion:^(BOOL finished) {
+        [self.navigationItem setRightBarButtonItem:self.rightItem animated:YES];
+    }];
 }
 
 #pragma mark SWYNetworkParamSourceDelegate
 - (SWYRequestParams *)paramsForRequest:(SWYBaseNetworkHelper *)networkHelper
 {
-    NSDictionary *dict = @{
-                           @"customtag":@"pagination",
-                           @"page":[NSString stringWithFormat:@"%d",(int)self.photoinfoHelper.nextPageNumber],
-                           @"rows":[NSString stringWithFormat:@"%d",(int)self.photoinfoHelper.numbersOfEachPage],
-                           
-                           //@"intelligentsearch":@[]
-                           };
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:@{
+                                                                                @"customtag":@"pagination",
+                                                                                @"page":[NSString stringWithFormat:@"%d",(int)self.photoinfoHelper.nextPageNumber],
+                                                                                @"rows":[NSString stringWithFormat:@"%d",(int)self.photoinfoHelper.numbersOfEachPage],
+                                                                                
+                                                                                //                           @"keyword":
+                                                                                }];
+    
+    NSString *searchText = self.searchTextField.text;
+    if (searchText !=nil && searchText.length > 0) {
+        [dict setObject:searchText forKey:@"keyword"];
+    }
     
     SWYRequestParams *params = [[SWYRequestParams alloc] initWithParams:[dict mutableCopy] files:nil];
     
@@ -219,14 +255,23 @@
     }
     
     [self.photoCollectionView reloadData];
+    
+    //结束头部刷新
     [self.photoCollectionView.header endRefreshing];
     
+    //结束底部刷新
     if (self.photoinfoHelper.isFinshedAllLoad) {
         [self.photoCollectionView.footer endRefreshingWithNoMoreData];
     }else{
         [self.photoCollectionView.footer endRefreshing];
     }
 
+//    if (self.photoCollectionView.contentSize.height > self.photoCollectionView.bounds.size.height) {
+//        self.photoCollectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+//    }else{
+//        self.photoCollectionView.footer = nil;
+//    }
+    
     NSLog(@"SWYPhotoSetViewController  requestDidSuccess%@",self.dataProvider);
 }
 
@@ -248,10 +293,16 @@
         NSArray *tempArr = dataDict[@"rows"];
         for (NSDictionary *dict in tempArr) {
             PhotoSetModel *model = [[PhotoSetModel alloc] init];
-            model.photopath = [NSString stringWithFormat:@"%@%@",URL_base,dict[@"photopath"]];
-            model.thumbpath = [NSString stringWithFormat:@"%@%@",URL_base,dict[@"thumbpath"]];
-            model.pointid = dict[@"pointid"];
-            model.address = dict[@"address"];
+            
+            model.photopath = [NSString stringWithFormat:@"%@%@",URL_base,
+                                                           [dict[@"photopath"] validateDataIsNull]];
+            
+            model.thumbpath = [NSString stringWithFormat:@"%@%@",URL_base,
+                                                           [dict[@"thumbpath"]validateDataIsNull]];
+            
+            model.pointid = [dict[@"pointid"] validateDataIsNull];
+            model.address = [dict[@"address"] validateDataIsNull];
+            
             [photoSetArr addObject:model];
         }
     }
@@ -259,14 +310,15 @@
     return photoSetArr;
 }
 
-
 #pragma mark 事件方法
 /**
  *  下拉刷新时加载数据
  */
 -(void)loadNewData
 {
+    //重置下载接口对象的状态
     [self.photoinfoHelper resetState];
+    //开始发送请求
     [self.photoinfoHelper startSendRequest];
 }
 
@@ -276,6 +328,22 @@
 -(void)loadMoreData
 {
     [self.photoinfoHelper startSendRequestForNextPage];
+}
+
+-(void)cancelSearch
+{
+    [self.searchTextField resignFirstResponder];
+    self.searchTextField.text = nil;
+    
+    [self.navigationItem setLeftBarButtonItem:self.leftItem animated:YES];
+    [self.navigationItem setRightBarButtonItem:nil animated:YES];
+    
+    CGRect titleFrame = self.navigationItem.titleView.frame;
+    self.navigationItem.titleView.frame = CGRectMake(0, titleFrame.origin.y, titleFrame.size.width - 30, titleFrame.size.height);
+    
+    [self.photoinfoHelper cancelAllRequests];
+    [self loadNewData];
+    
 }
 
 -(void)back

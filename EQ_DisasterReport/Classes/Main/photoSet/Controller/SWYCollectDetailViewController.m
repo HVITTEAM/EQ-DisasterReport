@@ -13,6 +13,7 @@
 #import "TableHeadView.h"
 #import "SWYPhotoBrowserViewController.h"
 #import "UIImageView+WebCache.h"
+#import "NSObject+Extension.h"
 #import "FetchPointinfoNTHelper.h"
 #import "PhotoDetailModel.h"
 
@@ -20,9 +21,9 @@
 
 @property(nonatomic,strong)UITableView *detailTableView;
 
-@property(nonatomic,strong)FetchPointinfoNTHelper *fetchPointinfoHelper;
+@property(nonatomic,strong)FetchPointinfoNTHelper *fetchPointinfoHelper;        //获取图片详情信息的接口对象
 
-@property(nonatomic,strong)PhotoDetailModel *photoDetailInfor;
+@property(nonatomic,strong)PhotoDetailModel *photoDetailInfor;                  //图片详情信息对象
 
 @end
 
@@ -31,8 +32,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
     [self initTableView];
+    
     [self initNaviBar];
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
     self.fetchPointinfoHelper.detailUrl = [NSString stringWithFormat:@"%ld",(long)[self.photoInfor.pointid integerValue]];
@@ -54,12 +58,13 @@
     
     //设置tableView头部视图
     TableHeadView *headView = [[[NSBundle mainBundle] loadNibNamed:@"TableHeadViw" owner:nil options:nil] lastObject];
-    [headView.bigImagV sd_setImageWithURL:[NSURL URLWithString:self.photoInfor.photopath] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [headView.bigImagV sd_setImageWithURL:[NSURL URLWithString:self.photoInfor.photopath] placeholderImage:[UIImage imageNamed:@"placeholder_image"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         NSLog(@"SWYCollectDetailViewController 头部大图片完成");
     }];
-
+    //下方的渐变图片，防止图片为浅色时，地址显示不清楚
     UIImage *gradientImg = [UIImage imageNamed:@"gradientBK_black"];
     headView.gradientBKView.image = [gradientImg resizableImageWithCapInsets:UIEdgeInsetsZero resizingMode:UIImageResizingModeStretch];
+    
     headView.delegate = self;
     self.detailTableView.tableHeaderView = headView;
 }
@@ -73,6 +78,9 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon_black"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
 }
 
+/**
+ *  fetchPointinfoHelper的 getter 方法
+ */
 -(FetchPointinfoNTHelper *)fetchPointinfoHelper
 {
     if (!_fetchPointinfoHelper) {
@@ -83,6 +91,9 @@
     return _fetchPointinfoHelper;
 }
 
+/**
+ *  photoDetailInfor的 getter 方法
+ */
 -(PhotoDetailModel *)photoDetailInfor
 {
     if (!_photoDetailInfor) {
@@ -114,7 +125,9 @@
         }
         cell.userNameLb.text = self.photoDetailInfor.username;
         cell.timeLb.text = [NSString stringWithFormat:@"%@  上传",self.photoDetailInfor.collecttime];
+        
         return cell;
+        
     }else if(indexPath.row == 1){
         static NSString *photoInfoCellId = @"photoInfoCell";
         PhotoInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:photoInfoCellId];
@@ -125,7 +138,9 @@
         cell.latLb.text = self.photoDetailInfor.latitude;
         cell.lonLb.text = self.photoDetailInfor.longitude;
         cell.levelLb.text = self.photoDetailInfor.earthquakeintensity;
+        
         return cell;
+        
     }else{
         static NSString *descriptionCellId = @"descriptionCell";
         DescriptionCell *cell = [tableView dequeueReusableCellWithIdentifier:descriptionCellId];
@@ -133,14 +148,11 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"DescriptionCell" owner:nil options:nil] lastObject];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        if (self.photoDetailInfor.descr == nil) {
-            cell.descriptionStr = @"";
-        }else{
-            cell.descriptionStr = self.photoDetailInfor.descr;
-        }
+        
+        cell.descriptionStr = self.photoDetailInfor.descr?self.photoDetailInfor.descr:@"";
+        
         return cell;
     }
-
 }
 
 #pragma mark UITableViewDelegate
@@ -156,16 +168,13 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"DescriptionCell" owner:nil options:nil] lastObject];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        if (self.photoDetailInfor.descr == nil) {
-            cell.descriptionStr = @"";
-        }else{
-            cell.descriptionStr = self.photoDetailInfor.descr;
-        }
+        
+        cell.descriptionStr = self.photoDetailInfor.descr?self.photoDetailInfor.descr:@"";
         
         CGFloat h = [cell calculateCellHeight];
         return h;
-
     }
+    
     return 64;
 }
 
@@ -188,31 +197,26 @@
 - (void)requestDidFailed:(SWYBaseNetworkHelper *)networkHelper
 {
     NSLog(@"失败");
-    
 }
 
 #pragma mark SWYNetworkReformerDelegate
 //对下载的原始数据进行重组，生成可直接使用的数据
 - (id)networkHelper:(SWYBaseNetworkHelper *)networkHelper reformData:(id)data
 {
-    NSLog(@"---------%@",data);
+    NSLog(@"SWYCollectDetailViewController---------%@",data);
+    
     PhotoDetailModel *model = [[PhotoDetailModel alloc] init];
     
-    model.address = data[@"address"];
-    model.collecttime = data[@"collecttime"];
-    if (data[@"description"] == nil || data[@"description"] == [NSNull null]) {
-        model.descr = @"";
-    }else{
-        model.descr = data[@"description"];
-    }
-    
-    model.earthquakeintensity = [NSString stringWithFormat:@"%@",data[@"earthquakeintensity"]];
-    model.keys = data[@"keys"];
-    model.latitude = [NSString stringWithFormat:@"%@",data[@"latitude"]];
-    model.longitude = [NSString stringWithFormat:@"%@",data[@"longitude"]];
-    model.pointid = [NSString stringWithFormat:@"%@",data[@"pointid"]];
-    model.username = data[@"username"];
-    model.loginname = data[@"loginname"];
+    model.address = [data[@"address"] validateDataIsNull];
+    model.collecttime = [data[@"collecttime"] validateDataIsNull];
+    model.descr = [data[@"description"] validateDataIsNull];
+    model.earthquakeintensity = [NSString stringWithFormat:@"%@",[data[@"earthquakeintensity"] validateDataIsNull]];
+    model.keys = [data[@"keys"] validateDataIsNull];
+    model.latitude = [NSString stringWithFormat:@"%@",[data[@"latitude"] validateDataIsNull]];
+    model.longitude = [NSString stringWithFormat:@"%@",[data[@"longitude"] validateDataIsNull]];
+    model.pointid = [NSString stringWithFormat:@"%@",[data[@"pointid"] validateDataIsNull]];
+    model.username = [data[@"username"] validateDataIsNull];
+    model.loginname = [data[@"loginname"] validateDataIsNull];
     
     return model;
 }

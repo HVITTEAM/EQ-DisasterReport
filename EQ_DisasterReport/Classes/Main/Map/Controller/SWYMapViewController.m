@@ -16,12 +16,17 @@
 #import "PersonCenterViewController.h"
 #import "SpotInfoViewController.h"
 #import "AppDelegate.h"
-//#import "LoginViewController.h"
 
 typedef NS_ENUM(NSInteger, BottomButtonType) {
     BottomButtonTypeCollectInfo = 0,
     BottomButtonTypePhotoSet,
     BottomButtonTypePersonCenter,
+};
+
+typedef NS_ENUM(NSInteger, ControlButtonType) {
+    ControlButtonTypeTraffic = 20,
+    ControlButtonTypeMapType,
+    ControlButtonTypeMylocation,
 };
 
 @interface SWYMapViewController ()<MAMapViewDelegate,AMapSearchDelegate,MapTypeSelectViewDelegate>
@@ -33,9 +38,9 @@ typedef NS_ENUM(NSInteger, BottomButtonType) {
 @property (nonatomic, strong) SWYButton *mapTypeSwitchBtn;       //切换地图类型
 @property (nonatomic, strong) SWYButton *mylocationBtn;          //切换用户跟随模式
 
-@property (nonatomic, strong) UIButton *photoSetBtn;
-@property (nonatomic, strong) UIButton *personCenterBtn;
-@property (nonatomic, strong) UIButton *collectInfoBtn;
+@property (nonatomic, strong) UIButton *photoSetBtn;            //照片墙按钮
+@property (nonatomic, strong) UIButton *personCenterBtn;        //个人中心按钮
+@property (nonatomic, strong) UIButton *collectInfoBtn;         //采集信息按钮
 
 @end
 
@@ -86,21 +91,24 @@ typedef NS_ENUM(NSInteger, BottomButtonType) {
     self.trafficSwitchBtn = [self createBtnWithNormalImageName:@"trafficSwitch_icon_normal" selectedImageName:@"trafficSwitch_icon_selected"];
     self.trafficSwitchBtn.x = MTScreenW - 50;
     self.trafficSwitchBtn.y = 90;
-    self.trafficSwitchBtn.tag = 20;
+    self.trafficSwitchBtn.tag = ControlButtonTypeTraffic;
     
     //切换地图类型掉按钮
     self.mapTypeSwitchBtn = [self createBtnWithNormalImageName:@"mapTypeSwitch_icon" selectedImageName:@"mapTypeSwitch_icon"];
     self.mapTypeSwitchBtn.x = MTScreenW - 50;
     self.mapTypeSwitchBtn.y = 140;
-    self.mapTypeSwitchBtn.tag = 21;
+    self.mapTypeSwitchBtn.tag = ControlButtonTypeMapType;
     
     //切换跟随模式按钮
     self.mylocationBtn = [self createBtnWithNormalImageName:@"locationIconNone" selectedImageName:@"locationIconNone"];
     self.mylocationBtn.x = 10;
     self.mylocationBtn.y = MTScreenH-120;
-    self.mylocationBtn.tag = 22;
+    self.mylocationBtn.tag = ControlButtonTypeMylocation;
 }
 
+/**
+ *  初始化底部工具条
+ */
 -(void)initBottomBar
 {
     UIView *bottomBar = [[UIView alloc] initWithFrame:CGRectMake(10, MTScreenH-50, MTScreenW-20, 40)];
@@ -150,10 +158,6 @@ typedef NS_ENUM(NSInteger, BottomButtonType) {
     UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(2*btnWidth, (btnHeight-10)/2, 1, btnHeight-30)];
     line2.backgroundColor = [UIColor lightGrayColor];
     [bottomBar addSubview:line2];
-    
-//    UIView *line3 = [[UIView alloc] initWithFrame:CGRectMake(3*btnWidth, (btnHeight-10)/2, 1, btnHeight-30)];
-//    line3.backgroundColor = [UIColor lightGrayColor];
-//    [bottomBar addSubview:line3];
 }
 
 #pragma mark 协议方法
@@ -163,9 +167,6 @@ typedef NS_ENUM(NSInteger, BottomButtonType) {
     if(updatingLocation)
     {
         self.currentLocation = userLocation;
-        
-//        AppDelegate *appdel = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-//        appdel.currentLocation = userLocation.location;
     }
 }
 
@@ -193,11 +194,11 @@ typedef NS_ENUM(NSInteger, BottomButtonType) {
  */
 -(void)mapControlBtnClicked:(SWYButton *)sender
 {
-    if (sender.tag == 20) {
+    if (sender.tag == ControlButtonTypeTraffic) {
         //切换交通图
         sender.selected = !sender.isSelected;
         self.mapView.showTraffic = sender.isSelected;
-    }else if (sender.tag == 22){
+    }else if (sender.tag == ControlButtonTypeMylocation){
         UIImage *image;
         //切换用户跟随模式
         switch (self.mapView.userTrackingMode) {
@@ -225,19 +226,15 @@ typedef NS_ENUM(NSInteger, BottomButtonType) {
         [sender setImage:image forState:UIControlStateNormal];
         NSLog(@"%f",self.mapView.zoomLevel);
     }else{
-        //切换地图类型
-//        sender.selected = !sender.isSelected;
-//        if (sender.selected) {
-//            SWYMapTypeSelectView *selectView =  [[SWYMapTypeSelectView alloc] init];
-//            selectView.delegate = self;
-//            [selectView showMapTypeViewToView:self.view position:CGPointMake(sender.x, CGRectGetMaxY(sender.frame))];
-//        }
         SWYMapTypeSelectView *selectView =  [[SWYMapTypeSelectView alloc] init];
         selectView.delegate = self;
         [selectView showMapTypeViewToView:self.view position:CGPointMake(sender.x, CGRectGetMaxY(sender.frame))];
     }
 }
 
+/**
+ *  底部工具条被点击时调用
+ */
 -(void)bottomBarBtnClicked:(UIButton *)sender
 {
     if (sender.tag == BottomButtonTypeCollectInfo) {
@@ -245,18 +242,16 @@ typedef NS_ENUM(NSInteger, BottomButtonType) {
         UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:collectionInfo];
         [self presentViewController:navVC animated:YES completion:nil];
         
-//        SpotInfoViewController *spotInfoVC = [[SpotInfoViewController alloc] init];
-//        UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:spotInfoVC];
-//        [self presentViewController:navVC animated:YES completion:nil];
-        
     }else if (sender.tag == BottomButtonTypePhotoSet){
         SWYPhotoSetViewController *photoSetVC = [[SWYPhotoSetViewController alloc] init];
         UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:photoSetVC];
         [self presentViewController:navVC animated:YES completion:nil];
+        
     }else if (sender.tag == BottomButtonTypePersonCenter){
         PersonCenterViewController *personCenter = [[PersonCenterViewController alloc] init];
         UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:personCenter];
         [self presentViewController:navVC animated:YES completion:nil];
+        
      }else{
 
      }

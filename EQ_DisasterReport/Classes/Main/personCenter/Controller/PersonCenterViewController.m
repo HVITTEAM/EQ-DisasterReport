@@ -59,7 +59,7 @@
     self.tableView.contentInset = UIEdgeInsetsMake(headViewHeight, 0, 0, 0);
     
     self.headView = [[[NSBundle mainBundle] loadNibNamed:@"PersonCenterHeadView" owner:self options:nil] lastObject];
-    self.headView.frame = CGRectMake(0, -headViewHeight, MTScreenW, headViewHeight);
+    self.headView.frame = CGRectMake(0, -headViewHeight - 20, MTScreenW, headViewHeight);
     
     UIImage *bkimage = [UIImage imageNamed:@"personCenterHeadBK"];
     self.headView.headBKImageView.image = [bkimage resizableImageWithCapInsets:UIEdgeInsetsZero resizingMode:UIImageResizingModeStretch];

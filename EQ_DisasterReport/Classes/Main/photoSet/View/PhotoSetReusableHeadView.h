@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface PhotoSetReusableHeadView : UICollectionReusableView
+
 @property (weak, nonatomic) IBOutlet UILabel *titleLb;
 
 @end
