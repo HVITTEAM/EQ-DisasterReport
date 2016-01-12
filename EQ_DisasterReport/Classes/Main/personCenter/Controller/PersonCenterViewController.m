@@ -117,7 +117,7 @@
 
 - (void)setupGroup1
 {
-    __weak typeof(self)weakSelf = self;
+    //__weak typeof(self)weakSelf = self;
     
     // 1.创建组
     HMCommonGroup *group = [HMCommonGroup group];
@@ -134,14 +134,14 @@
     about.operation = ^{
     };
     
-    HMCommonArrowItem *advice = [HMCommonArrowItem itemWithTitle:@"意见反馈" icon:nil];
-    advice.icon = @"user_info_Icon";
-    advice.operation = ^{
-        FeedbackView *feedbackView = [[FeedbackView alloc] init];
-        [feedbackView showViewtoFatherView:weakSelf.navigationController.view];
-    };
+//    HMCommonArrowItem *advice = [HMCommonArrowItem itemWithTitle:@"意见反馈" icon:nil];
+//    advice.icon = @"user_info_Icon";
+//    advice.operation = ^{
+//        FeedbackView *feedbackView = [[FeedbackView alloc] init];
+//        [feedbackView showViewtoFatherView:weakSelf.navigationController.view];
+//    };
     
-    group.items = @[account,about,advice];
+    group.items = @[account,about];
 }
 
 -(void)back

@@ -13,7 +13,7 @@
 - (void)awakeFromNib {
     // Initialization code    
     [self.recordBtn initRecord:self maxtime:60 title:@"上滑取消录音"];
-    [self.recordBtn setTitle:@"灾情上报" forState: UIControlStateNormal];
+    [self.recordBtn setTitle:@"语音上报" forState: UIControlStateNormal];
     [self.recordBtn setImage:[UIImage imageNamed:@"microphone_icon"] forState:UIControlStateNormal];
     
     self.resetBtn.layer.cornerRadius = 4;

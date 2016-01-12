@@ -123,7 +123,9 @@
 #pragma mark --UICollectionViewDelegate
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSInteger index = indexPath.section * 5 +indexPath.row;
+    //将它所在的父视图控制器的根视图结束编辑，即退出键盘
+    [self.parentVC.view endEditing:YES];
+    
     NSInteger index = indexPath.row;
     //在不显示新增图片按钮时，index 最大是self.dataProvider.count-1，如果等于self.dataProvider.count，说明当前显示新增图片按钮，且点击了新增图片按钮
     if (index == self.dataProvider.count) {

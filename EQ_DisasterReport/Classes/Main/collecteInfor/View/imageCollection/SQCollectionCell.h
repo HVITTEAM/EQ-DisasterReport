@@ -15,8 +15,12 @@
 @end
 
 @interface SQCollectionCell : UICollectionViewCell
+
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
+
 @property (weak, nonatomic) IBOutlet UIButton *delButton;
+
 @property(weak,nonatomic)id<SQCollectionCellDelegate>delegate;
+
 @property(strong,nonatomic)NSIndexPath *indexpath;
 @end

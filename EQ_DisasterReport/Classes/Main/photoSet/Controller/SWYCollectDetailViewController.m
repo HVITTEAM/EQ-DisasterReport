@@ -6,6 +6,8 @@
 //  Copyright © 2015年 董徐维. All rights reserved.
 //
 
+#define kHeadViewDefaultHeight 230
+
 #import "SWYCollectDetailViewController.h"
 #import "UserInfoCell.h"
 #import "PhotoInfoCell.h"
@@ -58,15 +60,18 @@
     
     //设置tableView头部视图
     TableHeadView *headView = [[[NSBundle mainBundle] loadNibNamed:@"TableHeadViw" owner:nil options:nil] lastObject];
-    [headView.bigImagV sd_setImageWithURL:[NSURL URLWithString:self.photoInfor.photopath] placeholderImage:[UIImage imageNamed:@"placeholder_image"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        NSLog(@"SWYCollectDetailViewController 头部大图片完成");
+    headView.delegate = self;
+    self.detailTableView.tableHeaderView = headView;
+    
+    NSString *encodeUrlStr = [self.photoInfor.photopath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [headView.bigImagV sd_setImageWithURL:[NSURL URLWithString:encodeUrlStr] placeholderImage:[UIImage imageNamed:@"placeholder_image"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        //根据图片调整视图高度
+        [self setTableHeadViewSizeWithHeadImage:image];
+        
     }];
     //下方的渐变图片，防止图片为浅色时，地址显示不清楚
     UIImage *gradientImg = [UIImage imageNamed:@"gradientBK_black"];
     headView.gradientBKView.image = [gradientImg resizableImageWithCapInsets:UIEdgeInsetsZero resizingMode:UIImageResizingModeStretch];
-    
-    headView.delegate = self;
-    self.detailTableView.tableHeaderView = headView;
 }
 
 /**
@@ -208,6 +213,20 @@
     PhotoDetailModel *model = [[PhotoDetailModel alloc] init];
     
     model.address = [data[@"address"] validateDataIsNull];
+    
+    
+    
+//    NSString *timeStr = [data[@"collecttime"] validateDataIsNull];
+//    NSLog(@"%@",timeStr);
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    
+//    NSLocale * locale = [NSLocale currentLocale];
+//    
+//    [formatter setLocale:[NSLocale currentLocale]];
+//    [formatter setDateFormat:@"yyyy-MM-dd hh:mm"];
+//    NSDate *date = [formatter dateFromString:timeStr];
+//    NSString *collectionTime = [formatter stringFromDate:date];
+    
     model.collecttime = [data[@"collecttime"] validateDataIsNull];
     model.descr = [data[@"description"] validateDataIsNull];
     model.earthquakeintensity = [NSString stringWithFormat:@"%@",[data[@"earthquakeintensity"] validateDataIsNull]];
@@ -231,6 +250,31 @@
     SWYPhotoBrowserViewController *browserVC = [[SWYPhotoBrowserViewController alloc] initPhotoBrowserWithImages:@[headVeiw.bigImagV.image] currentIndex:0];
     browserVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentViewController:browserVC animated:YES completion:nil];
+}
+
+
+#pragma mark 内部方法
+/**
+ *  设置TableHeadView（头部大图）的尺寸
+ */
+-(void)setTableHeadViewSizeWithHeadImage:(UIImage *)headImage
+{
+    //图片的宽高
+    CGFloat imageWidth = headImage.size.width;
+    CGFloat imageHeight = headImage.size.height;
+    
+    //视图的宽高，默认视图的宽为屏幕的宽
+    CGFloat headViewWidth = MTScreenW;
+    CGFloat headViewHeight = imageHeight * headViewWidth / imageWidth;
+    
+    if (headViewHeight > MTScreenH * 0.75) {    //如果高大于屏幕高的3/4
+        headViewHeight = MTScreenH * 0.75;
+    }else if (headViewHeight < kHeadViewDefaultHeight){    //如果高小于默认高度
+        headViewHeight = kHeadViewDefaultHeight;
+    }
+    UIView *headerView = self.detailTableView.tableHeaderView;
+    headerView.frame = CGRectMake(0, 0, headViewWidth, headViewHeight);
+    self.detailTableView.tableHeaderView = headerView;
 }
 
 -(void)back

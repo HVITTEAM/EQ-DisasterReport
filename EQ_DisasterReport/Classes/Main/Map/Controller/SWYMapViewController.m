@@ -275,7 +275,6 @@ typedef NS_ENUM(NSInteger, ControlButtonType) {
     [self.view addSubview:btn];
     
     [btn addTarget:self action:@selector(mapControlBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    btn.backgroundColor = [UIColor whiteColor];
     return btn;
 }
 

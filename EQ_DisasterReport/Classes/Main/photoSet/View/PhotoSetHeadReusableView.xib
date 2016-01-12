@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photoSetHeadReusableView" id="U6b-Vx-4bR" customClass="PhotoSetHeadReusableView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="151"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VRd-L1-tq8">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="151"/>
+                    <color key="backgroundColor" red="0.76078431369999999" green="0.83529411760000005" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                </imageView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="VRd-L1-tq8" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="Xu2-27-sbY"/>
+                <constraint firstAttribute="trailing" secondItem="VRd-L1-tq8" secondAttribute="trailing" id="lRT-bB-IZb"/>
+                <constraint firstAttribute="bottom" secondItem="VRd-L1-tq8" secondAttribute="bottom" id="lkh-lP-fci"/>
+                <constraint firstItem="VRd-L1-tq8" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="z4E-of-Dmp"/>
+            </constraints>
+            <connections>
+                <outlet property="headImageView" destination="VRd-L1-tq8" id="PS6-2G-vCn"/>
+            </connections>
+            <point key="canvasLocation" x="400" y="229.5"/>
+        </collectionReusableView>
+    </objects>
+</document>

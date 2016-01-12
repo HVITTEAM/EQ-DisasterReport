@@ -19,12 +19,16 @@
  *  content:编辑的内容  indexpath:对应的 cell 位置
  */
 -(void)fillContentViewController:(FillContentViewController*)fillContentVC filledContent:(NSString *)content indexPath:(NSIndexPath *)indexpath;
-
 @end
 
+//////////////////////////////////////////////////////////////////
+
 @interface FillContentViewController : UIViewController
+
 @property(nonatomic,copy)NSString *titleStr;            //标题
+
 @property(nonatomic,copy)NSString *contentStr;          //编辑的内容
+
 @property(nonatomic,strong)NSIndexPath *indexpath;     //对应cell 位置
 
 @property(nonatomic,weak)id<FillContentViewControllerDelegate>delegate;

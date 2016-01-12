@@ -130,7 +130,7 @@
     [self.view endEditing:YES];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self.loginNetWorkHelper startSendRequest];
-    //[HMControllerTool setRootViewController];
+//    [HMControllerTool setRootViewController];
 }
 
 #pragma mark -- 内部方法 --

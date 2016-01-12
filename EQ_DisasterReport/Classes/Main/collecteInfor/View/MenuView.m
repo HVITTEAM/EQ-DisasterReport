@@ -43,13 +43,18 @@
 
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-   [self removeFromSuperview];
+    [self hideMenuView];
 }
 
 -(void)showMenuViewInView:(UIView *)view frame:(CGRect)frame
 {
     self.frame = frame;
     [view addSubview:self];
+}
+
+-(void)hideMenuView
+{
+    [self removeFromSuperview];
 }
 
 -(void)menuContentView:(MenuContentView *)MenuContentView indexForItem:(NSInteger)idx

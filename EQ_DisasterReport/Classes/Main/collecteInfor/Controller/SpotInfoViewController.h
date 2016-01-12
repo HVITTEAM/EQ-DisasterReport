@@ -19,15 +19,17 @@ typedef NS_ENUM(NSInteger, ActionType) {
 {
    SpotInforModel *_spotInfoModel;
 }
-@property(nonatomic,strong)SpotInforModel *spotInfoModel;     //除图片和声音之外的采集数据
+@property(nonatomic,strong)SpotInforModel *spotInfoModel;      //除图片和声音之外的采集数据(新增时不需要传，显示和更新信息时需要传)
 
-@property(nonatomic,strong)NSIndexPath *currentIdx;            //与spotInfoModel对应的索引对象
+@property(nonatomic,strong)NSIndexPath *currentIdx;         //这个spotInfoModel的位置(新增时不需要传，显示和更新信息时需要传)
 
-@property(nonatomic,assign)ActionType actionType;                   //操作类型
+@property(nonatomic,assign)ActionType actionType;                   //当前页面的操作类型
 
 @property(nonatomic,weak)id<SpotInfoUploadDelegate>delegate;
 
 @end
+
+///////////////////////////////////////////////////////////////
 
 @protocol SpotInfoUploadDelegate <NSObject>
 

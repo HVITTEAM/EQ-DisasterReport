@@ -21,44 +21,73 @@
 #import "AudioVO.h"
 #import "PictureTableHelper.h"
 #import "AppDelegate.h"
+#import "EarthquakeinfoNTHelper.h"
 #import "AddPointinfoNTHelper.h"
 #import "SWYMultipartFormObject.h"
 #import "SWYRequestParams.h"
 #import "MapSearchAPIHelper.h"
+#import "ChooseIntensityViewController.h"
+#import "Earthquakeinfo.h"
 
 #define kCellMargin 10
 
-@interface SpotInfoViewController ()<UITableViewDataSource,UITableViewDelegate,FillContentViewControllerDelegate,ImagePickCellDelegate,AudioCellDelegate,SpotTextCellDelegate,SWYNetworkReformerDelegate,SWYNetworkParamSourceDelegate,SWYNetworkCallBackDelegate,MapSearchAPIHelperDelegate>
+@interface SpotInfoViewController ()<UITableViewDataSource,UITableViewDelegate,FillContentViewControllerDelegate,ImagePickCellDelegate,AudioCellDelegate,SpotTextCellDelegate,SWYNetworkReformerDelegate,SWYNetworkParamSourceDelegate,SWYNetworkCallBackDelegate,MapSearchAPIHelperDelegate,chooseIntensityDelegate>
+
 @property(nonatomic,strong)UITableView *infoTableView;
+
 @property(nonatomic,strong)NSArray *dataProvider;              //section 0 数据源
+
 @property(nonatomic,strong)NSMutableArray *images;            //图片数组
+
 @property(nonatomic,strong)AudioVO *audioVO;                //声音数据
 
-@property(strong,nonatomic)AddPointinfoNTHelper *addPointinfoNTHelper;
+@property(strong,nonatomic)AddPointinfoNTHelper *addPointinfoNTHelper;         //向服务器上传信息时的对象
 
-@property(strong,nonatomic)MapSearchAPIHelper *searchApiHelper;
+@property(strong,nonatomic)EarthquakeinfoNTHelper *earthquakeinfoNTHelper;         //向服务器获取地震信息的对象
 
-@property(assign,nonatomic)BOOL uploadState;
+@property(strong,nonatomic)MapSearchAPIHelper *searchApiHelper;               //地址解析对象
+
+@property(strong,nonatomic)Earthquakeinfo *earthquakeinfo;               //地震信息对象
+
+@property(assign,nonatomic)BOOL uploadState;                  //该条数据是否上传
 
 @end
 
 @implementation SpotInfoViewController
 
+#pragma mark -- 生命周期方法 --
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self initTableView];
-    [self initNavitionBar];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    [self initTableView];
+    
+    [self initNavitionBar];
+
     [self showData];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     self.navigationController.navigationBarHidden = NO;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+   // [self.infoTableView endEditing:YES];
+    
 }
 
 #pragma mark 初始化方法、setter和getter方法
@@ -105,7 +134,7 @@
         
         SpotCellModel *model2 = [[SpotCellModel alloc] init];
         model2.titleStr = @"烈度(级):";
-        model2.placeHolderStr = @"输入烈度";
+        model2.placeHolderStr = @"选择烈度";
         
         SpotCellModel *model3 = [[SpotCellModel alloc] init];
         model3.titleStr = @"经度(度):";
@@ -190,6 +219,16 @@
     return _addPointinfoNTHelper;
 }
 
+-(EarthquakeinfoNTHelper *)earthquakeinfoNTHelper
+{
+    if (!_earthquakeinfoNTHelper) {
+        _earthquakeinfoNTHelper = [[EarthquakeinfoNTHelper alloc] init];
+        _earthquakeinfoNTHelper.callBackDelegate = self;
+        _earthquakeinfoNTHelper.paramSource = self;
+    }
+    return _earthquakeinfoNTHelper;
+}
+
 -(MapSearchAPIHelper *)searchApiHelper
 {
     if (!_searchApiHelper) {
@@ -258,14 +297,14 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section ==0 && indexPath.row <=5){
+    if (indexPath.section ==0 && indexPath.row <=5 && indexPath.row != 2){
         SpotCellModel *model = self.dataProvider[indexPath.row];
         SpotTextCell *cell = [SpotTextCell cellWithTableView:tableView model:model];
         [cell setIndexPath:indexPath rowsInSection:(int)self.dataProvider.count];
         cell.delegate = self;
         cell.userInteractionEnabled = !self.uploadState;
         return cell;
-    }else if(indexPath.section ==0 && indexPath.row >=6){
+    }else if(indexPath.section ==0){
         SpotCellModel *model = self.dataProvider[indexPath.row];
         SpotLabelCell *cell = [SpotLabelCell cellWithTableView:tableView model:model];
         [cell setIndexPath:indexPath rowsInSection:(int)self.dataProvider.count];
@@ -332,7 +371,9 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{    
+{
+    [self.view endEditing:YES];
+    
     if (indexPath.section ==0 && indexPath.row >=6) {
         FillContentViewController *fillVC = [[FillContentViewController alloc] init];
         fillVC.delegate = self;
@@ -342,6 +383,10 @@
         SpotLabelCell *cell = [self.infoTableView cellForRowAtIndexPath:indexPath];
         fillVC.contentStr = [cell getContent];
         [self.navigationController pushViewController:fillVC animated:YES];
+    }else if (indexPath.section == 0 && indexPath.row == 2){
+        ChooseIntensityViewController *chooseIntensityVC = [ChooseIntensityViewController sharedInstance];
+        chooseIntensityVC.delegate = self;
+        [self.navigationController pushViewController:chooseIntensityVC animated:YES];
     }
 }
 
@@ -359,9 +404,6 @@
 -(void)beginEditCellContent:(SpotTextCell *)cell
 {
     self.navigationItem.rightBarButtonItem.title = @"完成";
-//    NSIndexPath *idx = [self.infoTableView indexPathForCell:cell];
-//    
-//    [self.infoTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(idx.row +1) inSection:idx.section] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 #pragma mark - FillContentViewControllerDelegate
@@ -376,13 +418,19 @@
     [self.infoTableView reloadRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
+#pragma mark chooseIntensityDelegate
+-(void)viewController:(ChooseIntensityViewController *)chooseIntensityVC selectedIntensity:(NSString *)intensity
+{
+    ((SpotCellModel *)self.dataProvider[2]).contentStr = intensity;
+    [self.infoTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:2 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+}
+
 #pragma mark - ImagePickCellDelegate
 -(void)imagePickCell:(ImagePickCell *)cell pickedImages:(NSMutableArray *)images imagePickViewheight:(CGFloat)height
 {
     self.images = images;
 
     [self.infoTableView reloadData];
-
 }
 
 #pragma mark - AudioCellDelegate
@@ -409,9 +457,20 @@
 #pragma mark SWYNetworkParamSourceDelegate
 - (SWYRequestParams *)paramsForRequest:(SWYBaseNetworkHelper *)networkHelper
 {
+    if (networkHelper == self.earthquakeinfoNTHelper) {   //请求地震信息时不需要参数
+        
+        return nil;
+    }
+    
+    //调查点的数据
     NSMutableArray *files = [[NSMutableArray alloc] init];
     NSMutableArray *voiceTimes = [[NSMutableArray alloc] init];
     NSMutableArray *photoTimes = [[NSMutableArray alloc] init];
+    
+    
+    NSString *intensity = [self switchRomeNumToNum:((SpotCellModel *)self.dataProvider[2]).contentStr];
+    
+    NSString *earthquakeId = [NSString stringWithFormat:@"%d",(int)self.earthquakeinfo.earthquakeid];
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc]
                              initWithDictionary:@{
@@ -419,12 +478,12 @@
                                                   @"address":((SpotCellModel *)self.dataProvider[5]).contentStr,
                                                   @"latitude":((SpotCellModel *)self.dataProvider[4]).contentStr,
                                                   @"longitude":((SpotCellModel *)self.dataProvider[3]).contentStr,
-                                                  @"earthquakeintensity":((SpotCellModel *)self.dataProvider[2]).contentStr,
+                                                  @"earthquakeintensity":intensity,
                                                   @"description":((SpotCellModel *)self.dataProvider[6]).contentStr,
                                                   @"collecttime":((SpotCellModel *)self.dataProvider[1]).contentStr,
-                                                  @"earthquakeid":@"earthquakeid",
                                                   @"voicetime":voiceTimes,
-                                                  @"phototime":photoTimes
+                                                  @"phototime":photoTimes,
+                                                  @"earthquakeid":earthquakeId
                                                 }];
 
     for (PictureVO *picVO in self.images ) {
@@ -456,8 +515,13 @@
 #pragma mark SWYNetworkCallBackDelegate
 - (void)requestDidSuccess:(SWYBaseNetworkHelper *)networkHelper
 {
+    if (networkHelper == self.earthquakeinfoNTHelper) {
+        self.earthquakeinfo = (Earthquakeinfo *)[self.earthquakeinfoNTHelper fetchDataWithReformer:self];
+        [self.addPointinfoNTHelper startSendRequest];
+        return;
+    }
     
-   [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     if ([self.delegate respondsToSelector:@selector(spotInfoViewController:uploadSuccessIndexPath:)]) {
         [self.delegate spotInfoViewController:self uploadSuccessIndexPath:self.currentIdx];
     }
@@ -472,6 +536,10 @@
 #pragma mark SWYNetworkReformerDelegate
 - (id)networkHelper:(SWYBaseNetworkHelper *)networkHelper reformData:(id)data
 {
+    if (networkHelper == self.earthquakeinfoNTHelper) {
+        Earthquakeinfo *earthquake = [Earthquakeinfo objectWithKeyValues:(NSDictionary *)data];
+        return earthquake;
+    }
     return data;
 }
 
@@ -496,7 +564,8 @@
 {
     if ([self.navigationItem.rightBarButtonItem.title isEqualToString:@"上传"]) {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [self.addPointinfoNTHelper startSendRequest];
+//        [self.addPointinfoNTHelper startSendRequest];
+        [self.earthquakeinfoNTHelper startSendRequest];
         return;
     }
     
@@ -661,6 +730,23 @@
     return self.audioVO;
  }
 
+
+#pragma mark -- 键盘处理相关 --
+
+-(void)keyboardWillShow:(NSNotification *)notification
+{
+    NSDictionary *keyboardDict = [notification userInfo];
+    CGRect keyboardFrame = [keyboardDict[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat keyboardHeight = keyboardFrame.size.height;
+    
+    [self.infoTableView setContentInset:UIEdgeInsetsMake(0, 0, keyboardHeight, 0)];
+}
+
+-(void)keyboardWillHide:(NSNotification *)notification
+{
+     [self.infoTableView setContentInset:UIEdgeInsetsZero];
+}
+
 -(void)back
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -685,6 +771,16 @@
         cell.resetBtn.hidden = YES;
     }
     return cell;
+}
+
+/**
+ *  将罗马数字转换成阿拉伯数字
+ */
+-(NSString *)switchRomeNumToNum:(NSString *)romeNum
+{
+    NSArray *romes = @[@"Ⅰ",@"Ⅱ",@"Ⅲ",@"Ⅳ",@"Ⅴ",@"Ⅵ",@"Ⅶ",@"Ⅷ",@"Ⅸ",@"Ⅹ",@"Ⅺ",@"Ⅻ"];
+    NSUInteger num = [romes indexOfObject:romeNum];
+    return [NSString stringWithFormat:@"%d",(int)(num+1)];
 }
 
 -(void)dealloc

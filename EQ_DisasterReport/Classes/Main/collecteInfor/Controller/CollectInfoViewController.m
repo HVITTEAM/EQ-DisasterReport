@@ -27,6 +27,8 @@
 
 @property(strong,nonatomic)UIBarButtonItem *rightItem;
 
+@property(strong,nonatomic)MenuView *menuView;                //弹出菜单(新增，删除)
+
 @property(assign,nonatomic)BOOL isAllSelected;
 
 @end
@@ -35,7 +37,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self initNaviBar];
+    
+    [self initToolBar];
 
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.allowsMultipleSelectionDuringEditing = YES;
@@ -51,7 +56,14 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-        [self initToolBar];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    //隐藏弹出菜单
+    [self.menuView hideMenuView];
 }
 
 #pragma mark 初始化方法、setter和getter方法
@@ -215,7 +227,7 @@
             return;
         }
         
-        self.tableView.editing = YES;
+        [self.tableView setEditing:YES animated:YES];
         [self.navigationController setToolbarHidden:NO animated:YES];
         [self.navigationItem setRightBarButtonItem:nil animated:YES];
         [self.navigationItem setLeftBarButtonItem:self.cancelItem animated:YES];
@@ -248,10 +260,10 @@
  */
 -(void)showMenu
 {
-    MenuView *menuView = [[MenuView alloc] initWithTitles:@[@"新增",@"删除"] titleIcons:@[@"edit_icon",@"delete_icon"]];
-    menuView.delegate = self;
+    self.menuView = [[MenuView alloc] initWithTitles:@[@"新增",@"删除"] titleIcons:@[@"edit_icon",@"delete_icon"]];
+    self.menuView.delegate = self;
     UIWindow *window = [[UIApplication sharedApplication]keyWindow];
-    [menuView showMenuViewInView:window frame:CGRectMake(0, 55, window.width, window.height - 55)];
+    [self.menuView showMenuViewInView:window frame:CGRectMake(0, 55, window.width, window.height - 55)];
 }
 
 /**
@@ -284,7 +296,7 @@
  */
 -(void)cancelAllSelect
 {
-    self.tableView.editing = NO;
+    [self.tableView setEditing:NO animated:YES];
     [self.navigationController setToolbarHidden:YES animated:YES];
     [self.navigationItem setRightBarButtonItem:self.rightItem animated:YES];
     [self.navigationItem setLeftBarButtonItem:self.leftItem animated:YES];

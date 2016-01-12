@@ -59,14 +59,14 @@
         model0.contentStr = [LoginUser shareInstance].loginname;
         
         SpotCellModel *model1 = [[SpotCellModel alloc] init];
-        model1.titleStr = @"用户名称:";
+        model1.titleStr = @"昵称:";
         model1.placeHolderStr = nil;
         model1.contentStr = [LoginUser shareInstance].username;
         
         SpotCellModel *model2 = [[SpotCellModel alloc] init];
-        model2.titleStr = @"岗位:";
+        model2.titleStr = @"邮箱:";
         model2.placeHolderStr = nil;
-        model2.contentStr = [LoginUser shareInstance].station;
+        //model2.contentStr = [LoginUser shareInstance].station;
         
         _dataProvider = @[@[model0,model1,model2]];
     }

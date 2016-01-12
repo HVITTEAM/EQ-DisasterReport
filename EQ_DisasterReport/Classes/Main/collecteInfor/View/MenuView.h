@@ -24,4 +24,6 @@
 
 -(void)showMenuViewInView:(UIView *)view frame:(CGRect)frame;
 
+-(void)hideMenuView;
+
 @end

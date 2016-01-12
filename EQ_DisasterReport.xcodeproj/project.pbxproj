@@ -19,14 +19,16 @@
 		D22A0F9D1C02AFB0006C345D /* DescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D22A0F9B1C02AFB0006C345D /* DescriptionCell.m */; };
 		D22A0F9E1C02AFB0006C345D /* DescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D22A0F9C1C02AFB0006C345D /* DescriptionCell.xib */; };
 		D22A0FA31C02D525006C345D /* 12.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D22A0FA21C02D525006C345D /* 12.jpg */; };
+		D22A2AEA1C44978A00754A5B /* EarthquakeinfoNTHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D22A2AE91C44978A00754A5B /* EarthquakeinfoNTHelper.m */; };
+		D22A2AED1C44997400754A5B /* Earthquakeinfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D22A2AEC1C44997400754A5B /* Earthquakeinfo.m */; };
+		D22A2AF11C44CC0100754A5B /* PhotoSetHeadReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D22A2AEF1C44CC0100754A5B /* PhotoSetHeadReusableView.m */; };
+		D22A2AF21C44CC0100754A5B /* PhotoSetHeadReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D22A2AF01C44CC0100754A5B /* PhotoSetHeadReusableView.xib */; };
 		D22C72621BFD9253007F08E8 /* AudioVO.m in Sources */ = {isa = PBXBuildFile; fileRef = D22C72611BFD9253007F08E8 /* AudioVO.m */; };
 		D22C74361C21028700BCD604 /* FetchPointinfoNTHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D22C74351C21028700BCD604 /* FetchPointinfoNTHelper.m */; };
 		D241C3801BFF05FA0098FC9E /* SQCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D241C37F1BFF05FA0098FC9E /* SQCollectionCell.m */; };
 		D2550B581BEAE93C00904D35 /* SWYPhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2550B571BEAE93C00904D35 /* SWYPhotoBrowserViewController.m */; };
 		D2550BC61BEB2C9400904D35 /* SWYNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D2550BC51BEB2C9400904D35 /* SWYNavigationBar.m */; };
 		D264347E1C22A4DC006E223C /* PhotoDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D264347D1C22A4DC006E223C /* PhotoDetailModel.m */; };
-		D2656EAA1BEBA2B400BA127F /* PhotoSetReusableHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2656EA81BEBA2B400BA127F /* PhotoSetReusableHeadView.m */; };
-		D2656EAB1BEBA2B400BA127F /* PhotoSetReusableHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2656EA91BEBA2B400BA127F /* PhotoSetReusableHeadView.xib */; };
 		D2756FED1C1EBBF900ED3DFB /* LocationNTHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D2756FEC1C1EBBF900ED3DFB /* LocationNTHelper.m */; };
 		D285F7FC1C0332A600421F06 /* HMControllerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D285F7FB1C0332A600421F06 /* HMControllerTool.m */; };
 		D28D17D91C1D101E0086C080 /* AMapLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D28D17D81C1D101E0086C080 /* AMapLocationKit.framework */; };
@@ -59,8 +61,6 @@
 		D29EE3F51C29254600B9629F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29EE3F41C29254600B9629F /* CFNetwork.framework */; };
 		D29EE3F71C29257D00B9629F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29EE3F61C29257D00B9629F /* CoreFoundation.framework */; };
 		D29EE3F91C29270B00B9629F /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = D29EE3F81C29270B00B9629F /* PushConfig.plist */; };
-		D29EEBBA1BFAFC860015C268 /* PhotoSetHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D29EEBB81BFAFC860015C268 /* PhotoSetHeadCell.m */; };
-		D29EEBBB1BFAFC860015C268 /* PhotoSetHeadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D29EEBB91BFAFC860015C268 /* PhotoSetHeadCell.xib */; };
 		D29EEBC01BFB2C2F0015C268 /* VoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D29EEBBF1BFB2C2F0015C268 /* VoiceModel.m */; };
 		D2A3F0CF1C2B82F400297FC5 /* NSObject+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A3F0CE1C2B82F400297FC5 /* NSObject+Extension.m */; };
 		D2A417B31C0099620037370C /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A417B11C0099620037370C /* AboutViewController.m */; };
@@ -229,6 +229,10 @@
 		D2EEA3801BF468CF00F2FD20 /* PersonCenterHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EEA37F1BF468CF00F2FD20 /* PersonCenterHeadView.m */; };
 		D2EEA3821BF468EE00F2FD20 /* PersonCenterHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2EEA3811BF468EE00F2FD20 /* PersonCenterHeadView.xib */; };
 		D2EEA3871BF4839200F2FD20 /* 11.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D2EEA3861BF4839200F2FD20 /* 11.jpg */; };
+		D2FA9F9E1C43754C00BC2F79 /* ChooseIntensityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2FA9F9C1C43754C00BC2F79 /* ChooseIntensityViewController.m */; };
+		D2FA9F9F1C43754C00BC2F79 /* ChooseIntensityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2FA9F9D1C43754C00BC2F79 /* ChooseIntensityViewController.xib */; };
+		D2FA9FA21C43759E00BC2F79 /* ChooseIntensityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2FA9FA11C43759E00BC2F79 /* ChooseIntensityCell.m */; };
+		D2FA9FA41C4375C100BC2F79 /* ChooseIntensityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2FA9FA31C4375C100BC2F79 /* ChooseIntensityCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -270,6 +274,13 @@
 		D22A0F9B1C02AFB0006C345D /* DescriptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescriptionCell.m; sourceTree = "<group>"; };
 		D22A0F9C1C02AFB0006C345D /* DescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DescriptionCell.xib; sourceTree = "<group>"; };
 		D22A0FA21C02D525006C345D /* 12.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 12.jpg; sourceTree = "<group>"; };
+		D22A2AE81C44978A00754A5B /* EarthquakeinfoNTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarthquakeinfoNTHelper.h; sourceTree = "<group>"; };
+		D22A2AE91C44978A00754A5B /* EarthquakeinfoNTHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EarthquakeinfoNTHelper.m; sourceTree = "<group>"; };
+		D22A2AEB1C44997400754A5B /* Earthquakeinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Earthquakeinfo.h; sourceTree = "<group>"; };
+		D22A2AEC1C44997400754A5B /* Earthquakeinfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Earthquakeinfo.m; sourceTree = "<group>"; };
+		D22A2AEE1C44CC0100754A5B /* PhotoSetHeadReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoSetHeadReusableView.h; sourceTree = "<group>"; };
+		D22A2AEF1C44CC0100754A5B /* PhotoSetHeadReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoSetHeadReusableView.m; sourceTree = "<group>"; };
+		D22A2AF01C44CC0100754A5B /* PhotoSetHeadReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoSetHeadReusableView.xib; sourceTree = "<group>"; };
 		D22C72601BFD9253007F08E8 /* AudioVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioVO.h; sourceTree = "<group>"; };
 		D22C72611BFD9253007F08E8 /* AudioVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioVO.m; sourceTree = "<group>"; };
 		D22C74341C21028700BCD604 /* FetchPointinfoNTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchPointinfoNTHelper.h; sourceTree = "<group>"; };
@@ -282,9 +293,6 @@
 		D2550BC51BEB2C9400904D35 /* SWYNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWYNavigationBar.m; sourceTree = "<group>"; };
 		D264347C1C22A4DC006E223C /* PhotoDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoDetailModel.h; sourceTree = "<group>"; };
 		D264347D1C22A4DC006E223C /* PhotoDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoDetailModel.m; sourceTree = "<group>"; };
-		D2656EA71BEBA2B400BA127F /* PhotoSetReusableHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoSetReusableHeadView.h; sourceTree = "<group>"; };
-		D2656EA81BEBA2B400BA127F /* PhotoSetReusableHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoSetReusableHeadView.m; sourceTree = "<group>"; };
-		D2656EA91BEBA2B400BA127F /* PhotoSetReusableHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoSetReusableHeadView.xib; sourceTree = "<group>"; };
 		D2756FEB1C1EBBF900ED3DFB /* LocationNTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationNTHelper.h; sourceTree = "<group>"; };
 		D2756FEC1C1EBBF900ED3DFB /* LocationNTHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationNTHelper.m; sourceTree = "<group>"; };
 		D285F7FA1C0332A600421F06 /* HMControllerTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMControllerTool.h; sourceTree = "<group>"; };
@@ -337,9 +345,6 @@
 		D29EE3F41C29254600B9629F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		D29EE3F61C29257D00B9629F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		D29EE3F81C29270B00B9629F /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
-		D29EEBB71BFAFC860015C268 /* PhotoSetHeadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoSetHeadCell.h; sourceTree = "<group>"; };
-		D29EEBB81BFAFC860015C268 /* PhotoSetHeadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoSetHeadCell.m; sourceTree = "<group>"; };
-		D29EEBB91BFAFC860015C268 /* PhotoSetHeadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoSetHeadCell.xib; sourceTree = "<group>"; };
 		D29EEBBE1BFB2C2F0015C268 /* VoiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceModel.h; sourceTree = "<group>"; };
 		D29EEBBF1BFB2C2F0015C268 /* VoiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceModel.m; sourceTree = "<group>"; };
 		D2A3F0CD1C2B82F400297FC5 /* NSObject+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Extension.h"; sourceTree = "<group>"; };
@@ -634,6 +639,12 @@
 		D2EEA37F1BF468CF00F2FD20 /* PersonCenterHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonCenterHeadView.m; sourceTree = "<group>"; };
 		D2EEA3811BF468EE00F2FD20 /* PersonCenterHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonCenterHeadView.xib; sourceTree = "<group>"; };
 		D2EEA3861BF4839200F2FD20 /* 11.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 11.jpg; sourceTree = "<group>"; };
+		D2FA9F9B1C43754C00BC2F79 /* ChooseIntensityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseIntensityViewController.h; sourceTree = "<group>"; };
+		D2FA9F9C1C43754C00BC2F79 /* ChooseIntensityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseIntensityViewController.m; sourceTree = "<group>"; };
+		D2FA9F9D1C43754C00BC2F79 /* ChooseIntensityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseIntensityViewController.xib; sourceTree = "<group>"; };
+		D2FA9FA01C43759E00BC2F79 /* ChooseIntensityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseIntensityCell.h; sourceTree = "<group>"; };
+		D2FA9FA11C43759E00BC2F79 /* ChooseIntensityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseIntensityCell.m; sourceTree = "<group>"; };
+		D2FA9FA31C4375C100BC2F79 /* ChooseIntensityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseIntensityCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -854,12 +865,9 @@
 				D2BFE57C1BE9DB5F00B65E91 /* PhotoSetCell.h */,
 				D2BFE57D1BE9DB5F00B65E91 /* PhotoSetCell.m */,
 				D2BFE57E1BE9DB5F00B65E91 /* PhotoSetCell.xib */,
-				D29EEBB71BFAFC860015C268 /* PhotoSetHeadCell.h */,
-				D29EEBB81BFAFC860015C268 /* PhotoSetHeadCell.m */,
-				D29EEBB91BFAFC860015C268 /* PhotoSetHeadCell.xib */,
-				D2656EA71BEBA2B400BA127F /* PhotoSetReusableHeadView.h */,
-				D2656EA81BEBA2B400BA127F /* PhotoSetReusableHeadView.m */,
-				D2656EA91BEBA2B400BA127F /* PhotoSetReusableHeadView.xib */,
+				D22A2AEE1C44CC0100754A5B /* PhotoSetHeadReusableView.h */,
+				D22A2AEF1C44CC0100754A5B /* PhotoSetHeadReusableView.m */,
+				D22A2AF01C44CC0100754A5B /* PhotoSetHeadReusableView.xib */,
 				D2BFE5A01BE9FFFF00B65E91 /* TableHeadView.h */,
 				D2BFE5A11BE9FFFF00B65E91 /* TableHeadView.m */,
 				D2BFE5A31BEA063400B65E91 /* TableHeadViw.xib */,
@@ -949,6 +957,8 @@
 				D2756FEC1C1EBBF900ED3DFB /* LocationNTHelper.m */,
 				D2E0A7F11C1FDF79002FE750 /* PhotoinfoNTHelper.h */,
 				D2E0A7F21C1FDF79002FE750 /* PhotoinfoNTHelper.m */,
+				D22A2AE81C44978A00754A5B /* EarthquakeinfoNTHelper.h */,
+				D22A2AE91C44978A00754A5B /* EarthquakeinfoNTHelper.m */,
 			);
 			path = subNetworkHelper;
 			sourceTree = "<group>";
@@ -1373,6 +1383,9 @@
 				D29647411BF19977004B8877 /* FillContentViewController.h */,
 				D29647421BF19977004B8877 /* FillContentViewController.m */,
 				D29647431BF19977004B8877 /* FillContentViewController.xib */,
+				D2FA9F9B1C43754C00BC2F79 /* ChooseIntensityViewController.h */,
+				D2FA9F9C1C43754C00BC2F79 /* ChooseIntensityViewController.m */,
+				D2FA9F9D1C43754C00BC2F79 /* ChooseIntensityViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1392,6 +1405,8 @@
 				D22C72611BFD9253007F08E8 /* AudioVO.m */,
 				D29EEBBE1BFB2C2F0015C268 /* VoiceModel.h */,
 				D29EEBBF1BFB2C2F0015C268 /* VoiceModel.m */,
+				D22A2AEB1C44997400754A5B /* Earthquakeinfo.h */,
+				D22A2AEC1C44997400754A5B /* Earthquakeinfo.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1421,6 +1436,9 @@
 				D2EC41501C1567EC002F5FA4 /* MenuContentView.m */,
 				D2EC414C1C15597F002F5FA4 /* MenuItem.h */,
 				D2EC414D1C15597F002F5FA4 /* MenuItem.m */,
+				D2FA9FA01C43759E00BC2F79 /* ChooseIntensityCell.h */,
+				D2FA9FA11C43759E00BC2F79 /* ChooseIntensityCell.m */,
+				D2FA9FA31C4375C100BC2F79 /* ChooseIntensityCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1620,7 +1638,6 @@
 				D29647331BF1739C004B8877 /* SpotLabelCell.xib in Resources */,
 				D2BFE5901BE9E0D800B65E91 /* 4.jpg in Resources */,
 				D2AD16D01BF2FDF8000D2182 /* mic_0.png in Resources */,
-				D29EEBBB1BFAFC860015C268 /* PhotoSetHeadCell.xib in Resources */,
 				D2BFE5A41BEA063400B65E91 /* TableHeadViw.xib in Resources */,
 				D22A0FA31C02D525006C345D /* 12.jpg in Resources */,
 				D29647671BF1BDF6004B8877 /* SQCollectionCell.xib in Resources */,
@@ -1633,10 +1650,12 @@
 				D2BFE5921BE9E0D800B65E91 /* 6.jpg in Resources */,
 				D29CAC591C0181F100F02FDB /* AccountTableViewController.xib in Resources */,
 				D2BFE5931BE9E0D800B65E91 /* 7.jpg in Resources */,
+				D2FA9F9F1C43754C00BC2F79 /* ChooseIntensityViewController.xib in Resources */,
 				D2EEA3871BF4839200F2FD20 /* 11.jpg in Resources */,
 				D2A534371C00C37000140F50 /* UseHelpViewController.xib in Resources */,
 				01EBA1601BE6F4CA00F2701D /* LaunchScreen.storyboard in Resources */,
 				01EBA15D1BE6F4CA00F2701D /* Assets.xcassets in Resources */,
+				D2FA9FA41C4375C100BC2F79 /* ChooseIntensityCell.xib in Resources */,
 				D2BFE58E1BE9E0D800B65E91 /* 2.jpg in Resources */,
 				D2EC988B1BE7112700ED8661 /* MJRefresh.bundle in Resources */,
 				D29647351BF1739C004B8877 /* SpotTextCell.xib in Resources */,
@@ -1651,6 +1670,7 @@
 				D2BFE5911BE9E0D800B65E91 /* 5.jpg in Resources */,
 				D2AD16D61BF2FDF8000D2182 /* mic_cancel.png in Resources */,
 				D2BFE59A1BE9FA3400B65E91 /* SWYCollectDetailViewController.xib in Resources */,
+				D22A2AF21C44CC0100754A5B /* PhotoSetHeadReusableView.xib in Resources */,
 				D2AD16D11BF2FDF8000D2182 /* mic_1.png in Resources */,
 				D296474C1BF1B56C004B8877 /* ImageCollectionView.xib in Resources */,
 				D2BFE59F1BE9FD8800B65E91 /* UserInfoCell.xib in Resources */,
@@ -1663,7 +1683,6 @@
 				D2EEA3821BF468EE00F2FD20 /* PersonCenterHeadView.xib in Resources */,
 				D2EDC4BD1BEC959A00AEDFB4 /* CollectInfoViewController.xib in Resources */,
 				D2BFE58C1BE9E0D800B65E91 /* 1.jpg in Resources */,
-				D2656EAB1BEBA2B400BA127F /* PhotoSetReusableHeadView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1708,6 +1727,7 @@
 				D2EC987E1BE7112700ED8661 /* MJRefreshBackFooter.m in Sources */,
 				D2EC414B1C153101002F5FA4 /* MenuView.m in Sources */,
 				D296472B1BF17363004B8877 /* SpotInfoViewController.m in Sources */,
+				D22A2AEA1C44978A00754A5B /* EarthquakeinfoNTHelper.m in Sources */,
 				D29EEBC01BFB2C2F0015C268 /* VoiceModel.m in Sources */,
 				D241C3801BFF05FA0098FC9E /* SQCollectionCell.m in Sources */,
 				D2EC97DF1BE70E4A00ED8661 /* AFSecurityPolicy.m in Sources */,
@@ -1725,6 +1745,7 @@
 				D2BFE5991BE9FA3400B65E91 /* SWYCollectDetailViewController.m in Sources */,
 				D2EC98071BE70E6B00ED8661 /* NSData+ImageContentType.m in Sources */,
 				D2EC97DB1BE70E4A00ED8661 /* AFHTTPRequestOperation.m in Sources */,
+				D2FA9FA21C43759E00BC2F79 /* ChooseIntensityCell.m in Sources */,
 				D2EC98A21BE7157500ED8661 /* PictureTableHelper.m in Sources */,
 				D2EEA3801BF468CF00F2FD20 /* PersonCenterHeadView.m in Sources */,
 				D2EEA36C1BF45D2100F2FD20 /* HMCommonCenterItem.m in Sources */,
@@ -1738,6 +1759,7 @@
 				D2EEA37C1BF45E0200F2FD20 /* PersonCenterViewController.m in Sources */,
 				D2EC980F1BE70E6B00ED8661 /* UIButton+WebCache.m in Sources */,
 				D2EC987D1BE7112700ED8661 /* MJRefreshAutoFooter.m in Sources */,
+				D22A2AED1C44997400754A5B /* Earthquakeinfo.m in Sources */,
 				D2EEA36B1BF45D2100F2FD20 /* HMCommonButtonItem.m in Sources */,
 				D22C74361C21028700BCD604 /* FetchPointinfoNTHelper.m in Sources */,
 				D2BFE57B1BE9DACF00B65E91 /* SWYPhotoSetViewController.m in Sources */,
@@ -1779,9 +1801,9 @@
 				01EBA1551BE6F4CA00F2701D /* AppDelegate.m in Sources */,
 				D296475F1BF1B814004B8877 /* UzysAssetsPickerController.m in Sources */,
 				D2EEA3761BF45D2B00F2FD20 /* HMBadgeView.m in Sources */,
-				D29EEBBA1BFAFC860015C268 /* PhotoSetHeadCell.m in Sources */,
 				D2EC98151BE70E6B00ED8661 /* UIView+WebCacheOperation.m in Sources */,
 				D2EC41511C1567EC002F5FA4 /* MenuContentView.m in Sources */,
+				D22A2AF11C44CC0100754A5B /* PhotoSetHeadReusableView.m in Sources */,
 				D2A3F0CF1C2B82F400297FC5 /* NSObject+Extension.m in Sources */,
 				D2EC97DD1BE70E4A00ED8661 /* AFHTTPSessionManager.m in Sources */,
 				D2EEA3711BF45D2100F2FD20 /* HMCommonTextfieldItem.m in Sources */,
@@ -1819,6 +1841,7 @@
 				D2EC982C1BE70EFD00ED8661 /* FMResultSet.m in Sources */,
 				D2EC98831BE7112700ED8661 /* MJRefreshAutoNormalFooter.m in Sources */,
 				D2550BC61BEB2C9400904D35 /* SWYNavigationBar.m in Sources */,
+				D2FA9F9E1C43754C00BC2F79 /* ChooseIntensityViewController.m in Sources */,
 				D2D888071C1E85BD00B919D4 /* SWYBaseNetworkHelper.m in Sources */,
 				01EBA1521BE6F4CA00F2701D /* main.m in Sources */,
 				D2EC98811BE7112700ED8661 /* MJRefreshHeader.m in Sources */,
@@ -1836,7 +1859,6 @@
 				D2EC981A1BE70EDC00ED8661 /* MBProgressHUD.m in Sources */,
 				D2EC98801BE7112700ED8661 /* MJRefreshFooter.m in Sources */,
 				D2D8880E1C1E875400B919D4 /* LoginactionNTHelper.m in Sources */,
-				D2656EAA1BEBA2B400BA127F /* PhotoSetReusableHeadView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

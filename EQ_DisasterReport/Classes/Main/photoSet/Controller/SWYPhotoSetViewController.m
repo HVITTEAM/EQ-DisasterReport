@@ -10,16 +10,15 @@
 
 #import "SWYPhotoSetViewController.h"
 #import "PhotoSetCell.h"
-#import "PhotoSetHeadCell.h"
 #import "SWYCollectDetailViewController.h"
-#import "PhotoSetReusableHeadView.h"
+#import "PhotoSetHeadReusableView.h"
 #import "PhotoinfoNTHelper.h"
 #import "SWYRequestParams.h"
 #import "PhotoSetModel.h"
 #import "UIImageView+WebCache.h"
 #import "NSObject+Extension.h"
 
-@interface SWYPhotoSetViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UITextFieldDelegate,SWYNetworkCallBackDelegate,SWYNetworkParamSourceDelegate,SWYNetworkReformerDelegate>
+@interface SWYPhotoSetViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UITextFieldDelegate,SWYNetworkCallBackDelegate,SWYNetworkParamSourceDelegate,SWYNetworkReformerDelegate>
 
 @property(nonatomic,strong)UICollectionView *photoCollectionView;
 
@@ -55,7 +54,6 @@
 -(void)initPhotoCollectionView
 {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    
     flowLayout.minimumLineSpacing = 1;
     flowLayout.minimumInteritemSpacing = 1;
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
@@ -70,14 +68,14 @@
     UINib *photoCellNib = [UINib nibWithNibName:@"PhotoSetCell" bundle:nil];
     [self.photoCollectionView registerNib:photoCellNib forCellWithReuseIdentifier:@"photoSetCell"];
     
-    UINib *photoHeadCellNib = [UINib nibWithNibName:@"PhotoSetHeadCell" bundle:nil];
-    [self.photoCollectionView registerNib:photoHeadCellNib forCellWithReuseIdentifier:@"photoSetHeadCell"];
-
+    //注册SupplementaryView
+    UINib *headReusableViewNib = [UINib nibWithNibName:@"PhotoSetHeadReusableView" bundle:nil];
+    [self.photoCollectionView registerNib:headReusableViewNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"photoSetHeadReusableView"];
+    
     //设置上下拉刷新
     self.photoCollectionView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     
     self.photoCollectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
-    //self.photoCollectionView.footer.automaticallyHidden = NO;
     
     [self.photoCollectionView.header beginRefreshing];
  }
@@ -140,45 +138,44 @@
 #pragma mark UICollectionViewDataSource
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return 1;
-    }
     return self.dataProvider.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
-        static NSString *photoSetHeadCellId = @"photoSetHeadCell";
-        PhotoSetHeadCell *cell = [self.photoCollectionView dequeueReusableCellWithReuseIdentifier:photoSetHeadCellId forIndexPath:indexPath];
-        cell.headImageView.image = [UIImage imageNamed:@"headViewimage"];
-        return cell;
-    }else{
-        static NSString *photoSetCellId = @"photoSetCell";
-        PhotoSetCell *cell = [self.photoCollectionView dequeueReusableCellWithReuseIdentifier:photoSetCellId forIndexPath:indexPath];
+    static NSString *photoSetCellId = @"photoSetCell";
+    PhotoSetCell *cell = [self.photoCollectionView dequeueReusableCellWithReuseIdentifier:photoSetCellId forIndexPath:indexPath];
+    
+    PhotoSetModel *model = self.dataProvider[indexPath.row];
+    cell.addressLb.text = model.address;
+    
+    NSString *encodeUrlStr = [model.thumbpath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [cell.photoImageV sd_setImageWithURL:[NSURL URLWithString:encodeUrlStr] placeholderImage:[UIImage imageNamed:@"placeholder_image"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
-        PhotoSetModel *model = self.dataProvider[indexPath.row];
-        cell.addressLb.text = model.address;
-        
-        [cell.photoImageV sd_setImageWithURL:[NSURL URLWithString:model.thumbpath] placeholderImage:[UIImage imageNamed:@"placeholder_image"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            
-        }];
-        
-        return cell;
+    }];
+    
+    return cell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0 && [kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        static NSString *photoSetHeadReusableViewId = @"photoSetHeadReusableView";
+        PhotoSetHeadReusableView *headView = [self.photoCollectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:photoSetHeadReusableViewId forIndexPath:indexPath];
+        headView.headImageView.image = [UIImage imageNamed:@"headViewimage"];
+        return headView;
     }
+    return nil;
 }
 
 #pragma mark UICollectionViewDelegate
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
-        return;
-    }
     SWYCollectDetailViewController *detailVC = [[SWYCollectDetailViewController alloc] init];
     detailVC.photoInfor = self.dataProvider[indexPath.row];
     [self.navigationController pushViewController:detailVC animated:YES];
@@ -186,17 +183,20 @@
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    if (section == 0) {
-        return UIEdgeInsetsMake(0 , 0, 0, 0);
-    }else return UIEdgeInsetsMake(1, 0, 5, 0);
+    return UIEdgeInsetsMake(1, 0, 0, 0);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
-        return CGSizeMake(MTScreenW, headViewHeight);
-    }
     return CGSizeMake((MTScreenW-2)/3, (MTScreenW-2)/3);
+}
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return CGSizeMake(0, headViewHeight);
+    }
+    return CGSizeMake(0,0);
 }
 
 #pragma mark UITextFieldDelegate
@@ -343,7 +343,6 @@
     
     [self.photoinfoHelper cancelAllRequests];
     [self loadNewData];
-    
 }
 
 -(void)back
