@@ -69,6 +69,9 @@
     
     self.shouldAddTimer = YES;
     
+    //徽标归零
+    application.applicationIconBadgeNumber = 0;
+    
     return YES;
 }
 

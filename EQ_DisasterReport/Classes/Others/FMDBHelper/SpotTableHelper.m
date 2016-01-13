@@ -76,7 +76,7 @@
 {
     NSMutableArray *array = [[NSMutableArray alloc] init];
     if ([db open]) {
-        NSString *sqlSelectStr = [NSString stringWithFormat:@"SELECT * FROM %@",TABLENAME];
+        NSString *sqlSelectStr = [NSString stringWithFormat:@"SELECT * FROM %@  ORDER BY pointid DESC",TABLENAME];
         FMResultSet *set = [db executeQuery:sqlSelectStr];
         while ([set next]) {
             NSString * pointid     = [set stringForColumn:POINTID];

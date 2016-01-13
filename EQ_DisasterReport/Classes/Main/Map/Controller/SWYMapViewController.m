@@ -158,6 +158,11 @@ typedef NS_ENUM(NSInteger, ControlButtonType) {
     UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(2*btnWidth, (btnHeight-10)/2, 1, btnHeight-30)];
     line2.backgroundColor = [UIColor lightGrayColor];
     [bottomBar addSubview:line2];
+    
+    
+    [self.collectInfoBtn setImage:[UIImage imageNamed:@"minus"] forState:UIControlStateNormal];
+    [self.photoSetBtn setImage:[UIImage imageNamed:@"minus"] forState:UIControlStateNormal];
+    [self.personCenterBtn setImage:[UIImage imageNamed:@"minus"] forState:UIControlStateNormal];
 }
 
 #pragma mark 协议方法

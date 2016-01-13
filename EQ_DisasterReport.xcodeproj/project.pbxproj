@@ -25,6 +25,10 @@
 		D22A2AF21C44CC0100754A5B /* PhotoSetHeadReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D22A2AF01C44CC0100754A5B /* PhotoSetHeadReusableView.xib */; };
 		D22C72621BFD9253007F08E8 /* AudioVO.m in Sources */ = {isa = PBXBuildFile; fileRef = D22C72611BFD9253007F08E8 /* AudioVO.m */; };
 		D22C74361C21028700BCD604 /* FetchPointinfoNTHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D22C74351C21028700BCD604 /* FetchPointinfoNTHelper.m */; };
+		D22D79761C45DEF700C0ADE2 /* SharedAppUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D79751C45DEF700C0ADE2 /* SharedAppUtil.m */; };
+		D22D79791C45F88000C0ADE2 /* DateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D79781C45F88000C0ADE2 /* DateUtil.m */; };
+		D22D797C1C45FD3000C0ADE2 /* ImageAndAudioUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D797B1C45FD3000C0ADE2 /* ImageAndAudioUtil.m */; };
+		D22D797F1C4637B500C0ADE2 /* NumberUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D797E1C4637B500C0ADE2 /* NumberUtil.m */; };
 		D241C3801BFF05FA0098FC9E /* SQCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D241C37F1BFF05FA0098FC9E /* SQCollectionCell.m */; };
 		D2550B581BEAE93C00904D35 /* SWYPhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2550B571BEAE93C00904D35 /* SWYPhotoBrowserViewController.m */; };
 		D2550BC61BEB2C9400904D35 /* SWYNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D2550BC51BEB2C9400904D35 /* SWYNavigationBar.m */; };
@@ -285,6 +289,14 @@
 		D22C72611BFD9253007F08E8 /* AudioVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioVO.m; sourceTree = "<group>"; };
 		D22C74341C21028700BCD604 /* FetchPointinfoNTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchPointinfoNTHelper.h; sourceTree = "<group>"; };
 		D22C74351C21028700BCD604 /* FetchPointinfoNTHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchPointinfoNTHelper.m; sourceTree = "<group>"; };
+		D22D79741C45DEF700C0ADE2 /* SharedAppUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedAppUtil.h; sourceTree = "<group>"; };
+		D22D79751C45DEF700C0ADE2 /* SharedAppUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedAppUtil.m; sourceTree = "<group>"; };
+		D22D79771C45F88000C0ADE2 /* DateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateUtil.h; sourceTree = "<group>"; };
+		D22D79781C45F88000C0ADE2 /* DateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateUtil.m; sourceTree = "<group>"; };
+		D22D797A1C45FD3000C0ADE2 /* ImageAndAudioUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAndAudioUtil.h; sourceTree = "<group>"; };
+		D22D797B1C45FD3000C0ADE2 /* ImageAndAudioUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageAndAudioUtil.m; sourceTree = "<group>"; };
+		D22D797D1C4637B500C0ADE2 /* NumberUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberUtil.h; sourceTree = "<group>"; };
+		D22D797E1C4637B500C0ADE2 /* NumberUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberUtil.m; sourceTree = "<group>"; };
 		D241C37E1BFF05FA0098FC9E /* SQCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQCollectionCell.h; sourceTree = "<group>"; };
 		D241C37F1BFF05FA0098FC9E /* SQCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQCollectionCell.m; sourceTree = "<group>"; };
 		D2550B561BEAE93C00904D35 /* SWYPhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWYPhotoBrowserViewController.h; sourceTree = "<group>"; };
@@ -1081,6 +1093,14 @@
 				D285F7FB1C0332A600421F06 /* HMControllerTool.m */,
 				D2E0A7E11C1F9F75002FE750 /* MapSearchAPIHelper.h */,
 				D2E0A7E21C1F9F75002FE750 /* MapSearchAPIHelper.m */,
+				D22D79771C45F88000C0ADE2 /* DateUtil.h */,
+				D22D79781C45F88000C0ADE2 /* DateUtil.m */,
+				D22D797A1C45FD3000C0ADE2 /* ImageAndAudioUtil.h */,
+				D22D797B1C45FD3000C0ADE2 /* ImageAndAudioUtil.m */,
+				D22D797D1C4637B500C0ADE2 /* NumberUtil.h */,
+				D22D797E1C4637B500C0ADE2 /* NumberUtil.m */,
+				D22D79741C45DEF700C0ADE2 /* SharedAppUtil.h */,
+				D22D79751C45DEF700C0ADE2 /* SharedAppUtil.m */,
 				D2EC989C1BE711C800ED8661 /* FMDBHelper */,
 			);
 			path = Others;
@@ -1745,6 +1765,7 @@
 				D2BFE5991BE9FA3400B65E91 /* SWYCollectDetailViewController.m in Sources */,
 				D2EC98071BE70E6B00ED8661 /* NSData+ImageContentType.m in Sources */,
 				D2EC97DB1BE70E4A00ED8661 /* AFHTTPRequestOperation.m in Sources */,
+				D22D797C1C45FD3000C0ADE2 /* ImageAndAudioUtil.m in Sources */,
 				D2FA9FA21C43759E00BC2F79 /* ChooseIntensityCell.m in Sources */,
 				D2EC98A21BE7157500ED8661 /* PictureTableHelper.m in Sources */,
 				D2EEA3801BF468CF00F2FD20 /* PersonCenterHeadView.m in Sources */,
@@ -1792,10 +1813,12 @@
 				D2AD16D81BF2FDF8000D2182 /* Mp3Recorder.m in Sources */,
 				D2550B581BEAE93C00904D35 /* SWYPhotoBrowserViewController.m in Sources */,
 				D2EEA36A1BF45D2100F2FD20 /* HMCommonArrowItem.m in Sources */,
+				D22D797F1C4637B500C0ADE2 /* NumberUtil.m in Sources */,
 				D2EDC4AE1BEC347E00AEDFB4 /* LoopImagesView.m in Sources */,
 				D2EEA36D1BF45D2100F2FD20 /* HMCommonGroup.m in Sources */,
 				D2ADF95F1BE85B5E007ECA5F /* SWYMapTypeSelectView.m in Sources */,
 				D2EC98141BE70E6B00ED8661 /* UIImageView+WebCache.m in Sources */,
+				D22D79761C45DEF700C0ADE2 /* SharedAppUtil.m in Sources */,
 				D2EC988E1BE7112700ED8661 /* UIScrollView+MJRefresh.m in Sources */,
 				D2EEA36E1BF45D2100F2FD20 /* HMCommonItem.m in Sources */,
 				01EBA1551BE6F4CA00F2701D /* AppDelegate.m in Sources */,
@@ -1807,6 +1830,7 @@
 				D2A3F0CF1C2B82F400297FC5 /* NSObject+Extension.m in Sources */,
 				D2EC97DD1BE70E4A00ED8661 /* AFHTTPSessionManager.m in Sources */,
 				D2EEA3711BF45D2100F2FD20 /* HMCommonTextfieldItem.m in Sources */,
+				D22D79791C45F88000C0ADE2 /* DateUtil.m in Sources */,
 				D2EC984A1BE7109A00ED8661 /* MJPropertyType.m in Sources */,
 				D2EC98841BE7112700ED8661 /* MJRefreshAutoStateFooter.m in Sources */,
 				D2BFE59E1BE9FD8800B65E91 /* UserInfoCell.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import "ChooseIntensityViewController.h"
 #import "ChooseIntensityCell.h"
+#import "NumberUtil.h"
 
 @interface ChooseIntensityViewController ()
 
@@ -135,22 +136,12 @@
 {
     if ([self.delegate respondsToSelector:@selector(viewController:selectedIntensity:)]) {
         
-        NSString *romeNUm = [self switchNumToRomeNumWithNum:indexPath.row];
+        NSString *romeNUm = [NumberUtil switchIndexPathToRomeNumWithIndexPath:indexPath];
         //回调，传回选中的烈度
         [self.delegate viewController:self selectedIntensity:romeNUm];
     }
     
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-#pragma mark -- 内部方法 --
-/**
- *  将阿拉伯数字转换成罗马数字
- */
--(NSString *)switchNumToRomeNumWithNum:(NSInteger)num
-{
-    NSArray *romes = @[@"Ⅰ",@"Ⅱ",@"Ⅲ",@"Ⅳ",@"Ⅴ",@"Ⅵ",@"Ⅶ",@"Ⅷ",@"Ⅸ",@"Ⅹ",@"Ⅺ",@"Ⅻ"];
-    return romes[num];
 }
 
 -(void)back

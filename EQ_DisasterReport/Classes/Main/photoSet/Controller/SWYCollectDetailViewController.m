@@ -18,6 +18,8 @@
 #import "NSObject+Extension.h"
 #import "FetchPointinfoNTHelper.h"
 #import "PhotoDetailModel.h"
+#import "DateUtil.h"
+#import "NumberUtil.h"
 
 @interface SWYCollectDetailViewController ()<UITableViewDataSource,UITableViewDelegate,TableHeadViewDelegate,SWYNetworkCallBackDelegate,SWYNetworkParamSourceDelegate,SWYNetworkReformerDelegate>
 
@@ -142,7 +144,7 @@
         }
         cell.latLb.text = self.photoDetailInfor.latitude;
         cell.lonLb.text = self.photoDetailInfor.longitude;
-        cell.levelLb.text = self.photoDetailInfor.earthquakeintensity;
+        cell.levelLb.text = [NumberUtil switchNumToRomeNumWithNum:[self.photoDetailInfor.earthquakeintensity integerValue]];
         
         return cell;
         
@@ -212,22 +214,12 @@
     
     PhotoDetailModel *model = [[PhotoDetailModel alloc] init];
     
+    //转换时间
+    NSString *utcTimeStr = [data[@"collecttime"] validateDataIsNull];
+    NSString *localeTimeStr = [DateUtil getLocalDateFormateUTCDate:utcTimeStr];
+    model.collecttime = localeTimeStr;
+    
     model.address = [data[@"address"] validateDataIsNull];
-    
-    
-    
-//    NSString *timeStr = [data[@"collecttime"] validateDataIsNull];
-//    NSLog(@"%@",timeStr);
-//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//    
-//    NSLocale * locale = [NSLocale currentLocale];
-//    
-//    [formatter setLocale:[NSLocale currentLocale]];
-//    [formatter setDateFormat:@"yyyy-MM-dd hh:mm"];
-//    NSDate *date = [formatter dateFromString:timeStr];
-//    NSString *collectionTime = [formatter stringFromDate:date];
-    
-    model.collecttime = [data[@"collecttime"] validateDataIsNull];
     model.descr = [data[@"description"] validateDataIsNull];
     model.earthquakeintensity = [NSString stringWithFormat:@"%@",[data[@"earthquakeintensity"] validateDataIsNull]];
     model.keys = [data[@"keys"] validateDataIsNull];

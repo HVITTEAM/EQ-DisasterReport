@@ -6,7 +6,8 @@
 //  Copyright © 2015年 董徐维. All rights reserved.
 //
 
-#define headViewHeight 193
+#define kHeadViewHeight 193
+#define kNavBarHeight 64
 
 #import "SWYPhotoSetViewController.h"
 #import "PhotoSetCell.h"
@@ -30,7 +31,9 @@
 
 @property(nonatomic,strong)UIBarButtonItem *rightItem;
 
-@property(nonatomic,strong)UITextField *searchTextField;
+@property(nonatomic,strong)UITextField *searchTextField;              //搜索框
+
+@property(nonatomic,strong)UIView *noImageView;                       //没有数据时显示
 
 @end
 
@@ -40,6 +43,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     [self initPhotoCollectionView];
     
     [self initNaviBar];
@@ -47,7 +52,7 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
-#pragma mark 初始化方法、setter和getter方法
+#pragma mark -- 初始化方法 --
 /**
  *  初始化集合视图
  */
@@ -61,8 +66,12 @@
     self.photoCollectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
     self.photoCollectionView.delegate = self;
     self.photoCollectionView.dataSource = self;
-    self.photoCollectionView.backgroundColor = [UIColor whiteColor];
+    self.photoCollectionView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.photoCollectionView];
+    
+    //添加无数据提示视图
+    [self.photoCollectionView addSubview:self.noImageView];
+    self.noImageView.hidden = YES;
     
     //注册 cell
     UINib *photoCellNib = [UINib nibWithNibName:@"PhotoSetCell" bundle:nil];
@@ -110,6 +119,7 @@
     self.navigationItem.titleView = self.searchTextField;
 }
 
+#pragma mark -- setter和getter方法 --
 /**
  *  dataProvider的 getter 方法
  */
@@ -132,6 +142,45 @@
         _photoinfoHelper.paramSource = self;
     }
     return _photoinfoHelper;
+}
+
+-(UIView *)noImageView
+{
+    if (!_noImageView) {
+        
+        CGRect bgViewFrame = CGRectMake(
+                                        0,
+                                        kHeadViewHeight + 15,
+                                        MTScreenW,
+                                        MTViewH - (kHeadViewHeight + 20)
+                                        );
+        
+        UIView *bgView = [[UIView alloc] initWithFrame:bgViewFrame];
+        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 80)];
+        imgView.image = [UIImage imageNamed:@"no_image_icon"];
+        imgView.contentMode = UIViewContentModeCenter;
+        [bgView addSubview:imgView];
+        
+        UILabel *promptLb = [[UILabel alloc]init];
+        promptLb.textAlignment = NSTextAlignmentCenter;
+        promptLb.textColor = [UIColor lightGrayColor];
+        promptLb.font = [UIFont systemFontOfSize:15];
+        promptLb.numberOfLines = 0;
+        
+        [bgView addSubview:promptLb];
+        
+        promptLb.text = @"抱歉!没有相关图片\n 您可以稍后再刷新试试";
+        CGFloat promptTextHeight = [promptLb.text boundingRectWithSize:CGSizeMake(MTScreenW, MAXFLOAT)
+                                                               options:NSStringDrawingUsesLineFragmentOrigin
+                                                            attributes:@{NSFontAttributeName:promptLb.font}
+                                                               context:nil].size.height;
+        
+        promptLb.frame = CGRectMake(0, CGRectGetMaxY(imgView.frame)+15, MTScreenW, promptTextHeight);
+
+        _noImageView = bgView;
+
+    }
+    return _noImageView;
 }
 
 #pragma mark 协议方法
@@ -179,6 +228,7 @@
     SWYCollectDetailViewController *detailVC = [[SWYCollectDetailViewController alloc] init];
     detailVC.photoInfor = self.dataProvider[indexPath.row];
     [self.navigationController pushViewController:detailVC animated:YES];
+    
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -194,7 +244,7 @@
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        return CGSizeMake(0, headViewHeight);
+        return CGSizeMake(0, kHeadViewHeight);
     }
     return CGSizeMake(0,0);
 }
@@ -258,19 +308,19 @@
     
     //结束头部刷新
     [self.photoCollectionView.header endRefreshing];
-    
+
     //结束底部刷新
     if (self.photoinfoHelper.isFinshedAllLoad) {
         [self.photoCollectionView.footer endRefreshingWithNoMoreData];
     }else{
         [self.photoCollectionView.footer endRefreshing];
     }
-
-//    if (self.photoCollectionView.contentSize.height > self.photoCollectionView.bounds.size.height) {
-//        self.photoCollectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
-//    }else{
-//        self.photoCollectionView.footer = nil;
-//    }
+    
+    if (self.dataProvider.count == 0) {
+        self.noImageView.hidden = NO;
+    }else{
+        self.noImageView.hidden = YES;
+    }
     
     NSLog(@"SWYPhotoSetViewController  requestDidSuccess%@",self.dataProvider);
 }
@@ -279,6 +329,12 @@
 {
     [self.photoCollectionView.header endRefreshing];
     [self.photoCollectionView.footer endRefreshing];
+    
+    if (self.dataProvider.count == 0) {
+        self.noImageView.hidden = NO;
+    }else{
+        self.noImageView.hidden = YES;
+    }
     NSLog(@"失败");
     
 }
