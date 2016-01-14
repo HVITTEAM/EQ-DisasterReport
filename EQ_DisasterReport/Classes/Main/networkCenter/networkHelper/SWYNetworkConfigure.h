@@ -23,12 +23,12 @@ typedef NS_ENUM(NSUInteger, SWYResponseStatus)
     SWYResponseStatusErrorNoNetwork
 };
 
-#define URL_loginaction        @"http://192.168.2.16:9000/sysapi/loginaction"
-#define URL_base               @"http://192.168.2.16:9000/eers/"
-#define URL_pointinfo          @"http://192.168.2.16:9000/eers/pointinfo"
-#define URL_location           @"http://192.168.2.26:9000/eers/location"
-#define URL_photoinfo          @"http://192.168.2.16:9000/eers/photoinfo"
-#define URL_earthquakeinfo     @"http://192.168.2.16:9000/eers/earthquakeinfo-last"
+#define URL_loginaction        @"http://192.168.2.39:9000/sysapi/loginaction"
+#define URL_base               @"http://192.168.2.39:9000/eers/"
+#define URL_pointinfo          @"http://192.168.2.39:9000/eers/pointinfo"
+#define URL_location           @"http://192.168.2.39:9000/eers/location"
+#define URL_photoinfo          @"http://192.168.2.39:9000/eers/photoinfo"
+#define URL_earthquakeinfo     @"http://192.168.2.39:9000/eers/earthquakeinfo-last"
 
 
 #endif /* SWYNetworkConfigure_h */

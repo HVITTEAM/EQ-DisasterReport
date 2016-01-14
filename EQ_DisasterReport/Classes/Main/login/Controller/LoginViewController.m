@@ -13,6 +13,7 @@
 #import "LoginUser.h"
 #import "MBProgressHUD.h"
 #import "APService.h"
+#import "NoticeHelper.h"
 
 @interface LoginViewController ()<SWYNetworkCallBackDelegate,SWYNetworkParamSourceDelegate,SWYNetworkReformerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *accountText;
@@ -105,6 +106,7 @@
 - (void)requestDidFailed:(SWYBaseNetworkHelper *)networkHelper
 {
    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [NoticeHelper AlertShow:@"登陆失败，请检查网络" view: self.view];
 }
 
 #pragma mark SWYNetworkReformerDelegate
@@ -130,7 +132,7 @@
     [self.view endEditing:YES];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self.loginNetWorkHelper startSendRequest];
-    //[HMControllerTool setRootViewController];
+//    [HMControllerTool setRootViewController];
 }
 
 #pragma mark -- 内部方法 --

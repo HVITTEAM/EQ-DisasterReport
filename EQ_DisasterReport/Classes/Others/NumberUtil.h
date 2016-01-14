@@ -25,4 +25,9 @@
  */
 +(NSString *)switchIndexPathToRomeNumWithIndexPath:(NSIndexPath *)idx;
 
+/**
+ *  判断输入内容是否在指定字符集合中
+ */
++(BOOL)validateNumber:(NSString *)numStr filterCondition:(NSString *)filerCondition;
+
 @end

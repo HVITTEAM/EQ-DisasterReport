@@ -65,6 +65,15 @@
     NSLog(@"SpotTextCell-----------%@",self.cellModel.contentStr);
 }
 
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if ([self.delegate respondsToSelector:@selector(spotTextCell:textField:shouldChangeCharactersInRange:replacementString:)]){
+        BOOL isChange =[self.delegate spotTextCell:self textField:textField shouldChangeCharactersInRange:range replacementString:string];
+        return isChange;
+    }
+    return YES;
+}
+
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];

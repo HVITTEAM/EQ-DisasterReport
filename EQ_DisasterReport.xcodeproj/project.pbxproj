@@ -233,6 +233,7 @@
 		D2EEA3801BF468CF00F2FD20 /* PersonCenterHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EEA37F1BF468CF00F2FD20 /* PersonCenterHeadView.m */; };
 		D2EEA3821BF468EE00F2FD20 /* PersonCenterHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2EEA3811BF468EE00F2FD20 /* PersonCenterHeadView.xib */; };
 		D2EEA3871BF4839200F2FD20 /* 11.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D2EEA3861BF4839200F2FD20 /* 11.jpg */; };
+		D2F0C3631C47684300D003B6 /* NoticeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F0C3621C47684300D003B6 /* NoticeHelper.m */; };
 		D2FA9F9E1C43754C00BC2F79 /* ChooseIntensityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2FA9F9C1C43754C00BC2F79 /* ChooseIntensityViewController.m */; };
 		D2FA9F9F1C43754C00BC2F79 /* ChooseIntensityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2FA9F9D1C43754C00BC2F79 /* ChooseIntensityViewController.xib */; };
 		D2FA9FA21C43759E00BC2F79 /* ChooseIntensityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2FA9FA11C43759E00BC2F79 /* ChooseIntensityCell.m */; };
@@ -651,6 +652,8 @@
 		D2EEA37F1BF468CF00F2FD20 /* PersonCenterHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonCenterHeadView.m; sourceTree = "<group>"; };
 		D2EEA3811BF468EE00F2FD20 /* PersonCenterHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonCenterHeadView.xib; sourceTree = "<group>"; };
 		D2EEA3861BF4839200F2FD20 /* 11.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 11.jpg; sourceTree = "<group>"; };
+		D2F0C3611C47684300D003B6 /* NoticeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeHelper.h; sourceTree = "<group>"; };
+		D2F0C3621C47684300D003B6 /* NoticeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeHelper.m; sourceTree = "<group>"; };
 		D2FA9F9B1C43754C00BC2F79 /* ChooseIntensityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseIntensityViewController.h; sourceTree = "<group>"; };
 		D2FA9F9C1C43754C00BC2F79 /* ChooseIntensityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseIntensityViewController.m; sourceTree = "<group>"; };
 		D2FA9F9D1C43754C00BC2F79 /* ChooseIntensityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseIntensityViewController.xib; sourceTree = "<group>"; };
@@ -1089,6 +1092,8 @@
 		D2EC97C61BE70C7300ED8661 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				D2F0C3611C47684300D003B6 /* NoticeHelper.h */,
+				D2F0C3621C47684300D003B6 /* NoticeHelper.m */,
 				D285F7FA1C0332A600421F06 /* HMControllerTool.h */,
 				D285F7FB1C0332A600421F06 /* HMControllerTool.m */,
 				D2E0A7E11C1F9F75002FE750 /* MapSearchAPIHelper.h */,
@@ -1856,6 +1861,7 @@
 				D2EC98461BE7109A00ED8661 /* MJExtensionConst.m in Sources */,
 				D2EC984E1BE7109A00ED8661 /* NSObject+MJProperty.m in Sources */,
 				D2EC98121BE70E6B00ED8661 /* UIImage+WebP.m in Sources */,
+				D2F0C3631C47684300D003B6 /* NoticeHelper.m in Sources */,
 				D2EC980D1BE70E6B00ED8661 /* SDWebImageManager.m in Sources */,
 				D2EC988D1BE7112700ED8661 /* UIScrollView+MJExtension.m in Sources */,
 				D2E0A7EC1C1FC4DC002FE750 /* LoginViewController.m in Sources */,

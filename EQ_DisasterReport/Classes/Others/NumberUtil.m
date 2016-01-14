@@ -35,4 +35,15 @@
     return romes[idx.row];
 }
 
+
++(BOOL)validateNumber:(NSString *)numStr filterCondition:(NSString *)filerCondition
+{
+    NSCharacterSet *characterSet;
+    characterSet = [[NSCharacterSet characterSetWithCharactersInString:filerCondition] invertedSet];
+    NSString *filtered = [[numStr componentsSeparatedByCharactersInSet:characterSet] componentsJoinedByString:@""];
+    BOOL result = [numStr isEqualToString:filtered];
+    return result;
+}
+
+
 @end

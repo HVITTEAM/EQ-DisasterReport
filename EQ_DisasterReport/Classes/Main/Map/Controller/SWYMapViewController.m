@@ -72,8 +72,10 @@ typedef NS_ENUM(NSInteger, ControlButtonType) {
     [self.view addSubview:self.mapView];
     
     self.mapView.mapType = MAMapTypeStandard;
-    self.mapView.zoomLevel = 14.0f;
+    self.mapView.zoomLevel = 19.0f;
+    [self.mapView setCenterCoordinate:CLLocationCoordinate2DMake(30.27320, 120.15515)];
     self.mapView.compassOrigin = CGPointMake(self.mapView.compassOrigin.x - 8, 30);
+    self.mapView.logoCenter = CGPointMake(CGRectGetWidth(self.view.bounds)-55, MTScreenH - 70);
     self.mapView.showsScale = NO;
     self.mapView.rotateCameraEnabled= NO;
     self.mapView.rotateEnabled = NO;
@@ -113,7 +115,11 @@ typedef NS_ENUM(NSInteger, ControlButtonType) {
 {
     UIView *bottomBar = [[UIView alloc] initWithFrame:CGRectMake(10, MTScreenH-50, MTScreenW-20, 40)];
     bottomBar.layer.cornerRadius = 10;
-    bottomBar.layer.masksToBounds = YES;
+    bottomBar.backgroundColor = [UIColor whiteColor];
+    bottomBar.layer.shadowRadius = 4;
+    bottomBar.layer.shadowOpacity = 0.4;
+    bottomBar.layer.shadowOffset = CGSizeMake(0, 2);
+    bottomBar.layer.shadowColor = [UIColor blackColor].CGColor;
     [self.view addSubview:bottomBar];
 
     CGFloat btnWidth = bottomBar.width/3;
@@ -121,7 +127,6 @@ typedef NS_ENUM(NSInteger, ControlButtonType) {
     
     self.collectInfoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.collectInfoBtn.frame = CGRectMake(0, 0, btnWidth, btnHeight);
-    self.collectInfoBtn.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:1.0];
     [self.collectInfoBtn setTitle:@"灾情采集" forState: UIControlStateNormal];
     [self.collectInfoBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.collectInfoBtn.titleLabel.font = [UIFont systemFontOfSize:13];
@@ -129,10 +134,8 @@ typedef NS_ENUM(NSInteger, ControlButtonType) {
     [self.collectInfoBtn addTarget:self action:@selector(bottomBarBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [bottomBar addSubview:self.collectInfoBtn];
     
-    
     self.photoSetBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.photoSetBtn.frame = CGRectMake(1*btnWidth, 0, btnWidth, btnHeight);
-    self.photoSetBtn.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:1.0];
     [self.photoSetBtn setTitle:@"照片墙" forState: UIControlStateNormal];
     [self.photoSetBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.photoSetBtn.titleLabel.font = [UIFont systemFontOfSize:13];
@@ -143,7 +146,6 @@ typedef NS_ENUM(NSInteger, ControlButtonType) {
     
     self.personCenterBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.personCenterBtn.frame = CGRectMake(2*btnWidth, 0,btnWidth, btnHeight);
-    self.personCenterBtn.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:1.0];
     [self.personCenterBtn setTitle:@"个人中心" forState: UIControlStateNormal];
     [self.personCenterBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.personCenterBtn.titleLabel.font = [UIFont systemFontOfSize:13];
@@ -159,10 +161,12 @@ typedef NS_ENUM(NSInteger, ControlButtonType) {
     line2.backgroundColor = [UIColor lightGrayColor];
     [bottomBar addSubview:line2];
     
-    
-    [self.collectInfoBtn setImage:[UIImage imageNamed:@"minus"] forState:UIControlStateNormal];
-    [self.photoSetBtn setImage:[UIImage imageNamed:@"minus"] forState:UIControlStateNormal];
-    [self.personCenterBtn setImage:[UIImage imageNamed:@"minus"] forState:UIControlStateNormal];
+    //设置图标
+     self.collectInfoBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -8, 0, 0);
+    [self.collectInfoBtn setImage:[UIImage imageNamed:@"collection_icon"] forState:UIControlStateNormal];
+     self.photoSetBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 0);
+    [self.photoSetBtn setImage:[UIImage imageNamed:@"photoSet_icon"] forState:UIControlStateNormal];
+    [self.personCenterBtn setImage:[UIImage imageNamed:@"personCenter_icon"] forState:UIControlStateNormal];
 }
 
 #pragma mark 协议方法
@@ -223,7 +227,7 @@ typedef NS_ENUM(NSInteger, ControlButtonType) {
                 //切换成None模式
                 [self.mapView setUserTrackingMode: MAUserTrackingModeNone animated:YES];
                 [self.mapView setCenterCoordinate:self.currentLocation.coordinate animated:YES];
-                [self.mapView setZoomLevel:17.0f animated:YES];
+                [self.mapView setZoomLevel:19.0f animated:YES];
                 image = [UIImage imageNamed:@"locationIconNone"];
                 NSLog(@"None");
                 break;

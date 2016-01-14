@@ -65,12 +65,8 @@
     self.cellModel = model;
     
     self.contentLb.preferredMaxLayoutWidth = MTScreenW-130;
-    //[self.contentView layoutIfNeeded];
-//    [self.contentView updateConstraintsIfNeeded];
-//    [self.contentView layoutIfNeeded];
 
     CGSize size = [self.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    // NSLog(@"cell-------%f",size.height+1);
     return size.height+1.0f;
 }
 

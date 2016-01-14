@@ -27,6 +27,7 @@
 #import "Earthquakeinfo.h"
 #import "ImageAndAudioUtil.h"
 #import "NumberUtil.h"
+#import "NoticeHelper.h"
 
 #define kCellMargin 10
 
@@ -305,6 +306,9 @@
         [cell setIndexPath:indexPath rowsInSection:(int)self.dataProvider.count];
         cell.delegate = self;
         cell.userInteractionEnabled = !self.uploadState;
+        if (indexPath.row == 1) {
+            cell.userInteractionEnabled = NO;
+        }
         return cell;
     }else if(indexPath.section ==0){
         SpotCellModel *model = self.dataProvider[indexPath.row];
@@ -408,6 +412,41 @@
 -(void)beginEditCellContent:(SpotTextCell *)cell
 {
     self.navigationItem.rightBarButtonItem.title = @"完成";
+}
+
+#define kNotNumbers @"0123456789."
+#define kNumbers @"0123456789"
+-(BOOL)spotTextCell:(SpotTextCell *)cell
+          textField:(UITextField *)textField
+shouldChangeCharactersInRange:(NSRange)range
+  replacementString:(NSString *)string
+{
+    NSIndexPath *idx = [self.infoTableView indexPathForCell:cell];
+    if (idx.section == 0 && idx.row == 0) {
+        BOOL result = [NumberUtil validateNumber:string filterCondition:kNumbers];
+        if (!result) {
+            [NoticeHelper AlertShow:@"请输入正确的手机号码" view:self.view];
+            return NO;
+        }
+        NSInteger strLength = textField.text.length - range.length + string.length;
+        if (strLength > 11) {
+            [NoticeHelper AlertShow:@"不能超过11个数字" view:self.view];
+            return NO;
+        }
+    }else if (idx.section == 0 && (idx.row == 3 || idx.row == 4)){
+        BOOL result = [NumberUtil validateNumber:string filterCondition:kNotNumbers];
+        if (!result) {
+            [NoticeHelper AlertShow:@"请输入正确的经纬度" view:self.view];
+            return NO;
+        }
+        if ([string isEqualToString:@"."]) {
+           if ([textField.text length] == 0) {
+                [NoticeHelper AlertShow:@"请输入正确的经纬度" view:self.view];
+                return NO;
+            }
+        }
+    }
+    return YES;
 }
 
 #pragma mark - FillContentViewControllerDelegate
@@ -565,17 +604,19 @@
  */
 -(void)saveData
 {
+    //上传数据
     if ([self.navigationItem.rightBarButtonItem.title isEqualToString:@"上传"]) {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [self.earthquakeinfoNTHelper startSendRequest];
         return;
     }
     
+    //保存数据到本地数据库
     NSMutableArray *tempArr = [NSMutableArray array];
     for (int i= 0; i<self.dataProvider.count;i++) {
         NSString *string = ((SpotCellModel *)self.dataProvider[i]).contentStr;
-        if (i>0&&i<=5) {
-            if (string == nil || string.length<=0) {
+        if (i > 0 && i <= 5) {
+            if (string == nil || string.length <= 0) {
                 [[[UIAlertView alloc] initWithTitle:@"提示" message:@"内容不能为空" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil] show];
                 return;
             }
@@ -584,6 +625,7 @@
                 string = @"";
             }
         }
+        
         [tempArr addObject:string];
     }
     

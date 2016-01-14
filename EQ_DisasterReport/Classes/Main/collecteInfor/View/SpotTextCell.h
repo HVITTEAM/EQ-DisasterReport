@@ -18,6 +18,14 @@
  */
 -(void)beginEditCellContent:(SpotTextCell *)cell;
 
+/**
+ *  键盘输入内容改变前回调,返回 YES 改变，返回 NO 输入的内容无效
+ */
+-(BOOL)spotTextCell:(SpotTextCell *)cell
+          textField:(UITextField *)textField
+shouldChangeCharactersInRange:(NSRange)range
+  replacementString:(NSString *)string;
+
 @end
 
 

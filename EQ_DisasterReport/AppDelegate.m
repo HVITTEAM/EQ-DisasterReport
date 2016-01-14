@@ -61,11 +61,11 @@
     //极光推送:初始化
     [APService setupWithOption:launchOptions];
     
-    //开启定位
-    [self setupLocationManager];
-    
     //显示登录界面
     [HMControllerTool setLoginViewController];
+    
+    //开启定位
+    [self setupLocationManager];
     
     self.shouldAddTimer = YES;
     
